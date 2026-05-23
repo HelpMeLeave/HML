@@ -54,7 +54,9 @@ export const Modal = ({
                 <div
                     className={cn(
                         "modal__body bg-background flex flex-col gap-6 size-9/10 flex-shrink-0 rounded-xl pt-0 pb-10 px-6",
-                        willClose && 'modal__body--will-close'
+                   'duration-400 motion-reduce:duration-0',
+					willClose ? 'animate-modal-vanish' : 'animate-modal-appear',
+                    willClose && 'modal__body--will-close'
                     )}
                     style={{
                         animation: `${willClose ? 'modalVanish' : 'modalAppear'} ${modalTiming}ms var(--anim-ease) both`
