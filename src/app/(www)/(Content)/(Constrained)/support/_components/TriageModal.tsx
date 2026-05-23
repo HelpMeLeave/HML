@@ -6,7 +6,7 @@ import { redirect, RedirectType } from 'next/navigation'
 
 import { Modal } from "~/components/Structure/Modal";
 import { Button } from '~/components/Button';
-import { triagePages, type Branch } from '../_lib/Triage';
+import { triagePages } from '../_lib/Triage';
 import './TriageModal.css'
 
 export function TriageModal() {
