@@ -67,7 +67,7 @@ export const Modal = ({
                         <Heading className="text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-pretty">{heading}</Heading>
                         <CloseButton variant="muted" onClick={handleClose} />
                     </div>
-                    <div className="modal__content overflow-scroll">
+                    <div className="modal__content overflow-y-auto">
                         {children}
                     </div>
                 </div>
