@@ -10,33 +10,37 @@ import { triagePages, type Branch } from '../_lib/Triage';
 import './TriageModal.css'
 
 export function TriageModal() {
-    const [branch, setBranch] = useState('intro');
+	type BranchKey = keyof typeof triagePages
+	type Choice = {
+		text: string
+		next: BranchKey
+	}
 
-    const branchContent: Branch = triagePages[branch];
+	const [branch, setBranch] = useState<BranchKey>('intro')
 
-    if(branchContent.redirect) {
-        redirect(branchContent.redirect, 'push' as RedirectType)
-    }
+	const branchContent = triagePages[branch]
 
-    return (<Modal
-        id="onsite-triage"
-        btnText="triage"
-        heading="Is HML right for you?"
-    >
-        {branchContent.body && (
-            <Markdown>{branchContent.body}</Markdown>
-        )}
-        {branchContent.choices && (
-            <div className="flex gap-3">
-                {branchContent.choices.map((choice) => (
-                    <Button
-                        key={`triage-option-${choice.text}`}
-                        onClick={() => setBranch(choice.next)}
-                    >
-                        {choice.text}
-                    </Button>
-                ))}
-            </div>
-        )}
-    </Modal>)
+	if ('redirect' in branchContent) {
+		redirect(branchContent.redirect, 'push' as RedirectType)
+	}
+
+	return (
+		<Modal
+			id='onsite-triage'
+			btnText='triage'
+			heading='Is HML right for you?'>
+			{branchContent.body && <Markdown>{branchContent.body}</Markdown>}
+			{'choices' in branchContent && (
+				<div className='flex gap-3'>
+					{(branchContent.choices as Choice[]).map(choice => (
+						<Button
+							key={`triage-option-${choice.text}`}
+							onClick={() => setBranch(choice.next)}>
+							{choice.text}
+						</Button>
+					))}
+				</div>
+			)}
+		</Modal>
+	)
 }

@@ -1,19 +1,4 @@
-interface Choice {
-    text: string
-    next: 'intro' | 'redirect-about' | 'funding' | 'exit-funding' | 'distress' | 'exit-distress' | 'emergency'| 'exit-emergency'| 'form'
-}
-
-export interface Branch {
-    body?: string
-    redirect?: string
-    choices?: Array<Choice>
-}
-
-interface Triage {
-    intro: Branch
-}
-
-export const triagePages = <Triage> {
+export const triagePages = {
     intro: {
         body: `
 *Help Me Leave* helps people understand publicly-available information about migration and visas. We are not a licensed immigration advisory service, and nothing we provide is legal advice. 
