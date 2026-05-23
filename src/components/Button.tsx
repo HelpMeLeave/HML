@@ -16,7 +16,6 @@ export const Button = ({
 		variant == 'muted'
 			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
 		variant == 'ghost' && 'border-0 bg-transparent text-current',
-		variant == 'close' && 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry m-0 size-9 flex justify-center items-center rounded-full',
 		props.className
 	)
 
@@ -42,24 +41,40 @@ export const Button = ({
 			{...buttonProps}
 			className={classes}>
 			<TouchTarget>
-				{
-					variant === 'close' ? (
-						<Icon IconName={preIcon} className="m-0 flex-shrink-0" />
-					) : (
-						<Inner
-							children={props.children}
-							preIcon={preIcon}
-						/> 
-					)
-				}
+				<Inner
+					children={props.children}
+					preIcon={preIcon}
+				/>
 			</TouchTarget>
 		</button>
 	)
 }
 
-export function CloseButton(props: Props) {
+export const CloseButton = ({
+	variant = 'default',
+	...props
+}: tBtnProps<'link' | 'button'>) => {
+	const classes = cn(
+		'click relative px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal m-0 size-9 flex justify-center items-center rounded-full',
+		(variant == 'default' || variant == 'bright')
+			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
+		variant == 'muted'
+			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
+		variant == 'ghost' && 'border-0 bg-transparent text-current',
+		props.className
+	)
+
 	const buttonProps = props as Props<'button'>
-	return <Button {...buttonProps} variant={"close"} preIcon='XIcon' />
+
+	return (
+		<button
+			{...buttonProps}
+			className={classes}>
+			<TouchTarget>
+				<Icon IconName={'XIcon'} className="m-0 flex-shrink-0" />
+			</TouchTarget>
+		</button>
+	)
 }
 
 export function TouchTarget({
@@ -83,7 +98,7 @@ export function TouchTarget({
 }
 
 type tBtnProps<T extends 'button' | 'link'> = {
-	variant?: 'default' | 'muted' | 'ghost' | 'bright' | 'close'
+	variant?: 'default' | 'muted' | 'ghost' | 'bright'
 } & (T extends 'link' ? Omit<Props.Link, 'as'> & { as: 'link'; href: string }
 : T extends 'button' ? Props<'button'>
 : never)
