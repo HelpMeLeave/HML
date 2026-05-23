@@ -1,22 +1,22 @@
-#onsite-triage p {
+#modal-onsite-triage__body p {
     margin-bottom: 24px;
 }
 
-#onsite-triage ul {
+#modal-onsite-triage__body ul {
     list-style: disc;
     margin-bottom: 24px;
 }
 
-#onsite-triage ul li {
+#modal-onsite-triage__body ul li {
     margin-left: 24px;
     list-style: disc;
 }
 
-#onsite-triage a {
+#modal-onsite-triage__body a {
     font-weight: bold;
     text-decoration: underline;
 }
 
-#onsite-triage a:hover {
+#modal-onsite-triage__body a:hover {
     color: light-dark(var(--color-hml-mulberry), var(--color-hml-yellow));
 }
