@@ -8,6 +8,32 @@
 @theme inline {
 	--font-sans: var(--font-open-sans);
 	--font-subtitle: var(--font-roboto);
+
+	--ease-modal: cubic-bezier(0.390, 0.575, 0.565, 1.000);
+    --animate-modal-appear: modalAppear var(--tw-duration) var(--ease-modal) both;
+
+	@keyframes modalAppear {
+		0% {
+			opacity: 0;
+			transform: scale3d(0.9, 0.9, 0.9);
+		}
+		100% {
+			opacity: 1;
+			transform: scale3d(1, 1, 1);
+		}
+	}
+
+	--animate-modal-vanish: modalVanish var(--tw-duration) var(--ease-modal) both;
+	@keyframes modalVanish {
+		0% {
+			opacity: 1;
+			transform: scale3d(1, 1, 1);
+		}
+		100% {
+			opacity: 0;
+			transform: scale3d(0.9, 0.9, 0.9);
+		}
+	}
 }
 
 :root {
