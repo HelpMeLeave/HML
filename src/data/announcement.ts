@@ -15,15 +15,15 @@ type Announcement = {
 }
 
 export const topBarAnnouncement: Announcement = {
-	message: 'Transgender, Gender-expansive, and Intersex to Prison Torture Pipeline',
+	message: 'Have Canadian ancestors? Learn how to claim citizenship by descent under Bill C-3',
 	type: {
 		full: 'Report Released',
 		abbreviated: 'Report',
-		icon: 'AnnouncementIcon',
+		icon: 'GlobeIcon',
 	},
 	link: {
 		folder: 'pdf',
-		fileName: 'TGI Persecution Report Feb 2026',
+		fileName: 'how-to-apply-for-canadian-citizenship-by-descent',
 		ext: 'pdf',
 		target: '_blank',
 	},
