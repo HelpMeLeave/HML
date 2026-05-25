@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react';
-import Markdown from 'react-markdown'
 import { redirect, RedirectType } from 'next/navigation'
-
-import { Modal } from "~/components/Structure/Modal";
-import { Button } from '~/components/Button';
-import { triagePages } from '../_lib/Triage';
+import { useState } from 'react'
+import Markdown from 'react-markdown'
+import { Button } from '~/components/Button'
+import { Modal } from '~/components/Structure/Modal'
+import { triagePages } from '../_lib/Triage'
 import './TriageModal.css'
 
 export function TriageModal() {
@@ -27,7 +26,7 @@ export function TriageModal() {
 	return (
 		<Modal
 			id='onsite-triage'
-			btnText='triage'
+			btnText='Reach Out'
 			heading='Is HML right for you?'>
 			{branchContent.body && <Markdown>{branchContent.body}</Markdown>}
 			{'choices' in branchContent && (
