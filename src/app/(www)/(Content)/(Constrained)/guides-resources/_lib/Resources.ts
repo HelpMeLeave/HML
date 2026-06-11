@@ -174,6 +174,12 @@ export const resources: tResource = {
 		image: '',
 		links: [
 			{
+				title: 'How to Apply for Canadian Citizenship by Descent',
+				href: '/pdf/how-to-apply-for-canadian-citizenship-by-descent.pdf',
+				type: 'guide',
+				target: '_blank',
+			},
+			{
 				title: 'Get Ready to Leave',
 				href: '/get-ready-to-leave',
 				subtitle: 'Essential Steps from Planning to Packing',

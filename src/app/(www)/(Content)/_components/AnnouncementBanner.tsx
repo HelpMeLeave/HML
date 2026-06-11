@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Icon } from '~/components/Icon'
 import { InlineLink } from '~/components/Text/Link'
 import { topBarAnnouncement } from '~/data/announcement'
+import { toTitleCase } from '~/lib/text'
 
 export const AnnouncementBanner = () => {
 	const [isVisible, setIsVisible] = useState(true)
@@ -23,7 +24,7 @@ export const AnnouncementBanner = () => {
 						className='text-hml-mulberry-50'
 					/>
 					<span className='text-hml-grey block w-fit truncate text-sm font-semibold italic md:text-lg/5 lg:text-2xl'>
-						{topBarAnnouncement.message}
+						{toTitleCase(topBarAnnouncement.message)}
 					</span>
 				</InlineLink>
 				<div className='flex justify-end'>
