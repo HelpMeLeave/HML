@@ -62,7 +62,7 @@ export const Modal = ({
 					}}
 					id={`modal-${id}__body`}>
 					<div className='modal__header my-2 flex w-full items-center justify-between'>
-						<Heading className='text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-pretty'>
+						<Heading className='text-hml-slate dark:text-hml-grey text-[2rem] font-bold italic tracking-tight text-pretty'>
 							{heading}
 						</Heading>
 						<CloseButton
