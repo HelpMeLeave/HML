@@ -1,6 +1,22 @@
 import Link from 'next/link'
+import type { ClassNameValue } from 'tailwind-merge'
 import { cn } from '~/lib/cn'
 import { Icon } from './Icon'
+
+const btnVariants = (
+	variant: tBtnProps<'button' | 'link'>['variant'],
+	...className: ClassNameValue[]
+) => {
+	return cn(
+		'click relative px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal',
+		(variant == 'default' || variant == 'bright')
+			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
+		variant == 'muted'
+			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
+		variant == 'ghost' && 'border-0 bg-transparent text-current',
+		...className
+	)
+}
 
 export const Button = ({
 	variant = 'default',
@@ -9,15 +25,7 @@ export const Button = ({
 }: tBtnProps<'link' | 'button'> & {
 	preIcon?: Props.Icon['IconName']
 }) => {
-	const classes = cn(
-		'click relative rounded-md px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal',
-		(variant == 'default' || variant == 'bright')
-			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
-		variant == 'muted'
-			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
-		variant == 'ghost' && 'border-0 bg-transparent text-current',
-		props.className
-	)
+	const classes = btnVariants(variant, 'rounded-md', props.className)
 
 	if ('href' in props) {
 		const linkProps = props as Props.Link
@@ -44,6 +52,27 @@ export const Button = ({
 				<Inner
 					children={props.children}
 					preIcon={preIcon}
+				/>
+			</TouchTarget>
+		</button>
+	)
+}
+
+export const CloseButton = ({ variant = 'default', ...props }: tBtnProps<'button'>) => {
+	const classes = btnVariants(
+		variant,
+		'm-0 size-9 flex justify-center items-center rounded-full',
+		props.className
+	)
+
+	return (
+		<button
+			{...props}
+			className={classes}>
+			<TouchTarget>
+				<Icon
+					IconName={'XIcon'}
+					className='m-0 shrink-0'
 				/>
 			</TouchTarget>
 		</button>

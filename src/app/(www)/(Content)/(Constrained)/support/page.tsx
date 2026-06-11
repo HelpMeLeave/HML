@@ -9,6 +9,7 @@ import { Text } from '~/components/Text/Text'
 import { FAQ } from './_components/faq'
 import { SupportHeading } from './_components/Heading'
 import { OnHold } from './_components/OnHold'
+import { TriageModal } from './_components/TriageModal'
 
 export const metadata: Metadata = {
 	title: 'Support Team',
@@ -31,7 +32,6 @@ export default async function SupportTeam() {
 	return (
 		<Page>
 			<SupportHeading />
-
 			<Text>
 				We’ll help you identify your most important support needs, explore which pathways may suit
 				you best, and then walk with you through the steps of organizing, arranging, and planning
@@ -100,11 +100,7 @@ export default async function SupportTeam() {
 
 			{isOn ?
 				<CTA
-					primaryAction={{
-						href: 'https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG',
-						label: 'Reach Out',
-						target: '_blank',
-					}}
+					primaryAction={<TriageModal />}
 					secondaryAction={{
 						href: '/get-ready-to-leave',
 						label: 'Get Ready to Leave',

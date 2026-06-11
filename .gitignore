@@ -28,7 +28,7 @@ Dockerfile
 .env*
 
 # prisma
-
+/src/server/prisma/generated
 
 #Vercel
 /.vercel

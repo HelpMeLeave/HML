@@ -1,0 +1,20 @@
+#modal-onsite-triage__body p {
+    margin-bottom: 24px;
+}
+
+#modal-onsite-triage__body ul {
+    margin-bottom: 24px;
+}
+
+#modal-onsite-triage__body ul li {
+    margin-left: 24px;
+    list-style: disc;
+}
+
+#modal-onsite-triage__body h3 > em {
+    font-style: normal;
+}
+
+#modal-onsite-triage__body a:hover {
+    color: light-dark(var(--color-hml-mulberry), var(--color-hml-yellow));
+}
