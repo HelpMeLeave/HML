@@ -16,11 +16,11 @@ Please remember that we provide information and support, but we cannot guarantee
 
 If you are not in one of these groups, your Support ticket response time will likely be delayed. You are still welcome to:
 
-- Use the *Help Me Leave* website to find pathways [HelpmeleaveHML | Pathway Explorer](https://www.helpmeleave.us/explorer) 
-- Use *Help Me Leave* resources and guides [HelpmeleaveHML | Guides & Resources](https://www.helpmeleave.us/guides-resources)
-- Join our community Discord to support your research. [Join the *Help Me Leave* - Community Discord Server!](https://discord.gg/yt68AYNdt8) 
+- Use the [*Help Me Leave* website](https://www.helpmeleave.us/explorer) to find pathways
+- Use [*Help Me Leave* resources and guides](https://www.helpmeleave.us/guides-resources)
+- Join our [community Discord](https://discord.gg/yt68AYNdt8) to support your research. 
         
-Do you understand how *Help Me Leave* can help you?
+### Do you understand how *Help Me Leave* can help you?
         `,
         choices: [
             {
@@ -38,7 +38,7 @@ Do you understand how *Help Me Leave* can help you?
     },
     funding: {
         body: `
-Do you need direct support with funding for your move?
+### Do you need direct support with funding for your move?
         `,
         choices: [
             {
@@ -53,7 +53,7 @@ Do you need direct support with funding for your move?
     },
     'exit-funding': {
         body: `
-*Help Me Leave* does not provide direct funding of any kind. Our mission is to provide our community with information, resources and advocacy. We recommend you join our Discord community for many useful resources, tips, and personal experiences navigating the financial strain of relocation. [Join the *Help Me Leave* - Community Discord Server!](https://discord.gg/yt68AYNdt8)
+*Help Me Leave* does not provide direct funding of any kind. Our mission is to provide our community with information, resources and advocacy. We recommend you [join our Discord community](https://discord.gg/yt68AYNdt8) for many useful resources, tips, and personal experiences navigating the financial strain of relocation.
         `,
         choices: [
             {
@@ -64,7 +64,7 @@ Do you need direct support with funding for your move?
     },
     distress: {
         body: `
-Are you experiencing significant emotional distress or a mental health crisis right now?
+### Are you experiencing significant emotional distress or a mental health crisis right now?
         `,
         choices: [
             {
@@ -111,7 +111,7 @@ If you are in crisis, here is a list of resources available to U.S. residents th
     },
     emergency: {
         body: `
-Are you currently in a very unsafe environment at home, for example, because of domestic violence or unsafe housing?        
+### Are you currently in a very unsafe environment at home, for example, because of domestic violence or unsafe housing?        
         `,
         choices: [
             {
@@ -146,10 +146,15 @@ The role of *Help Me Leave* is to help you understand your options. Your options
 - Your job
 - Whether you have family members or pets
 - Immigration laws 
-
+ 
 You may come to the conclusion that your options are too limited or you do not like the options that you have. You may decide that you want to remain in your country of origin. **That is also a valid choice.** We have collected resources and useful information for those choosing to stay.
 
-**Contacting the *Help Me Leave* Support team**
-If you would like to ask the HML Support Team for **information, guidance, or resources** about leaving your country, please fill in [our contact form](https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG)`
-    }
+### **Contacting the *Help Me Leave* Support team**
+If you would like to ask the HML Support Team for **information, guidance, or resources** about leaving your country, please fill in our contact form.
+        `,
+        cta: {
+            text: 'CONTACT FORM', 
+            href: 'https://forms.clickup.com/90151711045/f/2kyqbwa5-195/251K9UAW6C3E3HIJIG',
+        },
+    },
 }
