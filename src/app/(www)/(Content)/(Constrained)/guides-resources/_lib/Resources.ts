@@ -174,10 +174,18 @@ export const resources: tResource = {
 		image: '',
 		links: [
 			{
+				title: 'Leaving the U.S. Without Valid Travel Documents',
+				href: '/pdf/leaving-the-us-without-valid-travel-docs.pdf',
+				type: 'guide',
+				target: '_blank',
+				subtitle: 'Guide',
+			},
+			{
 				title: 'How to Apply for Canadian Citizenship by Descent',
 				href: '/pdf/how-to-apply-for-canadian-citizenship-by-descent.pdf',
 				type: 'guide',
 				target: '_blank',
+				subtitle: 'Guide',
 			},
 			{
 				title: 'Get Ready to Leave',
