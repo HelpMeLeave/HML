@@ -3,7 +3,6 @@
 }
 
 #modal-onsite-triage__body ul {
-    list-style: disc;
     margin-bottom: 24px;
 }
 
@@ -12,9 +11,8 @@
     list-style: disc;
 }
 
-#modal-onsite-triage__body a {
-    font-weight: bold;
-    text-decoration: underline;
+#modal-onsite-triage__body h3 > em {
+    font-style: normal;
 }
 
 #modal-onsite-triage__body a:hover {
