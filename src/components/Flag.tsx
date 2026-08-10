@@ -91,6 +91,72 @@ export const PrideFlag = ({ ...props }: Props.IconPath) => {
 	)
 }
 
+export const InclusiveFlag = ({ ...props }: Props.IconPath) => {
+	return (
+		<svg
+			version='1.1'
+			id='layer'
+			xmlns='http://www.w3.org/2000/svg'
+			xmlnsXlink='http://www.w3.org/1999/xlink'
+			x='0px'
+			y='0px'
+			viewBox='0 0 570 470'
+			xmlSpace='preserve'
+			{...props}
+			className='h-[13px] w-auto'>
+			<polygon
+				className='fill-[#870EAB]'
+				points='535,339.8 535,392.2 108.3,392.2 160.7,339.8 	'
+			/>
+			<polygon
+				className='fill-[#2C5EFB]'
+				points='535,287.4 535,339.8 160.7,339.8 213.1,287.4 	'
+			/>
+			<polygon
+				className='fill-[#2FAD4C]'
+				points='535,235 535,287.4 213.1,287.4 265.5,235 	'
+			/>
+			<polygon
+				className='fill-[#FCE22B]'
+				points='535,182.6 535,235 265.5,235 213.1,182.6 	'
+			/>
+			<polygon
+				className='fill-[#FF7400]'
+				points='535,130.2 535,182.6 213.1,182.6 160.7,130.2 	'
+			/>
+			<polygon
+				className='fill-[#E51C1C]'
+				points='535,77.8 535,130.2 160.7,130.2 108.3,77.8 	'
+			/>
+			<polygon
+				id='XMLID_438_'
+				className='fill-[#21191E]'
+				points='108.3,77.8 68.5,77.8 225.8,235 68.5,392.2 108.3,392.2 265.5,235 	'
+			/>
+			<polygon
+				id='XMLID_440_'
+				className='fill-[#80491E]'
+				points='68.5,77.8 35,77.8 35,84 186,235 35,386 35,392.2 68.5,392.2 225.8,235 	'
+			/>
+			<polygon
+				id='XMLID_441_'
+				className='fill-[#68D4F7]'
+				points='146.3,235 35,346.3 35,386 186,235 35,84 35,123.7 	'
+			/>
+			<polygon
+				id='XMLID_442_'
+				className='fill-[#FF92BA]'
+				points='35,123.7 35,163.5 106.5,235 35,306.5 35,346.3 146.3,235 	'
+			/>
+			<polygon
+				id='XMLID_443_'
+				className='fill-[#FFFFFF]'
+				points='35,163.5 35,306.5 106.5,235 	'
+			/>
+		</svg>
+	)
+}
+
 const TransFlag = ({ ...props }: Props.IconPath) => {
 	return (
 		<svg
@@ -163,7 +229,7 @@ const InnerAttributeLI = ({
 				'flex items-center gap-x-2 font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0!'
 			}>
 			{attr.isUn && <span>UN</span>}
-			{attr.prideScore && attr.prideScore >= 0 && <PrideFlag />}
+			{attr.prideScore && attr.prideScore >= 0 && <InclusiveFlag />}
 			{attr.transSafety && <TransFlag />}
 		</li>
 	)
@@ -190,7 +256,7 @@ const InnerAttributeSpan = ({
 			)}
 			{attr.prideScore && attr.prideScore >= 0 && (
 				<span className='text-current/50'>
-					<PrideFlag />
+					<InclusiveFlag />
 				</span>
 			)}
 		</>

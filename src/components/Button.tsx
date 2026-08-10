@@ -8,12 +8,24 @@ const btnVariants = (
 	...className: ClassNameValue[]
 ) => {
 	return cn(
-		'click relative px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0 has-[svg]:py-2 dark:tracking-normal',
-		(variant == 'default' || variant == 'bright')
+		'focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-0',
+		'click relative px-3.5 py-2.5 text-xs font-semibold tracking-wide whitespace-nowrap uppercase transition-all has-[svg]:py-2 dark:tracking-normal',
+		variant == 'default'
 			&& 'dark:bg-hml-mulberry dark:hover:bg-hml-mulberry-700 bg-hml-red hover:bg-hml-mulberry text-white',
 		variant == 'muted'
-			&& 'text-hml-red hover:bg-muted outline-hml-red dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 outline-1 hover:outline-current/10 dark:outline-transparent',
+			&& 'text-hml-mulberry-500 bg-hml-mulberry-50 outline-hml-mulberry-100/70 hover:text-foreground dark:text-hml-grey dark:bg-hml-mulberry-100/10 ring-zinc-600 hover:saturate-25 dark:outline-transparent',
 		variant == 'ghost' && 'border-0 bg-transparent text-current',
+		variant == 'wYellow' && [
+			'bg-hml-red hover:bg-hml-mulberry',
+			'text-white dark:outline-1',
+			'dark:bg-hml-yellow-800 dark:hover:bg-hml-yellow-900',
+			'dark:hover:outline-hml-yellow/10 dark:outline-hml-yellow/30',
+		],
+		variant == 'wYellowMuted' && [
+			'text-hml-mulberry-500 bg-hml-mulberry-50 outline-hml-mulberry-100/70 hover:text-foreground',
+			'dark:text-hml-yellow-500 dark:bg-hml-yellow-300/10',
+			'ring-zinc-600 hover:saturate-25 dark:outline-transparent',
+		],
 		...className
 	)
 }
@@ -33,6 +45,7 @@ export const Button = ({
 			<Link
 				prefetch={false}
 				{...linkProps}
+				as={undefined}
 				href={linkProps.href}
 				className={classes}>
 				<Inner
@@ -100,7 +113,7 @@ export function TouchTarget({
 }
 
 type tBtnProps<T extends 'button' | 'link'> = {
-	variant?: 'default' | 'muted' | 'ghost' | 'bright'
+	variant?: 'default' | 'muted' | 'ghost' | 'wYellow' | 'wYellowMuted'
 } & (T extends 'link' ? Omit<Props.Link, 'as'> & { as: 'link'; href: string }
 : T extends 'button' ? Props<'button'>
 : never)

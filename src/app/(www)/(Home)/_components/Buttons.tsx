@@ -14,7 +14,7 @@ export const NowBtn = ({
 }) => {
 	return (
 		<Button
-			variant={'bright'}
+			variant={'default'}
 			href='/leave-now'
 			{...props}
 			className={cn(

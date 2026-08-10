@@ -2,7 +2,7 @@
 
 import { AnimatePresence } from 'motion/react'
 import { Suspense, useContext, useReducer, useRef } from 'react'
-import { PageHeading } from '~/components/Text/Heading'
+import { PageEyebrow, PageHeading, PageHGroup, PageSubtitle } from '~/components/Structure/Page'
 import { useLocalData } from '~/hooks/useLocalData'
 import { DBContext } from '~/server/db/provider'
 import { FilterBtn } from './_components/Filter'
@@ -53,16 +53,14 @@ export const Base = () => {
 	return (
 		<>
 			<div className='relative mx-auto my-4 flex w-[95%] flex-col items-center justify-between rounded-2xl px-4 py-2 sm:flex-row'>
-				<PageHeading
-					subtitle={
-						<>
-							Use a combination of the filters and some of the visual clues on the country cards to
-							help narrow down your search!
-						</>
-					}
-					eyebrow='Visa Explorer'>
-					Explorer
-				</PageHeading>
+				<PageHGroup>
+					<PageEyebrow>Visa Explorer</PageEyebrow>
+					<PageHeading>Explorer</PageHeading>
+					<PageSubtitle>
+						Use a combination of the filters and some of the visual clues on the country cards to
+						help narrow down your search!
+					</PageSubtitle>
+				</PageHGroup>
 				<span className='flex items-center justify-start gap-4'>
 					<FilterBtn
 						className='hidden md:inline-flex'

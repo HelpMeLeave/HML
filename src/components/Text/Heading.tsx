@@ -1,5 +1,3 @@
-import { Eyebrow } from '~/components/Text/Eyebrow'
-import { Subtitle } from '~/components/Text/Subtitle'
 import { cn } from '~/lib/cn'
 
 /**
@@ -69,61 +67,6 @@ export const Heading = ({ level = 2, size = 'md', ...props }: Props.Heading) => 
 		<h6
 			{...props}
 			className={className}
-		/>
-	)
-}
-
-export const SectionHeading = ({ ...props }: Props<'h2'>) => {
-	return (
-		<h2
-			{...props}
-			className={cn(
-				'text-2xl font-semibold tracking-tight text-pretty text-gray-900 dark:text-white',
-				props.className
-			)}>
-			{props.children}
-		</h2>
-	)
-}
-
-export const PageHeading = ({
-	eyebrow,
-	subtitle,
-	children,
-	...props
-}: {
-	eyebrow?: string | ReactNode
-	subtitle?: ReactNode
-	children: ReactNode
-} & Props<'div'>) => (
-	<div className='max-w-4xl'>
-		{eyebrow && <PageEyebrow>{eyebrow}</PageEyebrow>}
-		<PageTitle {...props}>{children}</PageTitle>
-		{subtitle && <PageSubtitle>{subtitle}</PageSubtitle>}
-	</div>
-)
-
-const PageTitle = ({ ...props }) => (
-	<h1
-		className={cn(
-			'mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white',
-			props.className
-		)}>
-		{props.children}
-	</h1>
-)
-
-export const PageSubtitle = ({ ...props }: Props<'p'>) => (
-	<Subtitle
-		{...props}
-		className={cn('mt-6 text-xl/8', props.className)}
-	/>
-)
-export const PageEyebrow = ({ ...props }: Props<'p'>) => {
-	return (
-		<Eyebrow
-			{...props}
-			className={cn('text-base/7', props.className)}
 		/>
 	)
 }

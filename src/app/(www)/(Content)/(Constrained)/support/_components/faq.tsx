@@ -9,9 +9,7 @@ export const FAQ = () => {
 		q: string
 		A: MDXProcessor
 	}> = fs
-		.readFileSync(
-			path.join(process.cwd(), 'src/app/(www)/(Content)/(Constrained)/support/content.mdx')
-		)
+		.readFileSync(path.join(process.cwd(), 'src/app/(www)/(Content)/(Constrained)/support/faq.mdx'))
 		.toString()
 		.split('### Q: ')
 		.map(ea => {

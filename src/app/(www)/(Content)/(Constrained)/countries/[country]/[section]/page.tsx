@@ -4,8 +4,8 @@ import path from 'path'
 
 import { CTA } from '~/components/CTA'
 import { Divider } from '~/components/Divider'
-import { Section } from '~/components/Page'
 import {
+	Section,
 	SectionEyebrow,
 	SectionHeading,
 	SectionHGroup,

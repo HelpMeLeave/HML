@@ -8,6 +8,7 @@ export const Page = ({ ...props }: Props) => {
 	return (
 		<Main>
 			<section
+				{...props}
 				data-layout='page'
 				className={cn(
 					'mx-auto flex w-full max-w-2xl flex-col gap-y-6 px-6 lg:max-w-7xl lg:px-8',
@@ -21,7 +22,7 @@ export const Page = ({ ...props }: Props) => {
 	)
 }
 
-Page.HGroup = ({ ...props }) => {
+export const PageHGroup = ({ ...props }: Props<'hgroup'>) => {
 	return (
 		<hgroup
 			data-slot='page-hgroup'
@@ -39,18 +40,26 @@ Page.HGroup = ({ ...props }) => {
 	)
 }
 
-Page.Heading = ({ ...props }) => (
-	<h1
-		data-slot='page-heading'
-		className={cn(
-			'text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white',
-			props.className
-		)}>
-		{props.children}
-	</h1>
+export const PageHeading = ({
+	eyebrow,
+	subtitle,
+	...props
+}: Props<'h1'> & { eyebrow?: ReactNode; subtitle?: ReactNode }) => (
+	<>
+		{eyebrow && <PageEyebrow>{eyebrow}</PageEyebrow>}
+		<h1
+			data-slot='page-heading'
+			className={cn(
+				'text-4xl font-semibold tracking-tight text-pretty text-gray-900 capitalize sm:text-5xl dark:text-white',
+				props.className
+			)}>
+			{props.children}
+		</h1>
+		{subtitle && <PageSubtitle>{eyebrow}</PageSubtitle>}
+	</>
 )
 
-Page.Subtitle = ({ ...props }: Props) => {
+export const PageSubtitle = ({ ...props }: Props) => {
 	return (
 		<Subtitle
 			data-slot='page-subtitle'
@@ -60,7 +69,7 @@ Page.Subtitle = ({ ...props }: Props) => {
 	)
 }
 
-Page.Eyebrow = ({ ...props }) => {
+export const PageEyebrow = ({ ...props }) => {
 	if (props.children) {
 		return (
 			<Eyebrow
@@ -71,8 +80,3 @@ Page.Eyebrow = ({ ...props }) => {
 	}
 	return <PageBreadcrumb data-slot='page-eyebrow' />
 }
-
-export const PageHGroup = Page.HGroup
-export const PageHeading = Page.Heading
-export const PageSubtitle = Page.Subtitle
-export const PageEyebrow = Page.Eyebrow

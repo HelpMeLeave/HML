@@ -1,17 +1,23 @@
 import { CTA } from '~/components/CTA'
 import { Divider } from '~/components/Divider'
-import { Page } from '~/components/Structure/Page'
+import {
+	Page,
+	PageEyebrow,
+	PageHeading,
+	PageHGroup,
+	PageSubtitle,
+} from '~/components/Structure/Page'
 
 const Layout = ({ children }: { children?: ReactNode }) => (
 	<Page>
-		<Page.HGroup>
-			<Page.Eyebrow>Escape Routes</Page.Eyebrow>
-			<Page.Heading>Help Me Leave NOW</Page.Heading>
-			<Page.Subtitle>
+		<PageHGroup>
+			<PageEyebrow>Escape Routes</PageEyebrow>
+			<PageHeading>Help Me Leave NOW</PageHeading>
+			<PageSubtitle>
 				We know that many people need to leave quickly. We are here to help you explore your options
 				and make a plan.
-			</Page.Subtitle>
-		</Page.HGroup>
+			</PageSubtitle>
+		</PageHGroup>
 
 		{children}
 

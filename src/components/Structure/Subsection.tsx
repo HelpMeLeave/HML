@@ -72,6 +72,7 @@ const Heading = ({ ...props }: Props<'button'>) => {
 	const { type, open, handleToggle } = useContext(SubSectionContext)
 	return (
 		<button
+			type='button'
 			role='heading'
 			{...props}
 			className={cn(
