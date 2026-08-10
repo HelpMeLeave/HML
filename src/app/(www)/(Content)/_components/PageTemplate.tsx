@@ -1,4 +1,10 @@
-import { Page } from '~/components/Structure/Page'
+import {
+	Page,
+	PageEyebrow,
+	PageHeading,
+	PageHGroup,
+	PageSubtitle,
+} from '~/components/Structure/Page'
 
 type TemplateKeys = 'heading' | 'children'
 type OptionalTemplateKeys = 'eyebrow' | 'subtitle'
@@ -12,11 +18,11 @@ export const PageTemplate = ({
 	& Partial<Record<OptionalTemplateKeys, ReactNode>>) => {
 	return (
 		<Page>
-			<Page.HGroup>
-				{eyebrow && <Page.Eyebrow>{eyebrow}</Page.Eyebrow>}
-				<Page.Heading>{heading}</Page.Heading>
-				{subtitle && <Page.Subtitle>{subtitle}</Page.Subtitle>}
-			</Page.HGroup>
+			<PageHGroup>
+				{eyebrow && <PageEyebrow>{eyebrow}</PageEyebrow>}
+				<PageHeading>{heading}</PageHeading>
+				{subtitle && <PageSubtitle>{subtitle}</PageSubtitle>}
+			</PageHGroup>
 			{children}
 		</Page>
 	)

@@ -9,8 +9,8 @@
 	--font-sans: var(--font-open-sans);
 	--font-subtitle: var(--font-roboto);
 
-	--ease-modal: cubic-bezier(0.390, 0.575, 0.565, 1.000);
-    --animate-modal-appear: modalAppear var(--tw-duration) var(--ease-modal) both;
+	--ease-modal: cubic-bezier(0.39, 0.575, 0.565, 1);
+	--animate-modal-appear: modalAppear var(--tw-duration) var(--ease-modal) both;
 
 	@keyframes modalAppear {
 		0% {
@@ -36,7 +36,8 @@
 	}
 }
 
-:root {
+:root,
+:host {
 	--theme-black: oklch(0.145 0 0);
 	--theme-white: oklch(0.985 0 0);
 
@@ -383,4 +384,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 @utility admin-mobile-padding {
 	@apply px-6 md:px-0;
+}
+
+#root .p-FieldLabel {
+	font-size: var(--text-sm) !important;
 }

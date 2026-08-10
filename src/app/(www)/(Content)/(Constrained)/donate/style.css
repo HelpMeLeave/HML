@@ -1,0 +1,7 @@
+main:has(> #donate) {
+	max-width: unset;
+}
+
+#urgentBanner {
+	z-index: 99;
+}
