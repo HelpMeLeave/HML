@@ -6,6 +6,8 @@ declare global {
 		[key in Target]: NewType
 	}
 
+	type Todo = AnySafe
+
 	type Slug<V> = {
 		params: Promise<V>
 	}
