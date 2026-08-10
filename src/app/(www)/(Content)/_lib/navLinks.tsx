@@ -50,6 +50,10 @@ export const linkGroups = [
 				title: 'Media & Press',
 				href: '/media',
 			},
+			{
+				title: 'Donate',
+				href: '/donate',
+			},
 		],
 	},
 	{
