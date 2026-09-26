@@ -25,6 +25,7 @@ export class MDXProcessor {
 	frontmatter: iMDXProcessor['frontmatter'] = {}
 	components: MDXRemoteProps['components'] = mdxComponents()
 	plugins: iMDXProcessor['plugins'] = {} as iMDXProcessor['plugins']
+	sources: { title: string; source: string }[] = []
 
 	constructor(
 		public source: MDXRemoteProps['source'],
@@ -99,6 +100,26 @@ export class MDXProcessor {
 
 	replaceCustomMDX = (): this => {
 		this.raw = this.raw.replaceAll(/^->(.+)$/gm, '<P className="text-center">$1</P>')
+
+		this.sources =
+			([...(this.raw.match(/\s?(\[\^[^)]+\))/g) ?? [])]
+				.map((ea, i) => {
+					const matches = ea.match(/\s?\[\^(.+)\]\((.+)\)/) ?? []
+					if (matches && Array.isArray(matches)) {
+						if (matches[0]) {
+							this.raw = this.raw.replace(
+								matches[0],
+								`<InlineLink className="sup no-underline mx-px italic text-hml-red dark:text-hml-yellow-400" href="#${matches[1]}"><sup>[${i}]</sup></InlineLink>`
+							)
+						}
+
+						return {
+							title: matches[1],
+							source: matches[2],
+						}
+					}
+				})
+				.filter(Boolean) as MDXProcessor['sources']) ?? []
 
 		return this
 	}
@@ -239,18 +260,20 @@ const setPlugins = (
 const MDXSectionHeading = ({ source }: { source: string }) => {
 	let testSource = source
 
-	const sectionRegex = Array.from(testSource.matchAll(/(^> .+\n)?## .+(\n> .+)?/gm))
+	const sectionRegex = Array.from(testSource.matchAll(/(^> .+\n)?^## .+(\n> .+)?/gm))
 
 	sectionRegex.forEach((match: string[], i) => {
 		const finalLines = {
 			heading: '',
 			brow: '',
 			subtitle: '',
+			headingId: '',
 		}
 
 		const ifHeading = (entry: string) => {
 			if (entry.startsWith('## ')) {
 				finalLines.heading = entry.replaceAll('## ', '').trim()
+				finalLines.headingId = finalLines.heading.replaceAll(' ', '-').toLowerCase()
 			}
 		}
 
@@ -267,6 +290,7 @@ const MDXSectionHeading = ({ source }: { source: string }) => {
 		}
 
 		const splitLines = match[0].split('\n')
+
 		if (splitLines.length == 3) {
 			ifHeading(splitLines[1])
 			ifEyebrow(splitLines[0])
@@ -279,14 +303,16 @@ const MDXSectionHeading = ({ source }: { source: string }) => {
 				ifEyebrow(splitLines[0])
 				ifHeading(splitLines[1])
 			}
+		} else {
+			ifHeading(splitLines[0])
 		}
+
 		const final = Object.values(finalLines).filter(line => line)
+
 		if (final.length == 0) return
 		testSource = testSource.replace(
 			match[0],
-			`${i > 0 ? '</Section>\n' : ''}<Section>\n<SectionHeading eyebrow={<>${replaceLinks(finalLines.brow)}</>} subtitle={<>${replaceLinks(finalLines.subtitle)}</>}>
-${finalLines.heading}
-</SectionHeading>\n`
+			`${i > 0 ? '</Section>\n' : ''}<Section>\n<SectionHeading id={"${finalLines.headingId}"} eyebrow={<>${replaceLinks(finalLines.brow)}</>} subtitle={<>${replaceLinks(finalLines.subtitle)}</>}>${finalLines.heading}</SectionHeading>\n`
 		)
 	})
 	if (testSource.includes('<Section>')) testSource += '\n</Section>'
@@ -299,10 +325,14 @@ const MDXSubSection = ({ source }: { source: string }) => {
 	splitSource.forEach((line, i) => {
 		if (line.startsWith('### ')) {
 			removedLines.push(i)
-			splitSource[i] =
-				`${removedLines.length > 1 ? '</Subsection>\n' : ''}<Subsection title={"${line.replace('### ', '')}"}>`
+
+			splitSource[i] = `${removedLines.length > 1 ? '</Subsection>\n' : ''}<Subsection id={"${line
+				.replaceAll('### ', '')
+				.replaceAll(' ', '-')
+				.replaceAll('#', '')
+				.toLowerCase()}"} title={"${line.replace('### ', '')}"}>`
 		}
-		if (line.startsWith('## ') || line.startsWith('</Section')) {
+		if (line.startsWith('## ') || line.startsWith('</Section>')) {
 			splitSource[i] = `${removedLines.length > 0 ? '</Subsection>\n' : ''}${line}`
 			removedLines = []
 		}

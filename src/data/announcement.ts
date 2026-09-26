@@ -5,27 +5,37 @@ type Announcement = {
 		abbreviated: string
 		icon: IconKey
 	}
-	link: {
-		folder: string
-		fileName: string
-		ext: string
-		target: '_blank' | '_self'
-	}
 	isActive: boolean
-}
+} & (
+	| {
+			linkType: 'link'
+			link: {
+				src: string
+				target: '_blank' | '_self'
+			}
+	  }
+	| {
+			linkType: 'document'
+			link: {
+				folder: string
+				fileName: string
+				ext: string
+				target: '_blank' | '_self'
+			}
+	  }
+)
 
 export const topBarAnnouncement: Announcement = {
-	message: 'Have Canadian ancestors? Learn how to claim citizenship by descent under Bill C-3',
+	message: 'Help Me Vote 2026!',
 	type: {
-		full: 'Report Released',
-		abbreviated: 'Report',
-		icon: 'GlobeIcon',
+		full: 'Resource',
+		abbreviated: 'Resc.',
+		icon: 'Medal',
 	},
 	link: {
-		folder: 'pdf',
-		fileName: 'how-to-apply-for-canadian-citizenship-by-descent',
-		ext: 'pdf',
-		target: '_blank',
+		src: 'help-me-vote-2026',
+		target: '_self',
 	},
+	linkType: 'link',
 	isActive: true,
 }

@@ -64,7 +64,7 @@ export const PageSubtitle = ({ ...props }: Props) => {
 		<Subtitle
 			data-slot='page-subtitle'
 			{...props}
-			className={cn('text-xl leading-loose', props.className)}
+			className={cn('text-xl leading-loose text-balance', props.className)}
 		/>
 	)
 }

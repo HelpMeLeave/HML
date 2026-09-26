@@ -389,3 +389,10 @@ input[type="number"]::-webkit-outer-spin-button {
 #root .p-FieldLabel {
 	font-size: var(--text-sm) !important;
 }
+
+#by-state {
+	ul {
+		column-count: 2;
+		column-gap: 0.25;
+	}
+}

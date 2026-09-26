@@ -49,25 +49,4 @@ export const MatchingPathways = ({ country }: { country: ApiData.Country['abbr']
 				))}
 			</Section>
 		:	<></>
-
-	// return (
-	// 	matching.current.length > 0 && (
-	// 		<Section>
-	// 			<SectionHeading
-	// 				eyebrow='Your Pathways'
-	// 				subtitle='Here are the pathways that align with your needs'>
-	// 				Matching Pathways
-	// 			</SectionHeading>
-
-	// 			<DL>
-	// 				{matching.current.map(pathway => (
-	// 					<Fragment key={pathway.id}>
-	// 						<DL.Title href={pathway.official_link ?? undefined}>{pathway.name}</DL.Title>
-	// 						<DL.Item>{pathway.description}</DL.Item>
-	// 					</Fragment>
-	// 				))}
-	// 			</DL>
-	// 		</Section>
-	// 	)
-	// )
 }

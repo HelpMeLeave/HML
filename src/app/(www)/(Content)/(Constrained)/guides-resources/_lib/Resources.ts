@@ -3,6 +3,20 @@ export const resources: tResource = {
 		image: '',
 		links: [
 			{
+				title: 'Help Me Vote 2026',
+				href: '/help-me-vote-2026',
+				subtitle:
+					'While our primary goal is to find solutions for Americans to find safety living abroad in other countries, we want to do everything we can to help give at-risk Americans the best chance to live.',
+				type: 'guide',
+				author: 'Support Team',
+				date: '09-26-2026',
+				Icon: {
+					name: 'Medal',
+					color: 'text-current',
+				},
+				target: '_self',
+			},
+			{
 				title: '#NoLongerSafe September 22nd - October 24th, 2025',
 				href: '/pdf/NoLongerSafe - Sept22-Oct24.pdf',
 				subtitle:

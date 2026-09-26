@@ -23,21 +23,39 @@ const Section = ({
 const SectionHGroup = ({ ...props }: Props<'hgroup'>) => {
 	return (
 		<hgroup
-			className={cn('mb-0', props.className)}
+			className={cn('mb-0 [&+*]:mt-0', props.className)}
 			{...props}
 		/>
 	)
 }
-const SectionHeading = ({ ...props }: Props<'h2'>) => (
-	<h2
-		{...props}
-		className={cn(
-			'text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-pretty',
-			props.className
-		)}>
-		{props.children}
-	</h2>
-)
+const SectionHeading = ({
+	eyebrow,
+	subtitle,
+	...props
+}: Props<'h2'> & {
+	eyebrow?: string
+	subtitle?: string
+}) => {
+	if (subtitle || eyebrow) {
+		return (
+			<SectionHGroup>
+				{eyebrow && <SectionEyebrow>{eyebrow}</SectionEyebrow>}
+				<SectionHeading>{props.children}</SectionHeading>
+				{subtitle && <SectionSubtitle>{subtitle}</SectionSubtitle>}
+			</SectionHGroup>
+		)
+	}
+	return (
+		<h2
+			{...props}
+			className={cn(
+				'text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-balance',
+				props.className
+			)}>
+			{props.children}
+		</h2>
+	)
+}
 const SectionEyebrow = ({ children, ...props }: Props<'p'>) => {
 	return (
 		<Eyebrow

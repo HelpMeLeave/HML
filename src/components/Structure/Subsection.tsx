@@ -11,7 +11,7 @@ export type tSubSectionContext = {
 	type: 'default' | 'grey'
 }
 
-export type tSubSectionProps = Omit<Props<'button'>, 'type' | 'title'> & {
+export type tSubSectionProps = Omit<Props<'button'>, 'type'> & {
 	defaultOpen?: boolean
 	type?: 'default' | 'grey'
 	onOpen?: () => void
@@ -24,16 +24,30 @@ export const Subsection = ({
 	type = 'default',
 	role,
 	'aria-label': ariaLabel,
+	title,
 	...props
 }: tSubSectionProps) => {
+	if (title)
+		return (
+			<SubsectionProvider
+				aria-label={ariaLabel}
+				defaultOpen={defaultOpen}
+				type={type}
+				role={role}
+				{...props}>
+				<SubsectionHeading>{title}</SubsectionHeading>
+				<SubsectionContent>{props.children}</SubsectionContent>
+			</SubsectionProvider>
+		)
 	return (
 		<SubsectionProvider
 			aria-label={ariaLabel}
 			defaultOpen={defaultOpen}
 			type={type}
 			role={role}
-			{...props}
-		/>
+			{...props}>
+			{props.children}
+		</SubsectionProvider>
 	)
 }
 
