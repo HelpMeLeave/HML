@@ -1,6 +1,6 @@
 import { cn } from '~/lib/cn'
 
-const SubSectionFieldset = ({ ...props }: Props<'fieldset'>) => {
+export const SubSectionFieldset = ({ ...props }: Props<'fieldset'>) => {
 	return (
 		<fieldset
 			{...props}
@@ -20,7 +20,7 @@ const Divider = ({ side }: { side?: 'left' | 'right' }) => (
 	/>
 )
 
-export const SubSectionLegend = ({
+export const SubSectionFieldsetLegend = ({
 	description,
 	...props
 }: Props<'legend'> & {
@@ -47,7 +47,7 @@ export const SubSectionLegend = ({
 	)
 }
 
-export const SubSectionDetails = ({ ...props }: Props) => {
+export const SubSectionFieldsetDetails = ({ ...props }: Props) => {
 	return (
 		<div
 			{...props}
@@ -56,10 +56,7 @@ export const SubSectionDetails = ({ ...props }: Props) => {
 	)
 }
 
-SubSectionFieldset.Legend = SubSectionLegend
-SubSectionFieldset.Details = SubSectionDetails
-
-const Subsection = ({ ...props }: Props<'div'>) => {
+export const Subsection = ({ ...props }: Props<'div'>) => {
 	return (
 		<div
 			{...props}
@@ -68,7 +65,7 @@ const Subsection = ({ ...props }: Props<'div'>) => {
 		</div>
 	)
 }
-const SubsectionHeading = ({
+export const SubsectionHeading = ({
 	description,
 	...props
 }: Props<'h3'> & {
@@ -95,6 +92,3 @@ const SubsectionHeading = ({
 		</div>
 	)
 }
-Subsection.Heading = SubsectionHeading
-
-export { Subsection, SubSectionFieldset }

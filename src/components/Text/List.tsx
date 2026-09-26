@@ -17,7 +17,7 @@ export const List = ({ type, ...props }: Props<'ul'> & { type?: 'numbered' | '' 
 
 	if (type === 'numbered') {
 		return (
-			<ol
+			<OL
 				{...props}
 				className={className}
 			/>

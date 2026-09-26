@@ -1,7 +1,13 @@
 import { type Metadata } from 'next'
 import { CTA } from '~/components/CTA'
 import { Page } from '~/components/Structure/Page'
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 import { InlineLink } from '~/components/Text/Link'
 import { Li, OL } from '~/components/Text/List'
 import { Text } from '~/components/Text/Text'
@@ -48,14 +54,14 @@ export default async function SupportTeam() {
 			<FAQ />
 
 			<Section>
-				<Section.HGroup>
-					<Section.Eyebrow>Help Us Help You</Section.Eyebrow>
-					<Section.Heading>Before Reaching Out</Section.Heading>
-					<Section.Subtitle>
+				<SectionHGroup>
+					<SectionEyebrow>Help Us Help You</SectionEyebrow>
+					<SectionHeading>Before Reaching Out</SectionHeading>
+					<SectionSubtitle>
 						Reaching out can be scary, but asking for help is always the right choice—the best
 						choice for you.
-					</Section.Subtitle>
-				</Section.HGroup>
+					</SectionSubtitle>
+				</SectionHGroup>
 				<Text>
 					To make sure we can help you as best as possible, please read the following information
 					before contacting us. These documents will help you understand the process and prepare for

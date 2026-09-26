@@ -1,4 +1,10 @@
-import { AddButton, Button, SubSectionFieldset } from '@/admin/_components'
+import {
+	AddButton,
+	Button,
+	SubSectionFieldset,
+	SubSectionFieldsetDetails,
+	SubSectionFieldsetLegend,
+} from '@/admin/_components'
 import { FormSection } from '@/admin/_components/_form/clientFieldset'
 import { Field, Input, Label, Select, Strong, Textarea } from '@/admin/_components/catalyst/'
 import { document } from '@/admin/pathways/_lib/refresh'
@@ -70,7 +76,7 @@ export const Documentation = ({
 			<FormSection.Details>
 				{baseData.query.documents?.map(n => (
 					<SubSectionFieldset key={n.id}>
-						<SubSectionFieldset.Legend>
+						<SubSectionFieldsetLegend>
 							<span>
 								Document ID: <Strong className='text-interactive'>{n.id}</Strong>
 							</span>
@@ -88,8 +94,8 @@ export const Documentation = ({
 									solid
 								/>
 							</Button>
-						</SubSectionFieldset.Legend>
-						<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
+						</SubSectionFieldsetLegend>
+						<SubSectionFieldsetDetails className='gap-x-8 sm:grid-cols-2'>
 							{/* ! TYPE */}
 							<DocumentType
 								doc={n}
@@ -181,7 +187,7 @@ export const Documentation = ({
 									}}
 								/>
 							</Field>
-						</SubSectionFieldset.Details>
+						</SubSectionFieldsetDetails>
 					</SubSectionFieldset>
 				))}
 

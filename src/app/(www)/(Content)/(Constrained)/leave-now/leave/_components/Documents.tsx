@@ -1,13 +1,13 @@
 'use client'
 
-import { Subsection } from '~/components/Structure/Subsection'
+import { Subsection, SubsectionHeading, SubsectionList } from '~/components/Structure/Subsection'
 import { InlineLink } from '~/components/Text/Link'
 
 export const LeaveNowDocuments = () => {
 	return (
 		<Subsection>
-			<Subsection.Heading>Documents</Subsection.Heading>
-			<Subsection.List>
+			<SubsectionHeading>Documents</SubsectionHeading>
+			<SubsectionList>
 				<InlineLink
 					href='/pdf/Get-Your-Documents-Ready.pdf'
 					target='_blank'>
@@ -28,7 +28,7 @@ export const LeaveNowDocuments = () => {
 					target='_blank'>
 					Birth certificate
 				</InlineLink>
-			</Subsection.List>
+			</SubsectionList>
 		</Subsection>
 	)
 }

@@ -4,6 +4,8 @@ import {
 	RemoveButton,
 	RemoveButtonWrapper,
 	SubSectionFieldset,
+	SubSectionFieldsetDetails,
+	SubSectionFieldsetLegend,
 } from '@/admin/_components'
 import { Field, Label, Select, Textarea } from '@/admin/_components/catalyst'
 import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
@@ -105,10 +107,10 @@ export const NationalityRestrictionsCB = ({
 			{cbValue && (
 				<>
 					<SubSectionFieldset className='*:data-[slot="legend"]:text-current/70 md:pl-8'>
-						<SubSectionFieldset.Legend description='Please include each country as a separate entry'>
+						<SubSectionFieldsetLegend description='Please include each country as a separate entry'>
 							Countries with Restrictions
-						</SubSectionFieldset.Legend>
-						<SubSectionFieldset.Details>
+						</SubSectionFieldsetLegend>
+						<SubSectionFieldsetDetails>
 							<div className='flex flex-col'>
 								{data.query.restrictedNationalities.map(n => (
 									<div
@@ -163,7 +165,7 @@ export const NationalityRestrictionsCB = ({
 								}}>
 								Nationality
 							</AddButton>
-						</SubSectionFieldset.Details>
+						</SubSectionFieldsetDetails>
 					</SubSectionFieldset>
 				</>
 			)}

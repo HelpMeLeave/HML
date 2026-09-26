@@ -5,7 +5,7 @@ import { Suspense } from 'react'
 import { AlertCallout } from '~/components/AlertCallout'
 import { Icon } from '~/components/Icon'
 import { Page as PageEl, PageHeading } from '~/components/Structure/Page'
-import { Section } from '~/components/Structure/Section'
+import { SectionHeading } from '~/components/Structure/Section'
 import { InlineLink } from '~/components/Text/Link'
 import { MDXProvider } from '~/lib/mdx/MDXProvider'
 import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
@@ -53,7 +53,7 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 		.replaceSubSections()
 		.replaceCustomMDX()
 		.setComponents({
-			h2: props => <Section.Heading {...props} />,
+			h2: props => <SectionHeading {...props} />,
 		})
 
 	const { subtitle, type, title, description, warnings } = data.frontmatter as {
@@ -82,6 +82,7 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 		}
 		return null
 	}
+	console.log(ProcessSubtitle())
 
 	return (
 		<PageEl>
@@ -93,7 +94,7 @@ const Page = async (props: PageProps<'/[slug]'>) => {
 							{toTitleCase(type as string)}s <Icon IconName='ArrowRightIcon' /> {description}
 						</span>
 					}>
-					{title || parsedSlug}
+					{title ?? parsedSlug}
 				</PageHeading>
 				<data.Provider />
 			</Suspense>

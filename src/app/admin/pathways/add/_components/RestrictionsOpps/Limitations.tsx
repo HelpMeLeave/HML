@@ -4,6 +4,8 @@ import {
 	RemoveButton,
 	RemoveButtonWrapper,
 	SubSectionFieldset,
+	SubSectionFieldsetDetails,
+	SubSectionFieldsetLegend,
 } from '@/admin/_components'
 import { Field, Textarea } from '@/admin/_components/catalyst'
 import { note } from '@/admin/pathways/_lib/refresh'
@@ -22,10 +24,10 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 
 			{data.query.limitations?.length > 0 && (
 				<SubSectionFieldset className='md:pl-8'>
-					<SubSectionFieldset.Legend description='Please include each limitation as a separate entry'>
+					<SubSectionFieldsetLegend description='Please include each limitation as a separate entry'>
 						Limitations
-					</SubSectionFieldset.Legend>
-					<SubSectionFieldset.Details>
+					</SubSectionFieldsetLegend>
+					<SubSectionFieldsetDetails>
 						{data.query.limitations.map(n => (
 							<div
 								key={n.counter}
@@ -63,7 +65,7 @@ export const Limitations = ({ data, handlePrisma }: ElPrismaProps) => {
 							}}>
 							Limitation
 						</AddButton>
-					</SubSectionFieldset.Details>
+					</SubSectionFieldsetDetails>
 				</SubSectionFieldset>
 			)}
 		</>

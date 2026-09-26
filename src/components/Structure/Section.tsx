@@ -55,9 +55,4 @@ const SectionSubtitle = ({ ...props }: Props<'p'>) => (
 	</Subtitle>
 )
 
-Section.HGroup = SectionHGroup
-Section.Heading = SectionHeading
-Section.Eyebrow = SectionEyebrow
-Section.Subtitle = SectionSubtitle
-
 export { Section, SectionEyebrow, SectionHeading, SectionHGroup, SectionSubtitle }

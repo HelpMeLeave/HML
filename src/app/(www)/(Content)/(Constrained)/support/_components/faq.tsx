@@ -1,6 +1,12 @@
 import fs from 'fs'
 import path from 'path'
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 import { Subsection, SubsectionContent, SubsectionHeading } from '~/components/Structure/Subsection'
 import { MDXProcessor } from '~/lib/mdx/ProcessMDX'
 
@@ -23,15 +29,15 @@ export const FAQ = () => {
 
 	return (
 		<Section>
-			<Section.HGroup>
-				<Section.Eyebrow>FAQ</Section.Eyebrow>
-				<Section.Heading>Only Have a Quick Question?</Section.Heading>
-				<Section.Subtitle>
+			<SectionHGroup>
+				<SectionEyebrow>FAQ</SectionEyebrow>
+				<SectionHeading>Only Have a Quick Question?</SectionHeading>
+				<SectionSubtitle>
 					To keep our support team free to process users that are in dire need of relocation, we
 					have compiled a list of frequently asked questions to help you find the information you
 					need quickly.
-				</Section.Subtitle>
-			</Section.HGroup>
+				</SectionSubtitle>
+			</SectionHGroup>
 
 			{questions.map(ea => (
 				<Subsection

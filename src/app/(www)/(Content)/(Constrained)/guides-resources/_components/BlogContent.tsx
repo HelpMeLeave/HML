@@ -1,7 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 
 export const BlogContent = ({
 	blogPosts,
@@ -17,14 +23,14 @@ export const BlogContent = ({
 }) => {
 	return (
 		<Section>
-			<Section.HGroup>
-				<Section.Eyebrow>Team Member Blogs</Section.Eyebrow>
-				<Section.Heading>What We Think</Section.Heading>
-				<Section.Subtitle>
+			<SectionHGroup>
+				<SectionEyebrow>Team Member Blogs</SectionEyebrow>
+				<SectionHeading>What We Think</SectionHeading>
+				<SectionSubtitle>
 					We are people going through this process too. Here are some of our stories and
 					reflections.
-				</Section.Subtitle>
-			</Section.HGroup>
+				</SectionSubtitle>
+			</SectionHGroup>
 			<div
 				{...props}
 				className='mx-auto grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 md:mx-0 md:max-w-none md:grid-cols-3'>

@@ -1,15 +1,17 @@
 'use client'
-import { createContext, useCallback, useContext, useMemo, useState } from 'react'
+import { useContext } from 'react'
 import { Icon } from '~/components/Icon'
 import { cn } from '~/lib/cn'
+import { SubSectionContext } from './Subsection/CTX'
+import { SubsectionProvider } from './Subsection/Provider'
 
-type tSubSectionContext = {
+export type tSubSectionContext = {
 	open: boolean
 	handleToggle: () => void
 	type: 'default' | 'grey'
 }
 
-type tSubSectionProps = Omit<Props<'button'>, 'type' | 'title'> & {
+export type tSubSectionProps = Omit<Props<'button'>, 'type' | 'title'> & {
 	defaultOpen?: boolean
 	type?: 'default' | 'grey'
 	onOpen?: () => void
@@ -17,58 +19,25 @@ type tSubSectionProps = Omit<Props<'button'>, 'type' | 'title'> & {
 	onToggle?: (open: boolean) => void
 }
 
-const SubSectionContext = createContext<tSubSectionContext>(null!)
-
-const Subsection = ({
+export const Subsection = ({
 	defaultOpen = true,
 	type = 'default',
 	role,
 	'aria-label': ariaLabel,
-	onOpen,
-	onClose,
-	onToggle,
 	...props
 }: tSubSectionProps) => {
-	const [open, setOpen] = useState(defaultOpen)
-
-	const handleToggle = useCallback(() => {
-		if (onOpen && !open) {
-			onOpen()
-			setOpen(true)
-			return
-		} else if (onClose && open) {
-			onClose()
-			setOpen(false)
-			return
-		} else if (onToggle) {
-			onToggle(!open)
-			setOpen(prev => !prev)
-		} else {
-			setOpen(prev => !prev)
-		}
-	}, [onOpen, onClose, onToggle, open])
-
-	const contextValue = useMemo(
-		() => ({
-			open,
-			handleToggle,
-			type,
-		}),
-		[open, handleToggle, type]
-	)
-
 	return (
-		<article
-			{...props}
-			role={role}
+		<SubsectionProvider
 			aria-label={ariaLabel}
-			className={cn('flex flex-col', open && 'gap-y-2', props.className)}>
-			<SubSectionContext.Provider value={contextValue}>{props.children}</SubSectionContext.Provider>
-		</article>
+			defaultOpen={defaultOpen}
+			type={type}
+			role={role}
+			{...props}
+		/>
 	)
 }
 
-const Heading = ({ ...props }: Props<'button'>) => {
+export const SubsectionHeading = ({ ...props }: Props<'button'>) => {
 	const { type, open, handleToggle } = useContext(SubSectionContext)
 	return (
 		<button
@@ -97,7 +66,7 @@ const Heading = ({ ...props }: Props<'button'>) => {
 	)
 }
 
-const Content = ({
+export const SubsectionContent = ({
 	as,
 	...props
 }: Props<'div'> & {
@@ -115,7 +84,7 @@ const Content = ({
 	)
 }
 
-const ContentList = ({
+export const SubsectionList = ({
 	as,
 	...props
 }: Props<'div'> & {
@@ -124,7 +93,7 @@ const ContentList = ({
 	const Kids = Array.isArray(props.children) ? props.children : [props.children]
 
 	return (
-		<Content
+		<SubsectionContent
 			as={as ?? 'ul'}
 			{...props}
 			style={{
@@ -141,17 +110,6 @@ const ContentList = ({
 					</li>
 				)
 			})}
-		</Content>
+		</SubsectionContent>
 	)
-}
-
-Subsection.Heading = Heading
-Subsection.Content = Content
-Subsection.List = ContentList
-
-export {
-	Subsection,
-	Content as SubsectionContent,
-	Heading as SubsectionHeading,
-	ContentList as SubsectionList,
 }

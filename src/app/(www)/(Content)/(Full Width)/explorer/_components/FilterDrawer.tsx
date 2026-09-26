@@ -10,8 +10,13 @@ import { Button } from '~/components/Button'
 import { Checkbox } from '~/components/Form/Checkbox'
 import { Label } from '~/components/Form/Label'
 import { Icon } from '~/components/Icon'
-import { Section } from '~/components/Structure/Section'
-import { Subsection } from '~/components/Structure/Subsection'
+import {
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
+import { Subsection, SubsectionContent, SubsectionHeading } from '~/components/Structure/Subsection'
 
 export const Drawer = ({
 	overlayRef,
@@ -79,8 +84,8 @@ export const Drawer = ({
 							<Subsection
 								className='flex flex-col gap-1 *:[div]:flex *:[div]:flex-col *:[div]:gap-2'
 								key={grp.group}>
-								<Subsection.Heading>{grp.group}</Subsection.Heading>
-								<Subsection.Content>
+								<SubsectionHeading>{grp.group}</SubsectionHeading>
+								<SubsectionContent>
 									{grp.items.map(cb => (
 										<FilterCB
 											key={cb.dataKey}
@@ -91,7 +96,7 @@ export const Drawer = ({
 											dispatchReducer={dispatchReducer}
 										/>
 									))}
-								</Subsection.Content>
+								</SubsectionContent>
 							</Subsection>
 						))}
 						<ClearButton dispatchReducer={dispatchReducer} />
@@ -104,15 +109,15 @@ export const Drawer = ({
 }
 
 const FilterHeading = () => (
-	<Section.HGroup>
-		<Section.Eyebrow>Filter</Section.Eyebrow>
-		<Section.Heading>Let's get you matched!</Section.Heading>
-		<Section.Subtitle className='pointer-coarse:hidden'>
+	<SectionHGroup>
+		<SectionEyebrow>Filter</SectionEyebrow>
+		<SectionHeading>Let's get you matched!</SectionHeading>
+		<SectionSubtitle className='pointer-coarse:hidden'>
 			We can help narrow down the selection if you tell us a little bit about yourself - don’t
 			worry, we don’t keep a record of any of this and none of it can be traced back to you! If you
 			don’t select anything, you will just be shown the full list of pathways
-		</Section.Subtitle>
-	</Section.HGroup>
+		</SectionSubtitle>
+	</SectionHGroup>
 )
 
 const FilterCB = ({

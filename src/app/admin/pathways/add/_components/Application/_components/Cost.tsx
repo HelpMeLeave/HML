@@ -1,4 +1,8 @@
-import { SubSectionFieldset } from '@/admin/_components'
+import {
+	SubSectionFieldset,
+	SubSectionFieldsetDetails,
+	SubSectionFieldsetLegend,
+} from '@/admin/_components'
 import { Checkbox, CheckboxField, Label, Select } from '@/admin/_components/catalyst'
 import type { ElPrismaProps } from '@/admin/pathways/_lib/types'
 import { CostInput, CostRangeFieldsGroup, refresh } from '@/admin/pathways/add'
@@ -44,12 +48,12 @@ export const ApplicationCost = ({
 
 	return (
 		<SubSectionFieldset>
-			<SubSectionFieldset.Legend
+			<SubSectionFieldsetLegend
 				aria-label='Cost'
 				description='The cost associated with applying for this pathway. Do not include costs for documents as those will be covered in the Documentation section.'>
 				Cost
-			</SubSectionFieldset.Legend>
-			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-3'>
+			</SubSectionFieldsetLegend>
+			<SubSectionFieldsetDetails className='gap-x-8 sm:grid-cols-3'>
 				<CostRangeFieldsGroup
 					disabled={disabled}
 					required
@@ -156,7 +160,7 @@ export const ApplicationCost = ({
 						Information Not Available
 					</Label>
 				</CheckboxField>
-			</SubSectionFieldset.Details>
+			</SubSectionFieldsetDetails>
 		</SubSectionFieldset>
 	)
 }

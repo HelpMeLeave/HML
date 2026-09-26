@@ -1,7 +1,13 @@
 'use client'
 
 import { useContext } from 'react'
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 import { Subsection, SubsectionContent, SubsectionHeading } from '~/components/Structure/Subsection'
 import { useLocalData } from '~/hooks/useLocalData'
 import { DBContext } from '~/server/db/provider'
@@ -29,11 +35,11 @@ export const MatchingPathways = ({ country }: { country: ApiData.Country['abbr']
 
 	return pathways && pathways.length > 0 ?
 			<Section>
-				<Section.HGroup>
-					<Section.Eyebrow>Your Pathways</Section.Eyebrow>
-					<Section.Heading>Matching Pathways</Section.Heading>
-					<Section.Subtitle>Here are the pathways that align with your needs</Section.Subtitle>
-				</Section.HGroup>
+				<SectionHGroup>
+					<SectionEyebrow>Your Pathways</SectionEyebrow>
+					<SectionHeading>Matching Pathways</SectionHeading>
+					<SectionSubtitle>Here are the pathways that align with your needs</SectionSubtitle>
+				</SectionHGroup>
 
 				{pathways.map(pathway => (
 					<Subsection key={pathway.id}>

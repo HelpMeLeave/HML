@@ -55,7 +55,7 @@ export const PageHeading = ({
 			)}>
 			{props.children}
 		</h1>
-		{subtitle && <PageSubtitle>{eyebrow}</PageSubtitle>}
+		{subtitle && <PageSubtitle>{subtitle}</PageSubtitle>}
 	</>
 )
 

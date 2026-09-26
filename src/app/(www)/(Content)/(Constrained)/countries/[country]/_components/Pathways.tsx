@@ -1,18 +1,24 @@
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 import { InlineLink } from '~/components/Text/Link'
 import { Li, UL } from '~/components/Text/List'
 
 export const Pathways = ({ pathways, name }: { pathways: ApiData.Pathway[]; name: string }) => {
 	return (
 		<Section>
-			<Section.HGroup>
-				<Section.Eyebrow>Pathways</Section.Eyebrow>
-				<Section.Heading>Pathways to {name}</Section.Heading>
-				<Section.Subtitle>
+			<SectionHGroup>
+				<SectionEyebrow>Pathways</SectionEyebrow>
+				<SectionHeading>Pathways to {name}</SectionHeading>
+				<SectionSubtitle>
 					Most official information is from government websites, but some pathways are from
 					community organizations or other sources.
-				</Section.Subtitle>
-			</Section.HGroup>
+				</SectionSubtitle>
+			</SectionHGroup>
 
 			<UL>
 				{pathways.map(p => (

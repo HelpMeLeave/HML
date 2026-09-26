@@ -3,7 +3,7 @@ import { Button } from '~/components/Button'
 import { CTA } from '~/components/CTA'
 import { Page, PageHeading } from '~/components/Structure/Page'
 import { Section, SectionHeading } from '~/components/Structure/Section'
-import { Subsection } from '~/components/Structure/Subsection'
+import { Subsection as SubsectionComponent } from '~/components/Structure/Subsection'
 import { Blockquote } from '~/components/Text/Blockquote'
 import { Bold } from '~/components/Text/Bold'
 import { Heading } from '~/components/Text/Heading'
@@ -128,7 +128,9 @@ export function mdxComponents() {
 		},
 		Section: ({ ...props }: Props<typeof Section>) => <Section {...props} />,
 		SectionHeading: ({ ...props }: Props<typeof SectionHeading>) => <SectionHeading {...props} />,
-		Subsection: ({ ...props }: Props<typeof Subsection>) => <Subsection {...props} />,
+		Subsection: ({ ...props }: Props<typeof SubsectionComponent>) => (
+			<SubsectionComponent {...props} />
+		),
 		Page: ({ ...props }: Props<typeof Page>) => <Page {...props} />,
 		PageHeading: ({ ...props }: Props<typeof PageHeading>) => <PageHeading {...props} />,
 		InlineLink: ({ ...props }: Props<typeof InlineLink>) => <InlineLink {...props} />,

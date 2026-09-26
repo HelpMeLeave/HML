@@ -1,4 +1,10 @@
-import { FormError, FormGroupError, SubSectionFieldset } from '@/admin/_components'
+import {
+	FormError,
+	FormGroupError,
+	SubSectionFieldset,
+	SubSectionFieldsetDetails,
+	SubSectionFieldsetLegend,
+} from '@/admin/_components'
 import { Checkbox, CheckboxField } from '@/admin/_components/_form/Checkbox'
 import { Field, Input, InputGroup, Label, Select } from '@/admin/_components/catalyst'
 import { timeOptionEls } from '@/admin/pathways/_lib/constants'
@@ -143,8 +149,8 @@ export const DurationGroup = ({
 
 	return (
 		<SubSectionFieldset>
-			<SubSectionFieldset.Legend description={description}>{legend}</SubSectionFieldset.Legend>
-			<SubSectionFieldset.Details className='gap-x-8 sm:grid-cols-2'>
+			<SubSectionFieldsetLegend description={description}>{legend}</SubSectionFieldsetLegend>
+			<SubSectionFieldsetDetails className='gap-x-8 sm:grid-cols-2'>
 				<CheckboxField className='italic'>
 					<Checkbox
 						disabled={isNA}
@@ -222,7 +228,7 @@ export const DurationGroup = ({
 						className='col-span-full mt-0 text-center font-medium italic *:text-sm/12'
 					/>
 				)}
-			</SubSectionFieldset.Details>
+			</SubSectionFieldsetDetails>
 		</SubSectionFieldset>
 	)
 }

@@ -1,5 +1,11 @@
 import { type Metadata } from 'next'
-import { Section } from '~/components/Structure/Section'
+import {
+	Section,
+	SectionEyebrow,
+	SectionHeading,
+	SectionHGroup,
+	SectionSubtitle,
+} from '~/components/Structure/Section'
 import { Subsection, SubsectionHeading, SubsectionList } from '~/components/Structure/Subsection'
 import { Text } from '~/components/Text/Text'
 
@@ -12,11 +18,11 @@ export const metadata: Metadata = {
 const StartPage = () => {
 	return (
 		<Section>
-			<Section.HGroup>
-				<Section.Eyebrow>How to Start</Section.Eyebrow>
-				<Section.Heading>Visa vs. Asylum</Section.Heading>
-				<Section.Subtitle>Each has its own requirements, benefits, and risks.</Section.Subtitle>
-			</Section.HGroup>
+			<SectionHGroup>
+				<SectionEyebrow>How to Start</SectionEyebrow>
+				<SectionHeading>Visa vs. Asylum</SectionHeading>
+				<SectionSubtitle>Each has its own requirements, benefits, and risks.</SectionSubtitle>
+			</SectionHGroup>
 			<Text>
 				As a general rule, visas are better if you can meet the requirements, but they can take a
 				long time to obtain. Asylum is usually faster, but it can be more complicated and risky.

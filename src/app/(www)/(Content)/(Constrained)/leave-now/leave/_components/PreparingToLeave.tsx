@@ -1,12 +1,12 @@
 'use client'
 
-import { Subsection } from '~/components/Structure/Subsection'
+import { Subsection, SubsectionHeading, SubsectionList } from '~/components/Structure/Subsection'
 import { InlineLink } from '~/components/Text/Link'
 
 export const PreparingToLeave = () => (
 	<Subsection>
-		<Subsection.Heading>Preparing to leave</Subsection.Heading>
-		<Subsection.List>
+		<SubsectionHeading>Preparing to leave</SubsectionHeading>
+		<SubsectionList>
 			<InlineLink
 				href='/pdf/How-To-Book-a-Flight.pdf'
 				target='_blank'>
@@ -22,6 +22,6 @@ export const PreparingToLeave = () => (
 				target='_blank'>
 				Your first month
 			</InlineLink>
-		</Subsection.List>
+		</SubsectionList>
 	</Subsection>
 )
