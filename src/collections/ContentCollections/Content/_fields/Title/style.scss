@@ -1,0 +1,7 @@
+.content-title {
+  --accessibility-outline: 0px;
+  appearance: none;
+  &:focus-visible {
+    border-color: transparent;
+  }
+}

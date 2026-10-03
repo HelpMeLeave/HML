@@ -1,0 +1,122 @@
+@use '@/styles/admin/mixins' as *;
+
+.icon-picker.icon-btn {
+  &:is(span) {
+    display: flex;
+    flex-direction: column;
+  }
+  font-size: 0.65rem;
+  --hover-color: var(--theme-secondary);
+  .btn__content {
+    gap: 2px;
+    flex-direction: column-reverse;
+  }
+}
+
+.icon-clear-btns {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  button {
+    border-radius: 4px;
+    margin-block: 2px;
+  }
+}
+
+.field-type.text:has(.icon-clear-btns) {
+  width: 100%;
+}
+
+.array-field__draggable-rows > div {
+  flex: 1;
+  .array-field__row-header {
+    text-wrap: nowrap;
+  }
+}
+
+#field-community {
+  .array-field__row-header {
+    text-wrap: nowrap;
+  }
+
+  .btn--style-error {
+    --bg-color: transparent;
+    --border-color: color-mix(in hsl, var(--theme-error-500) 100%, transparent);
+    --color: var(--border-color);
+    border: 1px solid var(--border-color);
+    &:hover {
+      background-color: var(--border-color);
+      color: white;
+    }
+  }
+
+  .array-field__draggable-rows > div:has(.collapsible__toggle--open) {
+    flex-basis: 550px;
+    @include sm {
+      flex-basis: 100%;
+      .collapsible__content > .render-fields > .field-type.group-field,
+      #currentIcon {
+        max-width: 100%;
+        margin-inline: auto;
+      }
+    }
+    @include md {
+      max-width: 500px;
+    }
+  }
+  .collapsible__content > .render-fields {
+    #specialIcons .icon-picker {
+      display: grid;
+      grid-auto-flow: row dense;
+    }
+    @include md {
+      display: flex;
+      flex-direction: column;
+      .group-field {
+        flex-direction: column;
+        width: 500px;
+      }
+      #iconOptions {
+        display: flex;
+        flex-direction: column;
+        > *:not(#specialIcons) {
+          flex: 1;
+        }
+        gap: 2.5rem;
+      }
+      #specialIcons .icon-picker {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-auto-flow: unset;
+        @include lg {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+      }
+    }
+  }
+
+  #currentIcon {
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+    width: 100%;
+    button {
+      border-radius: 4px;
+      margin-block: 2px;
+    }
+  }
+
+  .pickerTitle {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid light-dark(var(--theme-secondary-200), var(--theme-secondary-800));
+  }
+
+  .icon-picker--grp:not(button) {
+    max-width: 600px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+    gap: 1rem;
+    margin-bottom: 16;
+  }
+}

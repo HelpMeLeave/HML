@@ -1,0 +1,198 @@
+@use 'sass:list';
+@use '@/styles/vars.scss' as *;
+
+body {
+  &:has([data-toggle='open']) {
+    @include max-screen-sm {
+      overflow: hidden;
+    }
+    --nav-open-width: 100vw;
+    @include screen-sm {
+      --nav-open-width: 168px;
+    }
+    @include screen-lg {
+      --nav-open-width: 200px;
+    }
+  }
+}
+body {
+  --action-width: 0px;
+  --actual-nav-width: 48px;
+  --total-nav-width: 48px;
+  @include screen-sm {
+    --total-nav-width: 54px;
+  }
+  --nav-offset: calc(var(--offset) * 1.5);
+  --nav-wrapper-width: calc(var(--nav-offset) + var(--actual-nav-width));
+  &:has([data-action-toggle='open']) {
+    --action-width: 48px;
+  }
+  &:has([data-toggle='open']) {
+    --actual-nav-width: 100dvw;
+  }
+  &:has([data-toggle='open']) {
+    @include max-screen-sm {
+      overflow: hidden;
+      --nav-open-width: 100vw;
+    }
+    @include screen-sm {
+      --nav-open-width: 168px;
+    }
+    @include screen-lg {
+      --nav-open-width: 200px;
+    }
+  }
+}
+
+.template-default {
+  background-color: $color-background;
+  @include screen-md {
+    background-color: $color-background;
+  }
+  color: $color-foreground;
+
+  min-height: 100vh;
+  display: grid;
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: var(--total-nav-width) 1fr;
+  @media (prefers-reduced-motion) {
+    transition: none;
+  }
+  @media screen and (max-width: 768px) {
+    grid-template-columns: var(--total-nav-width) auto var(--action-width) !important;
+  }
+  &:has([data-toggle='open']) {
+    transition: all 0.15s ease-in-out;
+    grid-template-columns: var(--nav-open-width) 0;
+    @media screen and (min-width: 678px) {
+      grid-template-columns: var(--nav-open-width) auto;
+    }
+  }
+}
+
+$icon-size: 24px;
+$icon-wrapper-size: 32px;
+
+$mobile-icon-size: 32px;
+$mobile-icon-wrapper-size: 48px;
+
+.sidebar-sm {
+  z-index: $z-top;
+  padding-left: calc(var(--offset) * 1.5);
+  nav {
+    transition: width $default-transition-duration $default-transition-timing-function;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    row-gap: 1rem;
+    width: $nav-width;
+    height: 100%;
+    @include screen-sm {
+      height: calc(100% - (var(--offset) * 3));
+      top: calc(var(--offset) * 1.5);
+      left: calc(var(--offset) * 1.5);
+      border-radius: $rounded-2xl;
+    }
+    overflow-y: auto;
+    padding-block: size(4);
+    background-color: var(--color-slate-900);
+
+    @include dark {
+      background-color: darker(var(--color-slate-900), 20%);
+    }
+    @include flex-col($align: center);
+
+    &[data-toggle='open'] {
+      overflow-x: hidden;
+      width: var(--nav-open-width);
+      [data-slot='icon'] {
+        width: $icon-wrapper-size;
+      }
+      [data-slot='action'] {
+        width: 100%;
+      }
+    }
+  }
+
+  [data-slot='action'] {
+    @include ellipses;
+    align-items: center;
+    cursor: pointer;
+    width: $icon-wrapper-size;
+    display: grid;
+    grid-template-columns: $icon-wrapper-size;
+    &:is([data-toggle='open'] *) {
+      grid-template-columns: $mobile-icon-wrapper-size auto;
+      @include screen-sm {
+        grid-template-columns: $icon-wrapper-size auto;
+      }
+    }
+
+    color: var(--color-slate-100);
+    &:hover {
+      color: var(--color-yellow-300);
+    }
+    @include dark {
+      color: currentColor;
+      &:hover {
+        color: white;
+      }
+    }
+    &:is([inert]) {
+      opacity: 50%;
+      cursor: not-allowed;
+    }
+  }
+
+  [data-current] {
+    color: var(--color-yellow-300);
+    &:hover {
+      color: var(--color-yellow-100);
+    }
+  }
+
+  [data-slot='label'] {
+    text-transform: capitalize;
+    @include ellipses;
+    @include text(lg);
+    @include screen-sm {
+      font-family: $font-mono;
+      @include text(xs);
+    }
+    &:is(.icon-only *) {
+      display: none;
+    }
+  }
+
+  [data-slot='icon'] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+    aspect-ratio: 1/1;
+    width: 100%;
+    font-size: $mobile-icon-size;
+    svg {
+      @include size($icon-size - 2px);
+      @include screen-sm {
+        @include size($icon-size - 6px);
+      }
+    }
+    @include screen-sm {
+      font-size: calc($icon-size - 6px);
+    }
+  }
+}
+
+.toggle {
+  width: 100%;
+  svg {
+    transition: all 0.2s ease-in-out;
+    rotate: 0deg;
+    @include nav-open {
+      rotate: -180deg;
+    }
+  }
+}

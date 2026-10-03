@@ -1,0 +1,68 @@
+.collection-edit--content .doc-controls.gutter {
+  top: 0rem;
+}
+
+@media (max-width: 499px) {
+  .rich-text-lexical__wrap .fixed-toolbar {
+    top: calc(var(--doc-controls-height) + 2px);
+  }
+}
+.collection-edit .doc-controls {
+  @media (max-width: 499px) {
+    &.gutter {
+      top: -2rem;
+    }
+  }
+  &__controls {
+    flex-grow: 1;
+    &-top {
+      &.flow {
+        display: flex;
+        width: 100%;
+        gap: 2rem;
+        @media (max-width: 500px) {
+          gap: 0.5rem;
+          justify-content: flex-start;
+          .pill {
+            margin: 0 !important;
+          }
+        }
+        flex-wrap: wrap;
+        @media (min-width: 825px) {
+          justify-content: space-between;
+          flex-grow: 1;
+        }
+        .flow-wrapper {
+          display: flex;
+          gap: 1rem;
+        }
+      }
+    }
+    @media (max-width: 499px) {
+      &::after {
+        background: none;
+      }
+      &-wrapper {
+        border: 0;
+        margin-block: 0.5rem;
+        height: fit-content;
+        background-color: transparent;
+        top: 0;
+        align-items: end;
+      }
+    }
+  }
+  &__divider {
+    display: none;
+  }
+  &__content {
+    display: none;
+  }
+  &__wrapper {
+    min-height: fit-content;
+  }
+}
+
+#action-save {
+  height: 100%;
+}

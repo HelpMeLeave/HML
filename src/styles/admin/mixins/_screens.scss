@@ -1,0 +1,54 @@
+@use '../vars' as *;
+
+@mixin sm {
+  @media (min-width: $xs-width) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: $s-width) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: $m-width) {
+    @content;
+  }
+}
+@mixin xl {
+  @media (min-width: $l-width) {
+    @content;
+  }
+}
+
+@mixin max-screen-lg {
+  @media (max-width: #{vars.$breakpoint-l-width}) {
+    @content;
+  }
+}
+
+@mixin shadow-sm {
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-m {
+  box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-lg {
+  box-shadow: 0 -2px 16px -2px rgba(0, 0, 0, 0.2);
+}
+
+@mixin shadow-lg-top {
+  box-shadow: 0 2px 16px -2px rgba(0, 0, 0, 0.2);
+}
+
+@mixin inputShadow {
+  @include shadow-sm;
+
+  &:not(:disabled) {
+    &:hover {
+      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

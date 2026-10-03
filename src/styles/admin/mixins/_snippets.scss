@@ -1,0 +1,33 @@
+// $italic: input boxes keep italic placeholders; placeholders inside the main editor body pass false
+@mixin empty($lh: 1.65, $italic: true) {
+  &:has(br:first-child:last-child)[data-placeholder] {
+    line-height: $lh !important;
+    &::before {
+      content: attr(data-placeholder);
+      position: absolute;
+      cursor: text;
+      @if $italic {
+        font-style: italic;
+      }
+      opacity: 75%;
+    }
+  }
+}
+
+@mixin is-empty {
+  &:has(br:first-child:last-child)[data-placeholder] {
+    @content;
+  }
+}
+
+@mixin has-empty($first: true) {
+  @if ($first==true) {
+    &:has(> br:first-child:last-child)[data-placeholder] {
+      @content;
+    }
+  } @else {
+    &:has(br:first-child:last-child)[data-placeholder] {
+      @content;
+    }
+  }
+}

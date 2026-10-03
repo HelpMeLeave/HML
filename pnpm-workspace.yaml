@@ -1,0 +1,16 @@
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  msgpackr-extract: true
+  sharp: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - knip@6.33.0
+  - zod@4.5.1
+# overrides:
+#   dompurify: '^3.4.13'
+#   esbuild: '^0.25.12'
+#   eslint: '^10.11.0'
+#   lodash.get: 'npm:lodash@^4.17.21'
+#   effect: '^3.20.0'
+#   browserslist: '^4.28.7'

@@ -1,76 +1,85 @@
-import { Eyebrow } from '~/components/Text/Eyebrow'
-import { Subtitle } from '~/components/Text/Subtitle'
-import { cn } from '~/lib/cn'
+import { Heading } from '@/components/primitives'
+import { Eyebrow } from '@/components/Structure/Eyebrow'
+import { Subtitle } from '@/components/Structure/Subtitle'
+import { cn } from '@/lib/cn'
+import { slugify } from 'payload/shared'
+import type { JSX } from 'react'
 
 const Section = ({
-	as,
-	...props
+  as,
+  ...props
 }: Props<'section'> & {
-	as?: React.JSX.ElementType
+  as?: React.JSX.ElementType
 }) => {
-	const Component = as || 'section'
+  const Component = as || 'section'
 
-	return (
-		<Component
-			data-section
-			{...props}
-			className={cn('flex flex-col gap-y-8', props.className)}>
-			{props.children}
-		</Component>
-	)
+  return (
+    <Component
+      data-section
+      {...props}>
+      {props.children}
+    </Component>
+  )
+}
+
+const SectionWrapper = ({ ...props }: Props<'section'>) => {
+  return (
+    <section
+      data-slot='section'
+      {...props}
+    />
+  )
 }
 
 const SectionHGroup = ({ ...props }: Props<'hgroup'>) => {
-	return (
-		<hgroup
-			className={cn('mb-0 [&+*]:mt-0', props.className)}
-			{...props}
-		/>
-	)
+  return (
+    <hgroup
+      {...props}
+      className={cn('mt-[1em] mb-[0.25em] text-[2.75rem] print:break-after-avoid', props.className)}
+    />
+  )
 }
-const SectionHeading = ({
-	eyebrow,
-	subtitle,
-	...props
-}: Props<'h2'> & {
-	eyebrow?: string
-	subtitle?: string
-}) => {
-	if (subtitle || eyebrow) {
-		return (
-			<SectionHGroup>
-				{eyebrow && <SectionEyebrow>{eyebrow}</SectionEyebrow>}
-				<SectionHeading>{props.children}</SectionHeading>
-				{subtitle && <SectionSubtitle>{subtitle}</SectionSubtitle>}
-			</SectionHGroup>
-		)
-	}
-	return (
-		<h2
-			{...props}
-			className={cn(
-				'text-hml-slate dark:text-hml-grey text-[2rem] font-semibold tracking-tight text-balance',
-				props.className
-			)}>
-			{props.children}
-		</h2>
-	)
-}
-const SectionEyebrow = ({ children, ...props }: Props<'p'>) => {
-	return (
-		<Eyebrow
-			{...props}
-			className={cn('text-sm/8', props.className)}>
-			{children}
-		</Eyebrow>
-	)
-}
-const SectionSubtitle = ({ ...props }: Props<'p'>) => (
-	<Subtitle
-		{...props}
-		className={cn('pl-2 text-[1.05rem]/loose text-balance', props.className)}>
-		{props.children}
-	</Subtitle>
+
+const SectionHeading = ({ ...props }: Props<'h2'>) => (
+  <Heading
+    {...props}
+    level={2}
+  />
 )
 
-export { Section, SectionEyebrow, SectionHeading, SectionHGroup, SectionSubtitle }
+const SectionEyebrow = ({ children, ...props }: Props<'p'>) => {
+  const parsedChildren = Array.isArray(children) ? children : [children]
+  const id =
+    parsedChildren.every((child) => typeof child == 'string') ?
+      slugify(parsedChildren.join(' '))
+    : undefined
+
+  return (
+    <Eyebrow
+      {...props}
+      id={id}
+    />
+  )
+}
+
+const SectionSubtitle = ({
+  ...props
+}: Props<'p'> & {
+  as?: JSX.ElementType
+}) => (
+  <Subtitle
+    {...props}
+    className={cn('text-[0.4em]', props.className)}
+    data-slot='subtitle'>
+    {props.children}
+  </Subtitle>
+)
+
+export {
+  Section,
+  SectionWrapper as SectionBase,
+  SectionEyebrow,
+  SectionHeading,
+  SectionHGroup,
+  SectionSubtitle,
+}

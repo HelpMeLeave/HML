@@ -1,0 +1,81 @@
+@custom-variant print {
+  @media print {
+    @slot;
+  }
+}
+
+@utility click {
+  cursor: pointer;
+}
+
+@utility card {
+  position: relative;
+  display: block;
+  padding: 1px;
+  @apply min-h-fit rounded-xl no-underline interactive decoration-0 transition-all duration-200 hover:-translate-y-px hover:shadow-xs;
+  > #cardWrapper,
+  .cardWrapper {
+    background-color: var(--color-card);
+    padding-inline: --spacing(4);
+    padding-block: --spacing(3);
+    @apply relative z-10 flex h-full flex-col rounded-[calc(0.75rem-1px)] bg-card hover:*:data-[slot="linkText"]:text-accent;
+  }
+
+  &::before {
+    content: " ";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    @apply rounded-xl bg-linear-to-b from-body/10 to-body/5 dark:from-grey-800/50 dark:to-grey-950/0;
+  }
+}
+
+@custom-variant hocus {
+  &:is(*:hover, *:focus-visible) {
+    @slot;
+  }
+}
+
+@utility interactive-outline {
+  outline-color: var(--color-accent);
+  @variant dark {
+    outline-color: var(--color-accent-muted);
+  }
+  &:focus {
+    outline-width: 1.5px;
+    outline-style: solid;
+    outline-offset: 2px;
+  }
+}
+
+@utility interactive-shadow {
+  &:focus-visible {
+    box-shadow:
+      0px 0px 0px 2px var(--color-background),
+      0px 0px 0px 3px var(--color-accent);
+  }
+}
+
+@utility interactive {
+  &:is(button, input) {
+    @apply interactive-outline;
+  }
+  &:is(a) {
+    text-decoration-thickness: 2px;
+    text-decoration-color: --alpha(var(--color-accent) / 50%);
+    @apply interactive-shadow;
+  }
+}
+
+@utility strong {
+  font-weight: 600;
+  color: var(--color-accent);
+  @variant dark {
+    font-weight: 400;
+  }
+}
+@custom-variant sibling {
+  :is(.sibling + *) {
+    @slot;
+  }
+}

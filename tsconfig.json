@@ -1,77 +1,47 @@
 {
-	"compilerOptions": {
-		"target": "ES2017",
-		"lib": [
-			"dom",
-			"dom.iterable",
-			"esnext"
-		],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"verbatimModuleSyntax": true,
-		"jsx": "preserve",
-		"incremental": true,
-		"plugins": [
-			{
-				"name": "next"
-			}
-		],
-		"paths": {
-			"@/*": [
-				"./src/app/*"
-			],
-			"www/*": [
-				"./src/app/(www)/(Content)/*"
-			],
-			"@/data-collection/*": [
-				"./src/app/admin/data-collection/*"
-			],
-			"~/*": [
-				"./src/*"
-			],
-			"~/components/*": [
-				"./src/components/*"
-			],
-			"~/components": [
-				"./src/components/index.ts"
-			],
-			"~/server/*": [
-				"./src/server/*"
-			],
-			"~/trpc": [
-				"./src/server/api/*"
-			],
-			"~/types/*": [
-				"./@types/*.d.ts"
-			],
-			"~/clientQuery": [
-				"./src/trpc/react.tsx"
-			],
-			"~/serverQuery": [
-				"./src/trpc/server.ts"
-			]
-		},
-		"typeRoots": [
-			"./node_modules/@types",
-			"./@types"
-		]
-	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		".next/types/**/*.ts",
-		"src/**/*.d.ts",
-		".next/dev/types/**/*.ts"
-	],
-	"exclude": [
-		"node_modules"
-	]
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "noErrorTruncation": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2024"],
+    "allowJs": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      },
+      {
+        "name": "@payloadcms/typescript-plugin"
+      }
+    ],
+    "paths": {
+      "@/*": ["./@types/*", "./src/*", "./public/*", "./.next/dev/types/*"],
+      "www/*": ["./src/app/(www)/*"],
+      "api/*": ["./src/app/(api)/*"]
+    },
+    "target": "ES2022",
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    // "skipLibCheck": false
+    "skipLibCheck": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./@types/**/*.ts",
+    "./@types/**/*.d.ts",
+    "./eslint.config.mjs",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "src/styles/tailwind.config.js"
+  ],
+  "exclude": ["./node_modules", "./src/migrations"]
 }

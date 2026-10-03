@@ -1,0 +1,86 @@
+@use '@/styles/admin/mixins' as *;
+@use '@/styles/admin/field' as *;
+
+.lexical {
+  // A thin muted rule down the left marks "inside this container".
+  &__section,
+  &__subsection {
+    border-left: 1px solid var(--theme-elevation-200);
+    padding-left: 1rem;
+  }
+  &__hgroup {
+    line-height: 1;
+    .LexicalEditorTheme__h2 {
+      margin: 0;
+    }
+    margin-bottom: 1rem;
+  }
+
+  &__subsection-heading {
+    @include empty($italic: false);
+  }
+
+  &__section:has(
+      > hgroup > .hgroup__section-eyebrow > br:first-child,
+      > hgroup > .hgroup__section-eyebrow > br:last-child
+    ) {
+    margin-top: 0;
+  }
+  &__hgroup:has(.hgroup__subtitle > br:first-child, .hgroup__subtitle > br:last-child) {
+    transition: 0.2s ease;
+    &:not(:hover) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Top level, not inside `.lexical`: that block is only a class prefix, so nesting a non-`&` selector there made it `.lexical .hgroup__…` and no `.lexical` ancestor exists.
+.hgroup__section-heading {
+  @include empty($italic: false);
+}
+
+.hgroup {
+  &__section-eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--theme-elevation-400);
+    @include empty($italic: false);
+  }
+  &__subtitle {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--theme-elevation-500);
+    text-wrap: balance;
+    letter-spacing: 0.1ch;
+    font-weight: 300;
+    @include empty(1.75, $italic: false);
+  }
+}
+
+@include schema-inputbox('content.subtitle') {
+  @include schema-padding;
+  @include schema-border();
+  @include inputShadow;
+  .LexicalEditorTheme__paragraph {
+    font-size: 1.05rem;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.75;
+    text-wrap: balance;
+    color: $theme-500;
+    letter-spacing: 0.075ch;
+  }
+  .rich-text-lexical__label-row {
+    display: none;
+  }
+}
+
+@include schema-inputbox('content.other-brow') {
+  font-size: 0.75rem;
+  padding-inline: 0.5rem;
+  max-width: 50vw;
+  * {
+    margin: 0;
+  }
+}

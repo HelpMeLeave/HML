@@ -1,0 +1,123 @@
+@use '@/styles/vars.scss' as *;
+
+@mixin meta() {
+  &__url {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.25rem;
+    justify-content: flex-end;
+    a {
+      text-transform: uppercase;
+      font-weight: 300;
+      text-decoration: 1px solid underline;
+      &:hover {
+        text-decoration: 2px solid underline;
+      }
+    }
+    button {
+      border-radius: 4px;
+      background-color: var(--color-theme-50);
+      border: 0.5px solid var(--color-theme-200);
+      padding: 1px;
+      width: 20px;
+      height: 20px;
+    }
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  &__size-type {
+    font-size: 0.75rem;
+    padding-block: 0.25rem;
+  }
+}
+
+.file-details__main-detail {
+  padding: 0px;
+  justify-content: unset;
+  align-self: unset;
+  gap: calc(var(--base) * 0.2);
+  flex-direction: column;
+  flex-grow: 0;
+  width: auto;
+  min-width: unset;
+  max-width: unset;
+  display: block;
+}
+.file-details {
+  .file-meta {
+    @include meta;
+  }
+
+  .file-field__upload-actions {
+    button {
+      width: 100%;
+      border-color: transparent;
+    }
+  }
+  &__remove {
+    background-color: var(--color-red-500) !important;
+    &:hover {
+      border-color: var(--color-red-200) !important;
+      background-color: var(--color-red-200) !important;
+      .btn__content {
+        color: black !important;
+      }
+    }
+    width: 100%;
+    .btn__content {
+      font-size: 0.75rem;
+      color: white;
+      font-weight: 400;
+      justify-content: center;
+      width: calc(100% - 1px);
+      &::after {
+        content: 'Remove';
+      }
+    }
+  }
+}
+
+.preview-sizes {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  max-width: max-content;
+  &__imageWrap,
+  &__sizeOption {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: start;
+  }
+  &__sizeOption {
+    flex-direction: row-reverse;
+    .preview-sizes__sizeMeta {
+      flex-basis: 200px;
+      flex-shrink: 0;
+    }
+  }
+  &__meta,
+  &__sizeMeta {
+    .file-meta {
+      @include meta;
+      * {
+        white-space: nowrap;
+      }
+    }
+  }
+  &__sizeName {
+    @include text(2xl);
+    text-transform: capitalize;
+  }
+  &__list {
+    row-gap: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+  &__preview {
+    max-width: 75%;
+  }
+}

@@ -1,0 +1,281 @@
+.main#homePage {
+  margin-top: 0;
+}
+
+@mixin _small() {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+@mixin sm() {
+  @media (min-width: 600px) {
+    @content;
+  }
+}
+
+@mixin dark() {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin group-hocus {
+  &:is(.panel:hover *, .panel:focus-visible *) {
+    @content;
+  }
+}
+$_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
+
+.gate {
+  --gutter: 26px;
+  --gutter-thirds: calc(var(--gutter));
+  --gutter-left: calc(var(--gutter-thirds));
+  --gutter-right: calc(--gutter-thirds * 2);
+  --accent: light-dark(var(--color-red-600), var(--color-yellow-500));
+  --accent-deep: light-dark(var(--color-red-700), var(--color-yellow-600));
+
+  /* Text over the photo. Deliberately NOT a light-dark() pair — the panel
+     behind it is a darkened image in both schemes, so the type stays light. */
+  --ink: var(--color-ui-25);
+  --shear: 0px;
+  --photo-brightness: 0.58;
+  --photo-brightness-hover: 0.85;
+  --photo-contrast: 1.28;
+
+  @include md {
+    --photo-brightness: 0.78;
+    --photo-brightness-hover: 0.85;
+    --photo-contrast: 1.18;
+    --shear: 46px;
+  }
+}
+
+.panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+
+  @include _small() {
+    min-height: 33.333svh;
+    &:last-child,
+    &:first-child {
+      min-height: 33.333svh;
+    }
+  }
+
+  @include md {
+    --clip-right: calc(100% - var(--shear)) 100%;
+    --clip-left: 0 0;
+
+    + .panel {
+      --clip-left: var(--shear) 0;
+      + .panel {
+        --clip-left: var(--shear) 0;
+        --clip-right: 100% 100%;
+      }
+    }
+    clip-path: polygon(var(--clip-left), 100% 0, var(--clip-right), 0 100%);
+  }
+
+  + .panel {
+    margin-left: 0;
+    border-top: 1px solid rgba(244, 242, 240, 0.18);
+    @include md {
+      border-top: 0;
+      margin-left: calc(var(--shear) * -1);
+    }
+
+    &::before {
+      display: none;
+      @include md {
+        display: unset;
+      }
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      background: rgba(244, 242, 240, 0.22);
+      clip-path: polygon(var(--shear) 0, calc(var(--shear) + 2px) 0, 2px 100%, 0 100%);
+    }
+  }
+
+  &:nth-child(2) {
+    flex-grow: 1.04;
+  }
+
+  .photo {
+    filter: grayscale(1) brightness(var(--photo-brightness)) contrast(var(--photo-contrast));
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom;
+    &:is([data-slot='BUILD COMMUNITY'] *) {
+      object-position: left 0%;
+      @include md {
+        object-position: 60%;
+      }
+    }
+    &:is([data-slot='EXPLORE'] *) {
+      object-position: bottom 80% left 0px;
+      @include md {
+        object-position: 70%;
+      }
+    }
+    &:is([data-slot='LEAVE'] *) {
+      object-position: bottom 80% left 0px;
+      @include md {
+        object-position: 60%;
+      }
+    }
+    transition:
+      object-position 240ms linear,
+      transform 420ms $_transform_transition,
+      filter 240ms linear;
+    @include group-hocus() {
+      transform: scale(1.08);
+      filter: grayscale(1) brightness(var(--photo-brightness-hover)) contrast(var(--photo-contrast));
+    }
+  }
+  &::after {
+    content: ' ';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.435) 0%, rgba(0, 0, 0, 0.435) 50%, transparent 100%);
+    height: 5rem;
+    @include md {
+      height: 15rem;
+    }
+    display: block;
+  }
+  &:hover::after {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.435) 50%, transparent 100%);
+    height: 10rem;
+  }
+
+  .shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.438) 0%, rgba(6, 6, 6, 0) 40%, rgba(6, 6, 6, 0) 100%);
+  }
+
+  .wash {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 200ms linear;
+    background: linear-gradient(rgba(155, 47, 47, 0.48) 0%, rgba(155, 47, 47, 0) 100%);
+    @include dark {
+      background: linear-gradient(rgba(149, 155, 47, 0.48) 0%, rgba(149, 155, 47, 0) 100%);
+    }
+    mix-blend-mode: difference;
+    @include group-hocus() {
+      opacity: 1;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    .body {
+      box-shadow: inset 0 0 0 3px var(--ink);
+    }
+  }
+  .chev {
+    flex: 0 0 auto;
+    transition: transform 190ms $_transform_transition;
+    @include group-hocus() {
+      transform: translateX(8px);
+    }
+  }
+
+  .rule {
+    transition: width 300ms $_transform_transition;
+    @include group-hocus() {
+      width: 128px;
+    }
+  }
+}
+
+.tint {
+  background: rgba(155, 47, 47, 0.1);
+  @include dark {
+    background: rgba(146, 149, 47, 0.1);
+  }
+}
+
+.body {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+  justify-content: end;
+  padding: 32px var(--gutter);
+  position: relative;
+  z-index: 4;
+
+  @include md {
+    justify-content: flex-end;
+    padding: 0 var(--gutter) 78px;
+  }
+}
+
+.name {
+  align-items: center;
+  color: var(--ink);
+  display: flex;
+  font-family: var(--font-bebas), 'Arial Narrow', sans-serif;
+  font-size: clamp(2.5rem, 2.6vw, 7.25rem);
+  gap: 16px;
+  letter-spacing: 0.02em;
+  line-height: 0.92;
+  white-space: nowrap;
+}
+
+.blurb {
+  text-shadow:
+    0 0 7px rgba(0, 0, 0, 0.255),
+    2px 0 3px rgba(0, 0, 0, 0.45),
+    0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.mark {
+  $_mark-clamp: clamp(28px, 3.7vw, 56px);
+  position: absolute;
+  z-index: 30;
+  right: $_mark-clamp;
+  top: $_mark-clamp;
+  width: 64px;
+  @include md {
+    width: 34px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo,
+  .wash,
+  .chev,
+  .rule {
+    transition-duration: 1ms;
+  }
+}

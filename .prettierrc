@@ -1,39 +1,36 @@
 {
-	"jsxSingleQuote": true,
-	"singleQuote": true,
-	"useTabs": true,
-	"tabWidth": 2,
-	"experimentalTernaries": true,
-	"experimentalOperatorPosition": "start",
-	"trailingComma": "es5",
-	"bracketSameLine": true,
-	"singleAttributePerLine": true,
-	"arrowParens": "avoid",
-	"bracketSpacing": true,
-	"objectWrap": "preserve",
-	"printWidth": 100,
-	"semi": false,
-	"quoteProps": "as-needed",
-	"plugins": [
-		"prettier-plugin-organize-imports",
-		"prettier-plugin-tailwindcss"
-	],
-	"tailwindStyleSheet": [
-		"./src/styles/style.css",
-		"./src/styles/colors.css",
-		"./src/styles/admin.css",
-		"./src/styles/www.css"
-	],
-	"tailwindFunctions": [
-		"cn",
-		"cva"
-	],
-	"overrides": [
-		{
-			"files": "*.css",
-			"options": {
-				"singleQuote": false
-			}
-		}
-	]
+  "jsxSingleQuote": true,
+  "singleQuote": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "experimentalTernaries": true,
+  "experimentalOperatorPosition": "start",
+  "trailingComma": "es5",
+  "bracketSameLine": true,
+  "singleAttributePerLine": true,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "objectWrap": "preserve",
+  "printWidth": 100,
+  "semi": false,
+  "quoteProps": "as-needed",
+  "proseWrap": "never",
+  "htmlWhitespaceSensitivity": "css",
+  "plugins": ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/styles/style.css",
+  "tailwindFunctions": ["cn", "cva"],
+  "overrides": [
+    {
+      "files": "*.css",
+      "options": {
+        "singleQuote": false
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "proseWrap": "preserve"
+      }
+    }
+  ]
 }

@@ -1,0 +1,6 @@
+.step-nav {
+  margin-left: 1rem;
+  [title='Dashboard']:has(.step-nav__home-icon) {
+    overflow: visible;
+  }
+}

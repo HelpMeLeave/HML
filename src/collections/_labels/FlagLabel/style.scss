@@ -1,0 +1,12 @@
+.btn {
+  &--style-flag {
+    margin: 0;
+    height: 100%;
+    height: min-content;
+    transform: translateY(-25%);
+    position: relative;
+    &.flagged {
+      --color: var(--color-red-500);
+    }
+  }
+}

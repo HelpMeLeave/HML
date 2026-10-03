@@ -1,0 +1,41 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "tags": [
+    "-lintignore"
+  ],
+  "project": [
+    "src/**"
+  ],
+  "entry": [
+    "{,src/}app/**/{layout,page,route,template}.{js,jsx,ts,tsx}",
+    "./@types/**",
+    "src/_config/payload-config.ts"
+  ],
+  "ignoreIssues": {
+    "@types/**": [
+      "types"
+    ],
+    "src/_config/payload-generated-schema.ts": [
+      "exports"
+    ]
+  },
+  "ignoreDependencies": [
+    "payload-types",
+    "payload-workflow"
+  ],
+  "next": {
+    "config": [
+      "next.config.{js,ts,cjs,mjs,mts}"
+    ],
+    "entry": [
+      "{,src/}app/{,[(]*[)]/}{manifest,robots}.{js,ts}",
+      "{,src/}app/**/sitemap.{js,ts}",
+      "{,src/}app/**/{icon,apple-icon,opengraph-image,twitter-image}.{js,jsx,ts,tsx}",
+      "{,src/}{instrumentation,instrumentation-client,middleware,proxy}.{js,jsx,ts,tsx}",
+      "{,src/}app/global-{error,not-found}.{js,jsx,ts,tsx}",
+      "{,src/}app/**/{default,error,forbidden,loading,not-found,unauthorized}.{js,jsx,ts,tsx}",
+      "{,src/}app/**/{layout,page,route,template}.{js,jsx,ts,tsx}",
+      "{,src/}pages/**/*.{js,jsx,ts,tsx}"
+    ]
+  }
+}

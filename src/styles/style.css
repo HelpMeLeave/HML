@@ -1,0 +1,109 @@
+@layer theme, base, components, utilities;
+
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "./keyframes.css";
+@import "./fonts.css";
+@import "./util.css";
+@import "./prose.css";
+@import "./lexicals/_checkmarkList.css";
+@import "./colors.css";
+
+@theme {
+  --measure: 660px;
+
+  --shadow-input: 0px 1px 3px 0px #00000011;
+  --shadow-input-hover: 0px 1px 2px -1px #0003;
+
+  --animate-fade: animate-fade 0.3s ease-in-out;
+  --animate-stepnav-open: animate-stepnav-open var(--nav-trans-time) 0s forwards ease-in-out;
+  --animate-stepnav-close: animate-stepnav-close var(--nav-trans-time) 0s forwards ease-in-out
+    reverse;
+
+  /* #region -------- UTILITIES & VARIANTS -------- */
+  --is-*: initial;
+  --is-sm: 0.875;
+  --is-base: 1;
+  --is-lg: 1.125;
+  --is-xl: 1.25;
+  --is-2xl: 1.5;
+
+  /* #endregion */
+}
+
+:root,
+:host {
+  color-scheme: light dark;
+
+  --nav-height: --spacing(20);
+  @media (width < 48rem) {
+    --nav-height: --spacing(16);
+  }
+  --footer-min-height: --spacing(70);
+  --announcement-height: --spacing(14);
+  --announcement-offset: --spacing(10);
+  --announcement-offset-b: calc(var(--announcement-offset) + 1px);
+}
+
+html,
+body,
+main {
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0.01ch;
+  color: var(--color-body);
+  background-color: var(--color-background);
+}
+
+body {
+  &:has([data-headlessui-state="open"]) header {
+    z-index: 1;
+  }
+}
+
+button {
+  @apply ring-0 ring-transparent outline-0;
+  &:focus-visible {
+    @apply ring-0 outline-1;
+  }
+}
+
+a {
+  outline: initial;
+  &:not(.interactive):focus-visible {
+    @apply decoration-[3px]! outline-none!;
+  }
+}
+
+#headlessui-portal-root {
+  [id*="headlessui-dialog"][role="dialog"] {
+    position: relative;
+    z-index: 20;
+  }
+}
+
+ol:has(> .list-title) {
+  padding-left: 0;
+  margin-left: 0;
+  li {
+    list-style: none;
+  }
+  counter-reset: list-title 0;
+  > li:first-child {
+    padding-left: 0;
+    margin-left: 0;
+    margin-bottom: 0;
+  }
+  > li:not(*:first-child) {
+    padding-left: 0;
+    &::before {
+      padding-right: 0.5rem;
+      content: counter(list-title, decimal) ".  ";
+      font-size: 0.75rem;
+      color: var(--color-accent);
+    }
+    counter-increment: list-title 1;
+  }
+}

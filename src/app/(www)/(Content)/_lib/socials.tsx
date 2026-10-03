@@ -1,15 +1,18 @@
+import { Discord } from '@/components/Icon/Discord'
 import type Link from 'next/link'
 
-export const socials = [
-	{
-		name: 'Discord',
-		type: 'DiscordIcon',
-		href: 'https://discord.gg/TcHKRgED6y',
-		color: '#7289da',
-	},
-] as {
-	name: string
-	type: IconKey
-	href: typeof Link.prototype.href
-	color: string
-}[]
+export type Social = {
+  name: string
+  type: typeof Discord
+  href: typeof Link.prototype.href
+  color: string
+}
+
+export const socials: Social[] = [
+  {
+    name: 'Discord',
+    type: Discord,
+    href: 'https://discord.gg/TcHKRgED6y',
+    color: '#7289da',
+  },
+]

@@ -1,0 +1,38 @@
+body:has(.collection-edit--content) {
+  .doc-header {
+    display: none;
+  }
+}
+
+#contentTypeChoice {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  a {
+    flex: 1 1 400px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: var(--style-radius-l);
+    background-color: var(--theme-elevation-100);
+    text-decoration-line: none;
+    text-transform: uppercase;
+    font-weight: 300;
+    span {
+      font-size: 1.5rem;
+    }
+    svg {
+      width: 2rem;
+      height: 2rem;
+      stroke-width: 2px;
+    }
+    &:hover {
+      transition: all 0.25s ease-in-out 0s;
+      background-color: var(--theme-elevation-800);
+      color: var(--theme-elevation-100);
+    }
+  }
+}

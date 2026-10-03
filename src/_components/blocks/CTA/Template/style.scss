@@ -1,0 +1,76 @@
+@use '@/styles/admin/mixins' as *;
+.cta-preview {
+  #spacer {
+    display: none;
+  }
+  section {
+    display: grid;
+    grid-template-columns: auto minmax(0px, 150px);
+    > h2 {
+      grid-column-start: 1;
+      letter-spacing: -0.025em;
+      line-height: 0.85;
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--theme-primary-600);
+      display: flex;
+      flex-direction: column;
+    }
+    > div {
+      display: flex;
+      position: relative;
+      top: 0.5rem;
+      flex-wrap: wrap;
+      grid-row-start: auto;
+      row-gap: 1.5rem;
+      justify-content: space-around;
+      align-content: flex-start;
+      align-self: center;
+      width: 100%;
+      height: 100%;
+
+      @media (min-width: 768px) {
+        grid-column-start: 2;
+        grid-row: span 2 / span 2;
+        grid-row-start: 1;
+      }
+    }
+    > span {
+      display: flex;
+      flex-direction: column;
+      grid-column-start: 1;
+      row-gap: 0.5rem;
+      width: 100%;
+      @media (min-width: 768px) {
+        padding-left: 0.5rem;
+        padding-right: 1rem;
+        row-gap: 1.5rem;
+      }
+    }
+  }
+  a {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 1;
+    color: var(--theme-bg);
+    &:hover {
+      opacity: 0.8;
+    }
+    padding: 0.5rem 1rem;
+    text-wrap: nowrap;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  [class*='cta-primary!'] {
+    background-color: var(--theme-primary-500);
+    @include dark {
+      background-color: var(--theme-primary-800);
+    }
+  }
+  .cta-secondary {
+    color: var(--theme-secondary);
+    padding: 0;
+  }
+  margin-bottom: 2rem;
+}

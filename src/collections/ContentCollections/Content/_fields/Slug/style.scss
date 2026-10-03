@@ -1,0 +1,32 @@
+.slug-lock {
+  position: absolute;
+  right: 0;
+  bottom: 0.16lh;
+  padding: 0.5lh 1lh;
+  &:hover svg {
+    color: var(--theme-primary);
+  }
+  &.unlocked {
+    opacity: 0.75;
+  }
+}
+
+.slug-wrapper {
+  position: relative;
+}
+
+.slug-label-wrapper {
+  display: flex;
+  align-items: center;
+  &--label {
+    margin-right: 0.5rem;
+  }
+}
+
+.slug-generate {
+  --hover-color: var(--theme-primary);
+}
+
+#doc-preview-btn {
+  --hover-color: var(--theme-secondary-700);
+}

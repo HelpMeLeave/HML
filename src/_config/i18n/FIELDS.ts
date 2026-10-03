@@ -1,0 +1,111 @@
+export const _areas = ['label', 'title', 'general', 'pronoun', 'pillar'] as const
+
+const title = {
+  entry: [
+    'chartOfAccounts',
+    'content',
+    'country',
+    'countryData',
+    'countryGlossaryTerm',
+    'countryImage',
+    'dataSet',
+    'document',
+    'donation',
+    'externalResource',
+    'form',
+    'formSubmission',
+    'formUpload',
+    'glossaryTerm',
+    'media',
+    'pathway',
+    'pathwayDocument',
+    'pathwayDocumentType',
+    'pillar',
+    'role',
+    'route',
+    'supporter',
+    'tag',
+    'team',
+    'teamRole',
+    'template',
+    'userApplication',
+    'userInvitation',
+    'userRole',
+    'v1Pathway',
+    'director',
+    'head',
+    'lead',
+    'contributor',
+  ] as const,
+  plural: [
+    'chartsOfAccounts',
+    'contents',
+    'countries',
+    'countryData',
+    'countryGlossaryTerms',
+    'countryImages',
+    'dataSets',
+    'documents',
+    'donations',
+    'externalResources',
+    'forms',
+    'formSubmissions',
+    'formUploads',
+    'glossaryTerms',
+    'medias',
+    'pathwayDocuments',
+    'pathwayDocumentTypes',
+    'pathways',
+    'pillars',
+    'roles',
+    'routes',
+    'supporters',
+    'tags',
+    'teamRoles',
+    'teams',
+    'templates',
+    'userApplications',
+    'userInvitations',
+    'userRoles',
+    'v1Pathways',
+    'directors',
+    'heads',
+    'leads',
+  ] as const,
+}
+
+const general = {
+  entry: ['key'] as const,
+  plural: ['keys'] as const,
+}
+
+const pronoun = {
+  entry: ['he', 'her', 'hers', 'hiatus', 'him', 'his', 'she', 'theirs', 'them', 'they'] as const,
+}
+
+const pillar = { entry: ['operation'] as const, plural: ['operations'] as const }
+
+const label = {
+  entry: [
+    'displayName',
+    'firstName',
+    'pronoun',
+    'lastName',
+    'status',
+    'hiatus',
+    'active',
+    'availability',
+    'inactive',
+    'pending',
+    'saveAdd',
+  ] as const,
+  plural: ['displayNames', 'firstNames', 'lastNames', 'pronouns', 'statuses'] as const,
+}
+
+export const _grp = {
+  label: [...label.entry, ...label.plural],
+  general: [...general.entry, ...general.plural],
+  pillar: [...pillar.entry, ...pillar.plural],
+  pronoun: [...pronoun.entry],
+  title: [...title.entry, ...title.plural],
+} as const

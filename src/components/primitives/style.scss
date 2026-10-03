@@ -1,0 +1,48 @@
+@mixin listStyle {
+  font-style: italic;
+  position: absolute;
+  left: -1em;
+  color: color-mix(in hsl, var(--color-theme-accent) 75%, transparent);
+  font-weight: 700;
+}
+
+@mixin listOdd($counter, $type: decimal) {
+  counter-increment: #{$counter} 1;
+  position: relative;
+  &::before {
+    content: counter(#{$counter}, #{$type}) '.';
+    @include listStyle();
+  }
+}
+
+// TODO checklist style
+
+ol,
+ul {
+  li:has(ol, ul) {
+    list-style-type: none;
+  }
+}
+
+ol li {
+  list-style-type: none;
+}
+
+ol:not(.payload-toast-container) {
+  counter-reset: ol-num-list;
+  li:not(*:has(ol, ul)) {
+    @include listOdd(ol-num-list);
+  }
+  ol {
+    counter-reset: ol-alpha-list;
+    li:not(*:has(ol, ul)) {
+      @include listOdd(ol-alpha-list, upper-alpha);
+    }
+    ol {
+      counter-reset: ol-alpha-lower-list;
+      li:not(*:has(ol, ul)) {
+        @include listOdd(ol-alpha-lower-list, lower-alpha);
+      }
+    }
+  }
+}

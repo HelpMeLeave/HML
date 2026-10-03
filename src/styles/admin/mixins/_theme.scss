@@ -1,0 +1,62 @@
+@use 'colors' as *;
+@use 'sass:list';
+@use 'sass:string';
+@use 'sass:meta';
+
+@function alpha($color, $amount) {
+  $test-amount: $amount;
+  @if (meta.type-of($amount) != string) {
+    $test-amount: '#{$amount}';
+  }
+  @if (string.index($test-amount, '%') != null) {
+    $amount: string.slice($test-amount, 1, string.index($test-amount, '%')-1);
+  }
+  @return color-mix(in hsl, #{$color} #{$amount + '%'}, transparent);
+}
+
+@mixin dark {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+$_THEME_COLORS: (
+  (0, hsl(142.5 2.2% 3.1%)),
+  (25, hsl(142.5 2.2% 5.1%)),
+  (50, hsl(147.7 4.5% 8%)),
+  (100, hsl(147.7 4.5% 11%)),
+  (150, hsl(147.5 2.5% 15%)),
+  (200, hsl(147.5 3.5% 25%)),
+  (250, hsl(147.6 4.2% 30%)),
+  (300, hsl(147.6 4.2% 35%)),
+  (350, hsl(147.5 3.5% 40%)),
+  (400, hsl(147.5 3.5% 45%)),
+  (450, hsl(146.6 3.9% 50%)),
+  (500, hsl(146.6 3.9% 55%)),
+  (550, hsl(147.5 3.5% 60%)),
+  (600, hsl(147.5 3.5% 65%)),
+  (650, hsl(147.6 4.2% 70%)),
+  (700, hsl(147.6 4.2% 75%)),
+  (750, hsl(147.5 3.5% 80%)),
+  (800, hsl(147.5 3.5% 85%)),
+  (850, hsl(147.7 4.5% 90%)),
+  (900, hsl(147.7 4.5% 95%)),
+  (950, hsl(150 3.1% 94.9%)),
+  (975, hsl(150 3.1% 96.9%)),
+  (1000, oklch(99.107% 0.00011 271.152))
+);
+$_VAR_STARTER: --theme-elevation-;
+
+@mixin dark-colors() {
+  @each $_shade in $_THEME_COLORS {
+    #{$_VAR_STARTER + list.nth($_shade,1)}: #{list.nth($_shade, 2)};
+  }
+  @include dark-theme();
+}
+
+@mixin light-colors() {
+  @each $_shade in $_THEME_COLORS {
+    #{$_VAR_STARTER + (1000 - list.nth($_shade,1))}: #{list.nth($_shade, 2)};
+  }
+  @include light-theme();
+}

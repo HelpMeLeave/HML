@@ -1,0 +1,7 @@
+@theme inline {
+  --font-body: var(--font-hyper), sans-serif;
+  --font-sans: var(--font-hyper), sans-serif;
+  --font-serif: var(--font-interstate), serif;
+  --font-header: var(--font-bebas), sans-serif;
+  --font-mono: var(--font-hyper-mono), monospace;
+}

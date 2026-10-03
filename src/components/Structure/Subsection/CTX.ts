@@ -1,8 +1,8 @@
+import type { tSubSectionContext } from '@/components/Structure/_types'
 import { createContext } from 'react'
-import type { tSubSectionContext } from '../Subsection'
 
 export const SubSectionContext = createContext<tSubSectionContext>({
-	open: false,
-	handleToggle: () => {},
-	type: 'default',
-})
+  open: false,
+  handleToggle: () => {},
+  type: 'default',
+} as tSubSectionContext)

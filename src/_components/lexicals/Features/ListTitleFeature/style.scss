@@ -1,0 +1,17 @@
+.LexicalEditorTheme__list--titled {
+    counter-reset: list-title 0;
+    > li:first-child {
+        list-style: none;
+        padding-left: 0;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+    > li:not(*:first-child) {
+        &::marker {
+            content: counter(list-title, decimal) '.  ';
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        counter-increment: list-title 1;
+    }
+}

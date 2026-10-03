@@ -1,27 +1,49 @@
+import { getNavigation } from '@/app/(www)/_providers/Navigation/qry.server'
+import { Body } from '@/components/Structure/Body'
+import { env } from '@/env'
+import { cn } from '@/lib/cn'
+import { atkinsonFont, atkinsonMonoFont, bebasNeue, interstateFont } from '@/lib/fonts'
+import '@/styles/style.css'
 import { Analytics } from '@vercel/analytics/next'
+import type { Metadata } from 'next'
 import 'react'
+import { Providers } from 'www/_providers'
 
-import { Providers } from '~/app/providers'
-import { env } from '~/env'
-import { cn } from '~/lib/cn'
-import '~/style/www.css'
+export const metadata: Metadata = {
+  title: {
+    template: '%s | HML',
+    default: 'Help Me Leave',
+  },
+  publisher: 'Help Me Leave',
+  metadataBase: new URL(env.NEXT_PUBLIC_BASE_URL),
+}
 
 const Layout = async ({
-	children,
+  children,
 }: Readonly<{
-	children: ReactNode
+  children: ReactNode
 }>) => {
-	const useAnalytics = env.NODE_ENV == 'production'
+  const useAnalytics = env.NODE_ENV == 'production'
+  const navFetch = await getNavigation()
 
-	return (
-		<body
-			className={cn(
-				'text-foreground relative h-screen overflow-x-hidden antialiased has-[#homepage]:overflow-hidden has-[main#homepage]:pb-0!'
-			)}>
-			<Providers>{children}</Providers>
-			{useAnalytics && <Analytics />}
-		</body>
-	)
+  return (
+    <html
+      suppressHydrationWarning={true}
+      data-scroll-behavior='smooth'
+      lang='eng'
+      className={cn(
+        atkinsonFont.variable,
+        atkinsonMonoFont.variable,
+        bebasNeue.variable,
+        interstateFont.variable,
+        'scroll-pt-[calc(var(--nav-height)+1.5rem)] scroll-smooth'
+      )}>
+      <Body>
+        <Providers nav={navFetch}>{children}</Providers>
+        {useAnalytics && <Analytics />}
+      </Body>
+    </html>
+  )
 }
 
 export default Layout

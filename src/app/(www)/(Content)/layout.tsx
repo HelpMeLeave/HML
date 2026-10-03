@@ -1,27 +1,21 @@
-import { AnnouncementBanner } from './_components/AnnouncementBanner'
-import { CookieContextProvider } from './_components/CookieContextProvider'
-import { Footer } from './_components/Footer'
-import { NavMenu } from './_components/TopNav'
+import { LayoutWrapper } from '@/app/(www)/(Content)/layout.client'
+import { cn } from '@/lib/cn'
 
-const Layout = async ({ children }: { children: ReactNode }) => {
-	// ! TODO
-	// const cookies = Object.fromEntries(await nextCookies())
-
-	return (
-		<CookieContextProvider>
-			<div className='flex min-h-screen flex-col justify-between'>
-				<div className='mb-8 flex flex-col'>
-					<header className='sticky top-0 z-99 h-20 w-full backdrop-blur-sm'>
-						<NavMenu />
-					</header>
-					{children}
-				</div>
-				<Footer />
-				{/* <CookieNotification /> */}
-				<AnnouncementBanner />
-			</div>
-		</CookieContextProvider>
-	)
-}
+const Layout = async ({ children }: LayoutProps<'/'>) => (
+  <LayoutWrapper>
+    <main
+      className={cn(
+        'relative grid',
+        'grid-cols-[minmax(1rem,1fr)_minmax(0,var(--measure))_minmax(1rem,1fr)]',
+        'sm:grid-cols-[minmax(1.5rem,1fr)_minmax(0,var(--measure))_minmax(1.5rem,1fr)]',
+        'xl:grid-cols-[1fr_190px_64px_minmax(0,var(--measure))_56px_300px_1fr]',
+        'md:has-data-[layout="half"]:grid-cols-[minmax(48px,auto)_minmax(1px,400px)_24px_minmax(1px,600px)_minmax(48px,auto)]',
+        'h-full',
+        'min-h-[calc(100vh-var(--nav-height)-var(--announcement-height)-var(--announcement-offset)-var(--footer-min-height))] has-data-[layout="half"]:content-center'
+      )}>
+      {children}
+    </main>
+  </LayoutWrapper>
+)
 
 export default Layout

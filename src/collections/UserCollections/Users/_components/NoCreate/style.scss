@@ -1,0 +1,169 @@
+@use '@/styles/admin/mixins' as *;
+
+body:has(.collection-edit--users .create-user .countdown) {
+  .doc-controls,
+  .doc-header,
+  .auth-fields.collection-edit__auth,
+  .document-fields__sidebar-wrap {
+    display: none;
+  }
+
+  .app-header,
+  #nav-toggler {
+    z-index: 0;
+  }
+
+  .create-user:has(.countdown) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    .alert {
+      border-radius: var(--style-radius-l);
+      width: min-content;
+      max-width: 75vw;
+      padding: 2rem 3rem;
+      @include shadow-sm;
+      margin-inline: auto;
+      &__header {
+        font-size: 2rem;
+        text-wrap: nowrap;
+        font-family: var(--font-header);
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        .countdown {
+          width: 1.25rem;
+          display: inline-block;
+        }
+      }
+      &__content {
+        width: 100%;
+        display: block;
+        line-height: 1.65;
+        text-wrap: nowrap;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        font-family: var(--font-mono);
+      }
+      .emph {
+        position: relative;
+        display: inline-block;
+        font-weight: 600;
+        padding: 0.15rem 0.5rem;
+        bottom: 1px;
+        color: var(--theme-secondary);
+        &:hover {
+          color: var(--theme-text);
+        }
+        svg {
+          width: 0.75rem;
+          height: 0.75rem;
+        }
+      }
+    }
+  }
+  .create-user-background {
+    background-color: var(--theme-overlay);
+    position: fixed;
+    top: 0vh;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: all 200ms linear;
+    &:after {
+      content: ' ';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      backdrop-filter: blur(2px);
+    }
+  }
+}
+
+body:not(:has(.create-user .countdown)) .collection-edit--users {
+  .document-fields__edit {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    .document-fields__fields {
+      grid-row: 1 / 2;
+      grid-column: span 2;
+    }
+    .collection-edit__auth {
+      background-color: transparent;
+      grid-row: 2 / 3;
+      margin-top: 0 !important;
+      padding-top: 0 !important;
+      &::before {
+        content: 'Login Settings';
+        font-family: var(--font-header);
+        font-size: 2.5rem;
+        line-height: 0.85;
+      }
+    }
+    .payload-settings {
+      grid-row: 2 / 3;
+      grid-column: 2 / 3;
+      margin-block: 0;
+      padding-block: 0;
+      &::before,
+      &::after {
+        display: none;
+      }
+      button {
+        width: 100%;
+        margin: 0;
+      }
+    }
+    @media (min-width: 672px) {
+      gap: 6rem;
+      .collection-edit__auth {
+        max-width: 672px;
+        width: 100%;
+        min-width: fit-content;
+        margin-top: 2rem;
+        gap: var(--base);
+        padding: 0;
+        margin-inline: auto 0px;
+      }
+      .auth-fields {
+        &__controls {
+          justify-content: flex-end;
+        }
+      }
+      .payload-settings {
+        width: 100%;
+        max-width: 672px;
+        margin-right: auto;
+      }
+    }
+
+    &:is(.document-fields--has-sidebar:has(.sidebar-toggle[data-open]) *) {
+      @media (max-width: 1024px) {
+        gap: 2rem;
+        grid-template-columns: 1fr;
+        .document-fields__fields,
+        .collection-edit__auth,
+        .payload-settings {
+          grid-column: 1 / 2;
+        }
+        .document-fields__fields {
+          grid-row: 1 / 2;
+        }
+        .collection-edit__auth {
+          grid-row: 2 / 3;
+          width: 100%;
+          margin-top: 6rem !important;
+        }
+        .payload-settings {
+          grid-row: 3 / 4;
+        }
+      }
+    }
+  }
+}

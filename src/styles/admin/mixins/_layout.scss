@@ -1,0 +1,16 @@
+@use '../vars' as *;
+@use 'theme' as *;
+
+@mixin in-sidebar($isSidebarLayout: true) {
+  &:is(.document-fields__sidebar-wrap *) {
+    @if ($isSidebarLayout == true) {
+      @media (min-width: $sidebar-min) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $sidebar-min) {
+        @content;
+      }
+    }
+  }
+}

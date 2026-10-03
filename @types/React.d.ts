@@ -1,28 +1,23 @@
 import type React from 'react'
 
 declare global {
-	type RefObject<T> = React.RefObject<T>
+  type RefObject<T> = React.RefObject<T>
+  type ReactNode = React.ReactNode
 
-	type ReactNode = React.ReactNode
+  interface EMouse<
+    Target extends EventTarget = Element,
+    NativeEv = MouseEvent,
+  > extends React.MouseEvent<Target, NativeEv> {
+    currentTarget: Target
+  }
 
-	interface EFocus<Target = Element, RelatedTarget = Element> extends React.FocusEvent<
-		Target,
-		RelatedTarget
-	> {
-		currentTarget: Target
-	}
+  type StringUnion<S extends string> = {
+    [Key in S]: Key
+  }[S]
 
-	interface EMouse<Target = Element, NativeEv = MouseEvent> extends React.MouseEvent<
-		Target,
-		NativeEv
-	> {
-		currentTarget: Target
-	}
+  type Keys<O extends Record<string, unknown>> = keyof O
 
-	interface EChange<Target = Element, RelatedTarget = Element> extends React.ChangeEvent<
-		Target,
-		RelatedTarget
-	> {
-		currentTarget: Target
-	}
+  interface CSSProperties {
+    textssss: HTMLInputElement
+  }
 }

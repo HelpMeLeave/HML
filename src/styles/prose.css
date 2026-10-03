@@ -1,0 +1,92 @@
+*:not(.no-typography, .no-typography > *) {
+  &:is(strong) {
+    color: var(--color-accent);
+    font-weight: 500;
+    @variant dark {
+      font-weight: 400;
+    }
+  }
+
+  &:is(section[data-slot="section"]),
+  &:is([data-slot="main"]) {
+    ol {
+      ::marker {
+        font-style: italic;
+        font-size: 0.75rem;
+        color: var(--color-counters);
+      }
+    }
+    ul {
+      ::marker {
+        font-style: italic;
+        color: var(--color-bullets);
+      }
+    }
+  }
+  &:is(section[data-slot="section"]) {
+    ul {
+      list-style-type: disc;
+    }
+
+    ol {
+      list-style-type: decimal;
+    }
+  }
+
+  &:is(main) {
+    color: var(--color-body);
+
+    a,
+    blockquote,
+    thead th {
+      strong {
+        color: inherit;
+      }
+    }
+    dt {
+      color: var(--color-headings);
+    }
+    hr {
+      border-color: var(--color-hr);
+    }
+    blockquote {
+      color: var(--color-quotes);
+      border-inline-start-color: var(--color-quote-borders);
+    }
+    kbd {
+      color: var(--color-kbd);
+      box-shadow:
+        0 0 0 1px var(--color-kbd-shadows),
+        0 3px 0 var(--color-kbd-shadows);
+    }
+    code {
+      color: var(--color-code);
+    }
+
+    pre {
+      color: var(--color-pre-code);
+      background-color: var(--color-pre-bg);
+    }
+    table {
+      thead {
+        border-bottom-color: var(--color-th-borders);
+        th {
+          color: var(--color-headings);
+        }
+      }
+      tbody {
+        tr {
+          border-bottom-color: var(--color-td-borders);
+        }
+      }
+      tfoot {
+        border-top-color: var(--color-th-borders);
+      }
+    }
+
+    figcaption {
+      color: var(--color-light);
+    }
+  }
+}
+/* #endregion */

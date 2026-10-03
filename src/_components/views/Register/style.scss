@@ -1,0 +1,3 @@
+.template-default:not(*:has(.sidebar-sm)) {
+  grid-template-columns: 1fr !important;
+}

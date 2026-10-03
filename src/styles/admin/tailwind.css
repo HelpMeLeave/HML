@@ -1,0 +1,51 @@
+@layer base, payload-default, payload, theme, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "../colors.css";
+@import "../fonts.css";
+
+@theme static {
+  --color-success-*: initial;
+  --color-success-50: var(--theme-secondary-50);
+  --color-success-100: var(--theme-secondary-100);
+  --color-success-150: var(--theme-secondary-150);
+  --color-success-200: var(--theme-secondary-200);
+  --color-success-250: var(--theme-secondary-250);
+  --color-success-300: var(--theme-secondary-300);
+  --color-success-350: var(--theme-secondary-350);
+  --color-success-400: var(--theme-secondary-400);
+  --color-success-450: var(--theme-secondary-450);
+  --color-success-500: var(--theme-secondary-500);
+  --color-success-550: var(--theme-secondary-550);
+  --color-success-600: var(--theme-secondary-600);
+  --color-success-650: var(--theme-secondary-650);
+  --color-success-700: var(--theme-secondary-700);
+  --color-success-750: var(--theme-secondary-750);
+  --color-success-800: var(--theme-secondary-800);
+  --color-success-850: var(--theme-secondary-850);
+  --color-success-900: var(--theme-secondary-900);
+  --color-success-950: var(--theme-secondary-950);
+}
+
+@theme inline {
+  --font-header: var(--font-bebas);
+  --font-body: var(--font-hyper);
+  --font-mono: var(--font-hyper-mono);
+}
+
+@theme static {
+  --theme-input-bg: red;
+}
+
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    @slot;
+  }
+}
+
+@layer utilities {
+  .table {
+    display: block;
+    width: 100%;
+  }
+}

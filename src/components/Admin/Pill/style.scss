@@ -1,0 +1,96 @@
+@use '@/styles/admin/mixins/index' as *;
+
+.pill--style-inline {
+  &__blue {
+    --bg-color: oklch(68.5% 0.169 237.323 / 15%);
+    --color: oklch(50% 0.134 242.749);
+    --shadow-color: #{alpha(var(--color-success-400), 20)};
+    @include dark {
+      --bg-color: oklch(68.5% 0.169 237.323 / 10%);
+      --color: oklch(82.8% 0.111 230.318);
+    }
+  }
+  &__red {
+    --bg-color: #{alpha(oklch(63.7% 0.237 25.331), 15)};
+    --color: oklch(50.5% 0.213 27.518);
+    --border-color: #{alpha(var(--color-error-300), 50)};
+    --shadow-color: #{alpha(var(--color-error-400), 20)};
+    @include dark {
+      --border-color: #{alpha(var(--color-red-500), 30)};
+      --bg-color: #{alpha(oklch(63.7% 0.237 25.331), 10)};
+      --color: oklch(70.4% 0.191 22.216);
+    }
+  }
+  &__yellow {
+    --bg-color: oklch(95.97% 0.20757 108.586 / 0.4);
+    --color: oklch(60.074% 0.12815 107.575);
+    --shadow-color: #{alpha(var(--color-yellow-400), 20)};
+    @include dark {
+      --bg-color: #{alpha(var(--color-yellow-200), 10)};
+      --color: var(--color-yellow-300);
+    }
+  }
+  &__purple {
+    --border-color: #{alpha(var(--color-purple-200), 50)};
+    --bg-color: #{alpha(var(--color-purple-200), 70)};
+    --color: var(--color-purple-700);
+    --shadow-color: #{alpha(var(--color-purple-400), 20)};
+    @include dark {
+      --border-color: #{alpha(var(--color-purple-400), 20)};
+      --bg-color: #{alpha(var(--color-purple-400), 15)};
+      --color: var(--color-purple-400);
+    }
+  }
+  &__orange {
+    --border-color: #{alpha(var(--color-poppy-300), 20)};
+    --bg-color: #{alpha(var(--color-poppy-200), 70)};
+    --color: var(--color-poppy-600);
+    --shadow-color: #{alpha(var(--color-poppy-600), 20)};
+    @include dark {
+      --border-color: var(--color-poppy-400);
+      --bg-color: var(--color-poppy-950);
+      --color: var(--color-poppy-400);
+    }
+  }
+  &__green {
+    --border-color: #{alpha(var(--color-pine-600), 50)};
+    --bg-color: #{alpha(var(--color-pine-100), 50)};
+    --color: var(--color-pine-700);
+    --shadow-color: #{alpha(var(--color-pine-600), 20)};
+    @include dark {
+      --border-color: #{alpha(var(--color-pine-400), 20)};
+      --bg-color: #{alpha(var(--color-pine-400), 15)};
+      --color: var(--color-pine-500);
+    }
+  }
+  &__pink {
+    --bg-color: oklch(71.8% 0.202 349.761 / 15%);
+    --color: oklch(52.5% 0.223 3.958);
+    --shadow-color: #{alpha(var(--color-pink-700), 20)};
+    @include dark {
+      --bg-color: oklch(71.8% 0.202 349.761 / 10%);
+      --color: oklch(71.8% 0.202 349.761);
+    }
+  }
+  &__lime {
+    --bg-color: oklch(84.1% 0.238 128.85 / 20%);
+    --color: oklch(53.2% 0.157 131.589);
+    --shadow-color: #{alpha(var(--color-lime-500), 30)};
+    @include dark {
+      --bg-color: oklch(84.1% 0.238 128.85 / 10%);
+      --color: oklch(89.7% 0.196 126.665);
+    }
+  }
+  --hover-bg: var(--bg-color);
+  --hover-color: var(--color);
+  --btn-font-size: 0.65rem;
+  margin: 0;
+  display: flex;
+  font-family: var(--font-body);
+  color: var(--color);
+  @include dark {
+    border-color: transparent;
+  }
+  background-color: var(--bg-color);
+  cursor: default;
+}
