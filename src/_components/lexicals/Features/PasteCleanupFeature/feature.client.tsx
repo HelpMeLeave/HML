@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  $createCheckmarkListItemNode,
-  CheckmarkListItemNode,
-} from '@/_components/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
+import { $createCheckmarkListItemNode } from '@/_components/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
 import {
   $createCheckmarkListNode,
   $isCheckmarkListNode,
@@ -14,10 +11,11 @@ import {
   type NodeKey,
   $getRoot,
   $isElementNode,
+  $isLineBreakNode,
   $isParagraphNode,
+  $isTextNode,
   $setSelection,
   COMMAND_PRIORITY_CRITICAL,
-  LineBreakNode,
   PASTE_COMMAND,
   TextNode,
 } from '@payloadcms/richtext-lexical/lexical'
@@ -27,27 +25,27 @@ import { useEffect } from 'react'
 
 const CHECKMARK_RE = /^-\[x\]\s*/i
 
-const isBlank = (node: LexicalNode): boolean => {
-  if (!$isParagraphNode(node)) return false
-  if (node.isEmpty()) return true
-  return node.getChildren().every((c) => c instanceof LineBreakNode)
-}
+const isBlank = (node: LexicalNode): boolean =>
+  !$isParagraphNode(node) ? false
+  : node.isEmpty() ? true
+  : node.getChildren().every($isLineBreakNode)
 
 const isCheckmarkParagraph = (node: LexicalNode): boolean => {
   if (!$isParagraphNode(node)) return false
+
   const first = node.getFirstChild()
-  return first instanceof TextNode && CHECKMARK_RE.test(first.getTextContent())
+  return $isTextNode(first) && CHECKMARK_RE.test(first.getTextContent())
 }
 
 const convertToCheckmarkItem = (node: LexicalNode) => {
   if (!$isParagraphNode(node)) return
 
   const first = node.getFirstChild()
-  if (first instanceof TextNode) {
-    first.setTextContent(first.getTextContent().replace(CHECKMARK_RE, ''))
-  }
+
+  $isTextNode(first) && first.setTextContent(first.getTextContent().replace(CHECKMARK_RE, ''))
 
   const item = $createCheckmarkListItemNode()
+
   node.getChildren().forEach((child) => item.append(child))
 
   const prev = node.getPreviousSibling()
@@ -58,42 +56,66 @@ const convertToCheckmarkItem = (node: LexicalNode) => {
     const list = $createCheckmarkListNode()
     list.append(item)
     node.replace(list)
-    $setSelection(list.getLastChild<CheckmarkListItemNode>()?.select() ?? list.select())
+
+    const lastChild = list.getLastChild()
+
+    $isCheckmarkListNode(lastChild) ?
+      $setSelection(lastChild.select())
+    : $setSelection(list.select())
   }
 }
 
-const cleanLinkSpaces = (node: LexicalNode) => {
+const cleanLinks = (node: LexicalNode) => {
   if (!$isElementNode(node) || !node.isInline()) return
-  const type = node.getType()
-  if (type !== 'link' && type !== 'autolink') return
+  if (!['link', 'autolink'].includes(node.getType())) return
 
-  // Leading spaces: strip from first text child, push to preceding sibling
   const firstChild = node.getFirstChild()
+
+  const handleRemainder = (node: TextNode, remainder: string) => {
+    if (remainder.length === 0) {
+      node.remove()
+    } else {
+      node.setTextContent(remainder)
+    }
+  }
+
   if (firstChild instanceof TextNode) {
+    if (firstChild.hasFormat('underline')) {
+      firstChild.toggleFormat('underline')
+    }
     const text = firstChild.getTextContent()
     const leading = text.length - text.trimStart().length
+
     if (leading > 0) {
       const spaces = text.slice(0, leading)
-      const remainder = text.slice(leading)
-      if (remainder.length === 0) firstChild.remove()
-      else firstChild.setTextContent(remainder)
+
+      handleRemainder(firstChild, text.slice(leading))
+
       const prev = node.getPreviousSibling()
-      if (prev instanceof TextNode) prev.setTextContent(prev.getTextContent() + spaces)
+
+      if ($isTextNode(prev)) {
+        prev.setTextContent(prev.getTextContent() + spaces)
+      }
     }
   }
 
   // Trailing spaces: strip from last text child, push to following sibling
   const lastChild = node.getLastChild()
-  if (lastChild instanceof TextNode) {
+  if ($isTextNode(lastChild)) {
     const text = lastChild.getTextContent()
     const trailing = text.length - text.trimEnd().length
+    const trailingSpaces = text.length - trailing
+
     if (trailing > 0) {
-      const spaces = text.slice(text.length - trailing)
-      const remainder = text.slice(0, text.length - trailing)
-      if (remainder.length === 0) lastChild.remove()
-      else lastChild.setTextContent(remainder)
+      const spaces = text.slice(trailingSpaces)
+
+      handleRemainder(lastChild, text.slice(0, trailingSpaces))
+
       const next = node.getNextSibling()
-      if (next instanceof TextNode) next.setTextContent(spaces + next.getTextContent())
+
+      if ($isTextNode(next)) {
+        next.setTextContent(spaces + next.getTextContent())
+      }
     }
   }
 }
@@ -101,15 +123,21 @@ const cleanLinkSpaces = (node: LexicalNode) => {
 const cleanWhitespaceInParagraph = (node: LexicalNode) => {
   if (!$isParagraphNode(node)) return
   const children = node.getChildren()
-  const lastTextNode = [...children].reverse().find((c) => c instanceof TextNode) ?? null
+
+  const lastTextNode = [...children].reverse().find((c) => $isTextNode(c)) ?? null
+
+  const initText = (child: TextNode) => child.getTextContent().replace(/ {2,}/g, ' ')
+
   for (const child of children) {
-    if (!(child instanceof TextNode)) continue
-    let text = child.getTextContent()
-    text = text.replace(/ {2,}/g, ' ')
-    if (child === lastTextNode) text = text.trimEnd()
-    if (text === child.getTextContent()) continue
-    if (text.length === 0) child.remove()
-    else child.setTextContent(text)
+    if (!$isTextNode(child)) continue
+
+    const text = child === lastTextNode ? initText(child).trimEnd() : initText(child)
+
+    if (text === child.getTextContent()) {
+      continue
+    }
+
+    text.length === 0 ? child.remove() : child.setTextContent(text)
   }
 }
 
@@ -125,15 +153,14 @@ const walk = (parent: LexicalNode, before: Set<NodeKey>) => {
     .getLatest()
     .getChildren()
     .forEach((node) => {
-      // untouched nodes are left alone, but pasted content can sit inside them
       if (!isTouched(node, before)) return walk(node, before)
 
       if (isBlank(node)) {
-        if (parent.getChildrenSize() > 1) node.remove()
+        parent.getChildrenSize() > 1 && node.remove()
       } else if (isCheckmarkParagraph(node)) {
         convertToCheckmarkItem(node)
       } else {
-        cleanLinkSpaces(node)
+        cleanLinks(node)
         cleanWhitespaceInParagraph(node)
         walk(node, before)
       }
