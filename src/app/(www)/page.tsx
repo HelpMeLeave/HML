@@ -74,6 +74,12 @@ const RouteDecorations = ({ tint }: { tint: Route['tint'] }) => (
 
 export const metadata: Metadata = {
   title: 'Help Me Leave',
+  description:
+    'Help Me Leave helps marginalized people find safe and legal pathways to live in other countries while advocating for the human rights of refugees and immigrants from all countries.',
+  openGraph: {
+    siteName: 'Help Me Leave',
+    url: 'https://www.helpmeleave.us',
+  },
 }
 
 const Home = async () => {
