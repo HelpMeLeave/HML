@@ -47,8 +47,10 @@ const SectionHeading = ({ ...props }: Props<'h2'>) => (
   />
 )
 
-const SectionEyebrow = ({ children, ...props }: Props<'p'>) => {
+const SectionEyebrow = ({ ...props }: Props<'p'>) => {
+  const { children } = props
   const parsedChildren = Array.isArray(children) ? children : [children]
+
   const id =
     parsedChildren.every((child) => typeof child == 'string') ?
       slugify(parsedChildren.join(' '))
