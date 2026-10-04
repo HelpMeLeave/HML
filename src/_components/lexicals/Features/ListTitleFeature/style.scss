@@ -6,7 +6,7 @@
         margin-left: 0;
         margin-bottom: 0;
     }
-    > li:not(*:first-child) {
+    &.LexicalEditorTheme__ol > li:not(*:first-child) {
         &::marker {
             content: counter(list-title, decimal) '.  ';
             font-size: 0.75rem;
