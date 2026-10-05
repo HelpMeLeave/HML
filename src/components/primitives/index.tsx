@@ -43,6 +43,7 @@ export const List = ({
     : 'list-disc',
     'in-[li]:my-0.5 in-[li]:ps-2!',
     'peer-[h4]:mt-0',
+    'mt-4 mb-4 ml-2 pl-2 *:last:mb-0 has-[+p]:mb-0',
     props.className
   )
 
@@ -71,62 +72,39 @@ export const OL = ({ ...props }: Props<typeof List>) => (
 export const UL = ({ ...props }: Props<typeof List>) => <List {...props} />
 
 export const Heading = ({ level = 2, ...props }: Props.Heading) => {
-  if (level == 1) {
-    return (
-      <h1
-        {...props}
-        className={cn('font-header leading-[0.85] font-normal', props.className)}
-        data-slot='heading-text'
-      />
-    )
+  const base = {
+    ...props,
+    'data-slot': 'heading-text',
   }
-  if (level == 2) {
-    return (
-      <h2
-        {...props}
-        className={cn('font-header leading-[0.85] font-normal text-inherit', props.className)}
-        data-slot='heading-text'
-      />
-    )
-  }
-  if (level == 3) {
-    return (
-      <h3
-        {...props}
-        className={cn(
-          'font-header leading-[0.85] font-normal',
-          'text-3xl **:[strong,b]:align-middle **:[strong,b]:font-body **:[strong,b]:font-light',
-          props.className
-        )}
-        data-slot='heading-text'
-      />
-    )
-  }
-  if (level == 4) {
-    return (
-      <h4
-        {...props}
-        className={cn(
-          'peer relative mb-1 leading-none font-bold text-base uppercase not-first:mt-[1.125em] has-[+:is(ol,ul,p:has(+ol),p:has(+ul))]:mb-[0.2em] *:[strong,b]:font-normal dark:*:[strong,b]:font-light',
-          props.className
-        )}
-        data-slot='heading-text'>
-        {props.children}
-      </h4>
-    )
-  }
-  if (level == 5) {
-    return (
-      <h5
-        {...props}
-        data-slot='heading-text'
-      />
-    )
-  }
+
+  const getClassName = (...className: string[]) =>
+    cn('font-header leading-[0.85] text-balance', ...className, props.className)
+
   return (
-    <h6
-      {...props}
-      data-slot='heading-text'
-    />
+    level == 1 ?
+      <h1
+        {...base}
+        className={getClassName('text-base')}
+      />
+    : level == 2 ?
+      <h2
+        {...base}
+        className={getClassName('text-body in-[hgroup:has([data-slot="eyebrow"])]:leading-none')}
+      />
+    : level == 3 ?
+      <h3
+        {...base}
+        className={getClassName('**:[strong,b]:font-light')}
+      />
+    : level == 4 ?
+      <h4
+        {...base}
+        className={getClassName(
+          'font-body',
+          'peer relative mb-1 leading-none font-bold text-base uppercase not-first:mt-[1.125em] has-[+:is(ol,ul,p:has(+ol),p:has(+ul))]:mb-[0.2em] *:[strong,b]:font-normal dark:*:[strong,b]:font-light'
+        )}
+      />
+    : level == 5 ? <h5 {...base} />
+    : <h6 {...base} />
   )
 }
