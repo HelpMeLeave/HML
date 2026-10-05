@@ -12,7 +12,7 @@ export const Subtitle = ({
     <El
       {...props}
       className={cn(
-        'font-body text-[0.3em] leading-relaxed font-light tracking-[0.1ch] text-balance text-muted/80 *:[strong,b]:font-normal dark:*:[strong,b]:font-light',
+        'font-body text-[0.3em] leading-relaxed font-light tracking-[0.1ch] text-balance text-muted/80 italic *:[strong,b]:font-normal dark:*:[strong,b]:font-light',
         props.className
       )}
       data-slot='subtitle'
