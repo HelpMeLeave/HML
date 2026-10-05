@@ -1,26 +1,11 @@
 import type { CTABtn, CTAProps } from '@/_components/blocks/CTA/_types'
-import { RichTextComponent } from '@/_components/blocks/RichText/Component'
-import { removeParagraph } from '@/_components/lexicals/RenderRichText/removeParagraphs'
 import { Button } from '@/components/Button'
+import { LexicalOrComponent } from '@/components/LexicalOrComponent'
 import { Section, SectionHeading } from '@/components/Structure/Section'
 import { cn } from '@/lib/cn'
 import { isRootLike } from '@/lib/normalize/is'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { convertLexicalToPlaintext } from '@payloadcms/richtext-lexical/plaintext'
-
-const Inner = ({ content }: { content: DefaultTypedEditorState | ReactNode }) => {
-  return (
-    <>
-      {isRootLike(content) ?
-        <RichTextComponent
-          converterOverrides={{ paragraph: removeParagraph }}
-          blockType='rich-text'
-          content={content}
-        />
-      : content}
-    </>
-  )
-}
 
 const CTAWrapper = ({ hasSecondary, ...props }: Props<'section'> & { hasSecondary: boolean }) => (
   <Section
@@ -43,7 +28,7 @@ const CTATitle = ({
     data-slot='title'
     {...props}
     className='col-start-1 mx-auto flex flex-col text-5xl leading-[0.85] text-balance text-accent *:saturate-50 dark:font-medium! *:[[id="spacer"]]:h-2!'>
-    {inner && <Inner content={inner} />}
+    {inner && <LexicalOrComponent content={inner} />}
   </SectionHeading>
 )
 
@@ -69,7 +54,7 @@ const CTASubtitle = ({
           'col-start-1 flex w-full flex-col gap-y-2 text-[.95rem] leading-[1.85] text-base md:gap-y-6 md:pr-4 md:pl-2',
           !hasPrimary && !hasSecondary && 'max-w-[calc(100%-150px)]'
         )}>
-        {<Inner content={inner} />}
+        {<LexicalOrComponent content={inner} />}
       </span>
     )
   )
