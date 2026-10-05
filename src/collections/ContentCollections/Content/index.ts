@@ -1,3 +1,4 @@
+import { assignHeadingIds } from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
 import { editorFull, editorFullBlocks } from '@/_components/lexicals/full'
 import { CTABlockConfig } from '@/_config/Blocks'
 import { tFn } from '@/_config/i18n/'
@@ -75,6 +76,10 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'workflow', 'route', 'slug'],
     groupBy: true,
+    listSearchableFields: ['title', 'slug'],
+  },
+  folders: {
+    browseByFolder: true,
   },
   custom: {
     workflow: {
@@ -145,7 +150,6 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
       'content',
       editorFull({
         blocks: [...editorFullBlocks.blocks],
-        inlineBlocks: editorFullBlocks.inlineBlocks,
       }),
       {
         access: {
@@ -158,6 +162,9 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
         admin: {
           condition: hasContentType,
           ...listDisabled,
+        },
+        hooks: {
+          beforeChange: [assignHeadingIds],
         },
       }
     ),
