@@ -200,7 +200,6 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     // ------------------------------------------------------------
     // #region ! ---------- TABLE ----------
     table: ({ node, nodesToJSX }) => {
-      console.log(node)
       // TODO: Design table
       return (
         <table className='overflow-hidden rounded-xl shadow-sm sm:mx-auto! dark:bg-black'>

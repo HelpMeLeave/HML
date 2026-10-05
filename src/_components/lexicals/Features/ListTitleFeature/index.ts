@@ -11,15 +11,12 @@ import {
 } from '@payloadcms/richtext-lexical/lexical'
 import {
   type ListType,
-  type SerializedListNode,
   $createListItemNode,
   $createListNode,
   $isListItemNode,
   $isListNode,
   ListNode,
 } from '@payloadcms/richtext-lexical/lexical/list'
-
-export type SerializedTitledListNode = SerializedListNode & { titled: boolean }
 
 export class TitledListNode extends ListNode {
   $config() {

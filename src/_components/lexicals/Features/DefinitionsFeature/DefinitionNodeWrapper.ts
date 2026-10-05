@@ -8,15 +8,8 @@ import {
   $setState,
   ElementNode,
   type LexicalNode,
-  type SerializedElementNode,
   type SerializedLexicalNode,
-  type Spread,
 } from '@payloadcms/richtext-lexical/lexical'
-
-export type SerializedDefinitionNodeWrapper = Spread<
-  { termID: number; instance: number },
-  SerializedElementNode
->
 
 export class DefinitionNodeWrapper extends ElementNode {
   $config() {

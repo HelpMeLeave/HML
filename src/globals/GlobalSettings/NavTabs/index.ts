@@ -27,7 +27,7 @@ const StaticBlocks: Block = {
   ],
 }
 
-export const NavTabs = (name: string, ...blocks: Block[]): BlocksField => ({
+const NavTabs = (name: string, ...blocks: Block[]): BlocksField => ({
   type: 'blocks',
   name,
   label: false,

@@ -7,13 +7,3 @@ export const listDisabled: {
   disableGroupBy: true,
   disableListFilter: true,
 }
-
-export const relationshipViewOnly: {
-  allowCreate: boolean
-  allowEdit: boolean
-  readOnly: boolean
-} = {
-  allowCreate: false,
-  allowEdit: false,
-  readOnly: true,
-}

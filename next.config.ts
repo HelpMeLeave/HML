@@ -33,6 +33,12 @@ export default withPayload({
         protocol: 'https',
         hostname: env.NEXT_PUBLIC_R2_URL.replace('https://', '').replace('/', ''),
       },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/**',
+      },
     ],
   },
 })

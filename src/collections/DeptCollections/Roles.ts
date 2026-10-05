@@ -6,7 +6,7 @@ import { DescriptionField, TextConfig } from '@/collections/_lib/Text'
 import { ROLE_TIERS } from '@/lib/constants/ROLE_TIERS'
 import { type CollectionConfig } from 'payload'
 
-export const tierOptions = ROLE_TIERS.map(({ name, value }) => ({
+const tierOptions = ROLE_TIERS.map(({ name, value }) => ({
   label: name,
   value: String(value),
 }))

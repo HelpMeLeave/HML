@@ -1,5 +1,4 @@
-import { Heading } from '@/components/primitives'
-import { SectionBase, SectionHGroup, SectionSubtitle } from '@/components/Structure/Section'
+import { SectionBase, SectionHGroup } from '@/components/Structure/Section'
 import { cn } from '@/lib/cn'
 import { type DialogProps, Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import type React from 'react'
@@ -56,19 +55,6 @@ export const ModalHeading = ({ ...props }: Props<typeof SectionHGroup>) => (
   <SectionHGroup {...props} />
 )
 
-export function ModalTitle({ ...props }: Props<'h2'>) {
-  return (
-    <Heading
-      level={2}
-      {...props}
-    />
-  )
-}
-
-export function ModalSubtitle({ ...props }: Props<'p'>) {
-  return <SectionSubtitle {...props} />
-}
-
 export function ModalBody({ ...props }: Props<'div'>) {
   return (
     <div
@@ -86,18 +72,6 @@ export function ModalActions({ className, ...props }: Props<'div'>) {
       className={cn(
         'mt-8 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:flex-row sm:*:w-auto',
         className
-      )}
-    />
-  )
-}
-export function ModalFooter({ className, ...props }: Props<'div'>) {
-  return (
-    <div
-      data-slot='footer'
-      {...props}
-      className={cn(
-        className,
-        'mt-8 flex flex-col-reverse items-center justify-end gap-3 *:w-full sm:flex-row sm:*:w-auto'
       )}
     />
   )

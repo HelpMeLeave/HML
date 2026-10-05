@@ -1,5 +1,5 @@
 import type { Media } from '@/payload-types'
-import type { Field, FieldHookArgs, Tab, TextField } from 'payload'
+import type { FieldHookArgs, TextField } from 'payload'
 
 const uploadPrettyFileName: TextField = {
   name: 'fileNamePretty',
@@ -38,21 +38,3 @@ export const TabDetailsFields = {
   alt: uploadAltField,
   caption: uploadCaptionField,
 }
-
-export const TabDetails = (...otherFields: Field[]): Tab => ({
-  label: 'Details',
-  fields: [
-    TabDetailsFields.fileName,
-    {
-      type: 'row',
-      custom: {
-        layout: {
-          direction: 'row',
-        },
-      },
-      fields: [uploadAltField, uploadCaptionField],
-    },
-
-    ...otherFields,
-  ],
-})

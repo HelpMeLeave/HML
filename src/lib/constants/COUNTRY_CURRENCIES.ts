@@ -1,17 +1,5 @@
 import type { CountryISO } from '@/payload-types'
 
-export type Currencies = {
-  [Key in CountryISO]: Record<
-    CountryISO,
-    {
-      name: string
-      symbol: string
-    }
-  >[Key]
-}
-
-export type Currency<C extends CountryISO> = Currencies[C]
-
 export const CURRENCIES: Record<
   CountryISO,
   {

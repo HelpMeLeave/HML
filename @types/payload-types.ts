@@ -347,7 +347,7 @@ export interface Config {
       roles: 'user-roles';
     };
     'payload-folders': {
-      documentsAndFolders: 'payload-folders' | 'documents' | 'users';
+      documentsAndFolders: 'payload-folders' | 'content' | 'documents' | 'users';
     };
   };
   collectionsSelect: {
@@ -723,6 +723,7 @@ export interface Content {
   headerImage?: (number | null) | Media;
   contentType: string;
   authorString?: string | null;
+  folder?: (number | null) | FolderInterface;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2170,6 +2171,10 @@ export interface FolderInterface {
           value: number | FolderInterface;
         }
       | {
+          relationTo?: 'content';
+          value: number | Content;
+        }
+      | {
           relationTo?: 'documents';
           value: number | Document;
         }
@@ -2181,7 +2186,7 @@ export interface FolderInterface {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
-  folderType?: ('documents' | 'users')[] | null;
+  folderType?: ('content' | 'documents' | 'users')[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -3926,6 +3931,7 @@ export interface ContentSelect<T extends boolean = true> {
   headerImage?: T;
   contentType?: T;
   authorString?: T;
+  folder?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -5853,16 +5859,6 @@ export interface CollectionsWidget {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock".
- */
-export interface FormBlock {
-  form: number | Form;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'form';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PageGroupBlock".
  */
 export interface PageGroupBlock {
@@ -5892,6 +5888,16 @@ export interface PageGroupBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FormBlock".
+ */
+export interface FormBlock {
+  form: number | Form;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'form';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TemplateBlock".
  */
 export interface TemplateBlock {
@@ -5899,91 +5905,6 @@ export interface TemplateBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'template';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ButtonModalOpenBlock".
- */
-export interface ButtonModalOpenBlock {
-  style?: ('primary' | 'secondary' | 'ghost') | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'button-modal-open';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ButtonModalBlock".
- */
-export interface ButtonModalBlock {
-  style?: ('primary' | 'secondary' | 'ghost') | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  action?: {
-    type?: ('open-modal' | 'set-page' | 'next-page' | 'preview-page' | 'redirect' | 'close-modal') | null;
-    setPageSlug?: string | null;
-    redirect?: (number | null) | Route;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'button-modal';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ModalBlock".
- */
-export interface ModalBlock {
-  openButton: ButtonModalOpenBlock[];
-  pages?:
-    | {
-        slug: string;
-        content?: {
-          root: {
-            type: string;
-            children: {
-              type: any;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-      }[]
-    | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'modal';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

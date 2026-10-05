@@ -65,26 +65,6 @@ export const baseListFeatures = [
 
 export const baseParagraphFeatures = [ParagraphFeature(), IndentFeature(), AlignFeature()]
 
-export const baseMiscFeatures = [
-  RelationshipFeature(),
-  EXPERIMENTAL_TableFeature(),
-  PasteCleanupFeature(),
-]
-// #region ! ---------- UPLOAD ----------
-export const baseUploadFeature = UploadFeature({
-  collections: { documents: { fields: [{ type: 'text', name: 'adminTitle', label: 'Title' }] } },
-})
-// #endregion ! --------------------
-
-// #region ! ---------- HEADINGS ----------
-
-export const baseHeadingFeatures = [
-  HeadingFeature({ enabledHeadingSizes: [] }),
-  H4Feature(),
-  SectionFeature(),
-  SubSectionFeature(),
-]
-
 // #endregion ! --------------------
 
 export const baseAdmin = {

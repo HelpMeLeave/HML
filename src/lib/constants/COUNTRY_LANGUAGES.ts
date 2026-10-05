@@ -1,16 +1,3 @@
-export type CountryLanguage<C extends CountryLanguageCode | null = null> =
-  C extends CountryLanguageCode ?
-    {
-      [KEY in keyof typeof COUNTRY_LANGUAGES]: KEY extends C ?
-        Record<KEY, (typeof COUNTRY_LANGUAGES)[KEY]>
-      : never
-    }[C]
-  : {
-      [KEY in keyof typeof COUNTRY_LANGUAGES]: KEY
-    }
-
-type CountryLanguageCode = keyof typeof COUNTRY_LANGUAGES
-
 export const COUNTRY_LANGUAGES = {
   ENG: 'English',
   ARA: 'Arabic',

@@ -1,7 +1,6 @@
 import type {
   SerializedParagraphNode,
   SerializedRootNode,
-  SerializedTextNode,
 } from '@payloadcms/richtext-lexical/lexical'
 
 export const RootNode = (withChildren: boolean = true) =>
@@ -28,20 +27,3 @@ export const RootNode = (withChildren: boolean = true) =>
       direction: null,
     },
   }) as { root: SerializedRootNode }
-
-export const creatRootNode = (text?: string) => {
-  const node = { ...RootNode() }
-  if (text) {
-    const firstChild = node.root.children[0] as SerializedParagraphNode
-    firstChild.children[0] = {
-      text,
-      version: 1,
-      type: 'text',
-      style: '',
-      mode: 'normal',
-      format: 0,
-      detail: 0,
-    } as SerializedTextNode
-  }
-  return node
-}

@@ -1,6 +1,6 @@
 import { toTitleCase } from '@/lib/textCasing'
 import type { OptionObject } from 'payload'
-import { extractID, slugify } from 'payload/shared'
+import { extractID } from 'payload/shared'
 
 export const normalizeCollectionID = (entry?: { id: number } | number | null | undefined) =>
   entry ? extractID(entry) : -1
@@ -20,16 +20,3 @@ export const normalizeSelectOptions = (...values: string[]): OptionObject[] =>
     label: toTitleCase(ea),
     value: ea,
   }))
-
-export const slugifyOptions = (...values: string[] | OptionObject[]): OptionObject[] =>
-  values.map((ea) =>
-    typeof ea == 'string' ?
-      {
-        label: toTitleCase(ea),
-        value: slugify(ea) ?? ea,
-      }
-    : {
-        label: typeof ea.label == 'string' ? toTitleCase(ea.label) : ea.label,
-        value: slugify(ea.value)!,
-      }
-  )
