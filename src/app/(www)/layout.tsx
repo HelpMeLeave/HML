@@ -1,7 +1,12 @@
 import { getNavigation } from '@/app/(www)/_providers/Navigation/qry.server'
 import { env } from '@/env'
 import { cn } from '@/lib/cn'
-import { atkinsonFont, atkinsonMonoFont, bebasNeue, interstateFont } from '@/lib/fonts'
+import {
+  atkinsonFont,
+  atkinsonMonoFont,
+  bebasNeue,
+  interstateFont /* playfair */,
+} from '@/lib/fonts'
 import '@/styles/style.css'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -35,6 +40,7 @@ const Layout = async ({
         atkinsonMonoFont.variable,
         bebasNeue.variable,
         interstateFont.variable,
+        // playfair.variable,
         'scroll-pt-[calc(var(--nav-height)+1.5rem)] scroll-smooth'
       )}>
       <body

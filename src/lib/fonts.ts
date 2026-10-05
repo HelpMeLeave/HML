@@ -2,6 +2,7 @@ import {
   Atkinson_Hyperlegible_Mono,
   Atkinson_Hyperlegible_Next,
   Bebas_Neue,
+  Playfair_Display,
 } from 'next/font/google'
 
 export const atkinsonFont = Atkinson_Hyperlegible_Next({
@@ -37,4 +38,13 @@ import localFont from 'next/font/local'
 export const interstateFont = localFont({
   src: '../../public/interstate-bold.woff',
   variable: '--font-interstate',
+})
+
+export const playfair = Playfair_Display({
+  display: 'swap',
+  variable: '--font-playfair',
+  subsets: ['latin'],
+  preload: false,
+  style: 'normal',
+  weight: ['400', '500', '600', '700'],
 })

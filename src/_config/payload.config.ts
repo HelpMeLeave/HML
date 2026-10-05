@@ -1,3 +1,4 @@
+import { baseFeatures, baseTheme } from '@/_components/lexicals/options'
 import { viewPath } from '@/_components/views'
 import { SidebarTogglePath } from '@/_components/views/SidebarToggle'
 import {
@@ -9,7 +10,6 @@ import {
 } from '@/_config/Blocks'
 import { folders } from '@/_config/folders'
 import { i18n } from '@/_config/i18n'
-import { lexicalBase } from '@/_config/lexical'
 import { plugins } from '@/_config/plugins'
 import { Schema } from '@/_config/schema'
 import { collections } from '@/collections'
@@ -17,6 +17,7 @@ import { globals } from '@/globals'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { type PgSchema, pgEnum } from '@payloadcms/db-postgres/drizzle/pg-core'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'node:path'
 import { cwd } from 'node:process'
 import { fileURLToPath } from 'node:url'
@@ -37,7 +38,13 @@ const config = buildConfig({
   },
   i18n,
   folders,
-  editor: lexicalBase(),
+  editor: lexicalEditor({
+    features: baseFeatures().all(),
+    lexical: {
+      theme: baseTheme,
+      namespace: 'root',
+    },
+  }),
   // #region ! ---------- ADMIN ----------
   admin: {
     autoRefresh: true,

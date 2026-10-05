@@ -11,6 +11,10 @@
 @import "./lexicals/_checkmarkList.css";
 @import "./colors.css";
 
+/* @theme inline {
+  --font-header: var(--font-playfair);
+} */
+
 @theme {
   --measure: 660px;
 
