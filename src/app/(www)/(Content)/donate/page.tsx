@@ -6,7 +6,7 @@ import { getDonationResult } from '@/app/(api)/stripe/donate'
 import { InlineLink } from '@/components/primitives/Link'
 import type { MainDetails } from '@/components/Structure/_types'
 import { MainEyebrow, MainHeading, MainHGroup, MainSubtitle } from '@/components/Structure/Main'
-import { Section, SectionHeading, SectionHGroup } from '@/components/Structure/Section'
+import { Section } from '@/components/Structure/Section'
 import type { Content } from '@/payload-types'
 import { getPayload } from '@/server/getPayload'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
@@ -86,10 +86,7 @@ const DonationsPage = async ({ searchParams }: PageProps<'/donate'>) => {
             </MainSubtitle>
           )}
         </MainHGroup>
-        <Section>
-          <SectionHGroup>
-            <SectionHeading>Have Questions?</SectionHeading>
-          </SectionHGroup>
+        <Section heading={'Have Questions?'}>
           E-Mail Us at{' '}
           <InlineLink
             className='decoration-accent/50'
@@ -97,10 +94,7 @@ const DonationsPage = async ({ searchParams }: PageProps<'/donate'>) => {
             Donations@helpmeleave.us
           </InlineLink>
         </Section>
-        <Section>
-          <SectionHGroup>
-            <SectionHeading>Direct Bank Transfer?</SectionHeading>
-          </SectionHGroup>
+        <Section heading='Direct Bank Transfer?'>
           <dl className='no-typography mx-6 grid max-w-max grid-cols-[auto_1fr] gap-x-4 *:text-sm *:odd:text-end *:odd:font-semibold'>
             <dt className='strong'>Account Name:</dt> <dd>Help Me Leave Stichting</dd>
             <dt className='strong'>IBAN:</dt> <dd>FR76 2763 3121 2904 9186 5658 583</dd>

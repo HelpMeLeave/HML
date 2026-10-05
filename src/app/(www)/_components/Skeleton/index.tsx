@@ -1,11 +1,6 @@
 import { P } from '@/components/primitives'
 import { Main, MainHeading, MainHGroup } from '@/components/Structure/Main'
-import {
-  Section,
-  SectionEyebrow,
-  SectionHeading,
-  SectionHGroup,
-} from '@/components/Structure/Section'
+import { Section } from '@/components/Structure/Section'
 import { cn } from '@/lib/cn'
 import type { ClassNameValue } from 'tailwind-merge'
 
@@ -49,15 +44,9 @@ export const Skeleton = () => {
           <SkeletonLine size='md' />
         </MainHeading>
       </MainHGroup>
-      <Section>
-        <SectionHGroup>
-          <SectionEyebrow>
-            <SkeletonLine size='sm' />
-          </SectionEyebrow>
-          <SectionHeading>
-            <SkeletonLine size='md' />
-          </SectionHeading>
-        </SectionHGroup>
+      <Section
+        heading={<SkeletonLine size='md' />}
+        brow={<SkeletonLine size='sm' />}>
         <P className='flex flex-col gap-y-4'>
           {['xl', '2xl', 'xl', '2xl', '2xl', 'xl', 'xl', '2xl', 'xl', '2xl', '2xl'].map((ea, i) => (
             <SkeletonLine

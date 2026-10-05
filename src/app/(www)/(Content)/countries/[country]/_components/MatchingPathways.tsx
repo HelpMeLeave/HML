@@ -1,11 +1,6 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
 import { Heading } from '@/components/primitives'
-import {
-  Section,
-  SectionHeading,
-  SectionHGroup,
-  SectionSubtitle,
-} from '@/components/Structure/Section'
+import { Section } from '@/components/Structure/Section'
 import type { Country } from '@/payload-types'
 import { getPayload } from '@/server/getPayload'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
@@ -22,12 +17,7 @@ export const MatchingPathways = async ({ country }: { country: Pick<Country, 'id
   })
 
   return (
-    <Section>
-      <SectionHGroup>
-        <SectionHeading>Pathways</SectionHeading>
-        <SectionSubtitle></SectionSubtitle>
-      </SectionHGroup>
-
+    <Section heading='Pathways'>
       {pathways.length > 0
         && pathways.map((pathway) => (
           <section
