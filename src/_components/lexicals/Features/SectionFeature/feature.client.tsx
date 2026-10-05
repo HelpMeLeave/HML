@@ -212,6 +212,11 @@ const insertConfig = {
       if (topLevel) topLevel.insertAfter(section)
       else $getRoot().append(section)
       hgroup.getFirstChild()?.selectStart()
+
+      editor.registerNodeTransform(SectionHeadingNode, (node) => {
+        const parent = node.getParent()
+        parent
+      })
     })
   },
 }

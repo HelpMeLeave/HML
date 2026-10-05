@@ -1,35 +1,18 @@
-import { applySerializedProps } from '@/_components/lexicals/Features/_lib/nodeUtils'
-import {
-  ElementNode,
-  type LexicalNode,
-  type SerializedElementNode,
-} from '@payloadcms/richtext-lexical/lexical'
+import { type LexicalNode, $create, ElementNode } from '@payloadcms/richtext-lexical/lexical'
 
 export class SectionContainerNode extends ElementNode {
-  static getType() {
-    return 'section-container'
-  }
-
-  static clone(node: SectionContainerNode) {
-    return new SectionContainerNode(node.__key)
+  $config() {
+    return this.config('section-container', { extends: ElementNode })
   }
 
   createDOM() {
     const el = document.createElement('section')
-    el.className = 'lexical__section'
+    el.className = 'lexical__section border-l border-ui-200'
     return el
   }
 
   updateDOM() {
     return false
-  }
-
-  static importJSON(serialized: SerializedElementNode) {
-    return applySerializedProps($createSectionContainerNode(), serialized)
-  }
-
-  exportJSON(): SerializedElementNode {
-    return { ...super.exportJSON(), type: 'section-container' }
   }
 
   isInline() {
@@ -46,12 +29,8 @@ export class SectionContainerNode extends ElementNode {
 }
 
 export class SectionContentNode extends ElementNode {
-  static getType() {
-    return 'section-content'
-  }
-
-  static clone(node: SectionContentNode) {
-    return new SectionContentNode(node.__key)
+  $config() {
+    return this.config('section-content', { extends: ElementNode })
   }
 
   createDOM() {
@@ -64,14 +43,6 @@ export class SectionContentNode extends ElementNode {
     return false
   }
 
-  static importJSON(serialized: SerializedElementNode) {
-    return applySerializedProps($createSectionContentNode(), serialized)
-  }
-
-  exportJSON(): SerializedElementNode {
-    return { ...super.exportJSON(), type: 'section-content' }
-  }
-
   isInline() {
     return false
   }
@@ -81,12 +52,12 @@ export class SectionContentNode extends ElementNode {
   }
 }
 
-export const $createSectionContainerNode = () => new SectionContainerNode()
+export const $createSectionContainerNode = () => $create(SectionContainerNode)
 export const $isSectionContainerNode = (
   node: LexicalNode | null | undefined
 ): node is SectionContainerNode => node instanceof SectionContainerNode
 
-export const $createSectionContentNode = () => new SectionContentNode()
+export const $createSectionContentNode = () => $create(SectionContentNode)
 export const $isSectionContentNode = (
   node: LexicalNode | null | undefined
 ): node is SectionContentNode => node instanceof SectionContentNode

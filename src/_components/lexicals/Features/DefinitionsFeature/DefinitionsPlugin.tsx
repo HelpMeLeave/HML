@@ -144,7 +144,7 @@ export const DefinitionsPlugin = () => {
           const wrapper = $getNodeByKey(match.nodeKey)
           if ($isDefinitionNodeWrapper(wrapper)) {
             // only this term moves on to its next occurrence; the others keep their spot
-            skipsRef.current.set(wrapper.getTermID(), wrapper.__instance + 1)
+            skipsRef.current.set(wrapper.getTermID(), wrapper.getInstance() + 1)
             $reject(wrapper)
             rejected = true
           }

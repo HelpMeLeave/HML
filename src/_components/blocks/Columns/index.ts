@@ -53,7 +53,6 @@ const sizes = [
 const columnSizeField: SelectField = {
   name: 'size',
   type: 'select',
-  defaultValue: 'half',
   options: sizes,
 }
 

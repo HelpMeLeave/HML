@@ -1,54 +1,47 @@
+import { termIDState } from '@/_components/lexicals/Features/_lib/nodeStates'
 import {
-  ElementNode,
   type LexicalNode,
-  type NodeKey,
   type SerializedElementNode,
   type Spread,
+  $create,
+  $getState,
+  $setState,
+  ElementNode,
 } from '@payloadcms/richtext-lexical/lexical'
 
 export type SerializedDefinitionNode = Spread<{ termID: number }, SerializedElementNode>
 
 export class DefinitionNode extends ElementNode {
-  __termID: number
-
-  constructor(termID: number, key?: NodeKey) {
-    super(key)
-    this.__termID = termID
-  }
-
-  static clone(node: DefinitionNode): DefinitionNode {
-    return new DefinitionNode(node.__termID, node.__key)
-  }
-
-  static getType(): string {
-    return 'definition'
-  }
-
-  static importJSON(serialized: SerializedDefinitionNode): DefinitionNode {
-    return $createDefinitionNode(serialized.termID).updateFromJSON(serialized)
+  $config() {
+    return this.config('definition', {
+      extends: ElementNode,
+      stateConfigs: [{ stateConfig: termIDState, flat: true }],
+    })
   }
 
   createDOM(): HTMLElement {
     const el = document.createElement('span')
     el.className = 'lexical__definition'
-    el.dataset.termId = String(this.__termID)
+    // 'direct' reads this node's own copy, which is what reconciliation is rendering
+    el.dataset.termId = String($getState(this, termIDState, 'direct'))
     return el
   }
 
-  exportJSON = (): SerializedDefinitionNode => ({
-    ...super.exportJSON(),
-    termID: this.__termID,
-    type: this.getType(),
-  })
+  getTermID(): number {
+    return $getState<string, unknown>(this, termIDState) as number
+  }
 
-  getTermID = (): number => this.getLatest().__termID
+  isInline(): boolean {
+    return true
+  }
 
-  isInline = (): boolean => true
-
-  updateDOM = (): boolean => false
+  updateDOM(): boolean {
+    return false
+  }
 }
 
-export const $createDefinitionNode = (termID: number) => new DefinitionNode(termID)
+export const $createDefinitionNode = (termID: number) =>
+  $setState($create(DefinitionNode), termIDState, termID)
 
 export const $isDefinitionNode = (node: LexicalNode | null | undefined): node is DefinitionNode =>
   node instanceof DefinitionNode

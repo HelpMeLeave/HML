@@ -1,9 +1,11 @@
-import { applySerializedProps } from '@/_components/lexicals/Features/_lib/nodeUtils'
+import { titledState } from '@/_components/lexicals/Features/_lib/nodeStates'
 import {
   type EditorConfig,
   type LexicalEditor,
   type LexicalNode,
-  type NodeKey,
+  $create,
+  $getState,
+  $setState,
   buildImportMap,
   isHTMLElement,
 } from '@payloadcms/richtext-lexical/lexical'
@@ -20,24 +22,10 @@ import {
 export type SerializedTitledListNode = SerializedListNode & { titled: boolean }
 
 export class TitledListNode extends ListNode {
-  titled: boolean
-
-  static getType = () => 'titled-list'
-
-  static clone = (node: TitledListNode) => {
-    return new TitledListNode(node.getListType(), node.getStart(), node.getTitled(), node.__key)
-  }
-
-  static importJSON = (serialized: SerializedTitledListNode) => {
-    return applySerializedProps(
-      $createTitledListNode(serialized.listType, serialized.start),
-      serialized
-    )
-  }
-
   $config() {
     return this.config('titled-list', {
       extends: ListNode,
+      stateConfigs: [{ stateConfig: titledState, flat: true }],
       importDOM: buildImportMap({
         ol: () => ({
           conversion: $domToTitledList,
@@ -51,26 +39,19 @@ export class TitledListNode extends ListNode {
     })
   }
 
-  constructor(type: ListType, start?: number, titled?: boolean, key?: NodeKey) {
-    super(type, start, key)
-    this.titled = titled ?? false
-  }
-
-  createDOM = (
-    config: EditorConfig,
-    _editor?: LexicalEditor
-  ): HTMLOListElement | HTMLUListElement => {
+  createDOM(config: EditorConfig, _editor?: LexicalEditor): HTMLOListElement | HTMLUListElement {
     const el = super.createDOM(config, _editor) as HTMLOListElement | HTMLUListElement
     el.className += ' LexicalEditorTheme__list--titled'
     return el
   }
 
-  exportJSON = (): SerializedTitledListNode => {
-    return { ...super.exportJSON(), type: this.getType(), titled: this.getTitled() }
+  getTitled() {
+    return $getState(this, titledState)
   }
 
-  getTitled = () => this.titled
-  isInline = () => false
+  isInline() {
+    return false
+  }
 }
 
 export const $isTitledListNode = (node: LexicalNode) => node instanceof TitledListNode
@@ -89,9 +70,14 @@ export const $toggleTitled = (node: TitledListNode | ListNode) => {
   return node
 }
 
-const $createTitledListNode = (listType?: ListType, start?: number) => {
-  return new TitledListNode(listType ?? 'bullet', start, true)
-}
+const $createTitledListNode = (listType?: ListType, start?: number) =>
+  $setState(
+    $create(TitledListNode)
+      .setListType(listType ?? 'bullet')
+      .setStart(start ?? 1),
+    titledState,
+    true
+  )
 
 function isDomChecklist(domNode: HTMLElement) {
   if (
@@ -152,6 +138,10 @@ function $domToTitledList(domNode: HTMLOListElement | HTMLUListElement) {
 }
 
 export const $convertToTitledListNode = (node: ListNode) =>
-  new TitledListNode(node.getListType(), node.getStart(), true)
+  $setState(
+    $create(TitledListNode).setListType(node.getListType()).setStart(node.getStart()),
+    titledState,
+    true
+  )
 
 const $wrapInListItem = (node: LexicalNode) => $createListItemNode().append(node)

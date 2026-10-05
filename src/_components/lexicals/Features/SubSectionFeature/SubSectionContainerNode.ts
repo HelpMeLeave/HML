@@ -1,17 +1,8 @@
-import { applySerializedProps } from '@/_components/lexicals/Features/_lib/nodeUtils'
-import {
-  ElementNode,
-  type LexicalNode,
-  type SerializedElementNode,
-} from '@payloadcms/richtext-lexical/lexical'
+import { type LexicalNode, $create, ElementNode } from '@payloadcms/richtext-lexical/lexical'
 
 export class SubSectionContainerNode extends ElementNode {
-  static getType() {
-    return 'subsection-container'
-  }
-
-  static clone(node: SubSectionContainerNode) {
-    return new SubSectionContainerNode(node.__key)
+  $config() {
+    return this.config('subsection-container', { extends: ElementNode })
   }
 
   createDOM() {
@@ -22,14 +13,6 @@ export class SubSectionContainerNode extends ElementNode {
 
   updateDOM() {
     return false
-  }
-
-  static importJSON(serialized: SerializedElementNode) {
-    return applySerializedProps($createSubSectionContainerNode(), serialized)
-  }
-
-  exportJSON(): SerializedElementNode {
-    return { ...super.exportJSON(), type: 'subsection-container' }
   }
 
   isInline() {
@@ -45,7 +28,7 @@ export class SubSectionContainerNode extends ElementNode {
   }
 }
 
-export const $createSubSectionContainerNode = () => new SubSectionContainerNode()
+export const $createSubSectionContainerNode = () => $create(SubSectionContainerNode)
 
 export const $isSubSectionContainerNode = (
   node: LexicalNode | null | undefined

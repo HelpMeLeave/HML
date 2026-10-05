@@ -20,6 +20,6 @@ export const $collectWrapperMarks = (): DefinitionMatch[] =>
       start: 0,
       termID: wrapper.getTermID(),
       text,
-      instance: wrapper.__instance,
+      instance: wrapper.getInstance(),
     }
   })

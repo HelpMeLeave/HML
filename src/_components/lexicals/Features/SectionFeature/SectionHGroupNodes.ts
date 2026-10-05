@@ -1,91 +1,118 @@
-import { applySerializedProps } from '@/_components/lexicals/Features/_lib/nodeUtils'
-import {
-  type LexicalNode,
-  type SerializedElementNode,
-  ElementNode,
-} from '@payloadcms/richtext-lexical/lexical'
+import { headingIdState } from '@/_components/lexicals/Features/_lib/nodeStates'
+import { browClassname } from '@/components/Structure/Eyebrow'
+import { type LexicalNode, $create, ElementNode } from '@payloadcms/richtext-lexical/lexical'
+
+// $config() lets Lexical supply getType, clone, importJSON and exportJSON, so each node only says what's different about it
 
 export class SectionHGroupNode extends ElementNode {
-  static getType = () => 'section-hgroup'
-  static clone = (node: SectionHGroupNode) => new SectionHGroupNode(node.__key)
-  static importJSON = (serialized: SerializedElementNode) =>
-    applySerializedProps($createSectionHGroupNode(), serialized)
+  $config() {
+    return this.config('section-hgroup', { extends: ElementNode })
+  }
 
-  createDOM = () => {
+  createDOM() {
     const el = document.createElement('hgroup')
-    el.className = 'lexical__hgroup hgroup'
+    el.className = 'text-6xl leading-none m-0 *:data-[slot="brow"]:leading-normal'
     return el
   }
 
-  exportJSON = () => ({ ...super.exportJSON(), type: this.getType() })
-  updateDOM = () => false
-  isInline = () => false
-  canBeEmpty = () => false
-  insertNewAfter = () => null
+  updateDOM() {
+    return false
+  }
+
+  isInline() {
+    return false
+  }
+
+  canBeEmpty() {
+    return false
+  }
+
+  insertNewAfter() {
+    return null
+  }
 }
 
 export class SectionHeadingNode extends ElementNode {
-  static getType = () => 'section-heading'
+  $config() {
+    return this.config('section-heading', {
+      extends: ElementNode,
+      stateConfigs: [{ stateConfig: headingIdState, flat: true }],
+    })
+  }
 
-  createDOM = () => {
+  createDOM() {
     const el = document.createElement('h2')
-    el.className = 'hgroup__section-heading'
+    el.className = 'text-[1em] text-body'
     el.dataset.placeholder = 'Section Heading....'
+    el.dataset.slot = 'heading'
     return el
   }
 
-  static clone = (node: SectionHeadingNode) => new SectionHeadingNode(node.__key)
+  updateDOM() {
+    return false
+  }
 
-  static importJSON = (serialized: SerializedElementNode) =>
-    applySerializedProps($createSectionHeadingNode(), serialized)
-
-  updateDOM = () => false
-  exportJSON = (): SerializedElementNode => ({ ...super.exportJSON(), type: 'section-heading' })
-  isInline = () => false
+  isInline() {
+    return false
+  }
 }
 
 export class SectionEyebrowNode extends ElementNode {
-  static getType = () => 'section-eyebrow'
-  static clone = (node: SectionEyebrowNode) => new SectionEyebrowNode(node.__key)
-  static importJSON = (serialized: SerializedElementNode) =>
-    applySerializedProps($createSectionEyebrowNode(), serialized)
+  $config() {
+    return this.config('section-eyebrow', { extends: ElementNode })
+  }
 
-  createDOM = () => {
+  createDOM() {
     const el = document.createElement('p')
-    el.className = 'hgroup__section-eyebrow'
+    el.className = browClassname
     el.dataset.placeholder = 'Eyebrow...'
+    el.dataset.slot = 'brow'
     return el
   }
 
-  exportJSON = () => ({ ...super.exportJSON(), type: this.getType() })
-  updateDOM = () => false
-  isInline = () => false
-  insertNewAfter = () => null
+  updateDOM() {
+    return false
+  }
+
+  isInline() {
+    return false
+  }
+
+  insertNewAfter() {
+    return null
+  }
 }
 
 export class SectionSubtitleNode extends ElementNode {
-  static getType = () => 'section-subtitle'
-  static clone = (node: SectionSubtitleNode) => new SectionSubtitleNode(node.__key)
-  static importJSON = (serialized: SerializedElementNode) =>
-    applySerializedProps($createSectionSubtitleNode(), serialized)
+  $config() {
+    return this.config('section-subtitle', { extends: ElementNode })
+  }
 
-  createDOM = () => {
+  createDOM() {
     const el = document.createElement('p')
     el.className = 'hgroup__subtitle'
     el.dataset.placeholder = 'Subtitle...'
+    el.dataset.slot = 'subtitle'
     return el
   }
 
-  exportJSON = () => ({ ...super.exportJSON(), type: this.getType() })
-  updateDOM = () => false
-  isInline = () => false
-  insertNewAfter = () => null
+  updateDOM() {
+    return false
+  }
+
+  isInline() {
+    return false
+  }
+
+  insertNewAfter() {
+    return null
+  }
 }
 
 export const $isSectionHGroupNode = (node?: LexicalNode | null): node is SectionHGroupNode =>
   node instanceof SectionHGroupNode
 
-export const $createSectionHGroupNode = () => new SectionHGroupNode()
-export const $createSectionHeadingNode = () => new SectionHeadingNode()
-export const $createSectionEyebrowNode = () => new SectionEyebrowNode()
-export const $createSectionSubtitleNode = () => new SectionSubtitleNode()
+export const $createSectionHGroupNode = () => $create(SectionHGroupNode)
+export const $createSectionHeadingNode = () => $create(SectionHeadingNode)
+export const $createSectionEyebrowNode = () => $create(SectionEyebrowNode)
+export const $createSectionSubtitleNode = () => $create(SectionSubtitleNode)

@@ -1,10 +1,13 @@
+import { instanceState, termIDState } from '@/_components/lexicals/Features/_lib/nodeStates'
 import { $collectWrapperNodes } from '@/_components/lexicals/Features/DefinitionsFeature/_lib/collectWrappers'
 import {
+  $create,
+  $getState,
   $isTextNode,
   $parseSerializedNode,
+  $setState,
   ElementNode,
   type LexicalNode,
-  type NodeKey,
   type SerializedElementNode,
   type SerializedLexicalNode,
   type Spread,
@@ -16,45 +19,41 @@ export type SerializedDefinitionNodeWrapper = Spread<
 >
 
 export class DefinitionNodeWrapper extends ElementNode {
-  __termID: number
-  __className: string = 'lexical__definition-wrapper'
-  __instance: number
-
-  constructor(termID: number, instance: number, key?: NodeKey) {
-    super(key)
-    this.__termID = termID
-    this.__instance = instance
+  $config() {
+    return this.config('definition-wrapper', {
+      extends: ElementNode,
+      stateConfigs: [
+        { stateConfig: termIDState, flat: true },
+        { stateConfig: instanceState, flat: true },
+      ],
+    })
   }
 
-  static clone = (node: DefinitionNodeWrapper): DefinitionNodeWrapper =>
-    new DefinitionNodeWrapper(node.__termID, node.__instance, node.__key)
-
-  static getType = (): string => 'definition-wrapper'
-
-  static importJSON = (serialized: SerializedDefinitionNodeWrapper): DefinitionNodeWrapper =>
-    $createDefinitionNodeWrapper(serialized.termID, serialized.instance).updateFromJSON(serialized)
-
-  createDOM = (): HTMLElement => {
+  createDOM(): HTMLElement {
     const el = document.createElement('span')
-    el.className = this.__className
-    el.dataset.termId = String(this.getTermID())
+    el.className = 'lexical__definition-wrapper'
+    // 'direct' reads this node's own copy, which is what reconciliation is rendering
+    el.dataset.termId = String($getState(this, termIDState, 'direct'))
     el.dataset.wrappedText = this.getFullTextContent()
 
     return el
   }
 
-  exportJSON = (): SerializedDefinitionNodeWrapper => ({
-    ...super.exportJSON(),
-    termID: this.__termID,
-    type: this.getType(),
-    instance: this.__instance,
-  })
+  getTermID(): number {
+    return $getState(this, termIDState) as number
+  }
 
-  getTermID = (): number => this.getLatest().__termID
+  getInstance(): number {
+    return $getState(this, instanceState) as number
+  }
 
-  isInline = (): boolean => true
+  isInline(): boolean {
+    return true
+  }
 
-  updateDOM = (): boolean => false
+  updateDOM(): boolean {
+    return false
+  }
 
   insertChildren = (...children: SerializedLexicalNode[]) =>
     children.forEach((child) => {
@@ -75,7 +74,7 @@ export class DefinitionNodeWrapper extends ElementNode {
 }
 
 export const $createDefinitionNodeWrapper = (termID: number, instance: number) =>
-  new DefinitionNodeWrapper(termID, instance)
+  $setState($setState($create(DefinitionNodeWrapper), termIDState, termID), instanceState, instance)
 
 export const $isDefinitionNodeWrapper = (
   node: LexicalNode | null | undefined

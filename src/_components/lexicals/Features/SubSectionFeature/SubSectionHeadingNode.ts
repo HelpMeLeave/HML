@@ -1,18 +1,17 @@
-import { applySerializedProps } from '@/_components/lexicals/Features/_lib/nodeUtils'
+import { headingIdState } from '@/_components/lexicals/Features/_lib/nodeStates'
 import {
+  type LexicalNode,
+  $create,
   $createParagraphNode,
   ElementNode,
-  type LexicalNode,
-  type SerializedElementNode,
 } from '@payloadcms/richtext-lexical/lexical'
 
 export class SubSectionHeadingNode extends ElementNode {
-  static getType() {
-    return 'subsection-heading'
-  }
-
-  static clone(node: SubSectionHeadingNode) {
-    return new SubSectionHeadingNode(node.__key)
+  $config() {
+    return this.config('subsection-heading', {
+      extends: ElementNode,
+      stateConfigs: [{ stateConfig: headingIdState, flat: true }],
+    })
   }
 
   createDOM() {
@@ -24,14 +23,6 @@ export class SubSectionHeadingNode extends ElementNode {
 
   updateDOM() {
     return false
-  }
-
-  static importJSON(serialized: SerializedElementNode) {
-    return applySerializedProps($createSubSectionHeadingNode(), serialized)
-  }
-
-  exportJSON(): SerializedElementNode {
-    return { ...super.exportJSON(), type: 'subsection-heading' }
   }
 
   isInline() {
@@ -54,7 +45,7 @@ export class SubSectionHeadingNode extends ElementNode {
   }
 }
 
-export const $createSubSectionHeadingNode = () => new SubSectionHeadingNode()
+export const $createSubSectionHeadingNode = () => $create(SubSectionHeadingNode)
 export const $isSubSectionHeadingNode = (
   node: LexicalNode | null | undefined
 ): node is SubSectionHeadingNode => node instanceof SubSectionHeadingNode
