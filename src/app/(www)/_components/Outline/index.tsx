@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  headingPlainText,
-  slugifyHeadingID,
-} from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
+import { headingID, headingPlainText } from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
 import { SmLeftRail } from '@/app/(www)/_components/LeftRail'
 import { InlineLink } from '@/components/primitives/Link'
 import { useScrollProgress } from '@/hooks/useInView'
@@ -20,7 +17,7 @@ type HeadingGrp = {
 
 // the slug has to be the id the converters rendered, so it comes from the same helper
 const getRootText = (node: SerializedLexicalNode) => ({
-  slug: slugifyHeadingID(node),
+  slug: headingID(node),
   plain: headingPlainText(node),
 })
 
@@ -152,8 +149,12 @@ export const TOC = ({
 
   if (headings.length > 0) {
     return (
-      <SmLeftRail>
-        <h4 className='mb-1 text-lg font-bold'>ON THIS PAGE</h4>
+      <SmLeftRail aria-labelledby='toc-heading'>
+        <h4
+          id='toc-heading'
+          className='mb-1 text-lg font-bold'>
+          ON THIS PAGE
+        </h4>
         <Grp
           headings={headings}
           level={1}

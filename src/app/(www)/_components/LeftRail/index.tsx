@@ -16,7 +16,7 @@ const LeftRailBase = (props: Props<'aside'>) => (
 export const SmLeftRail = (props: Props<'aside'>) => (
   <LeftRailBase
     {...props}
-    className={cn('xl:max-w-47.5', props.className)}
+    className={cn('mt-8 xl:max-w-47.5', props.className)}
   />
 )
 
