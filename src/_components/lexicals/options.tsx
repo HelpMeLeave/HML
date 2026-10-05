@@ -27,13 +27,9 @@ import {
   UnorderedListFeature,
   UploadFeature,
 } from '@payloadcms/richtext-lexical'
+import type { FeaturesInput } from './types'
 
 // #region ! ---------- TEXT STATE ----------
-const baseTextStateConfig = {
-  state: {
-    ...defaultColors,
-  },
-}
 export const baseTextFeatures = [
   UnderlineFeature(),
   BoldFeature(),
@@ -41,12 +37,12 @@ export const baseTextFeatures = [
   LexicalLinkFeature,
   SuperscriptFeature(),
   BlockquoteFeature(),
-  TextStateFeature(baseTextStateConfig),
+  TextStateFeature({ state: { ...defaultColors } }),
 ]
 // #endregion ! --------------------
 
 // #region ! ---------- TOOLBARS ----------
-const fixedToolbarConfig: Valid<Parameters<typeof FixedToolbarFeature>[number]> = {
+export const fixedToolbar = FixedToolbarFeature({
   customGroups: {
     layout: { type: 'dropdown', order: 1 },
     format: { type: 'buttons', order: 2 },
@@ -56,9 +52,7 @@ const fixedToolbarConfig: Valid<Parameters<typeof FixedToolbarFeature>[number]> 
     blocks: { type: 'dropdown', order: 8 },
     add: { type: 'dropdown', order: 9 },
   },
-  disableIfParentHasFixedToolbar: true,
-}
-export const fixedToolbar = FixedToolbarFeature(fixedToolbarConfig)
+})
 export const inlineToolbar = InlineToolbarFeature()
 // #endregion ! --------------------
 
@@ -77,28 +71,15 @@ export const baseMiscFeatures = [
   PasteCleanupFeature(),
 ]
 // #region ! ---------- UPLOAD ----------
-const baseUploadConfig = {
-  collections: {
-    documents: {
-      fields: [
-        {
-          type: 'text',
-          name: 'adminTitle',
-          label: 'Title',
-        },
-      ],
-    },
-  },
-}
-export const baseUploadFeature = UploadFeature(baseUploadConfig)
+export const baseUploadFeature = UploadFeature({
+  collections: { documents: { fields: [{ type: 'text', name: 'adminTitle', label: 'Title' }] } },
+})
 // #endregion ! --------------------
 
 // #region ! ---------- HEADINGS ----------
-const baseDefaultHeadingConfig = { enabledHeadingSizes: [] }
-const baseDefaultHeadingFeature = HeadingFeature(baseDefaultHeadingConfig)
 
 export const baseHeadingFeatures = [
-  baseDefaultHeadingFeature,
+  HeadingFeature({ enabledHeadingSizes: [] }),
   H4Feature(),
   SectionFeature(),
   SubSectionFeature(),
@@ -109,6 +90,66 @@ export const baseHeadingFeatures = [
 export const baseAdmin = {
   placeholder: 'Start typing...',
   hideGutter: true,
+}
+
+export function baseFeatures() {
+  const inline = [
+    ParagraphFeature(),
+    IndentFeature(),
+    AlignFeature(),
+    UnderlineFeature(),
+    BoldFeature(),
+    ItalicFeature(),
+    LexicalLinkFeature,
+    SuperscriptFeature(),
+    BlockquoteFeature(),
+    TextStateFeature({ state: { ...defaultColors } }),
+  ]
+
+  const block = [
+    HeadingFeature({ enabledHeadingSizes: [] }),
+    H4Feature(),
+    SectionFeature(),
+    SubSectionFeature(),
+    CheckmarkListFeature(),
+    OrderedListFeature(),
+    UnorderedListFeature(),
+    ListTitleFeature(),
+    PasteCleanupFeature(),
+  ]
+
+  const media = [
+    RelationshipFeature(),
+    UploadFeature({
+      collections: {
+        documents: { fields: [{ type: 'text', name: 'adminTitle', label: 'Title' }] },
+      },
+    }),
+  ]
+
+  const table = EXPERIMENTAL_TableFeature()
+  const toolbars = [fixedToolbar, inlineToolbar]
+
+  return {
+    inline,
+    block,
+    media,
+    toolbars,
+    table,
+    content: () => [...inline, ...block],
+    nested: function () {
+      return [...this.content(), ...toolbars]
+    },
+    all: function (options?: { withMedia?: true; withTable?: true }) {
+      const features: FeaturesInput[] = this.nested()
+
+      const { withMedia, withTable } = options ?? {}
+      withMedia === true && features.push(...this.media)
+      withTable === true && features.push(this.table)
+
+      return features
+    },
+  }
 }
 
 export const baseTheme = {

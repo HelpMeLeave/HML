@@ -3,7 +3,7 @@ import { RichTextBlockConverter } from '@/_components/blocks/RichText/Converter'
 import { TemplateConverter } from '@/_components/blocks/Templates/Converter'
 import { VideoPlayerConverter } from '@/_components/blocks/VideoPlayer/Converter'
 import { inlineBlocks } from '@/_components/inlineBlocks/converter'
-import { slugifyHeadingID } from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
+import { headingID } from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
 import type { SerializedCheckmarkListItem } from '@/_components/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
 import { CheckmarkList } from '@/_components/lexicals/Features/CheckmarkList/Component'
 import { definitionConverters } from '@/_components/lexicals/Features/DefinitionsFeature/Converter'
@@ -25,6 +25,7 @@ import {
 } from '@/components/Structure/Subsection/Subsection'
 import { cn } from '@/lib/cn'
 import { resolveLinkNode } from '@/lib/normalize/resolveLink'
+import type { Document } from '@/payload-types'
 import type { SerializedListNode, SerializedUploadNode } from '@payloadcms/richtext-lexical'
 import type {
   SerializedElementNode,
@@ -35,6 +36,7 @@ import type {
   JSXConverters,
   JSXConvertersFunction,
 } from '@payloadcms/richtext-lexical/react'
+import Image from 'next/image'
 import type { ElementType, JSX, JSXElementConstructor } from 'react'
 import { Fragment } from 'react'
 
@@ -65,11 +67,11 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
         'data-slot': 'section',
       }),
     'section-hgroup': (props) => NTK(SectionHGroup, props),
-    'section-heading': ({ node, nodesToJSX }) => (
-      <SectionHeading id={slugifyHeadingID(node)}>
-        {nodesToJSX({ nodes: node.children })}
-      </SectionHeading>
-    ),
+    'section-heading': ({ node, nodesToJSX }) => {
+      return (
+        <SectionHeading id={headingID(node)}>{nodesToJSX({ nodes: node.children })}</SectionHeading>
+      )
+    },
     'section-subtitle': (props) => props.node.children && NTK(SectionSubtitle, props),
     'section-eyebrow': (props) => props.node.children && NTK(SectionEyebrow, props),
     'section-content': (props) => NTK(Fragment, props),
@@ -79,7 +81,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     'subsection-container': (props) => NTK<typeof Subsection>(Subsection, props),
     'subsection-heading': ({ node, nodesToJSX }) => (
       <SubsectionHeading>
-        <span id={slugifyHeadingID(node)}>{nodesToJSX({ nodes: node.children })}</span>
+        <span id={headingID(node)}>{nodesToJSX({ nodes: node.children })}</span>
       </SubsectionHeading>
     ),
     'subsection-content': (props) => NTK(SubsectionContent, props, { className: 'sm:pl-6' }),
@@ -131,7 +133,6 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     list: ({ node, nodesToJSX }) => {
       const isTitledNode = 'titled' in node && node.titled == true
 
-      const className = 'my-4 ml-2 pl-2'
       const children = nodesToJSX({
         nodes: (node.children as SerializedCheckmarkListItem[]).reduce((prev, original, i) => {
           // work on a copy so rendering never rewrites the stored doc
@@ -171,14 +172,10 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       })
 
       if (node.listType == 'bullet') {
-        return (
-          <UL className={cn('list-disc', isTitledNode && '*:first:list-none', className)}>
-            {children}
-          </UL>
-        )
+        return <UL className={cn('list-disc', isTitledNode && '*:first:list-none')}>{children}</UL>
       } else if (node.listType == 'number')
-        return <OL className={cn('list-decimal', className)}>{children}</OL>
-      return <CheckmarkList className={cn('list-checkmark', className)}>{children}</CheckmarkList>
+        return <OL className={cn('list-decimal')}>{children}</OL>
+      return <CheckmarkList className={cn('list-checkmark')}>{children}</CheckmarkList>
     },
     'titled-list': ({ node, nodesToJSX }) => nodesToJSX({ nodes: [{ ...node, type: 'list' }] }),
     listitem: ({ node, nodesToJSX, parent }) => {
@@ -188,7 +185,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
           data-indent={node.indent}
           className={cn(
             'my-1.5 first:mt-0 last:mb-3 has-[#spacer]:mb-2',
-            isTitle ? 'list-title my-0 -ml-4 list-none pl-0' : 'pl-2',
+            isTitle ? 'list-title my-0 -ml-4 list-none pl-0 text-pretty' : 'pl-2',
             parent.type == 'listitem' && 'list-none'
           )}>
           {nodesToJSX({ nodes: node.children })}
@@ -203,6 +200,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     // ------------------------------------------------------------
     // #region ! ---------- TABLE ----------
     table: ({ node, nodesToJSX }) => {
+      console.log(node)
       // TODO: Design table
       return (
         <table className='overflow-hidden rounded-xl shadow-sm sm:mx-auto! dark:bg-black'>
@@ -238,7 +236,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       let El: Comp<'h1'> | Comp<'button'>
       const lvl = Number(node.tag[1])
       const props = {
-        id: slugifyHeadingID(node),
+        id: headingID(node),
         level: lvl > 3 ? lvl : undefined,
       }
       switch (node.tag) {
@@ -273,15 +271,22 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
         ),
       })
     },
-    upload: ({ node }) => {
+    upload: async ({ node }) => {
+      const {
+        value,
+        value: { url },
+      } = node as SerializedUploadNode & { value: Document }
+
       return (
-        <img
-          width={'300'}
-          src={
-            (node as SerializedUploadNode & { value?: { url: string } }).value?.url
-            ?? '/placeholder.jpg'
-          }
-        />
+        url && (
+          <Image
+            overrideSrc={url}
+            width={`${value.width!}`}
+            height={`${value.height!}`}
+            src=''
+            alt={value.meta?.title ?? value.filename?.replace(/\..+/, '') ?? ''}
+          />
+        )
       )
     },
     linebreak: () => (

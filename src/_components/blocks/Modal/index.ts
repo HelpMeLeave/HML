@@ -2,24 +2,9 @@ import {
   ButtonModalBlockConfig,
   ButtonOpenModalBlockConfig,
 } from '@/_components/blocks/Button/modal'
-import {
-  baseHeadingFeatures,
-  baseListFeatures,
-  baseMiscFeatures,
-  baseParagraphFeatures,
-  baseTextFeatures,
-  baseUploadFeature,
-  fixedToolbar,
-  inlineToolbar,
-} from '@/_components/lexicals/options'
 import { ColumnsBlockConfig, CTABlockConfig, VideoPlayerBlockConfig } from '@/_config/Blocks'
-import { cn } from '@/lib/cn'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
-import {
-  BlocksFeature,
-  defaultEditorLexicalConfig,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { Block } from 'payload'
 
 export const ModalBlockConfig: Block = {
@@ -53,15 +38,8 @@ export const ModalBlockConfig: Block = {
               placeholder: 'Start typing...',
               hideGutter: true,
             },
-            features: () => [
-              fixedToolbar,
-              inlineToolbar,
-              baseUploadFeature,
-              ...baseTextFeatures,
-              ...baseParagraphFeatures,
-              ...baseListFeatures,
-              ...baseHeadingFeatures,
-              ...baseMiscFeatures,
+            features: ({ rootFeatures }) => [
+              ...rootFeatures,
               BlocksFeature({
                 blocks: [
                   CTABlockConfig,
@@ -71,13 +49,6 @@ export const ModalBlockConfig: Block = {
                 ],
               }),
             ],
-            lexical: {
-              theme: {
-                ...defaultEditorLexicalConfig.theme,
-                root: cn(`rich-editor`, defaultEditorLexicalConfig.theme.root ?? ''),
-              },
-              namespace: `rich-editor`,
-            },
           }),
           name: 'content',
         },
