@@ -83,7 +83,7 @@ export const LinkFieldNewTab: CheckboxField = {
   },
 }
 
-export const LinkFieldName = (nameField: LinkFieldNameOptions): TextField => ({
+const LinkFieldName = (nameField: LinkFieldNameOptions): TextField => ({
   ...nameField,
   type: 'text',
   name: nameField?.name,

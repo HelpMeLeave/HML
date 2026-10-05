@@ -27,7 +27,7 @@ export const WizardModalAction = ({
   return (
     <Button
       className={cn('min-w-1/4 text-center')}
-      variant={'wYellowMuted'}
+      variant={'accentMuted'}
       {...action}>
       {text as string}
     </Button>

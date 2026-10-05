@@ -23,7 +23,7 @@ type UserIsFlags = {
 }[keyof User]
 
 export type UsrArgs = StrippedArgs<'Usr'>
-export type ValidUrl = {
+type ValidUrl = {
   req: Partial<PayloadRequest> & {
     url: string
   }

@@ -9,7 +9,7 @@ import type { SelectInputProps } from '@payloadcms/ui/fields/Select'
 import type { OptionObject, SelectFieldClientProps } from 'payload'
 import { type CSSProperties, useState } from 'react'
 
-export const PronounsBase = ({ ...props }: SelectInputProps & { initValue?: string[] | null }) => {
+const PronounsBase = ({ ...props }: SelectInputProps & { initValue?: string[] | null }) => {
   const t = useTranslation<NewTranslationObj, NewTranslationKeys>()
 
   const opts = PRONOUNS.map((o) => ({

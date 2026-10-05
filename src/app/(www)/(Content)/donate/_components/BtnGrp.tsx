@@ -15,7 +15,7 @@ export const NextButton = ({
     <Button
       {...props}
       type='button'
-      variant={'wYellow'}
+      variant={'accent'}
       size='small'
       className={'ml-auto flex max-w-[16em] flex-1 flex-row items-center justify-between gap-2'}>
       <span data-slot='content'>{toTitleCase(label)}</span>
@@ -45,7 +45,7 @@ export const PrevButton = ({
           step: transactionData.prevStep as Step,
         })
       }}
-      variant={'wYellowMuted'}
+      variant={'accentMuted'}
       size='small'
       className={[
         'flex max-w-[16em] flex-row-reverse items-center justify-between gap-2 bg-transparent dark:bg-transparent',

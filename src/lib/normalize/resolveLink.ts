@@ -8,7 +8,7 @@ type DocLinkField = LinkField & {
   url?: never
 }
 
-export const parseBaseURL = (...segments: string[]) =>
+const parseBaseURL = (...segments: string[]) =>
   '/' + segments.filter(Boolean).join('/').replace(/^\/+/, '')
 
 const host = (url: string) =>

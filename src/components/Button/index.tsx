@@ -15,13 +15,13 @@ export const Button = <T extends 'link' | 'button' = 'button'>({
     variant == 'ghost' && 'text-foreground border-0',
     variant == 'muted'
       && 'text-brand-red dark:text-brand-grey hover:bg-mulberry-700/10 dark:bg-mulberry-900 hover:dark:bg-mulberry-700',
-    variant == 'wYellow' && [
+    variant == 'accent' && [
       'bg-brand-red hover:bg-brand-mulberry',
       'text-white dark:outline-transparent',
       'dark:bg-yellow-800 dark:hover:bg-yellow-900',
       'dark:outline-brand-yellow/30 dark:hover:outline-brand-yellow/10',
     ],
-    variant == 'wYellowMuted' && [
+    variant == 'accentMuted' && [
       'hover:color-foreground bg-mulberry-50 text-mulberry-500 outline-mulberry-100/70',
       'dark:bg-yellow-300/10 dark:text-yellow-500',
       'ring-zinc-600 hover:saturate-25 dark:outline-transparent',
@@ -55,7 +55,7 @@ export const Button = <T extends 'link' | 'button' = 'button'>({
 }
 
 type tBtnProps<T extends 'button' | 'link'> = {
-  variant?: 'primary' | 'secondary' | 'muted' | 'ghost' | 'wYellow' | 'wYellowMuted'
+  variant?: 'primary' | 'secondary' | 'muted' | 'ghost' | 'accent' | 'accentMuted'
   size?: 'small' | 'medium' | 'large' | 'x-large'
   as?: T
 } & tBtnAsProps<T>

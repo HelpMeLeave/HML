@@ -17,7 +17,7 @@ export const LogoMarkFilled = (props: Props<'svg'>) => (
   </svg>
 )
 
-export const LogoMarkLowercase = (props: Props<'svg'>) => (
+const LogoMarkLowercase = (props: Props<'svg'>) => (
   <svg
     version='1.1'
     xmlns='http://www.w3.org/2000/svg'
@@ -39,7 +39,7 @@ export const LogoMarkLowercase = (props: Props<'svg'>) => (
   </svg>
 )
 
-export const LogoMarkUppercase = (props: Props<'svg'>) => (
+const LogoMarkUppercase = (props: Props<'svg'>) => (
   <svg
     version='1.1'
     xmlns='http://www.w3.org/2000/svg'
