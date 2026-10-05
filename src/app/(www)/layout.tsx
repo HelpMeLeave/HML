@@ -1,5 +1,4 @@
 import { getNavigation } from '@/app/(www)/_providers/Navigation/qry.server'
-import { Body } from '@/components/Structure/Body'
 import { env } from '@/env'
 import { cn } from '@/lib/cn'
 import { atkinsonFont, atkinsonMonoFont, bebasNeue, interstateFont } from '@/lib/fonts'
@@ -30,7 +29,7 @@ const Layout = async ({
     <html
       suppressHydrationWarning={true}
       data-scroll-behavior='smooth'
-      lang='eng'
+      lang='en'
       className={cn(
         atkinsonFont.variable,
         atkinsonMonoFont.variable,
@@ -38,10 +37,17 @@ const Layout = async ({
         interstateFont.variable,
         'scroll-pt-[calc(var(--nav-height)+1.5rem)] scroll-smooth'
       )}>
-      <Body>
+      <body
+        id='www'
+        className={cn(
+          'min-h-svh',
+          'printer-page:mt-20 antialiased',
+          'text-body',
+          'has-[#homePage]:bg-[#080808] has-[#homePage]:pb-0 has-[#homePage]:text-white'
+        )}>
         <Providers nav={navFetch}>{children}</Providers>
         {useAnalytics && <Analytics />}
-      </Body>
+      </body>
     </html>
   )
 }
