@@ -6,6 +6,9 @@ import type { CollectionConfig, FieldHookArgs } from 'payload'
 
 const Media: CollectionConfig<'media'> = {
   slug: 'media',
+  access: {
+    read: () => true,
+  },
   admin: {
     groupBy: true,
     useAsTitle: 'fileNamePretty',
