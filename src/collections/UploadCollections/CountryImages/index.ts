@@ -1,4 +1,5 @@
 import { tFn } from '@/_config/i18n/'
+import { cacheHeaders } from '@/collections/UploadCollections/_lib/cacheHeaders'
 import { TabCredit } from '@/collections/UploadCollections/Media/TabCredits'
 import { TabDetailsFields } from '@/collections/UploadCollections/Media/TabDetails'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
@@ -73,6 +74,7 @@ const CountryImages: CollectionConfig<'country-images'> = {
     },
   ],
   upload: {
+    modifyResponseHeaders: cacheHeaders,
     constructorOptions: {
       density: 100,
     },

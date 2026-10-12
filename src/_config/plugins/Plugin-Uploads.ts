@@ -11,6 +11,7 @@ const r2Bucket = ({
   collections: CollectionSlug[]
 }): S3StorageOptions => ({
   bucket: env.NEXT_PUBLIC_R2_BUCKET,
+  clientCacheKey: `r2:${endpointFolderName ?? 'root'}`,
   collections: collections.reduce(
     (acc, current) => {
       acc[current] = true

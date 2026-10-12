@@ -1,4 +1,5 @@
 import { tFn } from '@/_config/i18n/'
+import { cacheHeaders } from '@/collections/UploadCollections/_lib/cacheHeaders'
 import { TabCredit } from '@/collections/UploadCollections/Media/TabCredits'
 import { toTitleCase } from '@/lib/textCasing'
 import type { Media as tMedia } from '@/payload-types'
@@ -66,6 +67,7 @@ const Media: CollectionConfig<'media'> = {
     plural: tFn('title:medias'),
   },
   upload: {
+    modifyResponseHeaders: cacheHeaders,
     resizeOptions: {
       fit: 'cover',
       background: { r: 0, g: 0, b: 0, alpha: 0 },

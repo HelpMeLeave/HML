@@ -1,3 +1,4 @@
+import { cacheHeaders } from '@/collections/UploadCollections/_lib/cacheHeaders'
 import { columnField, rowField } from '@/collections/_fields/Flex'
 import { LinkConfig } from '@/collections/_lib/Link'
 import { TextConfig } from '@/collections/_lib/Text'
@@ -135,6 +136,7 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
     ],
   },
   upload: {
+    modifyResponseHeaders: cacheHeaders,
     admin: {
       components: {
         controls: ['@/collections/UploadCollections/ContentUploads/_components/Upload'],
