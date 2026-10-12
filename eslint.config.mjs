@@ -4,13 +4,17 @@ import prettier from 'eslint-config-prettier/flat'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 const eslintConfig = defineConfig([
-  ...nextTs,
-  prettier,
   {
+    files: ['**/*.{js,jsx,ts,tsx}'],
     plugins: {
       '@next/next': NextPlugin,
     },
+    rules: {
+      ...NextPlugin.configs.recommended.rules,
+    },
   },
+  ...nextTs,
+  prettier,
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:
@@ -18,7 +22,7 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
-    '@types/**',
+    // '@types/**',
     './src/_config/payload-generated-schema.ts',
     './src/migrations/**',
     '.claude/**',
