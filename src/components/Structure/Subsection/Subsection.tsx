@@ -2,6 +2,7 @@
 import type { tSubSectionProps } from '@/components/Structure/_types'
 import { SubSectionContext } from '@/components/Structure/Subsection/CTX'
 import { cn } from '@/lib/cn'
+import { toState } from '@/lib/slots'
 import { useCallback, useMemo, useState } from 'react'
 
 export const Subsection = ({
@@ -10,6 +11,7 @@ export const Subsection = ({
   onOpen,
   onClose,
   onToggle,
+  variant = 'subsection',
   ...props
 }: tSubSectionProps) => {
   const [open, setOpen] = useState(defaultOpen)
@@ -42,9 +44,12 @@ export const Subsection = ({
 
   return (
     <section
-      data-open={open ? '' : undefined}
+      // data-open={open ? '' : undefined}
+      data-state={toState(open)}
       data-slot='subsection'
-      className={cn('transition-all *:not-[h3]:pr-4 *:[h3]:-ml-4')}>
+      data-variant={variant}
+      // className={cn('transition-all *:not-[h3]:pr-4 *:[h3]:-ml-4')}>
+      className={cn('transition-all *:not-data-[slot=heading]:pr-4 *:data-[slot=heading]:-ml-4')}>
       <SubSectionContext.Provider value={contextValue}>{props.children}</SubSectionContext.Provider>
     </section>
   )

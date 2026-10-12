@@ -6,7 +6,6 @@ import { toSlug } from '@/lib/normalize/to'
 import { type FieldAction, TextInput } from '@payloadcms/ui'
 import { LockKeyhole, UnlockKeyhole } from 'lucide-react'
 import { type ChangeEvent, useState } from 'react'
-import './style.scss'
 
 type SlugLockElProps = {
   disabled: boolean
@@ -19,14 +18,23 @@ const SlugLockEl = ({ disabled, handleLockClick, locked }: SlugLockElProps) => (
     disabled={disabled}
     className={cn(
       'btn btn--style-none btn--no-margin btn--icon slug-lock',
-      locked ? 'locked' : 'unlocked'
+      'group absolute right-0 bottom-[0.16lh] px-[1lh] py-[0.5lh]',
+      locked && 'opacity-75',
+      locked ? 'locked' : 'unlocked opacity-75'
     )}
     type='button'
     onClick={handleLockClick}>
     <span className='sr-only'>{locked ? 'Unlock' : 'Lock'} Slug Field</span>
     {locked ?
-      <LockKeyhole size={14} />
-    : <UnlockKeyhole size={14} />}
+      <LockKeyhole
+        className='group-hover:text-(--theme-primary)'
+        size={14}
+      />
+    : <UnlockKeyhole
+        className='group-hover:text-(--theme-primary)'
+        size={14}
+      />
+    }
   </button>
 )
 
@@ -52,6 +60,8 @@ const GenerateBtn = ({ locked, ...props }: Props<'button'> & { locked: boolean }
       {...props}
       style={{
         lineHeight: 'inherit',
+        // @ts-expect-error custom css var
+        '--hover-color': 'var(--theme-primary)',
       }}
       type='button'
       className={cn('slug-generate btn--style-none btn btn--size-small btn--no-margin')}>
@@ -106,7 +116,7 @@ export const SlugComponentClient = ({ canEdit }: { canEdit: boolean }) => {
 
   return (
     <div className={cn('field-type text', locked && 'read-only')}>
-      <span className='slug-label-wrapper'>
+      <span className='flex items-center'>
         <label
           className='field-label'
           htmlFor='field-slug'>
@@ -120,7 +130,7 @@ export const SlugComponentClient = ({ canEdit }: { canEdit: boolean }) => {
       </span>
 
       <div
-        className={'field-type__wrap slug-wrapper'}
+        className={'field-type__wrap relative'}
         onBlur={handleFieldBlur}>
         <SlugInputEl
           value={draft ?? slugValue}

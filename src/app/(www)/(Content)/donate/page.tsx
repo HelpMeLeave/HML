@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
-import { removeParagraph } from '@/_components/lexicals/RenderRichText/removeParagraphs'
 import { getDonationResult } from '@/app/(api)/stripe/donate'
 import { InlineLink } from '@/components/primitives/Link'
 import type { MainDetails } from '@/components/Structure/_types'
 import { MainEyebrow, MainHeading, MainHGroup, MainSubtitle } from '@/components/Structure/Main'
 import { Section } from '@/components/Structure/Section'
+import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import type { Content } from '@/payload-types'
 import { getPayload } from '@/server/getPayload'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'

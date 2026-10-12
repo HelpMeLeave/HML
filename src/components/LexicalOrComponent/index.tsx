@@ -1,5 +1,5 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
-import { removeParagraph } from '@/_components/lexicals/RenderRichText/removeParagraphs'
+import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import { isRootLike } from '@/lib/normalize/is'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import type { JSXConverters } from '@payloadcms/richtext-lexical/react'

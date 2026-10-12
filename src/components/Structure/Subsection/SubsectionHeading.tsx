@@ -6,15 +6,19 @@ import { cn } from '@/lib/cn'
 import { ChevronRight } from 'lucide-react'
 import { useContext } from 'react'
 
-export const SubsectionHeading = ({ ...props }: Props<'button'>) => {
+// export const SubsectionHeading = ({ ...props }: Props<'button'>) => {
+export const SubsectionHeading = ({ level = 3, ...props }: Props<'button'> & { level?: 2 | 3 }) => {
   const { open, handleToggle } = useContext(SubSectionContext)
   return (
     <Heading
       className={cn(
         'group flex cursor-pointer items-baseline-last text-[2.125rem] leading-normal',
-        'mt-[1.25em] mb-[0.25em] not-in-data-open:mb-0 print:break-after-avoid'
+        // 'mt-[1.25em] mb-[0.25em] not-in-data-open:mb-0 print:break-after-avoid'
+        'mt-[1.25em] mb-[0.25em] not-in-data-[state=open]:mb-0 print:break-after-avoid'
       )}
-      level={3}
+      // level={3}
+      level={level}
+      variant='subsection'
       aria-expanded={open}>
       <button
         type='button'

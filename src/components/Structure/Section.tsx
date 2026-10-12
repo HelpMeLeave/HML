@@ -22,7 +22,8 @@ const Section = ({
   return (
     <Component
       data-section
-      {...baseProps}>
+      {...baseProps}
+      className={cn('mb-4', baseProps.className)}>
       {heading && (
         <SectionHGroup>
           <SectionHeading>
@@ -56,15 +57,19 @@ const SectionWrapper = ({ ...props }: Props<'section'>) => {
 
 const SectionHGroup = ({ ...props }: Props<'hgroup'>) => (
   <hgroup
+    data-slot='header'
     {...props}
     className={cn('mt-[1em] mb-[0.25em] text-[2.75rem] print:break-after-avoid', props.className)}
   />
 )
 
-const SectionHeading = ({ ...props }: Props<'h2'>) => (
+// const SectionHeading = ({ ...props }: Props<'h2'>) => (
+const SectionHeading = ({ level = 2, ...props }: Props<'h2'> & { level?: 2 | 3 }) => (
   <Heading
     {...props}
-    level={2}
+    // level={2}
+    level={level}
+    variant='section'
   />
 )
 

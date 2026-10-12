@@ -1,5 +1,4 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
-import { removeParagraph } from '@/_components/lexicals/RenderRichText/removeParagraphs'
 import { query } from '@/app/(www)/(Content)/[...slug]/_lib/query'
 import type { MainDetails } from '@/components/Structure/_types'
 import {
@@ -10,6 +9,7 @@ import {
   MainSubtitle,
 } from '@/components/Structure/Main'
 import { env } from '@/env'
+import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import { lastArrayIndex } from '@/lib/array'
 import type { Where } from '@/lib/filterBy'
 import { getPreview } from '@/lib/getPreview'

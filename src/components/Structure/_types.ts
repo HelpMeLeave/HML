@@ -13,6 +13,7 @@ export type tSubSectionProps = Omit<Props<'button'>, 'type' | 'title'> & {
   onOpen?: () => void
   onClose?: () => void
   onToggle?: (open: boolean) => void
+  variant?: import('@/lib/slots').HeadingVariant
   heading?: ReactNode
 }
 

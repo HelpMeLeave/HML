@@ -60,7 +60,7 @@ const ContentTypeChoice = (props: UIFieldServerProps) => {
                 <Icon
                   className={cn(
                     type == 'blog'
-                      && '*:stroke-2! *:odd:stroke-brand-mulberry *:odd:dark:stroke-yellow-700',
+                      && '*:odd:stroke-brand-mulberry *:stroke-2! *:odd:dark:stroke-yellow-700',
                     type == 'statement' && '*:first:fill-current *:first:stroke-0',
                     (type == 'report' || type == 'resource')
                       && '*:last:fill-current *:last:stroke-0',

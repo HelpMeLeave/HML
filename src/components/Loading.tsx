@@ -10,7 +10,7 @@ export const Loading = () => {
         className='flex h-12 w-12 items-center justify-center rounded-full bg-background/10'
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>
-        <Plane className='h-6 w-6 text-foreground' />
+        <Plane className='text-foreground h-6 w-6' />
       </motion.div>
     </div>
   )

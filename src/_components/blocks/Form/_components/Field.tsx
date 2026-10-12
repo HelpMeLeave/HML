@@ -24,7 +24,8 @@ export const Field = ({
         width: `${width ?? 100}%`,
         flex: `1 1 ${width ?? 100}%`,
       }}
-      data-slot={'field-wrapper'}
+      // data-slot={'field-wrapper'}
+      data-slot='field'
       className={cn('form-field')}>
       <FieldLabel
         label={label}
@@ -59,7 +60,8 @@ export const FieldLabel = ({
 }) =>
   label && (
     <label
-      data-slot='field-label'
+      // data-slot='field-label'
+      data-slot='label'
       htmlFor={`field-${name}`}
       className={cn('block text-sm/6 font-medium', props.className)}>
       {!!required && astrickPosition == 'left' && <RequiredAstrick required={required} />}
@@ -70,7 +72,8 @@ export const FieldLabel = ({
 
 const FieldInputWrapper = (props: Props) => (
   <div
-    data-slot='input-wrapper'
+    // data-slot='input-wrapper'
+    data-slot='control'
     {...props}
   />
 )

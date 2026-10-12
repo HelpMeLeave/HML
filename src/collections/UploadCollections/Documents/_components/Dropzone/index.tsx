@@ -86,7 +86,7 @@ export const Dropzone = ({
       />
       <span className='text-xs font-semibold tracking-[0.015ch] text-slate-500 uppercase'>
         {file ?
-          <span className='tracking-normal text-foreground'>{filename}</span>
+          <span className='text-foreground tracking-normal'>{filename}</span>
         : <>Drop a PDF or click to browse</>}
       </span>
       <span className='mt-1 text-xs tracking-widest text-slate-400 uppercase'>PDF</span>

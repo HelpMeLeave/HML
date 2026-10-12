@@ -40,7 +40,7 @@ export const Search = ({
     countries: {
       name: string
       id: string
-      mapSvgPath?: string | null | undefined
+      mapSvgPath?: Nullish<string>
     }[]
     searchQuery: string
     isOpen: boolean
@@ -165,7 +165,8 @@ const SearchInput = ({
           ])
         }}
         placeholder='Search countries...'
-        data-slot='input'
+        // data-slot='input'
+        data-slot='control'
         className={cn(
           isOpen ?
             'flex w-full border-input-border bg-input-bg px-3'

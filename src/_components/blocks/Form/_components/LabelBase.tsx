@@ -41,7 +41,7 @@ export const LabelBase = ({
       {title ?
         titleField
       : <>
-          <span className={cn('overflow-hidden text-base font-medium text-ellipsis')}>
+          <span className={cn('overflow-hidden font-medium text-ellipsis text-base')}>
             {(titleField as string) ?? '[ Untitled ]'}
           </span>
           <span className='mx-2 font-mono text-[0.65rem] uppercase italic opacity-75'>

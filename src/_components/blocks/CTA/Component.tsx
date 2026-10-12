@@ -25,7 +25,8 @@ const CTATitle = ({
   inner?: DefaultTypedEditorState | ReactNode
 }) => (
   <SectionHeading
-    data-slot='title'
+    // data-slot='title'
+    data-slot='heading'
     {...props}
     className='col-start-1 mx-auto flex flex-col text-5xl leading-[0.85] text-balance text-accent *:saturate-50 dark:font-medium! *:[[id="spacer"]]:h-2!'>
     {inner && <LexicalOrComponent content={inner} />}

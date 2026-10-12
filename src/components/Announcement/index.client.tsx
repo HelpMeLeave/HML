@@ -3,8 +3,10 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
 import type { tNavFetchCTX } from '@/app/(www)/_providers/_types'
 import { InlineLink } from '@/components/primitives/Link'
-import { env } from '@/env'
+// import { env } from '@/env'
+import { env } from '@/env.client'
 import { cn } from '@/lib/cn'
+import { toState } from '@/lib/slots'
 import type { RichTextBlock } from '@/payload-types'
 import { X } from 'lucide-react'
 import { type Dispatch, type SetStateAction, useState } from 'react'
@@ -16,7 +18,8 @@ export const AnnouncementInnerWrapper = ({ banner }: { banner: tNavFetchCTX['ban
     isVisible
     && banner && (
       <div
-        data-show={isVisible ? '' : undefined}
+        // data-show={isVisible ? '' : undefined}
+        data-state={toState(isVisible)}
         className='grid h-full w-full grid-cols-[1fr_auto] items-center gap-6 bg-accent-800 px-6 py-3.5 text-ui-25 transition hover:bg-accent-900 sm:px-6.5'>
         <Link
           className='block flex-1 no-underline decoration-0'
