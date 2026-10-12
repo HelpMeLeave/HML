@@ -1,0 +1,92 @@
+@use '@/styles/admin/mixins' as *;
+
+$border-color: alpha(var(--color-input-border), 50);
+$hover-color: var(--theme-secondary);
+$hover-bg: var(--theme-elevation-50);
+$bg: var(--theme-elevation-0);
+
+@mixin _action-border {
+  border-collapse: collapse;
+  border-radius: 4px;
+  border: 1px solid $border-color;
+}
+
+@mixin _action-position {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+@mixin _action-display {
+  vertical-align: middle;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  padding-inline: 1px;
+  margin: 0;
+}
+
+.action-toolbar {
+  opacity: 0;
+  transition: opacity 0.2s;
+  background: $bg;
+  @include _action-border();
+  @include _action-display();
+  @include _action-position();
+  &--show {
+    opacity: 1;
+  }
+
+  > .btn--withPopup {
+    margin: 0;
+    height: 100%;
+    border-radius: 0;
+    .btn {
+      // --hover-bg: transparent;
+      border: 0;
+    }
+    hover {
+      background-color: $hover-bg;
+    }
+  }
+  &__popup {
+    .popup-button-list {
+      &__button {
+        &:hover {
+          color: $hover-color;
+          background-color: $hover-bg;
+        }
+      }
+      &__disabled {
+        background-color: transparent;
+        pointer-events: none;
+      }
+    }
+  }
+}
+
+.popup {
+  &__content {
+    &:has(.action-toolbar__popup) {
+      border-radius: var(--form-radius);
+      background: lighter($color: #{$bg}, $amount: 2);
+      @include _action-border();
+      @include _action-display();
+      box-shadow: var(--form-shadow);
+      x &:hover {
+        box-shadow: var(--form-shadow-hover);
+      }
+    }
+  }
+}
+
+.action-toolbar,
+.fixed-toolbar,
+.inline-toolbar {
+  .tooltip {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+  }
+}

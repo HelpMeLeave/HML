@@ -1,0 +1,12 @@
+.rich-list-item {
+  .rich-list-item__title {
+    margin: 0;
+    color: var(--color-accent);
+  }
+
+  .rich-list-item__body {
+    > * {
+      margin-block: 0.5rem 0;
+    }
+  }
+}

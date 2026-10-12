@@ -1,0 +1,91 @@
+hgroup:has(> .lexical-upload:first-child) {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-content: center;
+  gap: 0.25em;
+  min-height: 20rem;
+  padding: 1.5rem;
+  overflow: hidden;
+
+  > .lexical-upload:first-child {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    // Payload card chrome off: the wrapper only hosts the image + actions.
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    // Let clicks reach the editable text; the actions re-enable them below.
+    pointer-events: none;
+
+    // Payload's real DOM (class prefix = theme.upload's LexicalEditorTheme__upload):
+    // __contents > __card > (__media > Thumbnail img + __overlay.__floater > __actions)
+    //                      + __metaOverlay.__floater (filename + collection label)
+    [class*='__contents'],
+    [class*='__card'],
+    [class*='__media'] {
+      height: 100%;
+      box-shadow: none;
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      max-width: none;
+      max-height: none;
+      border-radius: 0;
+      object-fit: cover;
+    }
+
+    // Swap would bypass the image-only drawer; covers use Remove + Add instead.
+    [class*='__swap-drawer-toggler'] {
+      display: none;
+    }
+
+    // Filename/collection strip would sit over the text.
+    [class*='__metaOverlay'] {
+      display: none;
+    }
+
+    // Edit/swap/remove buttons: always visible, tucked top-right, above text.
+    [class*='__overlay'] {
+      z-index: 1;
+      opacity: 1;
+      pointer-events: auto;
+      transform: none;
+    }
+  }
+
+  // Chip colours come from the Duotone feature's --chip-bg / --chip-text.
+  > :not(.lexical-upload) {
+    width: fit-content;
+    padding: 0.15em 0.5em;
+    background: var(--chip-bg, transparent);
+    color: var(--chip-text, inherit);
+  }
+
+  &:has(> .lexical-upload[data-position*='top']) {
+    align-content: start;
+  }
+  &:has(> .lexical-upload[data-position*='middle']) {
+    align-content: center;
+  }
+  &:has(> .lexical-upload[data-position*='bottom']) {
+    align-content: end;
+  }
+  &:has(> .lexical-upload[data-position*='left']) {
+    justify-items: start;
+  }
+  &:has(> .lexical-upload[data-position*='center']) {
+    justify-items: center;
+  }
+  &:has(> .lexical-upload[data-position*='right']) {
+    justify-items: end;
+  }
+}
