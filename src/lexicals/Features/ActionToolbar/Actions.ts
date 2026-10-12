@@ -1,50 +1,41 @@
 import { calloutType } from '@/lexicals/Features/_lib/nodeStates'
+import { $getFirstItemInCurrentList } from '@/lexicals/Features/_lists/getFirstItemInCurrentList'
+import { $getListAtCaret } from '@/lexicals/Features/_lists/getListAtCaret'
+import { $getListItemAtCaret } from '@/lexicals/Features/_lists/getListItemAtCaret'
 import type {
   ToolbarAction,
   ToolbarActionGroup,
   ToolbarActionItem,
 } from '@/lexicals/Features/ActionToolbar/_types'
-// import { $getCalloutAtCaret } from '@/lexicals/Features/Callout/CalloutNode'
 import { $getCalloutAtCaret } from '@/lexicals/Features/Callout/_lib'
-// import {
-//   $getListAfterPotentialTitle,
-//   $getPotentialListTitle,
-//   $makeListTitle,
-// } from '@/lexicals/Features/ListTitleFeature'
-import { $getListAfterPotentialTitle } from '@/lexicals/Features/ListTitleFeature/_lib/getListAfterPotentialTitle'
+import { $toggleTitled } from '@/lexicals/Features/ListTitleFeature'
 import { $getPotentialListTitle } from '@/lexicals/Features/ListTitleFeature/_lib/getPotentialListTitle'
+import { $getTitledListAtCaret } from '@/lexicals/Features/ListTitleFeature/_lib/getTitledListAtCaret'
 import { $makeListTitle } from '@/lexicals/Features/ListTitleFeature/_lib/makeListTitle'
-// import {
-//   $addDetails,
-//   $getListItemAtCaret,
-//   $isRichListItem,
-//   $removeDetails,
-// } from '@/lexicals/Features/RichListItem/nodes'
 import { $addDetails } from '@/lexicals/Features/RichListItem/_lib/addDetails'
-import { $getListItemAtCaret } from '@/lexicals/Features/RichListItem/_lib/getListItemAtCaret'
 import { $isRichListItem, $removeDetails } from '@/lexicals/Features/RichListItem/nodes'
 import {
   $getCover,
   $hgroupAtCaret,
   OPEN_COVER_DRAWER_COMMAND,
 } from '@/lexicals/Features/SectionCover/_lib'
-// import { $getHeadingAtCaret } from '@/lexicals/Features/Structure/nodes'
 import { $getHeadingAtCaret } from '@/lexicals/Features/Structure/_lib'
 import { fromCamelCase } from '@/lib/textCasing'
 import type { ResolvedClientFeatureMap } from '@payloadcms/richtext-lexical'
 import { $getState, $setState, type LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
+import { $isListItemNode } from '@payloadcms/richtext-lexical/lexical/list'
 import {
   ArrowDown,
-  ArrowLeftRight,
   ArrowUp,
+  BookOpenText,
   Image,
   ImageMinus,
   ImagePlus,
   Lightbulb,
+  List,
   ListMinus,
   ListPlus,
   ListStart,
-  ListTree,
   NotebookPenIcon,
   Siren,
   Trash,
@@ -87,7 +78,7 @@ const createEntry = (
     isActive?: ToolbarActionItem['isActive']
   }
 ): ToolbarActionItem => {
-  const { label, isActive, Icon, $isEnabled, onSelect } = opts
+  const { label, isActive, Icon, $isEnabled, onSelect, hideIfDisabled } = opts
   return {
     slug,
     Icon,
@@ -95,6 +86,7 @@ const createEntry = (
     $isEnabled,
     isActive: typeof isActive != 'undefined' ? isActive : () => false,
     label: label ? label : fromCamelCase(slug),
+    hideIfDisabled: hideIfDisabled ? hideIfDisabled : undefined,
   }
 }
 
@@ -103,16 +95,18 @@ const StructureGrp = createButtonGroup('headings', {
   $getKey: () => $getHeadingAtCaret()?.getKey(),
   entries: [
     createEntry('headingStyleUp', {
-      label: 'Style One Level Up',
+      label: 'Increase Level',
       Icon: ArrowUp,
       $isEnabled: () => Boolean($getHeadingAtCaret()?.nextHeadingStyle('up')),
       onSelect: (editor) => editor?.update(() => $getHeadingAtCaret()?.stepHeadingStyle('up')),
+      hideIfDisabled: true,
     }),
     createEntry('headingStyleDown', {
-      label: 'Style One Level Down',
+      label: 'Decrease Level',
       Icon: ArrowDown,
       $isEnabled: () => Boolean($getHeadingAtCaret()?.nextHeadingStyle('down')),
       onSelect: (editor) => editor?.update(() => $getHeadingAtCaret()?.stepHeadingStyle('down')),
+      hideIfDisabled: true,
     }),
     createEntry('removeHeading', {
       Icon: Trash,
@@ -156,19 +150,34 @@ const CoverGrp: ToolbarActionGroup = {
 
 const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
   feature: 'list-title',
-  $getKey: () => $getListAfterPotentialTitle()?.getKey(),
+  // IS THIS RETURNING NULL IF IT IS A LIST TITLE??
+  $getKey: () => $getFirstItemInCurrentList($getListAtCaret())?.getKey(),
   entries: [
     {
       slug: 'makeListTitle',
       label: 'Make List Title',
       Icon: ListStart,
       isActive: () => false,
-      $isEnabled: (_editor) => true,
+      $isEnabled: (_editor) => Boolean($getTitledListAtCaret()) == false,
       onSelect: (editor) =>
         editor?.update(() => {
           const lead = $getPotentialListTitle()
           if (lead) $makeListTitle(lead)
         }),
+      hideIfDisabled: true,
+    },
+    {
+      slug: 'dissolveListTitle',
+      label: 'Dissolve List Title',
+      Icon: List,
+      isActive: () => false,
+      $isEnabled: (_editor) => Boolean($getTitledListAtCaret()),
+      onSelect: (editor) =>
+        editor?.update(() => {
+          const list = $getTitledListAtCaret()
+          if (list) $toggleTitled(list)
+        }),
+      hideIfDisabled: true,
     },
   ],
 })
@@ -181,25 +190,24 @@ const RichListItemAction: ToolbarActionGroup = {
   $getKey: () => {
     return $getListItemAtCaret()?.getKey()
   },
-  label: 'Rich List',
-  Icon: ListTree,
-  type: 'dropdown',
+  type: 'buttons',
   entries: [
     {
       slug: 'addDetails',
-      label: 'Add Details',
+      label: 'Create Rich List',
       Icon: ListPlus,
       isActive: () => false,
       $isEnabled: () => !$isRichListItem($getListItemAtCaret()),
       onSelect: (editor) =>
         editor?.update(() => {
           const item = $getListItemAtCaret()
-          if (item && !$isRichListItem(item)) $addDetails(item)
+          if (item && !$isRichListItem(item) && $isListItemNode(item)) $addDetails(item)
         }),
+      hideIfDisabled: true,
     },
     {
       slug: 'removeDetails',
-      label: 'Remove Details',
+      label: 'Dissolve Rich List',
       Icon: ListMinus,
       isActive: () => false,
       $isEnabled: () => $isRichListItem($getListItemAtCaret()),
@@ -208,56 +216,44 @@ const RichListItemAction: ToolbarActionGroup = {
           const item = $getListItemAtCaret()
           if ($isRichListItem(item)) $removeDetails(item)
         }),
+      hideIfDisabled: true,
     },
   ],
 }
 
-const calloutItem = ({
-  key,
-  label,
-  Icon,
-}: {
-  key: string
-  label: string
-  Icon: LucideIcon
-}): ToolbarActionItem => ({
-  slug: key,
-  label,
-  Icon: Icon,
-  isActive: function () {
-    const callout = $getCalloutAtCaret()
-    if (!callout) return false
-    return $getState(callout, calloutType) == this.slug
-  },
-  onSelect: function (editor) {
-    return editor?.update(() => {
+const calloutItem = ({ key, label, Icon }: { key: string; label: string; Icon: LucideIcon }) =>
+  createEntry(key, {
+    isActive: function () {
       const callout = $getCalloutAtCaret()
-      if (!callout) return
-      $setState(callout, calloutType, this.slug)
-    })
-  },
-  $isEnabled: function () {
-    return this.isActive() == false
-  },
-})
+      if (!callout) return false
+      return $getState(callout, calloutType) == key
+    },
+    $isEnabled: function () {
+      const callout = $getCalloutAtCaret()
+      if (!callout) return false
+      return $getState(callout, calloutType) != key
+    },
+    Icon,
+    label,
+    onSelect: function (editor) {
+      return editor?.update(() => {
+        const callout = $getCalloutAtCaret()
+        if (!callout) return
+        $setState(callout, calloutType, key)
+      })
+    },
+  })
 
-const CalloutActionBase: ToolbarActionGroup = {
-  toolbar: 'callout',
-  slug: 'changeType',
-  features: ['callout'],
-  $include: function () {
-    return Boolean(this.$getKey())
-  },
+const CalloutActionBase: ToolbarActionGroup = createButtonGroup('callout', {
+  feature: 'callout',
   $getKey: () => $getCalloutAtCaret()?.getKey(),
-  type: 'dropdown',
-  label: 'Change Type',
-  Icon: ArrowLeftRight,
   entries: [
     calloutItem({ key: 'note', label: 'Note', Icon: NotebookPenIcon }),
-    calloutItem({ key: 'tip', label: 'Tip', Icon: Lightbulb }),
+    calloutItem({ key: 'tip', label: 'Good to know', Icon: Lightbulb }),
     calloutItem({ key: 'urgent', label: 'Urgent', Icon: Siren }),
+    calloutItem({ key: 'case-study', label: 'Case study', Icon: BookOpenText }),
   ],
-}
+})
 
 export const AllActions: ToolbarActionGroup[] = [
   StructureGrp,

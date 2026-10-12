@@ -15,8 +15,7 @@ export class SectionHGroupNode extends StructureNode {
   dom(): StructureDOM {
     return {
       tag: 'hgroup',
-      // className: 'text-6xl leading-none m-0 *:data-[slot="brow"]:leading-normal',
-      className: 'text-6xl leading-none m-0 *:data-[slot=eyebrow]:leading-normal',
+      className: 'text-6xl leading-none m-0 *:slot-eyebrow:leading-normal',
       slot: 'header',
     }
   }
@@ -53,7 +52,6 @@ export class SectionEyebrowNode extends StructureHeadingNode {
   }
 
   dom(): StructureDOM {
-    // return { tag: 'p', className: browClassname, placeholder: 'Eyebrow...', slot: 'brow' }
     return { tag: 'p', className: browClassname, placeholder: 'Eyebrow...', slot: 'eyebrow' }
   }
 }

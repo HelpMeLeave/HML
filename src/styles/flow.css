@@ -1,6 +1,6 @@
 /* Rich text spacing. See docs/spacing.md. Utilities still win over this layer, so a class on an element is an escape hatch. */
 @layer components {
-  /* defaults for parts that also render outside a flow container */
+  /* DEFAULTS */
   :where([data-slot="list"]) {
     margin-block: 1rem;
   }
@@ -45,6 +45,11 @@
   .flow > [data-slot="cta"],
   .flow > [data-slot="cta"] + * {
     --gap: var(--flow-cta);
+  }
+
+  [data-slot="list-item"]:has(+ [data-slot="list-item"])
+    .flow[data-slot="content"]:has([data-slot="callout"]) {
+    margin-bottom: calc(var(--flow-step) * var(--gap, var(--flow-callout))) !important;
   }
   /* #endregion */
 

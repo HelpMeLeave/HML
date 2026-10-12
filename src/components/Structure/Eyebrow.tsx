@@ -2,7 +2,7 @@ import { cn } from '@/lib/cn'
 import type { ElementType } from 'react'
 
 export const browClassname =
-  'my-0 flex items-center font-mono text-sm/8 font-normal tracking-[1.4] uppercase has-[br:first-child:last-child]:[before]:[content:attr(data-placeholder)]'
+  'my-0 flex items-center font-mono text-xs/7 font-normal tracking-[1.4] uppercase has-[br:first-child:last-child]:[before]:[content:attr(data-placeholder)] text-accent-muted dark:text-accent italic *:[a]:not-italic *:[a]:text-body'
 
 export const Eyebrow = ({ as: _as, ...props }: Props<'p'> & { as?: ElementType }) => {
   return (

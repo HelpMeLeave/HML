@@ -2956,9 +2956,10 @@ export interface MediaContent {
   updatedAt: string;
   name: string;
   filename?: string | null;
-  url?: string | null;
   thumbnailURL?: string | null;
+  _objectKey?: string | null;
   deletedAt?: string | null;
+  url?: string | null;
   mimeType?: string | null;
   filesize?: number | null;
   width?: number | null;
@@ -2968,32 +2969,32 @@ export interface MediaContent {
   sizes?: {
     thumbnail?: {
       url?: string | null;
-      width?: string | null;
-      height?: string | null;
+      width?: number | null;
+      height?: number | null;
       mimeType?: string | null;
       filesize?: number | null;
       filename?: string | null;
     };
     small?: {
       url?: string | null;
-      width?: string | null;
-      height?: string | null;
+      width?: number | null;
+      height?: number | null;
       mimeType?: string | null;
       filesize?: number | null;
       filename?: string | null;
     };
     'small-portrait'?: {
       url?: string | null;
-      width?: string | null;
-      height?: string | null;
+      width?: number | null;
+      height?: number | null;
       mimeType?: string | null;
       filesize?: number | null;
       filename?: string | null;
     };
     medium?: {
       url?: string | null;
-      width?: string | null;
-      height?: string | null;
+      width?: number | null;
+      height?: number | null;
       mimeType?: string | null;
       filesize?: number | null;
       filename?: string | null;
@@ -3777,10 +3778,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'internal-documents-record';
         value: number | InternalDocumentsRecord;
-      } | null)
-    | ({
-        relationTo: 'media-content';
-        value: number | MediaContent;
       } | null)
     | ({
         relationTo: 'pillar';
@@ -4837,9 +4834,10 @@ export interface MediaContentSelect<T extends boolean = true> {
   updatedAt?: T;
   name?: T;
   filename?: T;
-  url?: T;
   thumbnailURL?: T;
+  _objectKey?: T;
   deletedAt?: T;
+  url?: T;
   mimeType?: T;
   filesize?: T;
   width?: T;

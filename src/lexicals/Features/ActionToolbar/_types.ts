@@ -28,4 +28,5 @@ export type ToolbarActionItem = {
   isActive: () => boolean
   $isEnabled: (editor?: LexicalEditor) => boolean
   onSelect: (editor?: LexicalEditor) => void
+  hideIfDisabled?: boolean
 }

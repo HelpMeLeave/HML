@@ -58,7 +58,6 @@ const config = buildConfig({
       supportedTimezones: defaultTimezones,
     },
     avatar: 'gravatar',
-
     // #region ! ---------- IMPORT MAP ----------
     importMap: {
       importMapFile: path.resolve(
@@ -104,6 +103,9 @@ const config = buildConfig({
           height: 1024,
         },
       ],
+
+      url: env.NEXT_PUBLIC_BASE_URL,
+      collections: ['content'],
     },
     // #endregion ! --------------------
 

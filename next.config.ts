@@ -10,6 +10,7 @@ export default withPayload({
   devIndicators: false,
   allowedDevOrigins: ['192.168.0.159'],
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: 'https',

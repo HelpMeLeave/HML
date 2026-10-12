@@ -5,6 +5,9 @@
 @import "../keyframes.css";
 @import "../fonts.css";
 
+/* callout colors are only referenced from SCSS, which Tailwind doesn't scan */
+@source inline("text-{slate,poppy,purple}-{300,500}");
+
 @theme static {
   --color-success-*: initial;
   --color-success-50: var(--theme-secondary-50);

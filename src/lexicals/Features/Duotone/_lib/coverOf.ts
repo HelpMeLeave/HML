@@ -30,7 +30,6 @@ export const coverOf = (node: SerializedElementNode): CoverOfFnReturn => {
   const first = node.children?.[0] as CoverUpload | undefined
   if (!isUpload(first)) return
   if (typeof first.value != 'object' || !first.value.url) return
-  // if (!hasDuotone(first)) return
 
   const { url, mimeType } = first.value ?? {}
   const duotone = hasDuotone(first) ? first.fields.duotone : undefined

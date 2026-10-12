@@ -15,20 +15,8 @@ import {
 } from '@/components/Structure/Subsection/Subsection'
 import { headingID } from '@/lexicals/Features/_lib/slugifyHeadingID'
 import { coverOf, isUpload } from '@/lexicals/Features/Duotone/_lib/coverOf'
-import { duotoneAccent } from '@/lexicals/Features/Duotone/presets'
-import {
-  childOf,
-  NTK,
-  textOf,
-  type Comp,
-  type StyledContainer,
-} from '@/lexicals/RenderRichText/_lib'
-import type {
-  SerializedElementNode,
-  SerializedLexicalNode,
-} from '@payloadcms/richtext-lexical/lexical'
+import { childOf, NTK, type Comp, type StyledContainer } from '@/lexicals/RenderRichText/_lib'
 import type { JSXConverter } from '@payloadcms/richtext-lexical/react'
-import type { CSSProperties } from 'react'
 import { Fragment } from 'react'
 
 export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
@@ -68,33 +56,12 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
         : NTK(SectionHGroup, { node, nodesToJSX })
     }
 
-    const {
-      'section-heading': sectionHeading,
-      'section-eyebrow': sectionEyebrow,
-      'section-subtitle': sectionSubtitle,
-    } = Object.groupBy(
-      node.children.slice(1),
-      (ea) => (ea as SerializedLexicalNode).type
-    ) as Record<string, SerializedElementNode[]>
-
     return (
-      <>
-        <SectionCover
-          className='max-sm:max-w-full md:-right-6 md:-left-6 md:w-[calc(100%+3rem)]'
-          image={cover}
-          style={{ '--chars': textOf(sectionHeading?.[0]).length || undefined } as CSSProperties}>
-          <SectionHGroup>
-            {nodesToJSX({ nodes: [sectionEyebrow?.[0], sectionHeading?.[0]].filter(Boolean) })}
-          </SectionHGroup>
-        </SectionCover>
-        {sectionSubtitle && (
-          <SectionSubtitle
-            style={{ '--accent': duotoneAccent(cover.duotone?.color) } as CSSProperties}
-            className='mt-2 mb-8 w-full px-4 text-center text-[0.9em] text-wrap text-body!'>
-            <span>{nodesToJSX({ nodes: sectionSubtitle[0].children })}</span>
-          </SectionSubtitle>
-        )}
-      </>
+      <SectionCover
+        node={node}
+        nodesToJSX={nodesToJSX}
+        cover={cover}
+      />
     )
   },
   'section-heading': ({ node, nodesToJSX }) => {

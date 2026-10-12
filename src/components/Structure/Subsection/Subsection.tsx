@@ -44,12 +44,10 @@ export const Subsection = ({
 
   return (
     <section
-      // data-open={open ? '' : undefined}
       data-state={toState(open)}
       data-slot='subsection'
       data-variant={variant}
-      // className={cn('transition-all *:not-[h3]:pr-4 *:[h3]:-ml-4')}>
-      className={cn('transition-all *:not-data-[slot=heading]:pr-4 *:data-[slot=heading]:-ml-4')}>
+      className={cn('transition-all *:not-slot-heading:pr-4 *:slot-heading:-ml-4')}>
       <SubSectionContext.Provider value={contextValue}>{props.children}</SubSectionContext.Provider>
     </section>
   )

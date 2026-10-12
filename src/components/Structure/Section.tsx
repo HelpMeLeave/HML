@@ -63,11 +63,9 @@ const SectionHGroup = ({ ...props }: Props<'hgroup'>) => (
   />
 )
 
-// const SectionHeading = ({ ...props }: Props<'h2'>) => (
 const SectionHeading = ({ level = 2, ...props }: Props<'h2'> & { level?: 2 | 3 }) => (
   <Heading
     {...props}
-    // level={2}
     level={level}
     variant='section'
   />

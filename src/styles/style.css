@@ -10,8 +10,11 @@
 @import "./prose.css";
 @import "./flow.css";
 @import "./lexicals/_checkmarkList.css";
+@import "./lexicals/_listHighlight.css";
 @import "./lexicals/_sectionCover.css";
 @import "./colors.css";
+
+@plugin "./tailwind.config.js";
 
 /* @theme inline {
   --font-header: var(--font-playfair);
@@ -19,6 +22,7 @@
 
 @theme {
   --measure: 660px;
+  --measure-max: 70ch;
 
   --shadow-input: 0px 1px 3px 0px #00000011;
   --shadow-input-hover: 0px 1px 2px -1px #0003;
@@ -35,6 +39,8 @@
   --is-lg: 1.125;
   --is-xl: 1.25;
   --is-2xl: 1.5;
+
+  /* --slot-*: initial; */
 
   /* #endregion */
 }
@@ -113,3 +119,9 @@ ol:has(> .list-title) {
     counter-increment: list-title 1;
   }
 }
+
+@custom-variant slot-heading (&:is([data-slot="heading"]));
+@custom-variant slot-subsection-heading (&:is([data-slot="heading"][data-variant="subsection"]));
+@custom-variant slot-section-heading (&:is([data-slot="heading"][data-variant="section"]));
+@custom-variant slot-eyebrow (&:is([data-slot="eyebrow"]));
+@custom-variant slot-header (&:is([data-slot="header"]));

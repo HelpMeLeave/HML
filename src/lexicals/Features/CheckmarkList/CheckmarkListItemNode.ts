@@ -1,4 +1,4 @@
-import { type EditorConfig, $create } from '@payloadcms/richtext-lexical/lexical'
+import { type EditorConfig } from '@payloadcms/richtext-lexical/lexical'
 import {
   type SerializedListItemNode,
   ListItemNode,
@@ -23,5 +23,3 @@ export class CheckmarkListItemNode extends ListItemNode {
     return el
   }
 }
-
-export const $createCheckmarkListItemNode = () => $create(CheckmarkListItemNode)

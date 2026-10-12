@@ -1,5 +1,4 @@
-import { $createCheckmarkListItemNode } from '@/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
-import { type EditorConfig, type LexicalNode, $create } from '@payloadcms/richtext-lexical/lexical'
+import { type EditorConfig } from '@payloadcms/richtext-lexical/lexical'
 import { type SerializedListNode, ListNode } from '@payloadcms/richtext-lexical/lexical/list'
 
 export class CheckmarkListNode extends ListNode {
@@ -21,11 +20,3 @@ export class CheckmarkListNode extends ListNode {
     return { ...super.exportJSON(), listType: 'check' }
   }
 }
-
-export const $createCheckmarkListNode = () => $create(CheckmarkListNode)
-
-export const $isCheckmarkListNode = (node: unknown): node is CheckmarkListNode =>
-  node instanceof CheckmarkListNode
-
-export const $convertToCheckmarkListNode = (...children: LexicalNode[]): CheckmarkListNode =>
-  $createCheckmarkListNode().append($createCheckmarkListItemNode().append(...children))

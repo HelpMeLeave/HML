@@ -5,6 +5,7 @@
 //   QuoteBlockConfig,
 //   VideoPlayerBlockConfig,
 // } from '@/_config/Blocks'
+import { cn } from '@/lib/cn'
 import {
   BlocksFeature,
   defaultEditorLexicalConfig,
@@ -61,9 +62,20 @@ export const contentEditor = ({
 }: { blocks?: Block[]; inlineBlocks?: Block[] } = {}) =>
   lexicalEditor({
     admin: baseAdmin,
-    lexical: { namespace: 'rich-editor', theme: baseTheme },
     features: [
       ...contentFeatures,
       ...(blocks || inlineBlocks ? [BlocksFeature({ blocks, inlineBlocks })] : []),
     ],
+    lexical: {
+      namespace: 'rich-editor',
+      theme: {
+        ...baseTheme,
+        root: cn(baseTheme.root, 'max-w-[65ch]!'),
+        paragraph: 'text-theme font-normal [:is(.rich-list-item__body>*)]:first:mt-0',
+        text: {
+          bold: 'font-semibold text-accent',
+          base: '',
+        },
+      },
+    },
   })

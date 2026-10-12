@@ -13,6 +13,7 @@ import {
 } from '@payloadcms/richtext-lexical/lexical'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
 import { Megaphone } from 'lucide-react'
+import './style.scss'
 
 const CalloutMarkdownTransformer: () => ElementTransformer = () => ({
   dependencies: [CalloutNode],

@@ -1,0 +1,49 @@
+@use '@/styles/admin/mixins' as *;
+
+.LexicalEditorTheme__callout {
+  --callout: var(--color-slate-500);
+  --label: 'Note';
+  position: relative;
+  padding: 1.75rem 0.75rem 0.6rem;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--callout) 8%, transparent);
+
+  &::before {
+    content: var(--label);
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--callout);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &[data-variant='tip'] {
+    --label: 'Good to know';
+  }
+  &[data-variant='urgent'] {
+    --callout: var(--color-poppy-500);
+    --label: 'Urgent';
+  }
+  &[data-variant='case-study'] {
+    --callout: var(--color-purple-500);
+    --label: 'Case study';
+  }
+
+  @include dark {
+    --callout: var(--color-slate-300);
+    background: color-mix(in oklab, var(--callout) 12%, transparent);
+
+    &[data-variant='urgent'] {
+      --callout: var(--color-poppy-300);
+    }
+    &[data-variant='case-study'] {
+      --callout: var(--color-purple-300);
+    }
+  }
+}

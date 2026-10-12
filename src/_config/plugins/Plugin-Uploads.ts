@@ -44,17 +44,17 @@ const CountryImageCredentials = s3Storage(
     collections: ['country-images'],
   })
 )
-// const ContentMediaCredentials = s3Storage(
-//   r2Bucket({
-//     endpointFolderName: 'content',
-//     collections: ['media-content'],
-//   })
-// )
+const ContentMediaCredentials = s3Storage(
+  r2Bucket({
+    endpointFolderName: 'content',
+    collections: ['media-content'],
+  })
+)
 
 export const upload = [
   UploadThingConfig,
   CountryImageCredentials,
   MediaCredentials,
   FormUploadsCredentials,
-  // ContentMediaCredentials,
+  ContentMediaCredentials,
 ]

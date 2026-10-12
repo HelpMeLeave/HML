@@ -407,12 +407,12 @@ a {
 
   [data-lexical-text='true'] {
     line-height: inherit;
-    font-weight: inherit;
+    // font-weight: inherit;
     font-family: inherit;
     letter-spacing: inherit;
-    &:not(.LexicalEditorTheme__textBold, .LexicalEditorTheme__textItalic) {
-      color: currentColor;
-    }
+    // &:not(.LexicalEditorTheme__textBold, .LexicalEditorTheme__textItalic) {
+    //   color: currentColor;
+    // }
   }
 
   .link-editor {
@@ -653,4 +653,41 @@ table tbody td {
   :is(.\*\*\:text-\(--color\) *).tooltip-content {
     color: var(--color-background);
   }
+}
+
+.rich-list-item__body {
+  margin-bottom: 1.5em;
+  .LexicalEditorTheme__callout {
+    margin-block: 1.5rem;
+  }
+}
+
+.rich-list-item__body > *:first-child {
+  margin-top: 0;
+}
+
+.LexicalEditorTheme__ul,
+.LexicalEditorTheme__ol {
+  .LexicalEditorTheme__listItem {
+    margin-block: 0.25rem;
+  }
+  &:is(.LexicalEditorTheme__list--titled) {
+    .LexicalEditorTheme__listItem {
+      margin-block: 0.5rem;
+      &.rich-list-item {
+        margin-block: 0;
+      }
+      &:first-child {
+        margin-bottom: 0;
+        + * {
+          margin-top: 0.25rem;
+        }
+      }
+    }
+  }
+}
+
+.live-preview-window {
+  width: unset;
+  flex-grow: 0;
 }

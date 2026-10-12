@@ -84,6 +84,8 @@
   }
 }
 
+/* moved to _listHighlight.css */
+/*
 li {
   transition-property: all;
   transition-timing-function: linear(
@@ -126,3 +128,4 @@ li {
     border-radius: 8px;
   }
 }
+*/

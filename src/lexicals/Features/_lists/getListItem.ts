@@ -1,9 +1,9 @@
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical'
 import {
-  $isListItemNode,
-  $isListNode,
   type ListItemNode,
   type ListNode,
+  $isListItemNode,
+  $isListNode,
 } from '@payloadcms/richtext-lexical/lexical/list'
 
 export const $getListItem = (list: ListNode | ListItemNode, nth: number) => {

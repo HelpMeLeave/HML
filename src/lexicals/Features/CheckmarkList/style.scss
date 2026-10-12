@@ -1,0 +1,17 @@
+// Payload's checklist draws a checkbox in the same ::before the shared checkmark uses
+.checkmark-list li {
+  margin-left: 0;
+  text-decoration: none;
+
+  &::before {
+    width: auto;
+    top: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  &::after {
+    content: none;
+  }
+}

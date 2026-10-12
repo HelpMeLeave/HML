@@ -24,7 +24,9 @@ import {
   afterReadAuthorString,
   beforeDeleteGetRoute,
 } from '@/collections/ContentCollections/Content/_lib/hooks'
+import { previewURL } from '@/collections/ContentCollections/Content/_lib/previewURL'
 import type { tContentType } from '@/collections/ContentCollections/Content/_lib/types'
+// import { env } from '@/env'
 import { contentEditor, singleLineEditor } from '@/lexicals/editors'
 import { assignHeadingIds } from '@/lexicals/Features/_lib/slugifyHeadingID'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
@@ -268,6 +270,11 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
     defaultColumns: ['title', 'workflow', 'route', 'slug'],
     groupBy: true,
     listSearchableFields: ['title', 'slug'],
+    livePreview: {
+      url: ({ data, req }) => previewURL(data.id, req),
+      openByDefault: true,
+    },
+    // preview: (doc, { req }) => previewURL(doc.id, req),
   },
   folders: { browseByFolder: true },
   custom: {

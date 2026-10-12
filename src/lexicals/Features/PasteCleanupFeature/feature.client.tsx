@@ -1,10 +1,5 @@
 'use client'
 
-import { $createCheckmarkListItemNode } from '@/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
-import {
-  $createCheckmarkListNode,
-  $isCheckmarkListNode,
-} from '@/lexicals/Features/CheckmarkList/CheckmarkListNode'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import {
   type LexicalNode,
@@ -22,6 +17,9 @@ import {
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { $dfs } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useEffect } from 'react'
+import { $createCheckmarkListItemNode } from '../CheckmarkList/_lib/createCheckmarkListItemNode'
+import { $createCheckmarkListNode } from '../CheckmarkList/_lib/createCheckmarkListNode'
+import { $isCheckmarkListNode } from '../CheckmarkList/_lib/isCheckmarkListNode'
 
 const CHECKMARK_RE = /^-\[x\]\s*/i
 

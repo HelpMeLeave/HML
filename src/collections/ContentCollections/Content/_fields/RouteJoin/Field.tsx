@@ -1,4 +1,4 @@
-import { Link, TextInput } from '@payloadcms/ui'
+import { Link, PreviewButton, TextInput } from '@payloadcms/ui'
 import { EyeIcon } from 'lucide-react'
 import type { JoinFieldServerProps } from 'payload'
 
@@ -32,6 +32,7 @@ const RouteJoin = async (props: JoinFieldServerProps) => {
     if (totalDocs == 1)
       return (
         <span>
+          <PreviewButton />
           <TextInput
             value={docs[0].url}
             Label={
@@ -41,7 +42,7 @@ const RouteJoin = async (props: JoinFieldServerProps) => {
                   htmlFor='field-route'>
                   Route URL
                 </label>
-                <PreviewBtn url={docs[0].url} />
+                {/* <PreviewBtn url={docs[0].url} /> */}
               </span>
             }
 

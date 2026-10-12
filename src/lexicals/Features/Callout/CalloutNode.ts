@@ -25,7 +25,9 @@ export class CalloutNode extends ElementNode {
   createDOM() {
     const el = document.createElement('article')
     el.className = 'LexicalEditorTheme__callout'
-    el.dataset.type = $getState(this, calloutType)
+    el.dataset.slot = 'callout'
+    // el.dataset.type = $getState(this, calloutType)
+    el.dataset.variant = $getState(this, calloutType)
     return el
   }
 
@@ -35,7 +37,8 @@ export class CalloutNode extends ElementNode {
 
   updateDOM(prevNode: this, dom: HTMLElement): boolean {
     const change = $getStateChange(this, prevNode, calloutType)
-    if (change) dom.dataset.type = change[0]
+    // if (change) dom.dataset.type = change[0]
+    if (change) dom.dataset.variant = change[0]
     return false
   }
 }
@@ -43,14 +46,6 @@ export class CalloutNode extends ElementNode {
 export const $isCallout = (node: unknown): node is CalloutNode => node instanceof CalloutNode
 export const $createCallout = () => $create(CalloutNode)
 
-export type CalloutType = 'tip' | 'quote' | 'urgent' | 'note'
+export type CalloutType = 'tip' | 'quote' | 'urgent' | 'note' | 'case-study'
 export const $setCalloutType = (node: CalloutNode, type: CalloutType) =>
   $setState(node, calloutType, type)
-
-// /** Callout at the caret position */
-// export const $getCalloutAtCaret = () => {
-//   const selection = $getSelection()
-//   if (!$isRangeSelection(selection)) return null
-//
-//   return $findMatchingParent(selection.anchor.getNode(), $isCallout)
-// }

@@ -71,19 +71,20 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
         },
       }
     ),
+    LinkConfig('url', {
+      label: 'URL',
+      admin: {
+        disableListColumn: true,
+        hidden: false,
+        components: {
+          Field: '@/collections/_lib/Link/Field',
+        },
+        readOnly: false,
+        condition: (data) => data && data.filename,
+      },
+    }),
     rowField(
       { admin: { condition: (data) => data && data.filename } },
-      LinkConfig('url', {
-        label: 'URL',
-        admin: {
-          disableListColumn: true,
-          hidden: false,
-          components: {
-            Field: '@/collections/_lib/Link/Field',
-          },
-          readOnly: false,
-        },
-      }),
       TextConfig('thumbnailURL', {
         label: 'Thumbnail URL',
         admin: {

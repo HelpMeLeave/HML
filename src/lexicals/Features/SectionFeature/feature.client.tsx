@@ -1,7 +1,7 @@
 'use client'
 
 import { isActive } from '@/lexicals/Features/_lib/isActive'
-import { $createFullSection } from '@/lexicals/Features/SectionFeature/$createFullSection'
+import { $createFullSection } from '@/lexicals/Features/SectionFeature/createFullSection'
 import { SectionPlugin } from '@/lexicals/Features/SectionFeature/Plugin'
 import {
   $isSectionHGroupNode,
