@@ -1,4 +1,4 @@
-import { editorPlainRich } from '@/_components/lexicals/plainRich'
+import { singleLineEditor } from '@/lexicals/editors'
 import { normalizeSelectOptions } from '@/lib/normalize'
 import type { Block } from 'payload'
 

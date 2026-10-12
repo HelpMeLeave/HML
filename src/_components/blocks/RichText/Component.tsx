@@ -1,4 +1,4 @@
-import RichText, { type RichTextProps } from '@/_components/lexicals/RenderRichText'
+import RichText, { type RichTextProps } from '@/lexicals/RenderRichText'
 import type { RichTextBlock } from '@/payload-types'
 
 export const RichTextComponent = ({

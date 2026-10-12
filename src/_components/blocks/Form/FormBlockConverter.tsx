@@ -1,5 +1,5 @@
-import type { BlockConverterProps } from '@/_components/blocks/_types'
 import { FormComponent } from '@/_components/blocks/Form/FormBlockComponent'
+import type { BlockConverterProps } from '@/lexicals/_types'
 import type { FormBlock } from '@/payload-types'
 
 export const FormBlockConverter = ({ node }: BlockConverterProps<FormBlock>) => {

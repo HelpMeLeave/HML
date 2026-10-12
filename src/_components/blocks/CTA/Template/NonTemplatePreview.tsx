@@ -1,7 +1,7 @@
 import { createTextRoot, toPreviewBtn } from '@/_components/blocks/CTA/_lib'
 import type { NonTemplatePreviewProps } from '@/_components/blocks/CTA/_types'
 import { CTA } from '@/_components/blocks/CTA/Component'
-import RichText from '@/_components/lexicals/RenderRichText'
+import RichText from '@/lexicals/RenderRichText'
 import { Wrapper } from './Wrapper'
 
 export const NonTemplatePreview = ({

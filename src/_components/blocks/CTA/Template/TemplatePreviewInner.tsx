@@ -2,7 +2,7 @@
 import { getBtnFromBlockTemplate } from '@/_components/blocks/CTA/_lib'
 import { CTA } from '@/_components/blocks/CTA/Component'
 import { getTemplate } from '@/_components/blocks/CTA/Template/_lib'
-import RichText from '@/_components/lexicals/RenderRichText'
+import RichText from '@/lexicals/RenderRichText'
 import { use } from 'react'
 import { Wrapper } from './Wrapper'
 

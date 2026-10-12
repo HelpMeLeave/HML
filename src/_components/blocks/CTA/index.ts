@@ -1,5 +1,6 @@
 import { FieldButton } from '@/_components/blocks/CTA/Button'
-import { editorParagraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { editorParagraphRichText } from '@/lexicals/nested'
 import { rowField } from '@/collections/_fields/Flex'
 import { templateFields } from '@/collections/_fields/templateFields'
 import { cn } from '@/lib/cn'

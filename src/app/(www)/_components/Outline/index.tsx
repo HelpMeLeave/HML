@@ -1,9 +1,9 @@
 'use client'
 
-import { headingID, headingPlainText } from '@/_components/lexicals/Features/_lib/slugifyHeadingID'
 import { SmLeftRail } from '@/app/(www)/_components/LeftRail'
 import { InlineLink } from '@/components/primitives/Link'
 import { useScrollProgress } from '@/hooks/useInView'
+import { headingID, headingPlainText } from '@/lexicals/Features/_lib/slugifyHeadingID'
 import { cn } from '@/lib/cn'
 import { getNodesFromRichText } from '@/lib/getNodesFromRichText'
 import type { DefaultTypedEditorState, SerializedHeadingNode } from '@payloadcms/richtext-lexical'

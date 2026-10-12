@@ -1,6 +1,6 @@
 import React from 'react'
 
-import RenderRichText from '@/_components/lexicals/RenderRichText'
+import RenderRichText from '@/lexicals/RenderRichText'
 import { cn } from '@/lib/cn'
 import type { ColumnsBlock } from '@/payload-types'
 

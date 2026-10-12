@@ -1,4 +1,4 @@
-import RichTextConverter from '@/_components/lexicals/RenderRichText'
+import RichTextConverter from '@/lexicals/RenderRichText'
 import type { FormFieldMessage } from '@/payload-types'
 
 export const MessageFieldComponent = (props: FormFieldMessage) => (
