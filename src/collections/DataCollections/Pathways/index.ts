@@ -1,5 +1,6 @@
 import { NameField } from '@/_components/fields/Name'
-import { editorParagraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { isManager } from '@/access/_primitives'
 import { is } from '@/access/is'
@@ -455,7 +456,7 @@ const Pathways: CollectionConfig<'pathways'> = {
             label: false,
             type: 'richText',
             name: 'note',
-            editor: editorParagraphRichText,
+            editor: multiLineEditor(),
           },
         ],
       }

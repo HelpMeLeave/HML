@@ -1,6 +1,7 @@
 @use '@/styles/admin/mixins' as *;
 .cta-preview {
-  #spacer {
+  // #spacer {
+  [data-slot='spacer'] {
     display: none;
   }
   section {

@@ -1,5 +1,6 @@
 'use client'
 
+import { toState } from '@/lib/slots'
 import { Button } from '@payloadcms/ui'
 import { ChevronLeft } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
@@ -24,7 +25,8 @@ export const SidebarToggleClient = () => {
     sidebarEl
     && createPortal(
       <span
-        data-open={open ? '' : undefined}
+        // data-open={open ? '' : undefined}
+        data-state={toState(open)}
         className='sidebar-toggle'>
         <Button
           size='small'

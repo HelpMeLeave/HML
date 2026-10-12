@@ -163,6 +163,7 @@ const PageData = async ({
             blockType='rich-text'
             content={content as DefaultTypedEditorState}
             converterOverrides={pageConverters}
+            flow
           />
         )}
       </Main>

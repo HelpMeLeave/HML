@@ -41,19 +41,21 @@ export const List = ({
   const className = cn(
     'in-[li]:my-0.5 in-[li]:ps-2!',
     // 'peer-[h4]:mt-0',
-    'peer-data-[slot=heading]:peer-data-[variant=minor]:mt-0',
-    'mt-4 mb-4 ml-2 pl-2 *:last:mb-0 has-[+p]:mb-0',
+    // 'peer-data-[slot=heading]:peer-data-[variant=minor]:mt-0',
+    // 'mt-4 mb-4 ml-2 pl-2 *:last:mb-0 has-[+p]:mb-0',
+    'ml-2 pl-2 *:last:mb-0',
     type === 'numbered' ? 'list-decimal'
     : type == 'checkmark' ? 'list-checkmark ml-0 pl-0'
     : 'list-disc',
     // 'in-[[data-slot="subsection-content"]>div]:first:mt-0',
-    'in-[[data-slot=subsection]>[data-slot=content]>div]:first:mt-0',
+    // 'in-[[data-slot=subsection]>[data-slot=content]>div]:first:mt-0',
     props.className
   )
 
   if (type === 'numbered') {
     return (
       <ol
+        data-slot='list'
         {...props}
         className={className}
       />
@@ -61,6 +63,7 @@ export const List = ({
   }
   return (
     <ul
+      data-slot='list'
       {...props}
       data-list-type={type == 'checkmark' ? 'list-checkmark' : 'disc'}
       className={cn(className, type, props.className)}
@@ -79,7 +82,8 @@ export const UL = ({ ...props }: Props<typeof List>) => <List {...props} />
 export const h4ClassName = cn(
   'font-header leading-[0.85] text-balance',
   'font-body',
-  'peer relative mb-1 leading-none font-bold text-base uppercase not-first:mt-[1.125em] has-[+:is(ol,ul,p:has(+ol),p:has(+ul))]:mb-[0.2em] *:[strong,b]:font-normal dark:*:[strong,b]:font-light'
+  // 'peer relative mb-1 leading-none font-bold text-base uppercase not-first:mt-[1.125em] has-[+:is(ol,ul,p:has(+ol),p:has(+ul))]:mb-[0.2em] *:[strong,b]:font-normal dark:*:[strong,b]:font-light'
+  'peer relative mb-[0.25em] leading-none font-bold text-base uppercase not-first:mt-[1.125em] *:[strong,b]:font-normal dark:*:[strong,b]:font-light'
 )
 
 // export const Heading = ({ level = 2, ...props }: Props.Heading) => {

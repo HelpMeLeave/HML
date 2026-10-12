@@ -3,15 +3,30 @@
 @use 'sass:string';
 @use 'sass:meta';
 
-@function alpha($color, $amount) {
-  $test-amount: $amount;
-  @if (meta.type-of($amount) != string) {
-    $test-amount: '#{$amount}';
+@function asPercent($val) {
+  $test-amount: $val;
+  @if (meta.type-of($val) != string) {
+    $test-amount: '#{$val}';
   }
   @if (string.index($test-amount, '%') != null) {
-    $amount: string.slice($test-amount, 1, string.index($test-amount, '%')-1);
+    $val: string.slice($test-amount, 1, string.index($test-amount, '%')-1);
   }
-  @return color-mix(in hsl, #{$color} #{$amount + '%'}, transparent);
+  @return #{$val + '%'};
+}
+
+@function alpha($color, $amount) {
+  // $test-amount: $amount;
+  // @if (meta.type-of($amount) != string) {
+  //   $test-amount: '#{$amount}';
+  // }
+  // @if (string.index($test-amount, '%') != null) {
+  //   $amount: string.slice($test-amount, 1, string.index($test-amount, '%')-1);
+  // }
+  @return color-mix(in hsl, #{$color} #{asPercent($amount)}, transparent);
+}
+
+@function lighter($color, $amount) {
+  @return color-mix(in hsl, #{$color} 100%, white #{asPercent($amount)});
 }
 
 @mixin dark {

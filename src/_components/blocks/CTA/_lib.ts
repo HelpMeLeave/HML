@@ -74,7 +74,7 @@ export const getBtnFromBlockTemplate = (block: CTABlock) => {
 
 export const createTextRoot = (
   node?: { root: SerializedRootNode } | null
-): DefaultTypedEditorState | null | undefined =>
+): Nullish<DefaultTypedEditorState> =>
   node
   && ({
     root: {

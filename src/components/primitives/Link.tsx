@@ -43,6 +43,7 @@ export const InlineLink = ({
       {...props}
       className={cn(
         'font-semibold underline decoration-accent/50 decoration-[1.75px] underline-offset-2 hocus:decoration-accent hocus:decoration-1',
+        'in-[[data-slot=heading][data-variant=subsection]]:font-[450] in-[[data-slot=heading][data-variant=subsection]]:decoration-accent/80 in-[[data-slot=heading][data-variant=subsection]]:decoration-[0.08em] in-[[data-slot=heading][data-variant=subsection]]:underline-offset-[0.12em] in-[[data-slot=heading][data-variant=subsection]]:hocus:decoration-[0.08em]',
         props.className
       )}
       target={String(href)?.[0] != '#' ? (props.target ?? target()) : undefined}

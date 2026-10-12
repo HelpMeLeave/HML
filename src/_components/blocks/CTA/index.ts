@@ -10,6 +10,8 @@ import type { Block } from 'payload'
 const fieldBtnClassBase =
   'grow max-w-full! **:[--field-width:100%] field:field-render:gap-4! field:field-render:pl-6 field-label:text-lg! px-0!'
 
+const condition = conditionFnBlock({ key: 'useTemplate' }).siblingDataFalsy
+
 export const CTABlockConfig: Block = {
   slug: 'cta',
   interfaceName: 'CTABlock',
@@ -33,25 +35,15 @@ export const CTABlockConfig: Block = {
         name: 'title',
         type: 'richText',
         required: true,
-        custom: {
-          layout: {
-            labelSize: 'large',
-          },
-        },
-        editor: editorParagraphRichText,
-        admin: {
-          className: 'richtext-editor:py-0',
-          condition: conditionFnBlock({ key: 'useTemplate' }).siblingDataFalsy,
-        },
+        custom: { layout: { labelSize: 'large' } },
+        editor: multiLineEditor(),
+        admin: { className: 'richtext-editor:py-0', condition },
       },
       {
         name: 'subtitle',
         type: 'richText',
-        editor: editorParagraphRichText,
-        admin: {
-          className: 'richtext-editor:py-0',
-          condition: conditionFnBlock({ key: 'useTemplate' }).siblingDataFalsy,
-        },
+        editor: multiLineEditor(),
+        admin: { className: 'richtext-editor:py-0', condition },
       }
     ),
     rowField(
@@ -59,11 +51,7 @@ export const CTABlockConfig: Block = {
       FieldButton({
         name: 'primaryButton',
         withActions: true,
-        admin: {
-          className: cn('cta-primaryBtn', fieldBtnClassBase),
-          hideGutter: true,
-          condition: conditionFnBlock({ key: 'useTemplate' }).siblingDataFalsy,
-        },
+        admin: { className: cn('cta-primaryBtn', fieldBtnClassBase), hideGutter: true, condition },
       }),
       FieldButton({
         required: false,
@@ -71,7 +59,7 @@ export const CTABlockConfig: Block = {
         admin: {
           className: cn('cta-secondaryBtn', fieldBtnClassBase),
           hideGutter: true,
-          condition: conditionFnBlock({ key: 'useTemplate' }).siblingDataFalsy,
+          condition,
         },
       })
     ),

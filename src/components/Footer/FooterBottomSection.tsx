@@ -7,7 +7,7 @@ import type { NavigationGroup } from 'www/_providers/_types'
 
 export const FooterBottomSection = ({ children }: Props) => {
   return (
-    <span className='bg-theme-card flex items-center justify-between p-6 text-brand-mulberry italic dark:bg-transparent dark:text-brand-yellow'>
+    <span className='bg-theme-card text-brand-mulberry dark:text-brand-yellow flex items-center justify-between p-6 italic dark:bg-transparent'>
       {children}
     </span>
   )

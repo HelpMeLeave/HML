@@ -1,0 +1,10 @@
+[data-slot="section-cover"] {
+  & hgroup {
+    margin: 0;
+  }
+
+  & :is([data-slot="eyebrow"], [data-slot="subtitle"]) {
+    width: fit-content;
+    padding-inline: 12px;
+  }
+}

@@ -21,13 +21,31 @@ export const pageGroupBlockRouter = async (filterQuery: Where[], routeQueries: n
     // every match, not Payload's default first 10
     limit: 0,
     pagination: false,
+    depth: 1,
+    select: {
+      title: true,
+      subtitle: true,
+      content: true,
+      authorString: true,
+      contentType: true,
+      type: true,
+      route: true,
+      authors: true,
+    },
     populate: {
       routes: {
         url: true,
       },
-      'content-record': {
-        snapshot: true,
+      tag: {
+        title: true,
+        display: true,
       },
+      users: { name: true },
+      pillar: { name: true },
+      teams: { name: true },
+      // 'content-record': {
+      //   snapshot: true,
+      // },
     },
   })
 

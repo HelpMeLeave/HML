@@ -59,6 +59,7 @@ import {
 import { GlossaryTermCountryCollectionConfig } from '@/collections/DataCollections/GlossaryTerms/CountryTerm'
 import type { CollectionConfig } from 'payload'
 import { V1Pathways } from './DataCollections/V1Pathways'
+import { MediaContentCollectionConfig } from './UploadCollections/ContentUploads'
 
 export const collections: CollectionConfig[] = [
   ...setCollectionGroup('Finances', [
@@ -90,6 +91,7 @@ export const collections: CollectionConfig[] = [
     MediasCollectionConfig,
     CountryImagesCollectionConfig,
     InternalDocumentsCollectionConfig,
+    MediaContentCollectionConfig,
   ]),
   ...setCollectionGroup('Volunteer Management', [
     PillarsCollectionConfig,

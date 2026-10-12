@@ -7,7 +7,7 @@ export type TextFieldProps = Omit<
   Label: TextFieldIcon
   error?: string | string[]
   Icon?: LucideIcon
-  defaultValue?: string | number | readonly string[] | null | undefined
+  defaultValue?: Nullish<string | number | readonly string[]>
 }
 
 type TextFieldIcon =

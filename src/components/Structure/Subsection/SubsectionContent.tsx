@@ -22,7 +22,8 @@ export const SubsectionContent = ({
         props.className
       )}>
       {/* the single row the grid sizes; min-h-0 lets it shrink to nothing when closed */}
-      <div className='grid min-h-0 overflow-hidden'>{props.children}</div>
+      {/* <div className='grid min-h-0 overflow-hidden'>{props.children}</div> */}
+      <div className='flow grid min-h-0 overflow-hidden'>{props.children}</div>
     </div>
   )
 }

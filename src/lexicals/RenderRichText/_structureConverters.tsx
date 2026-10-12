@@ -56,6 +56,7 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
       // @ts-expect-error non-standard attribute
       'data-slot': 'section',
       'data-variant': 'section',
+      className: 'flow',
     })
   },
   'section-hgroup': ({ node, nodesToJSX }) => {
@@ -79,7 +80,7 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
     return (
       <>
         <SectionCover
-          className='max-w-full md:-right-6 md:-left-6 md:w-[calc(100%+3rem)]'
+          className='max-sm:max-w-full md:-right-6 md:-left-6 md:w-[calc(100%+3rem)]'
           image={cover}
           style={{ '--chars': textOf(sectionHeading?.[0]).length || undefined } as CSSProperties}>
           <SectionHGroup>
@@ -121,7 +122,8 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
           data-slot='subsection'
           // data-style='h4-heading'
           data-variant='minor'
-          className=':mt-8 my-4 sm:pl-6'>
+          // className=':mt-8 my-4 sm:pl-6'>
+          className='flow sm:pl-6'>
           <Heading
             level={3}
             // look={4}
@@ -141,7 +143,8 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
         <Section
           data-slot='section'
           // data-style='section'>
-          data-variant='section'>
+          data-variant='section'
+          className='flow'>
           <SectionHGroup>
             <SectionHeading
               level={3}

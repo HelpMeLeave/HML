@@ -7,7 +7,7 @@ export const parsePathway = (
     id: number
     country: string | Country
     countryName?: string | null
-  } & Partial<Record<keyof ExplorerPathwayData, boolean | null | undefined>>
+  } & Partial<Record<keyof ExplorerPathwayData, Nullish<boolean>>>
 ) => {
   const keys = Object.keys(finalPathway) as Array<keyof ExplorerPathwayData>
   keys.forEach((k) => {

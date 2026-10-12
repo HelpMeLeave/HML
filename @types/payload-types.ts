@@ -251,7 +251,6 @@ export interface Config {
     videoPlayer: VideoPlayerBlock;
     cta: CTABlock;
     columns: ColumnsBlock;
-    'dynamic-text': DynamicTextBlock;
   };
   collections: {
     coa: Coa;
@@ -280,6 +279,7 @@ export interface Config {
     'country-images': CountryImage;
     'internal-documents': InternalDocument;
     'internal-documents-record': InternalDocumentsRecord;
+    'media-content': MediaContent;
     pillar: Pillar;
     roles: Role;
     teams: Team;
@@ -377,6 +377,7 @@ export interface Config {
     'country-images': CountryImagesSelect<false> | CountryImagesSelect<true>;
     'internal-documents': InternalDocumentsSelect<false> | InternalDocumentsSelect<true>;
     'internal-documents-record': InternalDocumentsRecordSelect<false> | InternalDocumentsRecordSelect<true>;
+    'media-content': MediaContentSelect<false> | MediaContentSelect<true>;
     pillar: PillarSelect<false> | PillarSelect<true>;
     roles: RolesSelect<false> | RolesSelect<true>;
     teams: TeamsSelect<false> | TeamsSelect<true>;
@@ -604,6 +605,7 @@ export interface Route {
   adminTitle?: string | null;
   doc?: (number | null) | Content;
   url: string;
+  useSubtitleTagline?: boolean | null;
   tagline?: string | null;
   keywords?: string[] | null;
   public?: (number | null) | ContentRecord;
@@ -721,8 +723,14 @@ export interface Content {
   asPdf?: (number | null) | Document;
   cta?: CTABlock[] | null;
   headerImage?: (number | null) | Media;
-  contentType: string;
   authorString?: string | null;
+  test?: {
+    adminTitle?: string | null;
+    url?: string | null;
+    parent?: (number | null) | Content;
+    tagline?: string | null;
+  };
+  contentType: string;
   folder?: (number | null) | FolderInterface;
 }
 /**
@@ -2563,21 +2571,6 @@ export interface ColumnsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "DynamicTextBlock".
- */
-export interface DynamicTextBlock {
-  value: 'Current Date' | 'Current Time' | "Current User's Name";
-  format?: {
-    bold?: boolean | null;
-    italic?: boolean | null;
-    underlined?: boolean | null;
-  };
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'dynamic-text';
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "coa".
  */
 export interface Coa {
@@ -2952,6 +2945,60 @@ export interface InternalDocumentsSnapshot {
     [k: string]: unknown;
   } | null;
   tags?: (number | Tag)[] | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-content".
+ */
+export interface MediaContent {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  filename?: string | null;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  deletedAt?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: string | null;
+      height?: string | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: string | null;
+      height?: string | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    'small-portrait'?: {
+      url?: string | null;
+      width?: string | null;
+      height?: string | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: string | null;
+      height?: string | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -3732,6 +3779,10 @@ export interface PayloadLockedDocument {
         value: number | InternalDocumentsRecord;
       } | null)
     | ({
+        relationTo: 'media-content';
+        value: number | MediaContent;
+      } | null)
+    | ({
         relationTo: 'pillar';
         value: number | Pillar;
       } | null)
@@ -3929,8 +3980,16 @@ export interface ContentSelect<T extends boolean = true> {
         cta?: T | CTABlockSelect<T>;
       };
   headerImage?: T;
-  contentType?: T;
   authorString?: T;
+  test?:
+    | T
+    | {
+        adminTitle?: T;
+        url?: T;
+        parent?: T;
+        tagline?: T;
+      };
+  contentType?: T;
   folder?: T;
 }
 /**
@@ -4043,6 +4102,7 @@ export interface RoutesSelect<T extends boolean = true> {
   adminTitle?: T;
   doc?: T;
   url?: T;
+  useSubtitleTagline?: T;
   tagline?: T;
   keywords?: T;
   public?: T;
@@ -4767,6 +4827,69 @@ export interface InternalDocumentsSnapshotSelect<T extends boolean = true> {
   title?: T;
   content?: T;
   tags?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media-content_select".
+ */
+export interface MediaContentSelect<T extends boolean = true> {
+  createdAt?: T;
+  updatedAt?: T;
+  name?: T;
+  filename?: T;
+  url?: T;
+  thumbnailURL?: T;
+  deletedAt?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        'small-portrait'?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

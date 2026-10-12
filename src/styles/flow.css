@@ -1,0 +1,88 @@
+/* Rich text spacing. See docs/spacing.md. Utilities still win over this layer, so a class on an element is an escape hatch. */
+@layer components {
+  /* defaults for parts that also render outside a flow container */
+  :where([data-slot="list"]) {
+    margin-block: 1rem;
+  }
+  :where([data-slot="cta"]) {
+    margin-block: 3rem;
+  }
+
+  .flow {
+    /* rem, not em, so smaller-text parts (callouts) keep the body step; body text is the root size */
+    --flow-step: 0.25rem;
+
+    /* body pairs, in steps */
+    --flow-default: 4;
+    --flow-list-text: 8;
+    --flow-callout: 6;
+    --flow-cta: 12;
+  }
+
+  .flow > * {
+    --gap: initial;
+    margin-block: 0;
+  }
+  .flow > * + * {
+    margin-top: calc(var(--flow-step) * var(--gap, var(--flow-default)));
+  }
+
+  /* #region body pairs */
+  .flow > [data-slot="list"] + [data-slot="text"] {
+    --gap: var(--flow-list-text);
+  }
+  /* minor headings carry their own top margin, so the list makes room instead; collapses with the heading's 1.125em */
+  .flow
+    > [data-slot="list"]:has(
+      + :is([data-slot="heading"], [data-slot="subsection"])[data-variant="minor"]
+    ) {
+    margin-bottom: calc(var(--flow-step) * var(--flow-list-text));
+  }
+  .flow > [data-slot="callout"],
+  .flow > [data-slot="callout"] + * {
+    --gap: var(--flow-callout);
+  }
+  .flow > [data-slot="cta"],
+  .flow > [data-slot="cta"] + * {
+    --gap: var(--flow-cta);
+  }
+  /* #endregion */
+
+  /* #region structure owns its own space */
+  [data-variant="section"] {
+    --heading-size: 2.75rem;
+  }
+  [data-variant="subsection"] {
+    --heading-size: 2.125rem;
+  }
+  [data-variant="minor"] {
+    --heading-size: 1rem;
+  }
+
+  /* headers and headings carry their gaps in their own em; containers and whatever follows them take nothing from the flow */
+  .flow > :is([data-slot="section"], [data-slot="subsection"])[data-variant],
+  .flow > :is([data-slot="header"], [data-slot="heading"]) + *,
+  :is([data-slot="section"], [data-slot="subsection"])
+    :is([data-slot="section"], [data-slot="subsection"])[data-variant]
+    + * {
+    margin-top: 0;
+  }
+
+  /* a nested container closes with a gap in its heading's size */
+  :is([data-slot="section"], [data-slot="subsection"])
+    :is([data-slot="section"], [data-slot="subsection"])[data-variant] {
+    margin-bottom: calc(var(--heading-size) * 1.25);
+  }
+
+  /* minor containers usually end on a list, so they close with the same 32px a list leaves before a minor heading */
+  :is([data-slot="section"], [data-slot="subsection"])
+    [data-slot="subsection"][data-variant="minor"] {
+    margin-bottom: calc(var(--heading-size) * 2);
+  }
+
+  /* the minor look has no header wrapper, so its heading carries the container's top gap */
+  [data-slot="subsection"][data-variant="minor"] > [data-slot="heading"]:first-child {
+    margin-top: 1.125em;
+  }
+  /* #endregion */
+}

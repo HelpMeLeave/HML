@@ -36,7 +36,7 @@ export const QuoteBlockConfig: Block = {
     {
       type: 'richText',
       name: 'content',
-      editor: editorPlainRich,
+      editor: singleLineEditor({ namespace: 'quote' }),
     },
     {
       type: 'upload',

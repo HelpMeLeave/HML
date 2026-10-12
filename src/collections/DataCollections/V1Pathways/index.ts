@@ -1,4 +1,5 @@
-import { editorParagraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { columnField, rowField } from '@/collections/_fields/Flex'
 import { CheckboxConfig, CheckboxGroupConfig } from '@/collections/_lib/Checkbox'
@@ -53,7 +54,7 @@ export const V1Pathways: CollectionConfig<'v1Pathways'> = {
           defaultValue: 'wip',
         }
       ),
-      RichTextConfig('description', editorParagraphRichText)
+      RichTextConfig('description', multiLineEditor())
     ),
     {
       type: 'group',

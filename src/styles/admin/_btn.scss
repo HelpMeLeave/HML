@@ -310,6 +310,9 @@
       font-size: 0.75rem;
       &:hover {
         background-color: alpha(var(--theme-primary), 15);
+        &:is(.popup-button-list__disabled) {
+          background-color: transparent;
+        }
       }
     }
   }

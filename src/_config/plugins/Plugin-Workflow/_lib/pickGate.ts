@@ -25,7 +25,9 @@ export const pickGate = <G>({
   const gate = permissions[from]?.[to]
 
   // One button on the edge is answered directly; several are keyed by affordance.
-  return gate === undefined ? undefined
+  return (
+    gate === undefined ? undefined
     : isKeyed<G>(gate) ? gate[actionKey ?? to]
     : (gate as G)
+  )
 }

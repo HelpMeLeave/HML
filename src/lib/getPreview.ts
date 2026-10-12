@@ -3,7 +3,7 @@ import type {
   SerializedTextNode,
 } from '@payloadcms/richtext-lexical/lexical'
 
-type RichText = { root: { children: SerializedLexicalNode[] } } | null | undefined
+type RichText = Nullish<{ root: { children: SerializedLexicalNode[] } }>
 
 type PreviewOptions = {
   maxLength?: number

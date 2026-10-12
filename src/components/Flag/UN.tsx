@@ -1,7 +1,7 @@
 import { cn } from '@/lib/cn'
 
 export const UNFlag = {
-  Check: ({ attr }: { attr?: boolean | null | undefined | number }) => {
+  Check: ({ attr }: { attr?: Nullish<boolean | number> }) => {
     return attr === true ? <UNFlag.Icon /> : <></>
   },
   Match: () => <UNFlag.Icon />,

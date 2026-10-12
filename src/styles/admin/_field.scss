@@ -546,7 +546,9 @@ $input-form-shadow-hover: var(--form-shadow-hover);
     flex-grow: 1;
   }
   &__thumbnail {
-    flex: 1 1 150px;
+    flex: 0 1 250px;
+    min-height: 250px;
+    aspect-ratio: 1/1;
   }
 }
 
@@ -661,13 +663,6 @@ input {
     }
   }
   &__label {
-    &-small {
-      line-height: 0.85;
-      @include label-all(small);
-      header .field-label {
-        @include label-all(small);
-      }
-    }
     &-base {
       line-height: 0.85;
       @include label-all(base);
@@ -678,6 +673,13 @@ input {
     &-large {
       line-height: 0.85;
       @include _label-size(large);
+    }
+    &-small {
+      line-height: 0.85;
+      @include label-all(small);
+      header .field-label {
+        @include label-all(small);
+      }
     }
   }
 }
@@ -916,6 +918,20 @@ div.field-type.radio-group:not(
       @include dark {
         color: var(--theme-primary-700);
       }
+    }
+  }
+}
+
+#field-filters {
+  .render-fields:has(> #field-filters__asphalt) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .group-field .field-label {
+    &:is(.field-layout__label-small .field-label) {
+      --font-label: var(--font-body);
+      --label-size: 1rem;
+      --label-weight: 600;
     }
   }
 }

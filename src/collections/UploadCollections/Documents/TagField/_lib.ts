@@ -1,7 +1,7 @@
 import { fromCamelCase } from '@/lib/textCasing'
 import type { Tag } from '@/payload-types'
 
-export const normalize = (val: (number | Tag)[] | null | undefined): number[] =>
+export const normalize = (val: Nullish<(number | Tag)[]>): number[] =>
   (val ?? []).map((v) => (typeof v === 'number' ? v : v.id))
 
 export const asOption = (tags: Tag[]) =>

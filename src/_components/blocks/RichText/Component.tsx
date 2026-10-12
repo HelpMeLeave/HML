@@ -5,9 +5,11 @@ export const RichTextComponent = ({
   content,
   converterOverrides,
   pageType,
+  flow,
 }: RichTextBlock & {
   converterOverrides?: RichTextProps['converterOverrides']
   pageType?: string
+  flow?: boolean
 }) => {
   return (
     <RichText
@@ -15,6 +17,7 @@ export const RichTextComponent = ({
       enableGutter={false}
       converterOverrides={converterOverrides}
       pageType={pageType}
+      flow={flow}
     />
   )
 }

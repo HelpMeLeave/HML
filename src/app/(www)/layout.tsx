@@ -1,5 +1,6 @@
 import { getNavigation } from '@/app/(www)/_providers/Navigation/qry.server'
 import { env } from '@/env'
+import { DuotoneFilters } from '@/lexicals/Features/Duotone/DuotoneFilters'
 import { cn } from '@/lib/cn'
 import {
   atkinsonFont,
@@ -51,6 +52,7 @@ const Layout = async ({
           'text-body',
           'has-[#homePage]:bg-[#080808] has-[#homePage]:pb-0 has-[#homePage]:text-white'
         )}>
+        <DuotoneFilters />
         <Providers nav={navFetch}>{children}</Providers>
         {useAnalytics && <Analytics />}
       </body>

@@ -1,6 +1,7 @@
 import type { DirectionFieldFn, DirectionOptions } from '@/collections/_fields/Flex/_types'
 import { cn } from '@/lib/cn'
 import type { Field, GroupField } from 'payload'
+import type { FieldAdmin } from 'payload-types'
 
 const directionField: DirectionFieldFn<'column' | 'row'> = (
   direction,
@@ -61,4 +62,31 @@ const rowField = (options: DirectionOptions, ...fields: Field[]) =>
 const columnField = (options: DirectionOptions, ...fields: Field[]) =>
   directionField('column', options, ...fields) as GroupField
 
-export { columnField, rowField }
+type RowColumnConfigOptions = Omit<DirectionOptions, 'name'>
+  & Pick<FieldAdmin, 'width' | 'position'>
+
+const ColumnConfig = (
+  name: string,
+  { width, position, ...options }: RowColumnConfigOptions,
+  ...fields: Field[]
+) => RowColumnConfig('column', name, { width, position, ...options }, ...fields)
+
+const RowConfig = (
+  name: string,
+  { width, position, ...options }: RowColumnConfigOptions,
+  ...fields: Field[]
+) => RowColumnConfig('row', name, { width, position, ...options }, ...fields)
+
+const RowColumnConfig = (
+  direction: 'row' | 'column',
+  name: string,
+  { width, position, ...options }: RowColumnConfigOptions,
+  ...fields: Field[]
+) =>
+  directionField(
+    direction,
+    { name, ...options, admin: { ...options.admin, width, position } },
+    ...fields
+  ) as GroupField
+
+export { ColumnConfig, columnField, RowConfig, rowField }

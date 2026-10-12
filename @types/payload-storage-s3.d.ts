@@ -30,7 +30,7 @@ declare module '@payloadcms/storage-s3' {
       }
     | boolean
 
-  interface CollectionOptions extends Record<string, any> {
+  interface CollectionOptions extends Record<string, unknown> {
     adapter: Adapter | null
     disableLocalStorage?: boolean
     disablePayloadAccessControl?: true
@@ -70,7 +70,7 @@ declare module '@payloadcms/storage-s3' {
   export type HandleUpload = (args: {
     clientUploadContext: unknown
     collection: CollectionConfig
-    data: any
+    data: unknown
     file: File
     req: PayloadRequest
   }) =>
@@ -89,7 +89,7 @@ declare module '@payloadcms/storage-s3' {
 
   export type GenerateURL = (args: {
     collection: CollectionConfig
-    data: any
+    data: unknown
     filename: string
     prefix?: string
   }) => Promise<string> | string

@@ -1,4 +1,5 @@
-import { editorParagraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { editorParagraphRichText } from '@/lexicals/nested'
 import { is } from '@/access/is'
 import { simpleLinkField } from '@/collections/_fields/LinkBase'
 import { RichTextConfig } from '@/collections/_lib/RichText'
@@ -16,12 +17,12 @@ export const GlobalSettingsGlobalConfig: GlobalConfig = {
       Tab('announcementBanner', [
         { type: 'date', name: 'addedDate', required: true },
         simpleLinkField({ required: true }),
-        RichTextConfig('banner', editorParagraphRichText, { required: true }),
+        RichTextConfig('banner', multiLineEditor(), { required: true }),
       ]).named(),
       Tab('policies', [
-        { type: 'richText', name: 'privacy', editor: editorParagraphRichText },
-        { type: 'richText', name: 'cookie', editor: editorParagraphRichText },
-        { type: 'richText', name: 'accessibility', editor: editorParagraphRichText },
+        { type: 'richText', name: 'privacy', editor: multiLineEditor() },
+        { type: 'richText', name: 'cookie', editor: multiLineEditor() },
+        { type: 'richText', name: 'accessibility', editor: multiLineEditor() },
       ]).named()
     ).field(),
   ],

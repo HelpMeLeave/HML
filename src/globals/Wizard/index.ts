@@ -1,4 +1,5 @@
-import { editorFull } from '@/_components/lexicals/full'
+import { contentEditor } from '@/lexicals/editors'
+// import { editorFull } from '@/lexicals/full'
 import { simpleLinkField } from '@/collections/_fields/LinkBase'
 import { createRowLabel } from '@/collections/_labels/RowLabel/rowLabelEl'
 import type { SupportWizard } from '@/payload-types'
@@ -37,7 +38,7 @@ export const WizardGlobalConfig: GlobalConfig = {
         {
           type: 'richText',
           name: 'content',
-          editor: editorFull(),
+          editor: contentEditor(),
         },
         {
           type: 'blocks',
@@ -60,7 +61,7 @@ export const WizardGlobalConfig: GlobalConfig = {
                   name: 'modal',
                   // the target is a modal row id, so deleting that modal would leave this button going nowhere
                   validate: (
-                    value: string | null | undefined,
+                    value: Nullish<string>,
                     { data }: { data: Partial<SupportWizard> }
                   ) => {
                     if (!value) return true

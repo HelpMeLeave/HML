@@ -1,7 +1,8 @@
 'use client'
 
 import { TextField } from '@/components/Form'
-import { env } from '@/env'
+// import { env } from '@/env'
+import { env } from '@/env.client'
 import { useField } from '@payloadcms/ui'
 import { Copy } from 'lucide-react'
 

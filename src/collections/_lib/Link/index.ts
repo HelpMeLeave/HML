@@ -1,7 +1,6 @@
 import type { BaseFieldProps } from '@/collections/_lib/_types'
 import type { TextField } from 'payload'
 
-const LinkFieldPath = '@/collections/_lib/Link/Field'
 export const LinkCellPath = '@/collections/_lib/Link/Cell'
 
 export const LinkConfig = (name: string, options?: BaseFieldProps<TextField>): TextField =>
@@ -13,7 +12,7 @@ export const LinkConfig = (name: string, options?: BaseFieldProps<TextField>): T
       ...options?.admin,
       components: {
         ...options?.admin?.components,
-        Field: options?.admin?.components?.Field ?? LinkFieldPath,
+        Field: options?.admin?.components?.Field ?? '@/collections/_lib/Link/Field',
         Cell: options?.admin?.components?.Cell ?? LinkCellPath,
       },
     },

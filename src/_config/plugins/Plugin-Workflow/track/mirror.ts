@@ -1,5 +1,5 @@
 import { type TrackFilter, trackDecision } from '@/_config/plugins/Plugin-Workflow/track/filter'
-import type { Field, Tab } from 'payload'
+import type { Field, RichTextAdapter, RichTextField, Tab } from 'payload'
 import type { FlowOptionsCollector } from 'payload-workflow'
 import {
   fieldAffectsData,
@@ -20,6 +20,22 @@ const shouldSkip = (field: Field) => {
     || fieldIsPresentationalOnly(field)
   )
 }
+
+/** Same editor, but its node sub-fields skip validation — the content was validated when it was saved. */
+const unvalidatedEditor =
+  (editor: RichTextField['editor']): RichTextField['editor'] =>
+  async (args) => {
+    const resolved: RichTextAdapter = typeof editor == 'function' ? await editor(args) : editor!
+    return {
+      ...resolved,
+      hooks: {
+        ...resolved.hooks,
+        beforeChange: resolved.hooks?.beforeChange?.map(
+          (hook) => (hookArgs) => hook({ ...hookArgs, skipValidation: true })
+        ),
+      },
+    }
+  }
 
 export const mirrorFields = ({
   fields,
@@ -62,6 +78,7 @@ export const mirrorFields = ({
         ...(localized && { localized }),
         ...(fieldHasMaxDepth(base) && { maxDepth: base.maxDepth }),
         ...(fieldSupportsMany(base) && { hasMany: base.hasMany }),
+        ...(fieldAffectsData(base) && { validate: () => true }),
         ...props,
       }) as F
 
@@ -104,7 +121,7 @@ export const mirrorFields = ({
     }
 
     if (field.type == 'richText') {
-      mirrored.push(snap(field, { editor: field.editor }))
+      mirrored.push(snap(field, { editor: field.editor && unvalidatedEditor(field.editor) }))
       return mirrored
     }
 

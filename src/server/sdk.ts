@@ -1,4 +1,5 @@
-import { env } from '@/env'
+// import { env } from '@/env'
+import { env } from '@/env.client'
 import type { Config } from '@/payload-types'
 import { PayloadSDK } from '@payloadcms/sdk'
 

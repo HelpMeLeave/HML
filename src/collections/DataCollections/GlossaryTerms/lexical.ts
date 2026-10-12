@@ -1,4 +1,5 @@
-import { paragraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { paragraphRichText } from '@/lexicals/nested'
 import { columnField } from '@/collections/_fields/Flex'
 import { LinkFeature } from '@payloadcms/richtext-lexical'
 import type { CheckboxField, Field, RadioField } from 'payload'
@@ -38,4 +39,5 @@ const LexicalDefinitionFeature = LinkFeature({
   disableAutoLinks: true,
 })
 
-export const glossaryLexical = paragraphRichText([LexicalDefinitionFeature])
+// export const glossaryLexical = paragraphRichText([LexicalDefinitionFeature])
+export const glossaryLexical = multiLineEditor([LexicalDefinitionFeature])

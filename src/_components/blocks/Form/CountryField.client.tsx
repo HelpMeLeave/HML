@@ -6,7 +6,7 @@ import { useFormContext } from '@/_components/blocks/Form/_FormComponent/formHoo
 import type { FormFieldCountry } from '@/payload-types'
 import { parseMetaError } from './_lib/parseMetaError'
 
-type Country = { id: string; name: string | null | undefined }
+type Country = { id: string; name: Nullish<string> }
 
 export const CountrySelect = (props: FormFieldCountry & { countries: Country[] }) => {
   const { name, label, required, countries } = props

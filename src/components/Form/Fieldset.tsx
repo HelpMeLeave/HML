@@ -49,7 +49,8 @@ export const Legend = ({
 >) => {
   return (
     <HeadlessLegend
-      data-slot='legend'
+      // data-slot='legend'
+      data-slot='label'
       {...props}
       as='legend'
       className={cn(

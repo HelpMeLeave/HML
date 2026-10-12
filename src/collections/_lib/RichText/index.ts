@@ -1,6 +1,7 @@
-import { editorFull } from '@/_components/lexicals/full'
-import { baseAdmin, baseTheme } from '@/_components/lexicals/options'
-import { editorPlainRich } from '@/_components/lexicals/plainRich'
+import { contentEditor, multiLineEditor } from '@/lexicals/editors'
+// import { editorFull } from '@/lexicals/full'
+import { baseAdmin, baseTheme } from '@/lexicals/options'
+// import { editorPlainRich } from '@/lexicals/plainRich'
 import type { BaseFieldProps } from '@/collections/_lib/_types'
 import {
   type FeatureProviderServer,
@@ -11,7 +12,8 @@ import type { RichTextField } from 'payload'
 
 const RichTextCellPath = '@/collections/_lib/RichText/Cell'
 
-type LexicalProvider = typeof editorPlainRich
+// type LexicalProvider = typeof editorPlainRich
+type LexicalProvider = ReturnType<typeof multiLineEditor>
 type LexicalProps = Omit<LexicalEditorProps, 'features'> & {
   features: FeatureProviderServer[]
 }
@@ -40,8 +42,10 @@ const createEditor = (editor: ConfigEditorProp) => {
 }
 
 const editorOptions = {
-  fullPage: editorFull(),
-  withoutBlocks: editorPlainRich,
+  // fullPage: editorFull(),
+  // withoutBlocks: editorPlainRich,
+  fullPage: contentEditor(),
+  withoutBlocks: multiLineEditor(),
 }
 
 export const RichTextConfig = (

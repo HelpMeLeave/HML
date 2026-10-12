@@ -18,11 +18,14 @@ declare global {
 
     type Heading = Props<'h1'> & {
       level?: 1 | 2 | 3 | 4 | 5 | 6
+      /** The look, independent of the tag; defaults from `level`. */
+      variant?: import('@/lib/slots').HeadingVariant
       size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'title'
     }
     type WithRef<T extends React.ElementType> = React.ComponentPropsWithRef<T>
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   type AnySafe = any
   type AnyObject = Record<string, AnySafe>
   type Sub<T, Target extends keyof T, NewType = Record<T, unknown>> = Omit<T, Target> & NewType
@@ -31,6 +34,7 @@ declare global {
     params: Promise<V>
   }
 
+  type Nullish<T> = T | null | undefined
   type Valid<T> = Exclude<T, null | undefined>
   type Override<Type, NewType> = Omit<Type, keyof NewType> & NewType
   type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>

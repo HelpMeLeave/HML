@@ -137,7 +137,8 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
         <li
           data-indent={node.indent}
           className={cn(
-            'my-1.5 first:mt-0 last:mb-3 has-[#spacer]:mb-2',
+            // 'my-1.5 first:mt-0 last:mb-3 has-[#spacer]:mb-2',
+            'my-1.5 first:mt-0 last:mb-3 has-data-[slot=spacer]:mb-2',
             isTitle ? 'list-title my-0 -ml-4 list-none pl-0 text-pretty' : 'pl-2',
             parent.type == 'listitem' && 'list-none',
             parent.type == 'list' && (parent as SerializedListNode).listType == 'check' && 'pl-6!',
@@ -154,14 +155,17 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     'rich-list-item': ({ node, nodesToJSX, parent }) =>
       nodesToJSX({ nodes: [{ ...node, type: 'listitem' }], parent }),
     'rich-list-item-title': (props) => NTK(P, props, { className: 'text-accent' }),
-    'rich-list-item-body': (props) => NTK('div', props, { className: '*:mt-0 space-y-4 mb-3' }),
+    // 'rich-list-item-body': (props) => NTK('div', props, { className: '*:mt-0 space-y-4 mb-3' }),
+    'rich-list-item-body': (props) => NTK('div', props, { className: 'flow mb-3 -mt-[0.25em]' }),
     // #endregion ! --------------------
     // ------------------------------------------------------------
     // #region ! ---------- TABLE ----------
     table: ({ node, nodesToJSX }) => {
       // TODO: Design table
       return (
-        <table className='overflow-hidden rounded-xl shadow-sm sm:mx-auto! dark:bg-black'>
+        <table
+          data-slot='table'
+          className='overflow-hidden rounded-xl shadow-sm sm:mx-auto! dark:bg-black'>
           <tbody>{nodesToJSX({ nodes: node.children })}</tbody>
         </table>
       )
@@ -199,7 +203,8 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       return NTK(P, props, {
         className: cn(
           // 'mt-[0.5em] mb-[0.5em] leading-loose peer-[h4]:mt-0 [:is(ol+p)]:mt-[2em] [:is(p+p)]:mt-[1em] [:is(ul+p)]:mt-[2em]',
-          'mt-[0.5em] mb-[0.5em] leading-loose peer-data-[slot=heading]:peer-data-[variant=minor]:mt-0 [:is(ol+p)]:mt-[2em] [:is(p+p)]:mt-[1em] [:is(ul+p)]:mt-[2em]',
+          // 'mt-[0.5em] mb-[0.5em] leading-loose peer-data-[slot=heading]:peer-data-[variant=minor]:mt-0 [:is(ol+p)]:mt-[2em] [:is(p+p)]:mt-[1em] [:is(ul+p)]:mt-[2em]',
+          'leading-loose',
           child
             && child.format == 2
             && 'px-6 text-[0.9rem] leading-relaxed text-balance *:saturate-75'
@@ -222,6 +227,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       if (url) {
         return (
           <Image
+            data-slot='media'
             overrideSrc={url}
             width={Number(width)}
             height={Number(height)}
@@ -235,13 +241,16 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     linebreak: () => (
       <span
         role='none'
-        id='spacer'
+        // id='spacer'
+        data-slot='spacer'
         className='pointer-events-none block h-[0.5lh] select-none [:is(li>*)]:h-0'
       />
     ),
     blockquote: ({ node, nodesToJSX }) => {
       return (
-        <blockquote className='border-l-2 border-accent'>
+        <blockquote
+          data-slot='quote'
+          className='border-l-2 border-accent'>
           {nodesToJSX({ nodes: node.children })}
         </blockquote>
       )
@@ -251,7 +260,10 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       console.log(calloutType)
 
       return (
-        <P className='mx-auto my-6 flex w-fit max-w-4/5 gap-4 rounded-md bg-accent/50 px-4 py-2 pl-3 text-sm text-accent-50 outline outline-accent/20'>
+        <P
+          data-slot='callout'
+          // className='mx-auto my-6 flex w-fit max-w-4/5 gap-4 rounded-md bg-accent/50 px-4 py-2 pl-3 text-sm text-accent-50 outline outline-accent/20'>
+          className='mx-auto flex w-fit max-w-4/5 gap-4 rounded-md bg-accent/50 px-4 py-2 pl-3 text-sm text-accent-50 outline outline-accent/20'>
           <Star
             size={14}
             className='mt-px fill-current stroke-0'

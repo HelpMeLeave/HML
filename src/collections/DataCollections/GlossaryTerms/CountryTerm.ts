@@ -1,4 +1,5 @@
-import { editorParagraphRichText } from '@/_components/lexicals/nested'
+import { multiLineEditor } from '@/lexicals/editors'
+// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { rowField } from '@/collections/_fields/Flex'
 import { LinkConfig } from '@/collections/_lib/Link'
@@ -51,7 +52,7 @@ export const GlossaryTermCountryCollectionConfig: CollectionConfig<'glossary-ter
 
     {
       type: 'richText',
-      editor: editorParagraphRichText,
+      editor: multiLineEditor(),
       name: 'definition',
     },
     {

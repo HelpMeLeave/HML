@@ -8,7 +8,7 @@ export const createPathHook =
   (collection: 'pathway-categories' | 'pathway-document-types') =>
   async ({ data, req }: FieldHookArgs<PathwayCategory | PathwayDocumentType>) => {
     if (!data) return
-    let parentPath: string | null | undefined
+    let parentPath: Nullish<string>
     let parent: Partial<PathwayCategory | PathwayDocumentType> | number | null = data.parent ?? null
 
     if (parent) {

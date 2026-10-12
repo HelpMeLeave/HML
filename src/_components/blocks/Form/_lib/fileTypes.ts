@@ -1,8 +1,3 @@
-// Single source of truth for form Upload field file types.
-// Shared by the Upload block config, the /api/form-upload route handler, and the
-// client UploadField component so the friendly categories always map to the same
-// concrete MIME types.
-
 const FILE_TYPE_MIMES = {
   image: ['image/jpeg', 'image/png', 'image/webp', 'image/gif'],
   pdf: ['application/pdf'],
@@ -34,14 +29,11 @@ export const ALL_UPLOAD_MIMES: string[] = Object.values(FILE_TYPE_MIMES).flat()
 const isCategory = (value: unknown): value is FileTypeCategory =>
   typeof value === 'string' && value in FILE_TYPE_MIMES
 
-// Resolve the editor-selected categories to the concrete list of MIME types.
-export const resolveMimes = (
-  values: readonly (string | null | undefined)[] | null | undefined
-): string[] => {
+export const resolveMimes = (values: Nullish<readonly Nullish<string>[]>): string[] => {
   const cats = (values ?? []).filter(isCategory)
   return [...new Set(cats.flatMap((c) => FILE_TYPE_MIMES[c] as readonly string[]))]
 }
 
 // Build the `accept` attribute value for the file input from selected categories.
-export const toAcceptAttr = (values: readonly (string | null | undefined)[] | null | undefined) =>
+export const toAcceptAttr = (values: Nullish<readonly Nullish<string>[]>) =>
   resolveMimes(values).join(',')

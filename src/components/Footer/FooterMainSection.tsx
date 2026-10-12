@@ -6,7 +6,7 @@ export const FooterLogo = () => (
   <Logo
     mark='uppercase'
     logoType='mark'
-    className='hidden h-full w-auto text-brand-red md:block md:text-red-700 dark:text-yellow-500 print:h-30'
+    className='text-brand-red hidden h-full w-auto md:block md:text-red-700 dark:text-yellow-500 print:h-30'
   />
 )
 

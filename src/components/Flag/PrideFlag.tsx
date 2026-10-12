@@ -1,7 +1,7 @@
 import { cn } from '@/lib/cn'
 
 export const PrideFlag = {
-  Check: ({ attr }: { attr?: boolean | null | undefined | number }) =>
+  Check: ({ attr }: { attr?: Nullish<boolean | number> }) =>
     attr === true ? <PrideFlag.Icon /> : <></>,
   Icon: ({ ...props }: Props<'svg'>) => {
     return (

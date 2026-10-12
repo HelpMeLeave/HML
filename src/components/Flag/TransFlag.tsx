@@ -1,5 +1,5 @@
 export const TransFlag = {
-  Check: ({ attr }: { attr: boolean | null | undefined | number }) =>
+  Check: ({ attr }: { attr: Nullish<boolean | number> }) =>
     attr === true ? <TransFlag.Icon /> : <></>,
   Icon: ({ ...props }: Props<'svg'>) => {
     return (

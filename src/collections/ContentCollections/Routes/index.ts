@@ -1,10 +1,14 @@
 import { tFn } from '@/_config/i18n/'
 import { is } from '@/access/is'
 import { rowField } from '@/collections/_fields/Flex'
+import { CheckboxConfig } from '@/collections/_lib/Checkbox'
 import { JoinConfig } from '@/collections/_lib/Join'
 import { LinkConfig } from '@/collections/_lib/Link'
 import { TextConfig } from '@/collections/_lib/Text'
+import { TextareaConfig } from '@/collections/_lib/Textarea'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
+import { conditionFn } from '@/lib/condition'
+import { type Route } from '@/payload-types'
 import type { CollectionConfig } from 'payload'
 
 const componentPathBase = '@/_config/plugins/Plugin-Workflow/_components/Pill'
@@ -67,7 +71,19 @@ const RoutesCollectionConfig: CollectionConfig<'routes'> = {
         access: { update: is().Role.Director },
       })
     ),
-    { type: 'textarea', name: 'tagline' },
+    rowField(
+      { label: 'Tagline' },
+      CheckboxConfig('useSubtitleTagline', { defaultValue: true, admin: { width: '200px' } }),
+      TextareaConfig('tagline', {
+        label: false,
+        width: 'calc(100% - 250px)',
+        admin: { className: 'min-w-[200px]!' },
+        condition: conditionFn<Route, 'useSubtitleTagline'>({
+          key: 'useSubtitleTagline',
+          equals: true,
+        }).siblingDataEq,
+      })
+    ),
     TextConfig('keywords', { hasMany: true }),
     // #region ! ---------- sidebar ----------
     {

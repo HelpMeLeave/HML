@@ -1,10 +1,8 @@
-import { baseFeatures, baseTheme } from '@/_components/lexicals/options'
 import { viewPath } from '@/_components/views'
 import { SidebarTogglePath } from '@/_components/views/SidebarToggle'
 import {
   ColumnsBlockConfig,
   CTABlockConfig,
-  DynamicTextInlineBlockConfig,
   RichTextConfig,
   VideoPlayerBlockConfig,
 } from '@/_config/Blocks'
@@ -13,7 +11,9 @@ import { i18n } from '@/_config/i18n'
 import { plugins } from '@/_config/plugins'
 import { Schema } from '@/_config/schema'
 import { collections } from '@/collections'
+import { env } from '@/env'
 import { globals } from '@/globals'
+import { baseTheme, contentFeatures } from '@/lexicals/options'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { type PgSchema, pgEnum } from '@payloadcms/db-postgres/drizzle/pg-core'
 import { resendAdapter } from '@payloadcms/email-resend'
@@ -36,10 +36,12 @@ const config = buildConfig({
     walked: false,
     sidebarCollections: [],
   },
+  serverURL: env.NEXT_PUBLIC_BASE_URL,
   i18n,
   folders,
   editor: lexicalEditor({
-    features: baseFeatures().all(),
+    // features: baseFeatures.all(),
+    features: contentFeatures,
     lexical: {
       theme: baseTheme,
       namespace: 'root',
@@ -229,13 +231,7 @@ const config = buildConfig({
   // #endregion ! --------------------
 
   // #region ! ---------- BLOCKS ----------
-  blocks: [
-    RichTextConfig,
-    VideoPlayerBlockConfig,
-    CTABlockConfig,
-    ColumnsBlockConfig,
-    DynamicTextInlineBlockConfig,
-  ],
+  blocks: [RichTextConfig, VideoPlayerBlockConfig, CTABlockConfig, ColumnsBlockConfig],
   // #endregion ! --------------------
 
   // #region ! ---------- PLUGINS ----------

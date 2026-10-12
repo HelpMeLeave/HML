@@ -645,3 +645,12 @@ table tbody td {
 }
 
 // #endregion
+
+@media (max-width: 1024px) {
+  .tooltip {
+    display: block;
+  }
+  :is(.\*\*\:text-\(--color\) *).tooltip-content {
+    color: var(--color-background);
+  }
+}

@@ -27,11 +27,12 @@ export const CardBody = (props: Props & { as?: ElementType }) => {
 
 export const CardTitle = ({ ...props }: Props) => (
   <span
-    data-slot='linkText'
+    // data-slot='linkText'
+    data-slot='heading'
     {...props}
     className={cn(
       'decoration-brand-mulberry/50 dark:decoration-brand-yellow/50',
-      'text-body dark:text-brand-grey',
+      'dark:text-brand-grey text-body',
       'font-semibold underline decoration-2 underline-offset-2 transition-all dark:font-medium',
       props.className
     )}

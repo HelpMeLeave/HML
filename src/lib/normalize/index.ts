@@ -2,7 +2,7 @@ import { toTitleCase } from '@/lib/textCasing'
 import type { OptionObject } from 'payload'
 import { extractID } from 'payload/shared'
 
-export const normalizeCollectionID = (entry?: { id: number } | number | null | undefined) =>
+export const normalizeCollectionID = (entry?: Nullish<{ id: number } | number>) =>
   entry ? extractID(entry) : -1
 
 export const normalizeAdminPath = (path: string | string[] | null) => {

@@ -9,6 +9,11 @@ export type Slot =
   | 'content'
   | 'text'
   | 'media'
+  | 'list'
+  | 'quote'
+  | 'table'
+  | 'callout'
+  | 'spacer'
   | 'icon'
   | 'actions'
   | 'footer'
@@ -19,7 +24,14 @@ export type Slot =
 
 /** Component roots, named after the component. */
 export type RootSlot =
-  'section' | 'subsection' | 'section-cover' | 'page' | 'announcement' | 'admin-bar' | 'field'
+  | 'section'
+  | 'subsection'
+  | 'section-cover'
+  | 'page'
+  | 'announcement'
+  | 'admin-bar'
+  | 'field'
+  | 'cta'
 
 /** `data-variant` for headings and the section/subsection containers that hold them. */
 export type HeadingVariant = 'page' | 'section' | 'subsection' | 'minor'
