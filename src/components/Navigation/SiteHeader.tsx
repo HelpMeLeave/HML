@@ -124,7 +124,10 @@ export const SiteHeader = ({ topNav: nav }: { topNav: tNavFetchCTX['topNav'] }) 
   return (
     <header
       onMouseLeave={() => setOpenSlug(null)}
-      className={cn('sticky top-0 z-99 border-b border-hr-muted/10', 'max-md:mb-8 print:static')}>
+      className={cn(
+        'sticky top-0 z-99 border-b border-hr-muted/10',
+        'mb-4 md:max-md:mb-8 print:static'
+      )}>
       <div className='relative z-1 flex flex-wrap items-stretch bg-background/80 px-2 not-print:backdrop-blur-sm md:pr-6'>
         <NavSectionLogo />
 

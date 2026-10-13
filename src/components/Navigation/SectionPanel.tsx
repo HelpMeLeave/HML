@@ -3,6 +3,7 @@
 import type { tNavFetchTopNavItem } from '@/app/(www)/_providers/_types'
 import { ButtonLink } from '@/components/Navigation/ButtonLink'
 import { InlineLink } from '@/components/primitives/Link'
+import { ExternalLinkIcon } from 'lucide-react'
 
 export const SectionPanel = ({
   section,
@@ -14,7 +15,7 @@ export const SectionPanel = ({
   <div
     onMouseEnter={() => {}}
     onMouseLeave={onClose}
-    className='absolute inset-x-0 top-full border-t border-b border-hr-muted bg-background/90 shadow-[0_24px_48px_-28px] shadow-black/20 backdrop-blur-sm max-md:hidden'>
+    className='absolute inset-x-0 top-full border-t border-b border-hr-muted/20 bg-background/90 shadow-[0_24px_48px_-28px] shadow-black/20 backdrop-blur-sm max-md:hidden dark:border-hr-muted'>
     <div className='relative z-1 mx-auto grid max-w-350 grid-cols-[minmax(0,17rem)_1fr_1fr] gap-x-12 px-12 pt-10 pb-9'>
       <div>
         <p className='mb-3 text-xs font-semibold tracking-[0.26em] text-soft uppercase'>
@@ -49,10 +50,13 @@ export const SectionPanel = ({
                   prefetch={false}
                   onClick={onClose}
                   className='group block border-b border-hr-muted py-2.5 text-soft! no-underline! decoration-0! last:border-b-0'>
-                  <span className='mb-0.5 block text-[0.95rem] font-semibold transition-colors group-hocus:text-accent'>
+                  <span className='mb-0.5 block text-[0.95rem] font-semibold underline decoration-accent/50 decoration-[1.75px] underline-offset-2 transition-colors group-hocus:text-accent group-hocus:decoration-accent group-hocus:decoration-1'>
                     {child.displayText}
+                    {child.type == 'external' && (
+                      <ExternalLinkIcon className='ml-2 inline-block size-2.5 text-current/50' />
+                    )}
                   </span>
-                  <span className='block text-[0.8rem] leading-snug text-muted'>
+                  <span className='block text-[0.8rem] leading-snug font-normal text-muted'>
                     {child.description}
                   </span>
                 </InlineLink>

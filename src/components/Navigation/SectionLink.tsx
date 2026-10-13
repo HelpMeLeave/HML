@@ -12,7 +12,7 @@ const link = cva(
     'after:absolute after:inset-x-4 after:-bottom-px after:h-0.5 after:bg-accent',
     'after:scale-x-0 after:transition-transform',
     'max-md:shrink-0 max-md:px-4 max-md:py-3.5 max-md:after:inset-x-4 max-md:after:bottom-0',
-    'click outline-0 focus-visible:bg-accent-muted/20',
+    'outline-0 focus-visible:bg-accent-muted/20',
   ],
   {
     variants: {

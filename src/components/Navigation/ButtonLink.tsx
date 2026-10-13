@@ -1,3 +1,4 @@
+import { cn } from '@/lib/cn'
 import { isTraversable } from '@/lib/normalize/is'
 import Link from 'next/link'
 
@@ -9,6 +10,7 @@ export const ButtonLink = (props: Props<'button'> | Props<typeof Link>) => {
     return (
       <Link
         {...props}
+        className={cn('click', props.className)}
         prefetch={false}
         href={props.href}
       />
