@@ -13,9 +13,9 @@ const options = ['top', 'bottom', 'middle'].flatMap((y) =>
 export const duotoneFields: GroupField = {
   type: 'group',
   name: 'duotone',
-  admin: {
-    condition: (_data, siblingData) => siblingData?.purpose == 'heading',
-  },
+  // admin: {
+  //   condition: (_data, siblingData) => siblingData?.purpose == 'heading',
+  // },
   fields: [
     {
       name: 'color',

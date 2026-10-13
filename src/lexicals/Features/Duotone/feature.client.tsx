@@ -2,6 +2,7 @@
 
 import { duotoneFilter } from '@/lexicals/Features/Duotone/_lib/filter'
 import { DuotoneFilters } from '@/lexicals/Features/Duotone/DuotoneFilters'
+import { DuotoneSwatches } from '@/lexicals/Features/Duotone/DuotoneSwatches'
 import {
   duotoneChipVars,
   duotoneFilterStyle,
@@ -10,9 +11,11 @@ import {
 import { $isUploadNode, createClientFeature, UploadNode } from '@payloadcms/richtext-lexical/client'
 import { $getNodeByKey } from '@payloadcms/richtext-lexical/lexical'
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { DUOTONES } from './_lib/DUOTONES'
-import type { DuotoneFields } from './_types'
+import type { DuotoneFields, DuotoneThemed } from './_types'
+import './style.scss'
 
 const editorCss = DUOTONES.map(({ value }) => {
   const upload = `.lexical-upload[data-duotone='${value}']`
@@ -31,10 +34,14 @@ const editorCss = DUOTONES.map(({ value }) => {
 /** Mirrors each upload node's duotone preset and cover position onto its DOM element for CSS. SectionCover's layout rules read data-position from here. */
 const DuotonePreviewPlugin = () => {
   const [editor] = useLexicalComposerContext()
+  const [covers, setCovers] = useState<Record<string, { el: HTMLElement; color?: DuotoneThemed }>>(
+    {}
+  )
 
   useEffect(
     () =>
       editor.registerMutationListener(UploadNode, (mutations) => {
+        const next: typeof covers = {}
         editor.getEditorState().read(() => {
           for (const [key, mutation] of mutations) {
             if (mutation == 'destroyed') continue
@@ -57,7 +64,15 @@ const DuotonePreviewPlugin = () => {
 
             if (duotone?.position) el.dataset.position = duotone.position
             else delete el.dataset.position
+
+            if (node.getData().relationTo == 'media-content')
+              next[key] = { el, color: preset?.value }
           }
+        })
+        setCovers((prev) => {
+          const merged = { ...prev }
+          for (const [key] of mutations) delete merged[key]
+          return { ...merged, ...next }
         })
       }),
     [editor]
@@ -67,6 +82,17 @@ const DuotonePreviewPlugin = () => {
     <>
       <DuotoneFilters />
       <style>{editorCss}</style>
+      {Object.entries(covers).map(([key, { el, color }]) =>
+        createPortal(
+          <DuotoneSwatches
+            editor={editor}
+            nodeKey={key}
+            color={color}
+          />,
+          el,
+          key
+        )
+      )}
     </>
   )
 }
