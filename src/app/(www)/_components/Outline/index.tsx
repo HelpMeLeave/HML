@@ -1,6 +1,7 @@
 'use client'
 
 import { SmLeftRail } from '@/app/(www)/_components/LeftRail'
+import { Button } from '@/components/Button'
 import { InlineLink } from '@/components/primitives/Link'
 import { useScrollProgress } from '@/hooks/useInView'
 import { headingID, headingPlainText } from '@/lexicals/Features/_lib/slugifyHeadingID'
@@ -8,7 +9,8 @@ import { cn } from '@/lib/cn'
 import { getNodesFromRichText } from '@/lib/getNodesFromRichText'
 import type { DefaultTypedEditorState, SerializedHeadingNode } from '@payloadcms/richtext-lexical'
 import type { SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
-import { useMemo } from 'react'
+import { ChevronDown } from 'lucide-react'
+import { useMemo, useState } from 'react'
 
 type HeadingGrp = {
   section: SerializedLexicalNode
@@ -31,7 +33,7 @@ const Grp = ({
   progress?: number
 }) => {
   return (
-    <ul className='relative text-base'>
+    <ul className='relative ml-2.5 text-base'>
       <span
         style={{
           height: `100%`,
@@ -73,7 +75,6 @@ const Link = ({
         level == 1 ? 'pl-3 text-body/95' : 'pl-5',
         'my-0 -ml-0.5',
         'transition-all ease-out'
-        // isInView ? 'border-accent' : 'border-ui-100'
       )}>
       <InlineLink
         className={cn(
@@ -110,6 +111,8 @@ export const TOC = ({
   title: string
   docPreview: string
 }) => {
+  const [show, setShow] = useState(false)
+
   const headings = useMemo(
     () =>
       getNodesFromRichText(
@@ -150,16 +153,23 @@ export const TOC = ({
   if (headings.length > 0) {
     return (
       <SmLeftRail aria-labelledby='toc-heading'>
-        <h4
-          id='toc-heading'
-          className='mb-1 text-lg font-bold'>
-          ON THIS PAGE
+        <h4 id='toc-heading'>
+          <Button
+            type='button'
+            onClick={() => setShow((prev) => !prev)}
+            variant='ghost'
+            className='flex click items-center gap-1 pl-0 text-lg font-bold *:size-5 *:transition-all hocus:text-accent hocus:outline-0'>
+            <ChevronDown className={show ? 'rotate-0' : '-rotate-90'} />
+            ON THIS PAGE
+          </Button>
         </h4>
-        <Grp
-          headings={headings}
-          level={1}
-          progress={progress}
-        />
+        {show && (
+          <Grp
+            headings={headings}
+            level={1}
+            progress={progress}
+          />
+        )}
       </SmLeftRail>
     )
   }
