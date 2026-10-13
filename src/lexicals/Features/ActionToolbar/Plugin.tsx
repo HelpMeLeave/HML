@@ -9,6 +9,8 @@ import {
   useEditorConfigContext,
 } from '@payloadcms/richtext-lexical/client'
 import {
+  $getSelection,
+  $isRangeSelection,
   COMMAND_PRIORITY_LOW,
   mergeRegister,
   SELECTION_CHANGE_COMMAND,
@@ -43,7 +45,12 @@ export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement })
     if (!ref.current) return
 
     const check = $getVisibleToolbars()
-    const target = $getActualNode(check, editor)
+    const el = $getSelection()
+
+    const target =
+      $isRangeSelection(el) ?
+        editor.getElementByKey(el.anchor.getNode().getKey())
+      : $getActualNode(check, editor)
 
     setToolbar(Object.fromEntries(check.map((c) => [c.slug, c.check])))
     setFloatingElemPosition({
@@ -51,6 +58,7 @@ export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement })
       floatingElem: ref.current,
       targetRect: target instanceof HTMLElement ? target?.getBoundingClientRect() : null,
       horizontalOffset: 0,
+      verticalGap: 15,
     })
   })
 

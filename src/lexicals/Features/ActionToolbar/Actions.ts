@@ -22,13 +22,17 @@ import {
 import { $getHeadingAtCaret } from '@/lexicals/Features/Structure/_lib'
 import { fromCamelCase } from '@/lib/textCasing'
 import type { ResolvedClientFeatureMap } from '@payloadcms/richtext-lexical'
-import { $getState, $setState, type LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
+import {
+  $getState,
+  $isParagraphNode,
+  $setState,
+  type LexicalEditor,
+} from '@payloadcms/richtext-lexical/lexical'
 import { $isListItemNode } from '@payloadcms/richtext-lexical/lexical/list'
 import {
   ArrowDown,
   ArrowUp,
   BookOpenText,
-  Image,
   ImageMinus,
   ImagePlus,
   Lightbulb,
@@ -119,10 +123,8 @@ const StructureGrp = createButtonGroup('headings', {
 const CoverGrp: ToolbarActionGroup = {
   toolbar: 'headings',
   features: ['section-cover'],
-  label: 'Cover Image',
-  Icon: Image,
   slug: 'section-cover',
-  type: 'dropdown',
+  type: 'buttons',
   $include: () => Boolean($hgroupAtCaret()),
   $getKey: () => $getCover($hgroupAtCaret())?.getKey() ?? null,
   entries: [
@@ -136,6 +138,7 @@ const CoverGrp: ToolbarActionGroup = {
         const key = editor?.getEditorState().read(() => $hgroupAtCaret()?.getKey())
         if (key) editor?.dispatchCommand(OPEN_COVER_DRAWER_COMMAND, key)
       },
+      hideIfDisabled: true,
     },
     {
       slug: 'removeCoverImg',
@@ -144,13 +147,13 @@ const CoverGrp: ToolbarActionGroup = {
       isActive: () => false,
       $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
       onSelect: (editor) => editor?.update(() => $getCover($hgroupAtCaret())?.remove()),
+      hideIfDisabled: true,
     },
   ],
 }
 
 const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
   feature: 'list-title',
-  // IS THIS RETURNING NULL IF IT IS A LIST TITLE??
   $getKey: () => $getFirstItemInCurrentList($getListAtCaret())?.getKey(),
   entries: [
     {
@@ -158,7 +161,14 @@ const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
       label: 'Make List Title',
       Icon: ListStart,
       isActive: () => false,
-      $isEnabled: (_editor) => Boolean($getTitledListAtCaret()) == false,
+      $isEnabled: () => {
+        const list = $getListAtCaret()
+        return (
+          Boolean(list)
+          && Boolean($getTitledListAtCaret()) == false
+          && $isParagraphNode(list?.getPreviousSibling())
+        )
+      },
       onSelect: (editor) =>
         editor?.update(() => {
           const lead = $getPotentialListTitle()
@@ -171,7 +181,7 @@ const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
       label: 'Dissolve List Title',
       Icon: List,
       isActive: () => false,
-      $isEnabled: (_editor) => Boolean($getTitledListAtCaret()),
+      $isEnabled: () => Boolean($getTitledListAtCaret()),
       onSelect: (editor) =>
         editor?.update(() => {
           const list = $getTitledListAtCaret()
@@ -248,11 +258,11 @@ const CalloutActionBase: ToolbarActionGroup = createButtonGroup('callout', {
   feature: 'callout',
   $getKey: () => $getCalloutAtCaret()?.getKey(),
   entries: [
-    calloutItem({ key: 'note', label: 'Note', Icon: NotebookPenIcon }),
-    calloutItem({ key: 'tip', label: 'Good to know', Icon: Lightbulb }),
-    calloutItem({ key: 'urgent', label: 'Urgent', Icon: Siren }),
-    calloutItem({ key: 'case-study', label: 'Case study', Icon: BookOpenText }),
-  ],
+    { key: 'note', label: 'Note', Icon: NotebookPenIcon },
+    { key: 'tip', label: 'Good to know', Icon: Lightbulb },
+    { key: 'urgent', label: 'Urgent', Icon: Siren },
+    { key: 'case-study', label: 'Case study', Icon: BookOpenText },
+  ].map(calloutItem),
 })
 
 export const AllActions: ToolbarActionGroup[] = [
