@@ -165,7 +165,6 @@ const SearchInput = ({
           ])
         }}
         placeholder='Search countries...'
-        // data-slot='input'
         data-slot='control'
         className={cn(
           isOpen ?

@@ -1,9 +1,8 @@
-import { multiLineEditor } from '@/lexicals/editors'
-// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { rowField } from '@/collections/_fields/Flex'
 import { LinkConfig } from '@/collections/_lib/Link'
 import { TextConfig } from '@/collections/_lib/Text'
+import { multiLineEditor } from '@/lexicals/editors'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
 import type { CollectionBeforeChangeHook, CollectionConfig } from 'payload'
 

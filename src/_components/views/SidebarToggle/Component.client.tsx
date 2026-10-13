@@ -25,7 +25,6 @@ export const SidebarToggleClient = () => {
     sidebarEl
     && createPortal(
       <span
-        // data-open={open ? '' : undefined}
         data-state={toState(open)}
         className='sidebar-toggle'>
         <Button

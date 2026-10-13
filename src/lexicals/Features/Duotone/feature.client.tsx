@@ -26,7 +26,6 @@ const editorCss = DUOTONES.map(({ value }) => {
 
   return (
     `${upload} img{filter:var(--duotone-filter,${duotoneFilterStyle(value)})}`
-    // `${upload} img{filter:${duotoneFilterStyle(value)}}`
     + (chip && `:has(> ${upload}:first-child){${chip}}`)
   )
 }).join('')
@@ -59,8 +58,6 @@ const DuotonePreviewPlugin = () => {
               delete el.dataset.duotone
               el.style.removeProperty('--duotone-filter')
             }
-            // if (preset) el.dataset.duotone = preset.value
-            // else delete el.dataset.duotone
 
             if (duotone?.position) el.dataset.position = duotone.position
             else delete el.dataset.position

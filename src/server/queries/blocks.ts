@@ -43,9 +43,6 @@ export const pageGroupBlockRouter = async (filterQuery: Where[], routeQueries: n
       users: { name: true },
       pillar: { name: true },
       teams: { name: true },
-      // 'content-record': {
-      //   snapshot: true,
-      // },
     },
   })
 

@@ -58,7 +58,6 @@ export const ModalHeading = ({ ...props }: Props<typeof SectionHGroup>) => (
 export function ModalBody({ ...props }: Props<'div'>) {
   return (
     <div
-      // data-slot='body'
       data-slot='content'
       {...props}
     />

@@ -81,19 +81,15 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
     const style = (node as StyledContainer).subsectionHeadingStyle
 
     // stepped down: keeps its h3 with the H4 look, content always shown
-    // if (style == 'h4') {
     if (style == 'minor' || style == 'h4') {
       const heading = childOf(node, 'subsection-heading')
       return (
         <section
           data-slot='subsection'
-          // data-style='h4-heading'
           data-variant='minor'
-          // className=':mt-8 my-4 sm:pl-6'>
           className='flow sm:pl-6'>
           <Heading
             level={3}
-            // look={4}
             variant='minor'
             id={heading && headingID(heading)}>
             {nodesToJSX({ nodes: heading?.children ?? [] })}
@@ -109,7 +105,6 @@ export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
       return (
         <Section
           data-slot='section'
-          // data-style='section'>
           data-variant='section'
           className='flow'>
           <SectionHGroup>

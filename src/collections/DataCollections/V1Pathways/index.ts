@@ -1,10 +1,9 @@
-import { multiLineEditor } from '@/lexicals/editors'
-// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { columnField, rowField } from '@/collections/_fields/Flex'
 import { CheckboxConfig, CheckboxGroupConfig } from '@/collections/_lib/Checkbox'
 import { RichTextConfig } from '@/collections/_lib/RichText'
 import { TextConfig, TitleField } from '@/collections/_lib/Text'
+import { multiLineEditor } from '@/lexicals/editors'
 import { normalizeSelectOptions } from '@/lib/normalize'
 import type { CollectionConfig } from 'payload'
 

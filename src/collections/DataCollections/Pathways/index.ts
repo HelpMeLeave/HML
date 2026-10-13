@@ -1,6 +1,4 @@
 import { NameField } from '@/_components/fields/Name'
-import { multiLineEditor } from '@/lexicals/editors'
-// import { editorParagraphRichText } from '@/lexicals/nested'
 import { tFn } from '@/_config/i18n/'
 import { isManager } from '@/access/_primitives'
 import { is } from '@/access/is'
@@ -16,6 +14,7 @@ import {
   PathwayIntervalFormatItemPath,
   PathwayNameFieldPath,
 } from '@/collections/DataCollections/Pathways/paths'
+import { multiLineEditor } from '@/lexicals/editors'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
 import { toTitleCase } from '@/lib/textCasing'
 import type { CollectionConfig, TextareaField } from 'payload'

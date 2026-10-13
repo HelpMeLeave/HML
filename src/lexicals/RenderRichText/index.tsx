@@ -13,15 +13,6 @@ export type RichTextProps = {
   flow?: boolean
 } & Props<'div'>
 
-// const RichTextConverter = ({ className, ...props }: RichTextProps) => (
-//   <ConvertRichText
-//     converters={jsxConverters(props.converterOverrides)}
-//     disableContainer
-//     disableTextAlign
-//     className={className}
-//     {...props}
-//   />
-// )
 const RichTextConverter = ({ className, flow, ...props }: RichTextProps) => {
   const content = (
     <ConvertRichText

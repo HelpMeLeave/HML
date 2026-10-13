@@ -14,7 +14,6 @@ export class SectionContainerNode extends StructureContainerNode {
   }
 
   dom(): StructureDOM {
-    // return { tag: 'section', className: 'lexical__section border-l border-ui-200' }
     return { tag: 'section', className: 'lexical__section border-l border-ui-200', slot: 'section' }
   }
 
@@ -29,7 +28,6 @@ export class SectionContentNode extends StructureContentNode {
   }
 
   dom(): StructureDOM {
-    // return { tag: 'article', className: 'lexical__section-content' }
     return { tag: 'article', className: 'lexical__section-content', slot: 'content' }
   }
 }

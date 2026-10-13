@@ -40,7 +40,6 @@ const config = buildConfig({
   i18n,
   folders,
   editor: lexicalEditor({
-    // features: baseFeatures.all(),
     features: contentFeatures,
     lexical: {
       theme: baseTheme,

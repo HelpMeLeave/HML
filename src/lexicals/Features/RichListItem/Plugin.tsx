@@ -1,6 +1,5 @@
 'use client'
 
-// import { $backspaceAtBodyStart, $enterAtBodyEnd } from '@/lexicals/Features/RichListItem/_lib'
 import { $backspaceAtBodyStart } from '@/lexicals/Features/RichListItem/_lib/backspaceAtBodyStart'
 import { $enterAtBodyEnd } from '@/lexicals/Features/RichListItem/_lib/enterAtBodyEnd'
 import { $normalizeRichListItem } from '@/lexicals/Features/RichListItem/_lib/normalizeRichListItem'

@@ -42,7 +42,7 @@ const RouteJoin = async (props: JoinFieldServerProps) => {
                   htmlFor='field-route'>
                   Route URL
                 </label>
-                {/* <PreviewBtn url={docs[0].url} /> */}
+                <PreviewBtn url={docs[0].url} />
               </span>
             }
 

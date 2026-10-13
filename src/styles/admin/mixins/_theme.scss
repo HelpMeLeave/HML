@@ -15,13 +15,6 @@
 }
 
 @function alpha($color, $amount) {
-  // $test-amount: $amount;
-  // @if (meta.type-of($amount) != string) {
-  //   $test-amount: '#{$amount}';
-  // }
-  // @if (string.index($test-amount, '%') != null) {
-  //   $amount: string.slice($test-amount, 1, string.index($test-amount, '%')-1);
-  // }
   @return color-mix(in hsl, #{$color} #{asPercent($amount)}, transparent);
 }
 

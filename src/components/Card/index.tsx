@@ -27,7 +27,6 @@ export const CardBody = (props: Props & { as?: ElementType }) => {
 
 export const CardTitle = ({ ...props }: Props) => (
   <span
-    // data-slot='linkText'
     data-slot='heading'
     {...props}
     className={cn(

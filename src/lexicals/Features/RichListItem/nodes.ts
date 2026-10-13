@@ -132,21 +132,6 @@ export const $createRichListItem = (checked?: boolean) => {
   )
 }
 
-// /** The list item holding the caret. */
-// export const $getListItemAtCaret = () => {
-//   const selection = $getSelection()
-//   if (!$isRangeSelection(selection)) return null
-//   return $findMatchingParent(selection.anchor.getNode(), $isListItemNode)
-// }
-
-// /** Plain item → rich item: its text becomes the title and the caret moves into an empty body. */
-// export const $addDetails = (item: ListItemNode) => {
-//   const rich = $createRichListItem(item.getChecked())
-//   rich.getTitle()?.append(...item.getChildren())
-//   item.replace(rich)
-//   rich.getBody()?.selectStart()
-// }
-
 /** Rich item → plain item: the title becomes the item's text and non-empty body blocks move below it, splitting the list. */
 export const $removeDetails = (item: RichListItemNode) => {
   const plain = $createListItemNode(item.getChecked()).append(
@@ -162,21 +147,3 @@ export const $removeDetails = (item: RichListItemNode) => {
   blocks.reduce<LexicalNode>((prev, block) => prev.insertAfter(block), plain)
   plain.selectStart()
 }
-
-// /** Every rich item holds exactly a title then a body; stray inline nodes go to the title, stray blocks to the body. */
-// export const $normalizeRichListItem = (item: RichListItemNode) => {
-//   const title = item.getTitle() ?? $create(RichListItemTitleNode)
-//   const body = item.getBody() ?? $create(RichListItemBodyNode)
-//
-//   for (const child of item.getChildren()) {
-//     if (child.is(title) || child.is(body)) continue
-//     if (child instanceof ElementNode && !child.isInline()) body.append(child)
-//     else title.append(child)
-//   }
-//
-//   const first = item.getFirstChild()
-//   if (!first) item.append(title)
-//   else if (!first.is(title)) first.insertBefore(title)
-//   if (!body.is(title.getNextSibling())) title.insertAfter(body)
-//   if (body.isEmpty()) body.append($createParagraphNode())
-// }

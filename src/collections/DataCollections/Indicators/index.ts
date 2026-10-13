@@ -146,7 +146,6 @@ const IndicatorsCollectionConfig: CollectionConfig<'indicators'> = {
         {
           type: 'text',
           name: 'icon',
-          // admin: { components: { Field: '@/collections/DataCollections/Indicators/Icon' } },
           admin: { components: { Field: '@/collections/DataCollections/Indicators/IconLazy' } },
         },
         // Where the indicator appears is chosen here, not inferred from its icon, so any icon can be used anywhere

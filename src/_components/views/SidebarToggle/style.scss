@@ -11,7 +11,6 @@
   left: -35px;
   border-right: 1px solid var(--theme-elevation-25);
   --rotate: -180deg;
-  // &[data-open] {
   &[data-state='open'] {
     --rotate: 0deg;
   }
@@ -58,7 +57,6 @@
     background-color: var(--theme-bg);
     width: 0px !important;
     min-width: 0px !important;
-    // &:has(.sidebar-toggle:is([data-open])) {
     &:has(.sidebar-toggle:is([data-state='open'])) {
       width: 375px !important;
       max-width: 33%;

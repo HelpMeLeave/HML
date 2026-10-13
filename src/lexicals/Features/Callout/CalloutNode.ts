@@ -26,7 +26,6 @@ export class CalloutNode extends ElementNode {
     const el = document.createElement('article')
     el.className = 'LexicalEditorTheme__callout'
     el.dataset.slot = 'callout'
-    // el.dataset.type = $getState(this, calloutType)
     el.dataset.variant = $getState(this, calloutType)
     return el
   }
@@ -37,7 +36,6 @@ export class CalloutNode extends ElementNode {
 
   updateDOM(prevNode: this, dom: HTMLElement): boolean {
     const change = $getStateChange(this, prevNode, calloutType)
-    // if (change) dom.dataset.type = change[0]
     if (change) dom.dataset.variant = change[0]
     return false
   }

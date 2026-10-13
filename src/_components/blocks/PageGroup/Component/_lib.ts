@@ -26,7 +26,6 @@ const toExternalItem = (doc: ExternalResource): Item => ({
   preview: doc.description ?? '',
 })
 
-// const toContentItem = (doc: Content & { url?: string }): Item => ({
 const toContentItem = (doc: Omit<Content, 'flow' | 'slugGenerated'> & { url?: string }): Item => ({
   // TODO: AUTHOR STRING HOOK
   author: doc.authorString,
@@ -38,7 +37,6 @@ const toContentItem = (doc: Omit<Content, 'flow' | 'slugGenerated'> & { url?: st
   category: getCategory(doc),
 })
 
-// const getCategory = (doc: Content | Route | null) => {
 const getCategory = (doc: Pick<Content, 'type'> | Route | null) => {
   return (
     doc?.type ?

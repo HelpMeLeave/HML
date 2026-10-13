@@ -86,7 +86,6 @@
 }
 
 // Swapped heading styles: the h2/h3 level stays, only the look follows the container's heading-style state.
-// .lexical__section[data-heading-style='subsection'] > hgroup {
 .lexical__section[data-variant='subsection'] > [data-slot='header'] {
   font-size: 2.5rem;
   // eyebrow, subtitle and cover don't render on the site while styled as a subsection
@@ -95,13 +94,11 @@
   }
 }
 
-// .lexical__subsection[data-heading-style='section'] > .lexical__subsection-heading {
 .lexical__subsection[data-variant='section'] > .lexical__subsection-heading {
   font-size: 3.75rem;
   line-height: 1;
 }
 
-// .lexical__subsection[data-heading-style='h4'] > .lexical__subsection-heading {
 .lexical__subsection[data-variant='minor'] > .lexical__subsection-heading {
   font-size: 1.25rem;
   margin-top: 1em;

@@ -6,7 +6,6 @@ import { listDisabled } from '@/lib/collectionAdminSwitches'
 import { randomUUID } from 'node:crypto'
 import { extname } from 'node:path'
 import type { CollectionConfig } from 'payload'
-// import { createColorGroups } from './_lib/colorGroups'
 import { generateImageName } from './_lib/generateImageName'
 
 export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
@@ -65,7 +64,6 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
         name: 'filename',
         label: 'Filename',
         admin: {
-          // hidden: false,
           readOnly: true,
           disableListColumn: true,
           condition: (_data, _siblingData, { operation }) => operation != 'create',
@@ -95,11 +93,6 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
         },
       })
     ),
-    // {
-    //   type: 'group',
-    //   name: 'filters',
-    //   fields: createColorGroups(),
-    // },
     {
       name: 'sizes',
       type: 'group',
@@ -128,7 +121,6 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
         if (!req || !req.file) return
 
         if (operation == 'create') {
-          // req.file.name = `${randomUUID()}.${req.file.name.split('.')[1]}`
           const ext = extname(req.file.name) || `.${req.file.mimetype.split('/')[1]}`
           req.file.name = `${randomUUID()}${ext}`
         }

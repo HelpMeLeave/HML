@@ -8,7 +8,6 @@
   }
 
   &:is(section[data-slot="section"]),
-  /* &:is([data-slot="main"]) { */
   &:is([data-slot="page"]) {
     ol {
       ::marker {

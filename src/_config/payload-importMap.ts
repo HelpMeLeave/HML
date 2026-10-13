@@ -22,6 +22,7 @@ import { default as default_3fee807a57de359a0abf35c05202810e } from '@/collectio
 import { default as default_aadb02324e6463de09159fe7cb3a4433 } from '@/collections/ContentCollections/Content/_fields/Title/Cell'
 import { default as default_aa9f6f3ea2aa45510479000830548506 } from '@/collections/ContentCollections/Content/_fields/Title/Field'
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
+import { default as default_97af7ba5cf618c82a2c7784f4cd041ab } from '@/lexicals/Features/BlockGate/feature.client'
 import { default as default_2be58cca230e7d604509d7b00d88eb4e } from '@/lexicals/Features/DefinitionsFeature/feature.client'
 import { default as default_f824d6a3c1f51b052c8e2c22ca6c260a } from '@/lexicals/Features/SectionCover/feature.client'
 import { default as default_436a67f37b5b91cd831f0ddca90f9cb4 } from '@/lexicals/Features/Duotone/feature.client'
@@ -142,6 +143,7 @@ export const importMap = {
   "@/collections/ContentCollections/Content/_fields/Title/Cell#default": default_aadb02324e6463de09159fe7cb3a4433,
   "@/collections/ContentCollections/Content/_fields/Title/Field#default": default_aa9f6f3ea2aa45510479000830548506,
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
+  "@/lexicals/Features/BlockGate/feature.client#default": default_97af7ba5cf618c82a2c7784f4cd041ab,
   "@/lexicals/Features/DefinitionsFeature/feature.client#default": default_2be58cca230e7d604509d7b00d88eb4e,
   "@/lexicals/Features/SectionCover/feature.client#default": default_f824d6a3c1f51b052c8e2c22ca6c260a,
   "@/lexicals/Features/Duotone/feature.client#default": default_436a67f37b5b91cd831f0ddca90f9cb4,

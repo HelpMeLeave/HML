@@ -1,10 +1,3 @@
-// import {
-//   ColumnsBlockConfig,
-//   CTABlockConfig,
-//   PageGroupBlockConfig,
-//   QuoteBlockConfig,
-//   VideoPlayerBlockConfig,
-// } from '@/_config/Blocks'
 import { cn } from '@/lib/cn'
 import {
   BlocksFeature,

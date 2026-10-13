@@ -6,7 +6,6 @@ import type { CTABlock } from '@/payload-types'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
 import { useDocumentInfo, useField } from '@payloadcms/ui'
 import { Suspense } from 'react'
-// import './style.scss'
 
 // Reads one button group out of form state in the shape the block saves, so the preview goes through the same builder as the site
 const useButton = (path: string): Valid<CTABlock['primaryButton']> => {

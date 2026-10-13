@@ -1,4 +1,3 @@
-// import { env } from '@/env'
 import { env } from '@/env.client'
 
 export const getClientSideAdminURL = (...path: string[]) => {

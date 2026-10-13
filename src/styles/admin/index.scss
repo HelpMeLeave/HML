@@ -238,7 +238,7 @@ a {
     text-decoration-thickness: 3px;
   }
   &:is(.LexicalEditorTheme__link) {
-    text-decoration-color: color-mix(in hsl, var(--theme-secondary) 70%, transparent);
+    text-decoration-color: color-mix(in hsl, var(--color-accent) 70%, transparent);
     text-decoration-thickness: 2px;
     text-underline-offset: 2px;
   }
@@ -341,10 +341,7 @@ a {
     }
     &__link {
       color: var(--theme-text);
-      text-decoration: 2px solid underline var(--theme-secondary-400);
-      @include dark {
-        text-decoration-color: var(--theme-primary-500);
-      }
+      text-decoration: 2px solid underline alpha(var(--color-accent), 50%);
       border: 0;
       &:hover {
         text-decoration-thickness: 1px;
@@ -407,12 +404,8 @@ a {
 
   [data-lexical-text='true'] {
     line-height: inherit;
-    // font-weight: inherit;
     font-family: inherit;
     letter-spacing: inherit;
-    // &:not(.LexicalEditorTheme__textBold, .LexicalEditorTheme__textItalic) {
-    //   color: currentColor;
-    // }
   }
 
   .link-editor {
@@ -690,4 +683,16 @@ table tbody td {
 .live-preview-window {
   width: unset;
   flex-grow: 0;
+}
+[data-variant='minor'] {
+  > h1,
+  > h2,
+  > h3,
+  > h3 * {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    line-height: normal;
+  }
 }

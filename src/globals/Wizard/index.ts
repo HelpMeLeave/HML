@@ -1,7 +1,6 @@
-import { contentEditor } from '@/lexicals/editors'
-// import { editorFull } from '@/lexicals/full'
 import { simpleLinkField } from '@/collections/_fields/LinkBase'
 import { createRowLabel } from '@/collections/_labels/RowLabel/rowLabelEl'
+import { contentEditor } from '@/lexicals/editors'
 import type { SupportWizard } from '@/payload-types'
 import type { GlobalConfig } from 'payload'
 

@@ -87,5 +87,3 @@ export const conditionFnBlock = (props?: { key?: string; equals?: unknown; in?: 
 
   return options
 }
-
-// : (_data, _siblingData, args) => operation(args).notCreate

@@ -5,7 +5,6 @@ export const MainHeading = ({ ...props }: Props<'h1'>) => (
   <Heading
     level={1}
     role='heading'
-    // data-slot='heading'
     className={cn('not-has-[+[data-slot="subtitle"]]:mb-[0.2em]', props.className)}>
     {props.children}
   </Heading>

@@ -1,10 +1,9 @@
-import { multiLineEditor } from '@/lexicals/editors'
-// import { editorParagraphRichText } from '@/lexicals/nested'
 import { is } from '@/access/is'
 import { simpleLinkField } from '@/collections/_fields/LinkBase'
 import { RichTextConfig } from '@/collections/_lib/RichText'
 import { Tab, Tabs } from '@/collections/_lib/Tabs'
 import { NavigationTabs } from '@/globals/GlobalSettings/NavTabs'
+import { multiLineEditor } from '@/lexicals/editors'
 import type { GlobalConfig } from 'payload'
 
 export const GlobalSettingsGlobalConfig: GlobalConfig = {

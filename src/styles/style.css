@@ -16,10 +16,6 @@
 
 @plugin "./tailwind.config.js";
 
-/* @theme inline {
-  --font-header: var(--font-playfair);
-} */
-
 @theme {
   --measure: 660px;
   --measure-max: 70ch;
@@ -39,8 +35,6 @@
   --is-lg: 1.125;
   --is-xl: 1.25;
   --is-2xl: 1.5;
-
-  /* --slot-*: initial; */
 
   /* #endregion */
 }

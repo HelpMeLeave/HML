@@ -32,9 +32,6 @@ export abstract class StructureNode extends ElementNode {
     const el = document.createElement(tag)
     if (className) el.className = className
     if (placeholder) el.dataset.placeholder = placeholder
-    // if (tag == 'section') {
-    //   el.dataset.style = className?.includes('subsection') ? 'subsection' : 'section'
-    // }
     if (slot) el.dataset.slot = slot
     return el
   }
@@ -158,7 +155,6 @@ export abstract class StructureHeadingNode extends StructureNode {
       next.selectStart()
       return null
     }
-    // else $containerOf(this)?.getContent()?.getFirstChild()?.selectStart()
 
     const content = $containerOf(this)?.getContent()
     const first = content?.getFirstChild()
@@ -194,9 +190,6 @@ export abstract class StructureHeadingNode extends StructureNode {
     const prev = this.getPreviousSibling()
     if ($isStructureHeading(prev)) prev.selectEnd()
     return true
-
-    // container.dissolve()
-    // return true
   }
 }
 

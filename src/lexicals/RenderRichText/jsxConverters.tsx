@@ -179,7 +179,6 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     linebreak: () => (
       <span
         role='none'
-        // id='spacer'
         data-slot='spacer'
         className='pointer-events-none block h-[0.5lh] select-none [:is(li>*)]:h-0'
       />

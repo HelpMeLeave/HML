@@ -12,7 +12,6 @@ const CTAWrapper = ({ hasSecondary, ...props }: Props<'section'> & { hasSecondar
     data-slot='cta'
     {...props}
     className={cn(
-      // 'my-12 grid gap-x-8 gap-y-2 sm:min-w-125 md:grid-cols-[auto_minmax(120px,200px)] lg:mx-auto lg:max-w-2xl',
       'grid gap-x-8 gap-y-2 sm:min-w-125 md:grid-cols-[auto_minmax(120px,200px)] lg:mx-auto lg:max-w-2xl',
       !hasSecondary && 'grid-cols-[auto_minmax(120px,200px)]',
       props.className
@@ -27,10 +26,8 @@ const CTATitle = ({
   inner?: DefaultTypedEditorState | ReactNode
 }) => (
   <SectionHeading
-    // data-slot='title'
     data-slot='heading'
     {...props}
-    // className='col-start-1 mx-auto flex flex-col text-5xl leading-[0.85] text-balance text-accent *:saturate-50 dark:font-medium! *:[[id="spacer"]]:h-2!'>
     className='col-start-1 mx-auto flex flex-col text-5xl leading-[0.85] text-balance text-accent *:saturate-50 *:data-[slot=spacer]:h-2! dark:font-medium!'>
     {inner && <LexicalOrComponent content={inner} />}
   </SectionHeading>
