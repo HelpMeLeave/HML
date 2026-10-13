@@ -1,4 +1,5 @@
 import { ActionToolbarFeature } from '@/lexicals/Features/ActionToolbar/feature.server'
+import { BlockGateFeature } from '@/lexicals/Features/BlockGate/feature.server'
 import { CustomCheckmarkServer as CheckmarkListFeature } from '@/lexicals/Features/CheckmarkList/feature.server'
 import { DefinitionsFeature } from '@/lexicals/Features/DefinitionsFeature'
 import { DuotoneFeature } from '@/lexicals/Features/Duotone/feature.server'
@@ -75,6 +76,7 @@ export const contentFeatures = [
   DuotoneFeature(),
   SectionCoverFeature(),
   DefinitionsFeature(),
+  BlockGateFeature(),
 ]
 // #endregion ! --------------------
 
