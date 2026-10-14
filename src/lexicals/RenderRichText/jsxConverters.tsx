@@ -192,7 +192,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
         </blockquote>
       )
     },
-    callout: ({ node, nodesToJSX }) => {
+    callout: ({ node, nodesToJSX, converters }) => {
       const variant =
         node.calloutType in CALLOUTS ? (node.calloutType as keyof typeof CALLOUTS) : 'note'
       const { label, Icon, className: color } = CALLOUTS[variant]
@@ -218,7 +218,13 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
             {label}
           </span>
           <P className='col-[2/2] row-[2/2] text-sm leading-relaxed text-body/85 italic *:font-normal'>
-            {nodesToJSX({ nodes: node.children })}
+            {nodesToJSX({
+              nodes: node.children,
+              converters: {
+                ...converters,
+                paragraph: ({ node, nodesToJSX }) => <>{nodesToJSX({ nodes: node.children })}</>,
+              },
+            })}
           </P>
         </div>
       )
