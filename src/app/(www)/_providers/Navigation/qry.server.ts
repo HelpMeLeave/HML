@@ -7,7 +7,8 @@ import type {
   NotNull,
 } from '@/app/(www)/_providers/Navigation/_types'
 import { isTraversable } from '@/lib/normalize/is'
-import { isOffSite, resolveLinkNode } from '@/lib/normalize/resolveLink'
+import { isOffSite } from '@/lib/normalize/isOffSite'
+import { resolveLinkNode } from '@/lib/normalize/resolveLink'
 import { getPayload } from '@/server/getPayload'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { DateTime } from 'luxon'

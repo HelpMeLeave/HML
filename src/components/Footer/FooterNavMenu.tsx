@@ -1,6 +1,6 @@
 'use client'
 import { InlineLink } from '@/components/primitives/Link'
-import { isOffSite } from '@/lib/normalize/resolveLink'
+import { isOffSite } from '@/lib/normalize/isOffSite'
 import type { NavigationGroup } from 'www/_providers/_types'
 
 export const FooterNavMenu = ({ children }: Props) => (

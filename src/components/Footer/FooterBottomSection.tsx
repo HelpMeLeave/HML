@@ -1,6 +1,6 @@
 'use client'
 
-import { isOffSite } from '@/lib/normalize/resolveLink'
+import { isOffSite } from '@/lib/normalize/isOffSite'
 import Link from 'next/link'
 import type { Social } from 'www/(Content)/_lib/socials'
 import type { NavigationGroup } from 'www/_providers/_types'

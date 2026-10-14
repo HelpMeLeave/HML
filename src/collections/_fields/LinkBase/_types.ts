@@ -1,4 +1,4 @@
-import type { Config } from '@/payload-types'
+import type { RelationshipData } from '@payloadcms/richtext-lexical'
 import type { CollectionSlug, FilterOptions, RelationshipField, TextField } from 'payload'
 
 export type LinkFieldDocOptions = {
@@ -17,10 +17,8 @@ export type LinkFieldNameOptions = {
 
 export type LinkField = {
   linkType: 'internal' | 'external' | 'custom'
-  doc?: {
-    relationTo: CollectionSlug
-    value: number | Config['collections'][CollectionSlug]
-  } | null
+  doc?: Nullish<RelationshipData>
   url?: string | null
   newTab?: boolean | null
 }
+export type ValidLinkField = { url: string } | { doc: RelationshipData }

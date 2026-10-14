@@ -1,78 +1,13 @@
 import type { LinkField } from '@/collections/_fields/LinkBase/_types'
-import { env } from '@/env.client'
-import type { Content, Document, Media, Route } from '@/payload-types'
+import { isOffSite } from '@/lib/normalize/isOffSite'
+import { isPopulatedDoc } from '@/lib/normalize/isPopulatedDoc'
+import { isUrlLink } from '@/lib/normalize/isUrlLink'
+import { resolveDoc } from '@/lib/normalize/resolveDoc'
 
-type DocLinkField = LinkField & {
+export type DocLinkField = LinkField & {
   linkType: 'internal'
   doc: Valid<LinkField['doc']>
   url?: never
-}
-
-const parseBaseURL = (...segments: string[]) =>
-  '/' + segments.filter(Boolean).join('/').replace(/^\/+/, '')
-
-const host = (url: string) =>
-  url
-    .replace(/^https?:\/\//i, '')
-    .replace(/^www\./i, '')
-    .split('/')[0]
-
-/**
- * Whether an href actually leaves the site — the single authority for `target`.
- * A relative path, `mailto:`, `tel:` or `#anchor` is never off-site, and neither is an absolute URL on our own host.
- * `linkType` cannot answer this: it only says which field holds the href.
- */
-export const isOffSite = (url?: string | null) => {
-  if (!url || !/^https?:\/\//i.test(url)) return false
-  return host(url) != host(env.NEXT_PUBLIC_BASE_URL)
-}
-
-const resolveDoc = ({ doc: { relationTo, value }, newTab }: DocLinkField) => {
-  const target = Boolean(newTab) ? '_blank' : '_self'
-
-  if (relationTo === 'media') {
-    return {
-      url: parseBaseURL('media', encodeURIComponent((value as Media).filename ?? '')),
-      target,
-      offsite: false,
-    }
-  }
-
-  // PDFs are served from UploadThing through /media/pdfs/[filename]; documents have no slug, so the fallback below sent them to the home page
-  if (relationTo == 'documents') {
-    return {
-      url: parseBaseURL('media', 'pdfs', encodeURIComponent((value as Document).filename ?? '')),
-      target,
-      offsite: false,
-    }
-  }
-
-  if (relationTo == 'routes') {
-    const content = value as Route
-    return {
-      url: parseBaseURL(content.url),
-      target,
-      public: content.public,
-      offsite: false,
-    }
-  }
-
-  if (relationTo == 'externalResources') {
-    const page = value as Route
-    return {
-      url: page.url,
-      // These point off-site by definition, so the href decides, not the checkbox.
-      target: isOffSite(page.url) ? '_blank' : target,
-      offsite: true,
-    }
-  }
-
-  // content, or any other collection with a slug
-  const slugged = value as Content | Document | { slug: string }
-  return {
-    url: parseBaseURL('slug' in slugged ? slugged.slug! : ''),
-    target,
-  }
 }
 
 /**
@@ -101,8 +36,3 @@ export const resolveLinkNode = (link: LinkField) => {
     return resolveDoc(link as DocLinkField)
   }
 }
-
-const isUrlLink = (link: LinkField) => ['custom', 'external'].includes(link.linkType)
-
-const isPopulatedDoc = (link: LinkField) =>
-  Boolean(link.doc?.value) && typeof link.doc?.value === 'object'
