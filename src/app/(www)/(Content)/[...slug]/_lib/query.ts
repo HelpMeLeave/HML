@@ -26,6 +26,7 @@ const handlePreview = async ({ user, url, payload }: HandleProps) => {
         subtitle: true,
         'other-brow': true,
         flow: true,
+        init: true,
       },
     },
   })
@@ -66,6 +67,7 @@ const handlePublic = async ({ user, url, payload }: HandleProps) => {
         currentLifecycle: {
           published: true,
         },
+        init: true,
       },
       'content-record': {
         transition: {
@@ -93,6 +95,8 @@ const handlePublic = async ({ user, url, payload }: HandleProps) => {
       ...docs?.[0]?.doc.currentLifecycle.published.snapshot,
       id: docs?.[0]?.doc.id,
       flow: 'published',
+      at: docs?.[0]?.doc.currentLifecycle.published.transition?.at,
+      init: docs?.[0]?.doc.init,
     },
   }
 }

@@ -1,5 +1,6 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
 import { query } from '@/app/(www)/(Content)/[...slug]/_lib/query'
+import { P } from '@/components/primitives'
 import type { MainDetails } from '@/components/Structure/_types'
 import {
   Main,
@@ -97,7 +98,17 @@ const PageData = async ({
     return <NotFound />
   }
 
-  const { id, title, content, subtitle, flow } = doc as Partial<Content>
+  const {
+    id,
+    title,
+    content,
+    subtitle,
+    flow,
+    at: changed,
+    init: created,
+  } = doc as Partial<Content> & {
+    at: string
+  }
 
   const docPreview = convertLexicalToPlaintext({
     converters: {
@@ -158,6 +169,18 @@ const PageData = async ({
             </MainSubtitle>
           )}
         </MainHGroup>
+        <P className='mt-1 mb-4 text-end font-mono text-xs text-accent uppercase italic'>
+          {created && (
+            <span className='flex gap-x-2'>
+              {created.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Published $2-$3-$1')}
+            </span>
+          )}
+          {changed && (
+            <span className='flex gap-x-2'>
+              {changed.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Updated $2-$3-$1')}
+            </span>
+          )}
+        </P>
         {content && (
           <RichTextComponent
             blockType='rich-text'

@@ -17,14 +17,21 @@ export const baseQry = (url: string, preview?: boolean) => {
           depth: 2,
           where: {},
           populate: {
-            content: { content: true, title: true, subtitle: true, 'other-brow': true },
+            content: {
+              init: true,
+              content: true,
+              title: true,
+              subtitle: true,
+              'other-brow': true,
+              currentLifecycle: { changed: { at: true } },
+            } as PopulateType['content'],
           },
         }
       : {
           dept: 3,
           where: { 'doc.currentLifecycle.published': { exists: true } },
           populate: {
-            content: { contentType: true, currentLifecycle: { published: true } },
+            content: { init: true, contentType: true, currentLifecycle: { published: true } },
             'content-record': {
               snapshot: {
                 content: true,
@@ -32,6 +39,7 @@ export const baseQry = (url: string, preview?: boolean) => {
                 subtitle: true,
                 'other-brow': true,
               },
+              transition: { at: true },
             },
           } as PopulateType,
         }
