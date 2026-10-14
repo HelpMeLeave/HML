@@ -262,6 +262,24 @@ const fields: Field[] = Object.values({
   },
 })
 
+const calcHeight = (
+  current: { width: number; height: number },
+  calc: { width: number } | { height: number }
+) => {
+  const key = Object.keys(calc)[0]
+  const baseNum = calc[key as keyof typeof calc]
+  if (key == 'width') {
+    return {
+      width: baseNum,
+      height: (current.height / current.width) * baseNum,
+    }
+  }
+  return {
+    height: baseNum,
+    width: (current.width / current.height) * baseNum,
+  }
+}
+
 const ContentCollectionConfig: CollectionConfig<'content'> = {
   slug: 'content',
   admin: {
@@ -271,13 +289,43 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
     listSearchableFields: ['title', 'slug'],
     livePreview: {
       url: ({ data, req }) => previewURL(data.id, req),
-      openByDefault: true,
+      openByDefault: false,
+      breakpoints: [
+        {
+          label: 'Mobile',
+          ...calcHeight(
+            {
+              width: 402,
+              height: 874,
+            },
+            { width: 375 }
+          ),
+          name: 'md',
+        },
+        {
+          label: 'Tablet',
+          ...calcHeight(
+            {
+              width: 768,
+              height: 1024,
+            },
+            { height: 800 }
+          ),
+          name: 'tb',
+        },
+      ],
     },
   },
   folders: { browseByFolder: true },
   custom: {
     workflow: {
-      track: { asPdf: false, contentType: false, slugGenerated: false, timeline: false },
+      track: {
+        asPdf: false,
+        contentType: false,
+        slugGenerated: false,
+        timeline: false,
+        init: false,
+      },
       flow: defaultFlow,
       locksAt: ['submitted'],
     },
@@ -286,6 +334,14 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
     afterChange: [afterChangeParseRoute],
     afterDelete: [afterDeleteRemoveRoute],
     beforeDelete: [beforeDeleteGetRoute],
+    beforeChange: [
+      ({ operation, data }) => {
+        if (!data?.init || operation == 'create') {
+          const dat = new Date()
+          data.init = dat.toISOString()
+        }
+      },
+    ],
   },
   enableQueryPresets: true,
   labels: { singular: tFn('title:content'), plural: tFn('title:contents') },
@@ -299,7 +355,11 @@ const ContentCollectionConfig: CollectionConfig<'content'> = {
     delete: is().Bri,
   },
   defaultPopulate: { route: true, flow: true, currentLifecycle: { published: true } },
-  fields: [...fields, ...ContentTypeFields],
+  fields: [
+    { name: 'init', type: 'date', admin: { hidden: true, ...listDisabled } },
+    ...fields,
+    ...ContentTypeFields,
+  ],
 }
 
 export default ContentCollectionConfig
