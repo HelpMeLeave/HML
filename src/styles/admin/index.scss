@@ -653,10 +653,9 @@ table tbody td {
   .LexicalEditorTheme__callout {
     margin-block: 1.5rem;
   }
-}
-
-.rich-list-item__body > *:first-child {
-  margin-top: 0;
+  > *:first-child {
+    margin-top: 0;
+  }
 }
 
 .LexicalEditorTheme__ul,
@@ -684,6 +683,7 @@ table tbody td {
   width: unset;
   flex-grow: 0;
 }
+
 [data-variant='minor'] {
   > h1,
   > h2,
