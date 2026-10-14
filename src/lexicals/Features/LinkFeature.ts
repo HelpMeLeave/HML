@@ -1,4 +1,4 @@
-import { isOffSite } from '@/lib/normalize/resolveLink'
+import { isOffSite } from '@/lib/normalize/isOffSite'
 import { LinkFeature } from '@payloadcms/richtext-lexical'
 import type { CheckboxField, RadioField } from 'payload'
 import { fieldAffectsData } from 'payload/shared'
