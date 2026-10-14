@@ -92,12 +92,12 @@ export const SectionCover = ({
           )}>
           <Image
             fill
-            src={url.replace(/(\.[a-z]+$)/, '-medium$1')}
+            src={url}
             alt=''
             sizes='100vw,600px'
             className='-z-10 object-cover'
             style={filter ? { filter } : undefined}
-            unoptimized
+            // unoptimized
           />
           <SectionHGroup
             className={cn(
