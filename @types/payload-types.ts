@@ -643,6 +643,7 @@ export interface Content {
    */
   transitionNote?: string | null;
   currentLifecycle?: ContentLifecycle;
+  init?: string | null;
   'other-brow'?: {
     root: {
       type: string;
@@ -3954,6 +3955,7 @@ export interface ContentSelect<T extends boolean = true> {
   actionKey?: T;
   transitionNote?: T;
   currentLifecycle?: T | ContentLifecycleSelect<T>;
+  init?: T;
   'other-brow'?: T;
   type?: T;
   title?: T;

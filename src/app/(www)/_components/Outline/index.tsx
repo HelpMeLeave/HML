@@ -123,7 +123,6 @@ export const TOC = ({
           || node.type == 'subsection-heading',
         (node) => ({
           node: node as SerializedHeadingNode,
-          // section-heading carries no `tag`, so its level comes from the type
           level:
             node.type == 'section-heading' ?
               2

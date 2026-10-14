@@ -8,23 +8,13 @@ export const hasManagementRole = async (
   payload: BasePayload,
   req?: PayloadRequest
 ) => {
-  const userRoles = await payload.find({
+  const userRoles = await payload.count({
     collection: 'user-roles',
     where: {
-      user: {
-        equals: userId,
-      },
-      'role.tier': {
-        less_than_equal: 1,
-      },
-      'role.id': {
-        not_in: excludeRoleIds,
-      },
+      user: { equals: userId },
+      'role.tier': { less_than_equal: 1 },
+      'role.id': { not_in: excludeRoleIds },
     },
-    select: {
-      role: true,
-    },
-    depth: 1,
     req,
   })
 
