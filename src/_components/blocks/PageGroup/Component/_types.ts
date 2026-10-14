@@ -11,3 +11,15 @@ export type Item = {
 }
 
 export type QueryIds = Record<Tag['title'], { ids: number[]; titles: string[] }>
+
+export type CardBageProps = {
+  isInternal: boolean
+  category: Nullish<string | 'guide' | 'how to' | 'press release' | 'news & commentary'>
+}
+
+export type ItemCardProps = {
+  isInternal: boolean
+  item: Item
+  i: number
+  className?: Props['className']
+}

@@ -7,6 +7,7 @@ import { pageGroupBlockRouter } from '@/server/queries/blocks'
 import type { Where } from 'payload'
 
 const WATCHED_KEYS = ['topic', 'timeline', 'contentType', 'campaign']
+
 const WHERE_FN = {
   in: (key: string, valueArray: Array<string | number>): Where => ({
     [key]: {

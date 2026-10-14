@@ -1,6 +1,5 @@
 import { parsePageGroup } from '@/_components/blocks/PageGroup/Component/_lib'
-import type { Item } from '@/_components/blocks/PageGroup/Component/_types'
-import { I } from '@/_components/blocks/PageGroup/Component/I'
+import type { CardBageProps, ItemCardProps } from '@/_components/blocks/PageGroup/Component/_types'
 import { Badge } from '@/components/Badge'
 import { Card, CardBody, CardFooter, CardMeta, CardTitle } from '@/components/Card'
 import { P } from '@/components/primitives'
@@ -8,28 +7,57 @@ import { SectionBase, SectionHeading, SectionHGroup } from '@/components/Structu
 import type { PageGroupBlock } from '@/payload-types'
 import { Suspense } from 'react'
 
-const ItemCard = ({ isInternal, item, i }: { isInternal: boolean; item: Item; i: number }) => {
+const CardNumber = ({ i }: { i: number }) => (
+  <span className='font-mono text-xs text-grey-600 tabular-nums'>
+    {String(i + 1).padStart(2, '0')}
+  </span>
+)
+
+const CardBadge = ({ isInternal, category }: CardBageProps) => {
+  const processCat = () => {
+    const initCat = (category?.toLowerCase() ?? '').trim()
+    if (initCat == '' || !initCat) return isInternal ? 'in-house' : 'external'
+    return initCat
+  }
+
+  const thisCat = processCat()
+
+  return (
+    <Badge
+      color={
+        !isInternal ? 'yellow'
+        : thisCat == 'guide' ?
+          'blue'
+        : thisCat == 'how to' ?
+          'amber'
+        : thisCat == 'press release' ?
+          'rose'
+        : thisCat == 'in-house' ?
+          'zinc'
+        : thisCat == 'news & commentary' ?
+          'violet'
+        : 'emerald'
+      }
+      className='font-mono font-normal tracking-widest uppercase sm:text-[0.65rem]/4'>
+      {thisCat}
+    </Badge>
+  )
+}
+const ItemCard = ({ isInternal, item, i, className }: ItemCardProps) => {
   return (
     <Card
+      className={className}
       as='a'
       href={item.url ?? '/'}
       target={item.target}
       data-external={isInternal ? undefined : 'true'}
       key={item.url}>
       <CardMeta>
-        <I i={i} />
-        <Badge
-          color={
-            !isInternal ? 'yellow'
-            : item.category?.toLowerCase() == 'guide' ?
-              'blue'
-            : item.category?.toLowerCase() == 'how to' ?
-              'amber'
-            : 'blue'
-          }
-          className='font-mono font-normal tracking-widest uppercase sm:text-[0.65rem]/4'>
-          {isInternal ? (item.category ?? 'in-house') : 'External'}
-        </Badge>
+        <CardNumber i={i} />
+        <CardBadge
+          isInternal={isInternal}
+          category={item.category}
+        />
       </CardMeta>
 
       <CardTitle>{item.text}</CardTitle>
@@ -40,8 +68,6 @@ const ItemCard = ({ isInternal, item, i }: { isInternal: boolean; item: Item; i:
 }
 
 export const PageGroupBlockComponent = async ({ title, filters }: PageGroupBlock) => {
-  const items = await parsePageGroup(filters)
-
   return (
     <SectionBase>
       <SectionHGroup>
@@ -49,17 +75,16 @@ export const PageGroupBlockComponent = async ({ title, filters }: PageGroupBlock
       </SectionHGroup>
 
       <Suspense fallback={<P>Loading items...</P>}>
-        <ul className='grid grid-cols-1 gap-4 pl-0 sm:grid-cols-2 lg:grid-cols-3'>
-          {items?.map((ea, i) => {
-            return (
-              <ItemCard
-                key={`${ea.category}-${ea.url}`}
-                isInternal={ea.target === '_self'}
-                item={ea}
-                i={i}
-              />
-            )
-          })}
+        <ul className='grid grid-cols-1 gap-4 pl-0 sm:grid-cols-2'>
+          {(await parsePageGroup(filters))?.map((ea, i, arr) => (
+            <ItemCard
+              key={`${ea.category}-${ea.url}`}
+              isInternal={ea.target === '_self'}
+              item={ea}
+              i={i}
+              className={i % 2 == 0 && arr.length - 1 == i ? 'col-span-full' : ''}
+            />
+          ))}
         </ul>
       </Suspense>
     </SectionBase>
