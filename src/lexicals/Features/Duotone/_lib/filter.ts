@@ -8,5 +8,7 @@ export type DuotoneTweaks = Partial<Record<keyof typeof DUOTONE_TWEAKS, number |
 /** CSS filter for a duotone preset, with any per-use tweaks applied over the defaults. */
 export const duotoneFilter = (color: DuotoneThemed, tweaks?: DuotoneTweaks | null) => {
   const pct = (key: keyof typeof DUOTONE_TWEAKS) => `${tweaks?.[key] ?? DUOTONE_TWEAKS[key]}%`
-  return `contrast(${pct('contrast')}) brightness(${pct('brightness')}) saturate(0.8) grayscale(${pct('grayscale')}) url(#duotone-${color})`
+  return color.includes('-dark') ?
+      `contrast(${pct('contrast')}) brightness(${pct('brightness')}) url(#duotone-${color}) grayscale(${pct('grayscale')}) contrast(1.4)`
+    : `contrast(${pct('contrast')}) brightness(${pct('brightness')}) saturate(0.8) grayscale(${pct('grayscale')}) url(#duotone-${color})`
 }
