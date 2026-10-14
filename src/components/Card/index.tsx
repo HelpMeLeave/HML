@@ -1,4 +1,5 @@
 import { P } from '@/components/primitives'
+import { linkClassName } from '@/components/primitives/Link'
 import { cn } from '@/lib/cn'
 import Link from 'next/link'
 import type { ElementType } from 'react'
@@ -29,19 +30,14 @@ export const CardTitle = ({ ...props }: Props) => (
   <span
     data-slot='heading'
     {...props}
-    className={cn(
-      'decoration-brand-mulberry/50 dark:decoration-brand-yellow/50',
-      'dark:text-brand-grey text-body',
-      'font-semibold underline decoration-2 underline-offset-2 transition-all dark:font-medium',
-      props.className
-    )}
+    className={cn(linkClassName, props.className)}
   />
 )
 
 export const CardFooter = (props: Props) => (
   <P
     {...props}
-    className={cn('mt-2 text-xs text-gray-400 dark:text-gray-500', props.className)}
+    className={cn('mt-2 text-xs text-body/50 dark:text-gray-500', props.className)}
   />
 )
 
