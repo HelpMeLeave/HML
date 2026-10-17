@@ -1,28 +1,27 @@
-import type { User, WorkflowRecordSlug } from '@/payload-types'
-import type {
-  CheckboxField,
-  CollectionConfig,
-  DateField,
-  Field,
-  JSONField,
-  NamedGroupField,
-  SingleRelationshipField,
-  TextField,
-} from 'payload'
-
-type RecordDetailBaseFields = [
-  DateField & {
-    name: 'at'
-  },
-  SingleRelationshipField & {
-    name: 'by'
-  },
-  CheckboxField & {
-    name: 'system'
-  },
-]
-
 declare module 'payload-workflow' {
+  import type { User, WorkflowRecordSlug } from '@/payload-types'
+  import type {
+    CheckboxField,
+    CollectionConfig,
+    DateField,
+    Field,
+    JSONField,
+    NamedGroupField,
+    SingleRelationshipField,
+    TextField,
+  } from 'payload'
+
+  type RecordDetailBaseFields = [
+    DateField & {
+      name: 'at'
+    },
+    SingleRelationshipField & {
+      name: 'by'
+    },
+    CheckboxField & {
+      name: 'system'
+    },
+  ]
   type FlowRecord = {
     baseId: number | string
     entry: {
@@ -45,24 +44,35 @@ declare module 'payload-workflow' {
     TransitionSubmittedActionKey
   >
 
-  type RecordTransition<F extends Flow.STATUS = Flow.STATUS, T extends Flow.STATUS = Flow.STATUS> =
+  type RecordTransition<F extends FlowSTATUS = FlowSTATUS, T extends FlowSTATUS = FlowSTATUS> =
     F extends 'submitted' ? RecordTransitionSubmitted : RecordTransitionBase<F, T>
 
   type RecordTransitionAction<
-    F extends Flow.STATUS,
-    T extends Flow.STATUS,
+    F extends FlowSTATUS,
+    T extends FlowSTATUS,
     K extends TransitionActionKey,
   > = RecordTransitionBase<F, T> & { key: K }
 
   type RecordTransitionBase<
-    F extends Flow.STATUS = Flow.STATUS,
-    T extends Flow.STATUS = Flow.STATUS,
+    F extends FlowSTATUS = FlowSTATUS,
+    T extends FlowSTATUS = FlowSTATUS,
   > = { from: F; to: T; snapshotReference?: FlowRecord }
   // #endregion ! --------------------
-}
 
-// #region ! ---------- CONFIG ----------
-declare module 'payload-workflow' {
+  // #region ! ---------- CONFIG ----------
+
+  type RecordDetailBaseFields = [
+    DateField & {
+      name: 'at'
+    },
+    SingleRelationshipField & {
+      name: 'by'
+    },
+    CheckboxField & {
+      name: 'system'
+    },
+  ]
+
   type WorkflowRecordConfig = CollectionConfig<WorkflowRecordSlug> & {
     slug: WorkflowRecordSlug
     defaultPopulate?: CollectionConfig['defaultPopulate']
@@ -107,6 +117,5 @@ declare module 'payload-workflow' {
       },
     ]
   }
+  // #endregion ! --------------------
 }
-
-// #endregion ! --------------------

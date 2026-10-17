@@ -3,7 +3,7 @@ import { columnField } from '@/collections/_fields/Flex'
 import { TitleField } from '@/collections/_lib/Text'
 import type { InternalDocument } from '@/payload-types'
 import type { CollectionConfig } from 'payload'
-import type { Config } from 'payload-workflow'
+import type { ConfigObj } from 'payload-workflow'
 
 const InternalDocumentsCollectionConfig: CollectionConfig = {
   slug: 'internal-documents',
@@ -20,7 +20,7 @@ const InternalDocumentsCollectionConfig: CollectionConfig = {
       track: Object.fromEntries(
         (['deletedAt'] as (keyof InternalDocument)[]).map((ea) => [ea, false])
       ) as Record<keyof InternalDocument, false>,
-    } as Config.Obj<'internal-documents'>,
+    } as ConfigObj<'internal-documents'>,
   },
   admin: {
     useAsTitle: 'title',

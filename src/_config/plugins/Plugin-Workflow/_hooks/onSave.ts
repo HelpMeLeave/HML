@@ -14,23 +14,23 @@ import type {
   WorkflowRecordSlug,
 } from '@/payload-types'
 import { DateTime } from 'luxon'
-import {
-  type CollectionBeforeChangeHook,
-  type PayloadRequest,
-  type RequestContext,
-  APIError,
-} from 'payload'
-import type { Flow, WorkflowCollection } from 'payload-workflow'
+import type { CollectionBeforeChangeHook, PayloadRequest } from 'payload'
+import { APIError, type RequestContext } from 'payload'
+import type {
+  FlowLocksAt,
+  FlowSTATUS,
+  WorkflowCollectionPreprocessedConfig,
+} from 'payload-workflow'
 
 export type OnSaveHookProps = {
-  collection: WorkflowCollection.PreprocessedConfig
+  collection: WorkflowCollectionPreprocessedConfig
   baseSlug: string
   recordSlug: WorkflowRecordSlug
-  buttons: Record<Flow.STATUS, FlowButton[]>
-  initStatus: Flow.STATUS
+  buttons: Record<FlowSTATUS, FlowButton[]>
+  initStatus: FlowSTATUS
   permissions: FlowPermissions
   trackedPaths: string[]
-  locksAt?: Flow.LocksAt
+  locksAt?: FlowLocksAt
 }
 
 const checkAffordance = ({
@@ -43,9 +43,9 @@ const checkAffordance = ({
   req,
   note,
 }: {
-  buttons: Record<Flow.STATUS, FlowButton[]>
-  transitionTo: Flow.STATUS
-  from: Flow.STATUS
+  buttons: Record<FlowSTATUS, FlowButton[]>
+  transitionTo: FlowSTATUS
+  from: FlowSTATUS
   actionKey?: string | null
   bySystem: boolean
   permissions: FlowPermissions

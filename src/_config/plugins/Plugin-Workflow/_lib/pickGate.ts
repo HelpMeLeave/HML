@@ -1,6 +1,6 @@
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
-type GateMap<G> = Partial<Record<Flow.STATUS, Partial<Record<Flow.STATUS, G | Record<string, G>>>>>
+type GateMap<G> = Partial<Record<FlowSTATUS, Partial<Record<FlowSTATUS, G | Record<string, G>>>>>
 
 // A gate is a function (server) or a boolean (client); only the keyed form is a plain object.
 const isKeyed = <G>(gate: G | Record<string, G>): gate is Record<string, G> =>
@@ -18,8 +18,8 @@ export const pickGate = <G>({
   actionKey,
 }: {
   permissions: GateMap<G>
-  from: Flow.STATUS
-  to: Flow.STATUS
+  from: FlowSTATUS
+  to: FlowSTATUS
   actionKey?: string | null
 }): G | undefined => {
   const gate = permissions[from]?.[to]

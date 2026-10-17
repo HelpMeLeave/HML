@@ -1,6 +1,6 @@
-import type { Flow, FlowBtn } from 'payload-workflow'
+import type { FlowBtn, FlowSTATUS } from 'payload-workflow'
 
-export type ToFlowStatus = `to${Capitalize<Flow.STATUS>}`
+export type ToFlowStatus = `to${Capitalize<FlowSTATUS>}`
 
 export type CreateFlowBtnProps = {
   btnLabel: FlowBtn.Label

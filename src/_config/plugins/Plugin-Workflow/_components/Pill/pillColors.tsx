@@ -1,7 +1,7 @@
 import type { PillColors } from '@/components/Admin/Pill/_types'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
-export const pillColors: Record<Flow.STATUS, PillColors> = {
+export const pillColors: Record<FlowSTATUS, PillColors> = {
   wip: 'pink',
   submitted: 'blue',
   approved: 'purple',

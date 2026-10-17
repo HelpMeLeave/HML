@@ -1,7 +1,7 @@
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
 export type BtnFnProps = {
-  to: Flow.STATUS
+  to: FlowSTATUS
   actionKey?: string
   transitionNote?: string
 }

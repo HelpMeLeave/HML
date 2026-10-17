@@ -1,7 +1,7 @@
 import type { WorkflowRecordSlug } from '@/payload-types'
 import { DateTime } from 'luxon'
 import type { Data, PayloadRequest } from 'payload'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
 /** Who did something, and when. Each group that a row can carry brings its own, because a save that changes content and moves status involves two different people. */
 export type Attribution = {
@@ -44,8 +44,8 @@ export const mintEntry = async ({
   /** The state this save displaced. */
   snapshot?: Data
   transition?: Attribution & {
-    from: Flow.STATUS
-    to: Flow.STATUS
+    from: FlowSTATUS
+    to: FlowSTATUS
     /** Which affordance was taken, when an edge offers more than one. */
     actionKey?: string
   }

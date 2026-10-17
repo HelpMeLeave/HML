@@ -1,13 +1,12 @@
-import type { Option, SelectField } from 'payload'
-
 declare module 'payload-workflow' {
+  import type { Option, SelectField } from 'payload'
   type FlowStatusField = Omit<SelectField, 'hasMany' | 'name' | 'options'> & {
     options: FlowOption[]
     name: 'flow'
     hasMany: false
   }
 
-  type FlowOption<S extends Flow.STATUS = Flow.STATUS> = {
+  type FlowOption<S extends FlowSTATUS = FlowSTATUS> = {
     label: Capitalize<S>
     value: S
   }

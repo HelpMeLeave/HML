@@ -1,6 +1,7 @@
 import type { DocumentGroup, FieldCustomLayout } from '@/payload-types'
 import type { StaticLabel } from 'payload'
 import type { ReplacerField, ReplacerFieldType } from 'payload-fields'
+import { FlowSTATUS } from 'payload-workflow'
 
 declare module 'payload' {
   interface CollectionCustom {
@@ -27,4 +28,20 @@ declare module 'payload' {
   }
 
   export type ParamSegments = { segments?: string[] }
+
+  interface CollectionCustom {
+    workflow?: ConfigObj
+  }
+
+  interface RequestContext {
+    workflow?: {
+      bySystem?: boolean
+      transition?: boolean
+      data: {
+        from: FlowSTATUS
+        to: FlowSTATUS
+        key?: string
+      }
+    }
+  }
 }

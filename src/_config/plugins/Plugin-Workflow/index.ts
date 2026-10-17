@@ -6,7 +6,7 @@ import { buildRecordCollection } from '@/_config/plugins/Plugin-Workflow/collect
 import { workflowSchema } from '@/_config/plugins/Plugin-Workflow/collections/schema'
 import type { WorkflowRecordSlug } from '@/payload-types'
 import { type CollectionConfig, type Config, definePlugin } from 'payload'
-import type { WorkflowCollection } from 'payload-workflow'
+import type { WorkflowCollectionConfig } from 'payload-workflow'
 
 /** Every collection's declared gates, lifted out of its flow so the config could cross to the client. Keyed by slug, then by the status a transition leaves, then by the affordance. */
 export const pluginWorkflowPermissions: Record<string, FlowPermissions> = {}
@@ -21,14 +21,14 @@ export const PluginWorkflow = definePlugin({
     const baseSlugs: string[] = []
 
     const built = collections.flatMap(
-      (collection): Array<CollectionConfig | WorkflowCollection.Config> => {
+      (collection): Array<CollectionConfig | WorkflowCollectionConfig> => {
         if (!hasWorkflowConfig(collection) || isBuilt(collection)) return [collection]
 
         baseSlugs.push(collection.slug)
 
         const baseSlug = collection.slug
         const recordSlug: WorkflowRecordSlug = `${baseSlug}-record` as WorkflowRecordSlug
-        const { flow, locksAt } = collection.custom.workflow
+        const { flow, locksAt } = collection.custom?.workflow ?? {}
 
         const { initStatus, statusOptions, pillLabels, buttons, permissions } = parseFlow(flow)
 
@@ -57,7 +57,7 @@ export const PluginWorkflow = definePlugin({
 
         collection.custom.workflow._init = true
 
-        return [collection as WorkflowCollection.Config, recordCollection]
+        return [collection as WorkflowCollectionConfig, recordCollection]
       }
     )
 

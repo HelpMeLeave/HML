@@ -3,7 +3,7 @@ import { listDisabled } from '@/lib/collectionAdminSwitches'
 import { toTitleCase } from '@/lib/textCasing'
 import type { WorkflowRecordSlug } from '@/payload-types'
 import type { CollectionConfig, Field } from 'payload'
-import type { Flow, FlowOption, WorkflowCollection } from 'payload-workflow'
+import type { FlowOption, FlowSTATUS, WorkflowCollectionPreprocessedConfig } from 'payload-workflow'
 import { fieldIsID } from 'payload/shared'
 
 /**
@@ -18,8 +18,8 @@ export const setBaseFields = ({
   recordSlug,
   hasSidebarFields,
 }: {
-  collection: WorkflowCollection.PreprocessedConfig
-  initStatus: Flow.STATUS
+  collection: WorkflowCollectionPreprocessedConfig
+  initStatus: FlowSTATUS
   statusOptions: FlowOption[]
   recordSlug: WorkflowRecordSlug
   hasSidebarFields: boolean[]

@@ -1,62 +1,68 @@
-import type { User, WorkflowCollectionSlug } from '@/payload-types'
-import type { Button } from '@payloadcms/ui/elements/Button'
-import type { IconName } from 'lucide-react/dynamic'
-import type { CollectionConfig, Field, TypedCollectionSelect } from 'payload'
-
-// #region ! ---------- BTN OMITTED ----------
-type BtnOmitted =
-  | 'to'
-  | 'buttonStyle'
-  | 'btnLabel'
-  | 'children'
-  | 'enableSubMenu'
-  | 'onClick'
-  | 'onMouseDown'
-  | 'programmaticSubmit'
-  | 'Link'
-  | 'SubMenuPopupContent'
-  | 'secondaryActions'
-  | 'icon'
-// #endregion ! --------------------
-
-type RawCollectionConfig = Omit<CollectionConfig, 'fields' | 'custom'>
-
 declare module 'payload-workflow' {
-  namespace WorkflowCollection {
-    type PreprocessedConfig = CollectionConfig & {
-      custom: {
-        workflow: Config.Obj
-      }
-    }
+  import type { User, WorkflowCollectionSlug } from '@/payload-types'
+  import type { Button } from '@payloadcms/ui/elements/Button'
+  import type { IconName } from 'lucide-react/dynamic'
+  import type { CollectionConfig, Field, TypedCollectionSelect } from 'payload'
 
-    type Config = RawCollectionConfig & {
-      custom: {
-        workflow: Config.Obj
-      }
-      fields: Fields
-    }
+  // #region ! ---------- BTN OMITTED ----------
+  type BtnOmitted =
+    | 'to'
+    | 'buttonStyle'
+    | 'btnLabel'
+    | 'children'
+    | 'enableSubMenu'
+    | 'onClick'
+    | 'onMouseDown'
+    | 'programmaticSubmit'
+    | 'Link'
+    | 'SubMenuPopupContent'
+    | 'secondaryActions'
+    | 'icon'
+  // #endregion ! --------------------
 
-    type Fields = [FlowStatusField, WorkflowLifecycleField, ...Field[]]
+  type RawCollectionConfig = Omit<CollectionConfig, 'fields' | 'custom'>
+
+  // #region ! ---------- WORKFLOW COLLECTION ----------
+  type WorkflowCollectionPreprocessedConfig = CollectionConfig & {
+    custom: {
+      workflow: ConfigObj
+    }
   }
 
-  namespace Config {
-    type Flow = FlowConfig
+  type WorkflowCollectionConfig = RawCollectionConfig & {
+    custom: {
+      workflow: ConfigObj
+    }
+    fields: WorkflowCollectionFields
+  }
 
+  type WorkflowCollectionFields = [FlowStatusField, WorkflowLifecycleField, ...Field[]]
+  // #endregion ! --------------------
+
+  namespace Config {
     type Obj<TSlug extends WorkflowCollectionSlug = WorkflowCollectionSlug> = {
       _init?: true
       track: true | true | TypedCollectionSelect[TSlug]
-      flow: Flow
-      locksAt?: Flow.LocksAt
+      flow: FlowConfig
+      locksAt?: FlowLocksAt
     }
   }
 
-  namespace Flow {
-    type STATUS =
-      'wip' | 'submitted' | 'approved' | 'scheduled' | 'published' | 'deleted' | 'archived'
-    type STATUS_WITHOUT_STEPS = Exclude<STATUS, 'wip' | 'submitted' | 'approved' | 'scheduled'>
-
-    type LocksAt = STATUS | STATUS[]
+  type ConfigObj<TSlug extends WorkflowCollectionSlug = WorkflowCollectionSlug> = {
+    _init?: true
+    track: true | true | TypedCollectionSelect[TSlug]
+    flow: FlowConfig
+    locksAt?: FlowLocksAt
   }
+
+  type FlowSTATUS =
+    'wip' | 'submitted' | 'approved' | 'scheduled' | 'published' | 'deleted' | 'archived'
+  type FlowSTATUS_WITHOUT_STEPS = Exclude<
+    FlowSTATUS,
+    'wip' | 'submitted' | 'approved' | 'scheduled'
+  >
+
+  type FlowLocksAt = FlowSTATUS | FlowSTATUS[]
 
   namespace FlowBtn {
     type Label = string

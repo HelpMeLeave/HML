@@ -5,7 +5,7 @@ import { toTitleCase } from '@/lib/textCasing'
 import type { WorkflowRecordSlug } from '@/payload-types'
 import type {
   FlowOptionsCollector,
-  WorkflowCollection,
+  WorkflowCollectionPreprocessedConfig,
   WorkflowRecordConfig,
 } from 'payload-workflow'
 import { fieldIsID } from 'payload/shared'
@@ -16,7 +16,7 @@ import { fieldIsID } from 'payload/shared'
  * Schema only. What gets written into it, and when, is the write path's job — this answers "what shape does an entry have".
  */
 export const buildRecordCollection = (base: {
-  collection: WorkflowCollection.PreprocessedConfig
+  collection: WorkflowCollectionPreprocessedConfig
   recordSlug: WorkflowRecordSlug
 }) => {
   const slug = base.collection.slug

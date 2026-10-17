@@ -6,7 +6,7 @@ import type {
 } from '@/_config/plugins/Plugin-Workflow/_lib/parseFlow'
 import type { WorkflowCollectionSlug } from '@/payload-types'
 import type { ServerProps } from 'payload'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
 /**
  * The document's transitions, resolved on the server.
@@ -21,9 +21,9 @@ const FlowControls = async ({
   pillLabels,
   permissions: payloadPermissions,
 }: ServerProps & {
-  buttons: Record<Flow.STATUS, FlowButton[]>
+  buttons: Record<FlowSTATUS, FlowButton[]>
   slug: WorkflowCollectionSlug
-  pillLabels: Record<Flow.STATUS, string>
+  pillLabels: Record<FlowSTATUS, string>
 }) => {
   // Nothing to transition until the document exists.
   if (!user) return null
@@ -35,11 +35,11 @@ const FlowControls = async ({
   const permissions = {} as FlowPermissionAnswers
 
   for (const [from, byTo] of Object.entries(pluginWorkflowPermissions[slug] ?? {})) {
-    const fromKey = from as Flow.STATUS
-    permissions[fromKey] ??= {} as FlowPermissionAnswers[Flow.STATUS]
+    const fromKey = from as FlowSTATUS
+    permissions[fromKey] ??= {} as FlowPermissionAnswers[FlowSTATUS]
 
     for (const [to, declared] of Object.entries(byTo ?? {}))
-      permissions[fromKey][to as Flow.STATUS] =
+      permissions[fromKey][to as FlowSTATUS] =
         typeof declared == 'function' ?
           Boolean(declared(user))
         : Object.fromEntries(

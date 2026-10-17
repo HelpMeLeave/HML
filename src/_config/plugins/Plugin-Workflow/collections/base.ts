@@ -3,7 +3,13 @@ import { setBaseComponents } from '@/_config/plugins/Plugin-Workflow/collections
 import { setBaseFields } from '@/_config/plugins/Plugin-Workflow/collections/baseFields'
 import { setBaseHooks } from '@/_config/plugins/Plugin-Workflow/collections/baseHooks'
 import type { WorkflowRecordSlug } from '@/payload-types'
-import type { Flow, FlowOption, WorkflowCollection } from 'payload-workflow'
+import type {
+  FlowLocksAt,
+  FlowOption,
+  FlowSTATUS,
+  WorkflowCollectionConfig,
+  WorkflowCollectionPreprocessedConfig,
+} from 'payload-workflow'
 
 export const setBase = ({
   collection,
@@ -18,16 +24,16 @@ export const setBase = ({
   pillLabels,
   hasSidebarFields,
 }: {
-  collection: WorkflowCollection.PreprocessedConfig
+  collection: WorkflowCollectionPreprocessedConfig
   baseSlug: string
   recordSlug: WorkflowRecordSlug
-  buttons: Record<Flow.STATUS, FlowButton[]>
-  initStatus: Flow.STATUS
+  buttons: Record<FlowSTATUS, FlowButton[]>
+  initStatus: FlowSTATUS
   permissions: FlowPermissions
   trackedPaths: string[]
-  locksAt?: Flow.LocksAt
+  locksAt?: FlowLocksAt
   statusOptions: FlowOption[]
-  pillLabels: Record<Flow.STATUS, string>
+  pillLabels: Record<FlowSTATUS, string>
   hasSidebarFields: boolean[]
 }) => {
   setBaseComponents({
@@ -55,5 +61,5 @@ export const setBase = ({
     trackedPaths,
     locksAt,
   })
-  return collection as WorkflowCollection.Config
+  return collection as WorkflowCollectionConfig
 }

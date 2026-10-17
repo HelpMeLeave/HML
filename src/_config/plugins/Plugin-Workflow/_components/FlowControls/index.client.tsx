@@ -15,7 +15,7 @@ import type { tContentType } from '@/collections/ContentCollections/Content/_lib
 import type { WorkflowCollectionSlug } from '@/payload-types'
 import { Button, SaveButton, useField, useTranslation } from '@payloadcms/ui'
 import { usePathname, useSearchParams } from 'next/navigation'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 import './style.scss'
 
 const Btn = ({ button }: { button: FlowButton }) => {
@@ -70,13 +70,13 @@ export const FlowControlsClient = ({
   idIsNull,
 }: {
   slug: WorkflowCollectionSlug
-  buttons: Record<Flow.STATUS, FlowButton[]>
+  buttons: Record<FlowSTATUS, FlowButton[]>
   permissions: FlowPermissionAnswers
-  pillLabels: Record<Flow.STATUS, string>
+  pillLabels: Record<FlowSTATUS, string>
   canCreate: boolean
   idIsNull: boolean
 }) => {
-  const { value: from } = useField<Flow.STATUS>({ path: 'flow' })
+  const { value: from } = useField<FlowSTATUS>({ path: 'flow' })
   const { value: locked } = useField<boolean>({
     path: 'currentLifecycle.locked',
   })

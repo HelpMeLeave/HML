@@ -1,10 +1,10 @@
 import { pillColors } from '@/_config/plugins/Plugin-Workflow/_components/Pill/pillColors'
 import { Pill } from '@/components/Admin/Pill'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 import './style.scss'
 
 type PillBaseProps = {
-  status: Flow.STATUS
+  status: FlowSTATUS
   label?: string
   className?: string
   style?: Props<'span'>['style']

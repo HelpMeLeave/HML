@@ -1,7 +1,7 @@
 import type { OnSaveHookProps } from '@/_config/plugins/Plugin-Workflow/_hooks/onSave'
 import { pickGate } from '@/_config/plugins/Plugin-Workflow/_lib/pickGate'
 import type { PayloadRequest } from 'payload'
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
 export const checkAccessGate = ({
   permissions,
@@ -11,8 +11,8 @@ export const checkAccessGate = ({
   req,
 }: {
   permissions: OnSaveHookProps['permissions']
-  from: Flow.STATUS
-  requested: Flow.STATUS
+  from: FlowSTATUS
+  requested: FlowSTATUS
   actionKey?: string | null
   req: PayloadRequest
 }) => {

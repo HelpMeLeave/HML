@@ -1,30 +1,23 @@
-import type { User, WorkflowRecordSlug } from '@/payload-types'
-import type { NamedGroupField, SingleRelationshipField } from 'payload'
-
 declare module 'payload-workflow' {
-  // #region ! ---------- type FLOW CONFIG ----------
+  import type { User, WorkflowRecordSlug } from '@/payload-types'
+  import type { NamedGroupField, SingleRelationshipField } from 'payload'
 
-  /**
-   * `true` indicates using the same value as the status in string form
-   * IE: { published: true } uses the label "Published"
-   */
+  // #region ! ---------- type FLOW CONFIG ----------
   type PillLabel = true | string
 
-  type SubFlow<K extends Flow.STATUS> = {
-    [SubKey in Exclude<Flow.STATUS, K>]?: FlowBtn.BaseBtnProps | FlowBtn.BaseBtnProps[]
+  type SubFlow<K extends FlowSTATUS> = {
+    [SubKey in Exclude<FlowSTATUS, K>]?: FlowBtn.BaseBtnProps | FlowBtn.BaseBtnProps[]
   }
 
-  type FlowStep<K extends Flow.STATUS> =
-    K extends Flow.STATUS_WITHOUT_STEPS ? PillLabel : SubFlow<K> & { pillLabel: PillLabel }
+  type FlowStep<K extends FlowSTATUS> =
+    K extends FlowSTATUS_WITHOUT_STEPS ? PillLabel : SubFlow<K> & { pillLabel: PillLabel }
 
   type FlowConfig = {
-    [Key in Flow.STATUS]?: FlowStep<Key>
+    [Key in FlowSTATUS]?: FlowStep<Key>
   }
 
   // #endregion ! --------------------
-}
 
-declare module 'payload-workflow' {
   // #region ! ---------- type LIFECYCLE ----------
   type WorkflowRecordsField = SingleRelationshipField & {
     hasMany: true
@@ -42,30 +35,8 @@ declare module 'payload-workflow' {
     fields: [WorkflowRecordsField, WorkflowPublishedField]
   }
   // #endregion ! --------------------
-}
 
-declare module 'payload-workflow' {
-  // #region ! ---------- BUTTON ----------
-
+  // #region ! ---------- type BUTTON ----------
   type ButtonAccess = (user: User | null) => boolean
-
   // #endregion ! --------------------
-}
-
-declare module 'payload' {
-  interface CollectionCustom {
-    workflow?: Config.Obj
-  }
-
-  interface RequestContext {
-    workflow?: {
-      bySystem?: boolean
-      transition?: boolean
-      data: {
-        from: Flow.STATUS
-        to: Flow.STATUS
-        key?: string
-      }
-    }
-  }
 }

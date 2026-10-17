@@ -1,5 +1,9 @@
 import type { FlowButton } from '@/_config/plugins/Plugin-Workflow/_lib/parseFlow'
-import type { Flow, WorkflowCollection } from 'payload-workflow'
+import type {
+  FlowLocksAt,
+  FlowSTATUS,
+  WorkflowCollectionPreprocessedConfig,
+} from 'payload-workflow'
 
 /**
  * Sets base collection components
@@ -10,11 +14,11 @@ export const setBaseComponents = ({
   locksAt,
   pillLabels,
 }: {
-  collection: WorkflowCollection.PreprocessedConfig
-  locksAt?: Flow.LocksAt
+  collection: WorkflowCollectionPreprocessedConfig
+  locksAt?: FlowLocksAt
   /** Sent down as data. The client picks the set for the current status rather than deriving it from the flow config. */
-  buttons: Record<Flow.STATUS, FlowButton[]>
-  pillLabels: Record<Flow.STATUS, string>
+  buttons: Record<FlowSTATUS, FlowButton[]>
+  pillLabels: Record<FlowSTATUS, string>
 }) => {
   collection.admin = {
     ...collection.admin,
@@ -38,10 +42,10 @@ const DocControls = ({
   locksAt,
   pillLabels,
 }: {
-  collection: WorkflowCollection.PreprocessedConfig
-  buttons: Record<Flow.STATUS, FlowButton[]>
-  locksAt?: Flow.LocksAt
-  pillLabels: Record<Flow.STATUS, string>
+  collection: WorkflowCollectionPreprocessedConfig
+  buttons: Record<FlowSTATUS, FlowButton[]>
+  locksAt?: FlowLocksAt
+  pillLabels: Record<FlowSTATUS, string>
 }) => ({
   path: '@/_config/plugins/Plugin-Workflow/_components/FlowControls',
   serverProps: {

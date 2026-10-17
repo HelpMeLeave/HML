@@ -18,7 +18,7 @@ import { multiLineEditor } from '@/lexicals/editors'
 import { listDisabled } from '@/lib/collectionAdminSwitches'
 import { toTitleCase } from '@/lib/textCasing'
 import type { CollectionConfig, TextareaField } from 'payload'
-import type { Config } from 'payload-workflow'
+import type { ConfigObj } from 'payload-workflow'
 
 const Pathways: CollectionConfig<'pathways'> = {
   slug: 'pathways',
@@ -46,7 +46,7 @@ const Pathways: CollectionConfig<'pathways'> = {
         published: true,
       },
       track: true,
-    } as Config.Obj<'pathways'>,
+    } as ConfigObj<'pathways'>,
   },
   defaultPopulate: {
     name: true,

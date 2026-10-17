@@ -1,6 +1,6 @@
-import type { Flow } from 'payload-workflow'
+import type { FlowSTATUS } from 'payload-workflow'
 
-export const FLOW_STATUSES: Flow.STATUS[] = [
+export const FLOW_STATUSES: FlowSTATUS[] = [
   'wip',
   'submitted',
   'approved',
