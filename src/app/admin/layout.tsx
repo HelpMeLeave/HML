@@ -3,7 +3,7 @@ import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 
 import '@/styles/admin/tailwind.css'
 
-import '@/styles/admin/index.scss'
+// import '@/styles/admin/index.scss'
 
 import { importMap } from '@/_config/payload-importMap'
 import config from '@/_config/payload.config'

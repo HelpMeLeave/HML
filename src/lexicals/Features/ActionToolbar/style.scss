@@ -1,14 +1,11 @@
 @use '@/styles/admin/mixins' as *;
 
 $border-color: alpha(var(--color-input-border), 50);
-$hover-color: var(--theme-secondary);
-$hover-bg: var(--theme-elevation-50);
-$bg: var(--theme-elevation-0);
+$hover-color: var(--color-secondary);
 
 @mixin _action-border {
   border-collapse: collapse;
   border-radius: 4px;
-  border: 1px solid $border-color;
 }
 
 @mixin _action-position {
@@ -31,8 +28,8 @@ $bg: var(--theme-elevation-0);
 .action-toolbar {
   opacity: 0;
   transition: opacity 0.2s;
-  background: $bg;
-  @include _action-border();
+  // background: $bg;
+  // @include _action-border();
   @include _action-display();
   @include _action-position();
   &--show {
@@ -46,16 +43,12 @@ $bg: var(--theme-elevation-0);
     .btn {
       border: 0;
     }
-    hover {
-      background-color: $hover-bg;
-    }
   }
   &__popup {
     .popup-button-list {
       &__button {
         &:hover {
           color: $hover-color;
-          background-color: $hover-bg;
         }
       }
       &__disabled {
@@ -70,7 +63,7 @@ $bg: var(--theme-elevation-0);
   &__content {
     &:has(.action-toolbar__popup) {
       border-radius: var(--form-radius);
-      background: lighter($color: #{$bg}, $amount: 2);
+      background: lighter($color: var(--color-elevation-0), $amount: 2);
       @include _action-border();
       @include _action-display();
       box-shadow: var(--form-shadow);

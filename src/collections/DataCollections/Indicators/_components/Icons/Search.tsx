@@ -27,7 +27,7 @@ export const Search = ({
             flex: 1,
             padding: '6px 10px',
             borderRadius: 6,
-            border: '1px solid var(--theme-elevation-150)',
+            border: '1px solid var(--color-elevation-150)',
             background: 'transparent',
             fontSize: 13,
           }}

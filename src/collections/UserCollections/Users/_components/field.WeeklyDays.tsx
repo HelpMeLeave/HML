@@ -27,7 +27,7 @@ const TODField = ({ as, ...props }: Props<'button'> & { as?: JSX.ElementType }) 
         fontSize: '.75rem',
         fontWight: 500,
         textTransform: 'uppercase',
-        backgroundColor: 'var(--theme-elevation-100)',
+        backgroundColor: 'var(--color-elevation-100)',
         appearance: 'none',
         border: 0,
       }}

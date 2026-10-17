@@ -17,7 +17,7 @@ body:has(.collection-edit--content) {
     justify-content: space-between;
     padding: 1.5rem;
     border-radius: var(--style-radius-l);
-    background-color: var(--theme-elevation-100);
+    background-color: var(--color-elevation-100);
     text-decoration-line: none;
     text-transform: uppercase;
     font-weight: 300;
@@ -31,8 +31,8 @@ body:has(.collection-edit--content) {
     }
     &:hover {
       transition: all 0.25s ease-in-out 0s;
-      background-color: var(--theme-elevation-800);
-      color: var(--theme-elevation-100);
+      background-color: var(--color-elevation-800);
+      color: var(--color-elevation-100);
     }
   }
 }

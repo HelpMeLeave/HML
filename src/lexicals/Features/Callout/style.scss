@@ -35,7 +35,7 @@
     --label: 'Case study';
   }
 
-  @include dark {
+  @media (prefers-color-scheme: dark) {
     --callout: var(--color-slate-300);
     background: color-mix(in oklab, var(--callout) 12%, transparent);
 

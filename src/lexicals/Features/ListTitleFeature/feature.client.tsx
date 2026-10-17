@@ -18,7 +18,6 @@ import {
 import { ListNode } from '@payloadcms/richtext-lexical/lexical/list'
 import { $getNearestNodeOfType } from '@payloadcms/richtext-lexical/lexical/utils'
 import { ListStart, TextCursor } from 'lucide-react'
-import './style.scss'
 
 const Icon = () => <ListStart />
 

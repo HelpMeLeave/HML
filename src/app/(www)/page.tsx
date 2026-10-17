@@ -10,7 +10,7 @@ import { ChevronsRightIcon } from 'lucide-react'
 import type { Metadata } from 'next'
 import Image, { type StaticImageData } from 'next/image'
 import Link from 'next/link'
-import './styles.scss'
+import './landing.css'
 
 const PANEL_SIZES = '36vw, 100vw'
 

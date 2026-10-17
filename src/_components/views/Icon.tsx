@@ -10,7 +10,7 @@ const Icon = () => (
       left: '-.5rem',
       top: '-.1rem',
       height: '1.25rem',
-      color: 'var(--theme-primary)',
+      color: 'var(--color-primary)',
       borderRadius: '999px',
       overflow: 'visible',
       outlineOffset: '0.5rem',

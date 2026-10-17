@@ -27,11 +27,11 @@ const SlugLockEl = ({ disabled, handleLockClick, locked }: SlugLockElProps) => (
     <span className='sr-only'>{locked ? 'Unlock' : 'Lock'} Slug Field</span>
     {locked ?
       <LockKeyhole
-        className='group-hover:text-(--theme-primary)'
+        className='group-hover:text-(--color-primary)'
         size={14}
       />
     : <UnlockKeyhole
-        className='group-hover:text-(--theme-primary)'
+        className='group-hover:text-(--color-primary)'
         size={14}
       />
     }
@@ -61,7 +61,7 @@ const GenerateBtn = ({ locked, ...props }: Props<'button'> & { locked: boolean }
       style={{
         lineHeight: 'inherit',
         // @ts-expect-error custom css var
-        '--hover-color': 'var(--theme-primary)',
+        '--hover-color': 'var(--color-primary)',
       }}
       type='button'
       className={cn('slug-generate btn--style-none btn btn--size-small btn--no-margin')}>

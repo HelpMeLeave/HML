@@ -67,7 +67,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
   --font-label: var(--font-body);
   --label-weight: 600;
   --label-leading: 1.65;
-  --label-color: var(--theme-elevation-500);
+  --label-color: var(--color-elevation-500);
 }
 
 @mixin group-label-base {
@@ -88,20 +88,20 @@ $input-form-shadow-hover: var(--form-shadow-hover);
   --label-weight: 400;
   --label-leading: 0.85;
   @if ($size == large) {
-    --label-color: var(--theme-elevation-600);
+    --label-color: var(--color-elevation-600);
     --label-size: 2.5rem;
     @include in-sidebar() {
       --label-size: 2rem;
     }
   }
   @if ($size == base) {
-    --label-color: var(--theme-elevation-700);
+    --label-color: var(--color-elevation-700);
     --label-size: 2rem;
     @include in-sidebar() {
       --label-size: 1.5rem;
     }
   } @else {
-    --label-color: var(--theme-elevation-800);
+    --label-color: var(--color-elevation-800);
     --label-size: 1.35rem;
     @include in-sidebar() {
       --label-size: 1.15rem;
@@ -168,7 +168,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
     --label-size: 2.5rem;
     --font-label: var(--font-header);
     --label-weight: 400;
-    --label-color: var(--theme-elevation-700);
+    --label-color: var(--color-elevation-700);
   }
 }
 
@@ -252,7 +252,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
 
   border-radius: var(--collapsible-radius);
   &--style-default {
-    border-color: alpha(var(--theme-elevation-150), 75);
+    border-color: alpha(var(--color-elevation-150), 75);
     @include inputShadow;
   }
 
@@ -265,7 +265,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
       text-transform: uppercase;
       font-weight: 500;
       * {
-        color: var(--theme-secondary);
+        color: var(--color-secondary);
       }
       font-family: var(--font-mono);
     }
@@ -273,31 +273,31 @@ $input-form-shadow-hover: var(--form-shadow-hover);
       font-size: 1.5rem;
     }
     span {
-      color: var(--theme-primary-600);
+      color: var(--color-primary-600);
       @include dark {
-        color: var(--theme-primary-700);
+        color: var(--color-primary-700);
       }
     }
   }
   &__toggle-wrap,
   &__content {
-    --theme-input-bg: var(--theme-elevation-25);
-    --theme-input-border-color: var(--theme-elevation-200);
-    --theme-input-border-color-hover: var(--theme-elevation-250);
+    --theme-input-bg: var(--color-elevation-25);
+    --theme-input-border-color: var(--color-elevation-200);
+    --theme-input-border-color-hover: var(--color-elevation-250);
     @include dark {
-      --theme-input-bg: var(--theme-elevation-0);
-      --theme-input-border-color: var(--theme-elevation-50);
-      --theme-input-border-color-hover: var(--theme-elevation-100);
+      --theme-input-bg: var(--color-elevation-0);
+      --theme-input-border-color: var(--color-elevation-50);
+      --theme-input-border-color-hover: var(--color-elevation-100);
     }
-    button.doc-drawer__toggler {
+    button.doc-drawer__toggler:not(.relationship-add-new__add-button) {
       background-color: var(--theme-input-bg);
     }
     .relationship__wrap:has(.relationship-add-new) {
       border-color: var(--theme-input-border-color);
     }
-    background-color: color-mix(in hsl, var(--theme-elevation-25) 100%, white 50%);
+    background-color: color-mix(in hsl, var(--color-elevation-25) 100%, white 50%);
     @include dark {
-      background-color: color-mix(in hsl, var(--theme-elevation-25) 100%, white 2%);
+      background-color: color-mix(in hsl, var(--color-elevation-25) 100%, white 2%);
     }
     &.collapsible__content {
       padding-top: 0;
@@ -417,6 +417,13 @@ $input-form-shadow-hover: var(--form-shadow-hover);
 
 .react-select .rs__control {
   @extend %relationship-input;
+  box-shadow: none;
+  background-color: none;
+  &:hover,
+  &:is(.react-select:hover *) {
+    box-shadow: none;
+    background-color: none;
+  }
 }
 
 .relationship__wrap {
@@ -426,6 +433,9 @@ $input-form-shadow-hover: var(--form-shadow-hover);
     .react-select .rs__control {
       cursor: pointer;
       border: 0;
+    }
+    .relationship-add-new__add-button {
+      box-shadow: none;
     }
   }
   &:not(:has(.relationship-add-new)) {
@@ -448,9 +458,9 @@ $input-form-shadow-hover: var(--form-shadow-hover);
   overflow: hidden;
   .rs__option {
     &--is-focused {
-      background-color: var(--theme-primary-100);
+      background-color: var(--color-primary-100);
       @include dark {
-        background-color: alpha(var(--theme-primary-300), 10);
+        background-color: alpha(var(--color-primary-300), 10);
       }
     }
   }
@@ -472,7 +482,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
 
 .relationship-add-new:hover,
 .rs__indicators [class*='-indicator']:hover {
-  color: var(--theme-primary);
+  color: var(--color-primary);
   .stroke {
     stroke-width: 2px;
   }
@@ -561,7 +571,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
       font-weight: 400;
       font-style: normal;
       letter-spacing: 0.1ch;
-      color: var(--theme-elevation-700);
+      color: var(--color-elevation-700);
     }
     margin-top: 1rem;
     margin-bottom: 0;
@@ -572,7 +582,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
       font-family: var(--font-body);
       font-weight: 700;
       font-style: italic;
-      color: var(--theme-elevation-500);
+      color: var(--color-elevation-500);
     }
   }
   .table-wrap {
@@ -585,7 +595,7 @@ $input-form-shadow-hover: var(--form-shadow-hover);
 }
 
 .field-description {
-  color: var(--theme-elevation-550);
+  color: var(--color-elevation-550);
   font-style: italic;
   font-size: 0.8rem;
   line-height: 1.25;
@@ -693,7 +703,7 @@ input {
   align-items: center;
   gap: 0.25rem;
 
-  --theme-success-400: color-mix(in hsl, var(--theme-primary) 50%, transparent);
+  --theme-success-400: color-mix(in hsl, var(--color-primary) 50%, transparent);
   --border-color: var(--theme-input-border-color);
   &:hover {
     --border-color: var(--theme-input-border-color-hover);
@@ -710,12 +720,12 @@ input {
   svg {
     width: 1.15rem;
     height: 1.15rem;
-    color: var(--theme-primary);
+    color: var(--color-primary);
   }
 }
 
 %input-label {
-  --label-color: var(--theme-elevation-600);
+  --label-color: var(--color-elevation-600);
   --label-leading: 0.85;
   --label-weight: 500;
   --size: calc(var(--label-size) * 0.85);
@@ -729,7 +739,7 @@ input {
   font-style: italic;
   margin-left: 10px;
   padding-left: 0;
-  --theme-success-400: color-mix(in hsl, var(--theme-primary) 40%, transparent);
+  --theme-success-400: color-mix(in hsl, var(--color-primary) 40%, transparent);
 }
 
 %input-grp {
@@ -784,7 +794,7 @@ input {
 }
 
 .radio-input {
-  --theme-success-400: color-mix(in hsl, var(--theme-primary) 50%, transparent);
+  --theme-success-400: color-mix(in hsl, var(--color-primary) 50%, transparent);
   --border-color: var(--theme-input-border-color);
   &:hover {
     --border-color: var(--theme-input-border-color-hover);
@@ -800,7 +810,7 @@ input {
     &::before {
       width: var(--input-size);
       height: var(--input-size);
-      background-color: var(--theme-secondary);
+      background-color: var(--color-secondary);
       border-color: var(--theme-input-bg);
       border-width: 3px;
     }
@@ -814,7 +824,7 @@ input {
     font-weight: 400;
   }
   input[type='radio']:focus + .radio-input__styled-radio {
-    box-shadow: 0 0 6px 2px alpha(var(--theme-primary), 20);
+    box-shadow: 0 0 6px 2px alpha(var(--color-primary), 20);
   }
 }
 
@@ -916,7 +926,7 @@ div.field-type.radio-group:not(
     &::before {
       content: counter(block-row, decimal-leading-zero);
       @include dark {
-        color: var(--theme-primary-700);
+        color: var(--color-primary-700);
       }
     }
   }

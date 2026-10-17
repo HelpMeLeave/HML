@@ -27,28 +27,29 @@
   }
 }
 
+$_shadow-light: rgba(0, 0, 0, 0.1);
+$_shadow: rgba(0, 0, 0, 0.1);
 @mixin shadow-sm {
-  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px -1px $_shadow-light;
 }
 
 @mixin shadow-m {
-  box-shadow: 0 4px 8px -3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px -3px $_shadow-light;
 }
 
 @mixin shadow-lg {
-  box-shadow: 0 -2px 16px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -2px 16px -2px $_shadow;
 }
 
 @mixin shadow-lg-top {
-  box-shadow: 0 2px 16px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 16px -2px $_shadow;
 }
 
 @mixin inputShadow {
-  @include shadow-sm;
+  --shadow: #{$_shadow-light};
 
-  &:not(:disabled) {
-    &:hover {
-      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
-    }
+  &:not(:disabled):hover {
+    --shadow: #{$_shadow};
   }
+  box-shadow: 0 2px 2px -1px var(--shadow);
 }

@@ -7,7 +7,7 @@ import { COMMAND_PRIORITY_HIGH, KEY_ENTER_COMMAND } from '@payloadcms/richtext-l
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { mergeRegister } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useEffect } from 'react'
-import './style.scss'
+import './style.css'
 
 export const ListTitlePlugin = () => {
   const [editor] = useLexicalComposerContext()

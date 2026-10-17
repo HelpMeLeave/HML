@@ -12,7 +12,7 @@
       line-height: 0.85;
       font-size: 3rem;
       font-weight: 500;
-      color: var(--theme-primary-600);
+      color: var(--color-primary-600);
       display: flex;
       flex-direction: column;
     }
@@ -63,13 +63,13 @@
     border-radius: 4px;
   }
   [class*='cta-primary!'] {
-    background-color: var(--theme-primary-500);
+    background-color: var(--color-primary-500);
     @include dark {
-      background-color: var(--theme-primary-800);
+      background-color: var(--color-primary-800);
     }
   }
   .cta-secondary {
-    color: var(--theme-secondary);
+    color: var(--color-secondary);
     padding: 0;
   }
   margin-bottom: 2rem;

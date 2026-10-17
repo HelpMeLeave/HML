@@ -5,7 +5,6 @@ import { $enterAtBodyEnd } from '@/lexicals/Features/RichListItem/_lib/enterAtBo
 import { $normalizeRichListItem } from '@/lexicals/Features/RichListItem/_lib/normalizeRichListItem'
 import {
   $isRichListItem,
-  // $normalizeRichListItem,
   RichListItemBodyNode,
   RichListItemNode,
   RichListItemTitleNode,
@@ -19,7 +18,6 @@ import {
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { $unwrapNode, mergeRegister } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useEffect } from 'react'
-import './style.scss'
 
 export const RichListItemPlugin = () => {
   const [editor] = useLexicalComposerContext()

@@ -2,36 +2,6 @@
   margin-top: 0;
 }
 
-@mixin _small() {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
-
-@mixin md() {
-  @media (min-width: 768px) {
-    @content;
-  }
-}
-@mixin sm() {
-  @media (min-width: 600px) {
-    @content;
-  }
-}
-
-@mixin dark() {
-  @media (prefers-color-scheme: dark) {
-    @content;
-  }
-}
-
-@mixin group-hocus {
-  &:is(.panel:hover *, .panel:focus-visible *) {
-    @content;
-  }
-}
-$_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
-
 .gate {
   --gutter: 26px;
   --gutter-thirds: calc(var(--gutter));
@@ -48,7 +18,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   --photo-brightness-hover: 0.85;
   --photo-contrast: 1.28;
 
-  @include md {
+  @media (min-width: 768px) {
     --photo-brightness: 0.78;
     --photo-brightness-hover: 0.85;
     --photo-contrast: 1.18;
@@ -71,7 +41,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 
-  @include _small() {
+  @media (max-width: 768px) {
     min-height: 33.333svh;
     &:last-child,
     &:first-child {
@@ -79,7 +49,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
     }
   }
 
-  @include md {
+  @media (min-width: 768px) {
     --clip-right: calc(100% - var(--shear)) 100%;
     --clip-left: 0 0;
 
@@ -96,17 +66,17 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   + .panel {
     margin-left: 0;
     border-top: 1px solid rgba(244, 242, 240, 0.18);
-    @include md {
+    @media (min-width: 768px) {
       border-top: 0;
       margin-left: calc(var(--shear) * -1);
     }
 
     &::before {
       display: none;
-      @include md {
+      @media (min-width: 768px) {
         display: unset;
       }
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       z-index: 5;
@@ -128,35 +98,35 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
     height: 100%;
     object-fit: cover;
     object-position: bottom;
-    &:is([data-slot='BUILD COMMUNITY'] *) {
+    &:is([data-slot="BUILD COMMUNITY"] *) {
       object-position: left 0%;
-      @include md {
+      @media (min-width: 768px) {
         object-position: 60%;
       }
     }
-    &:is([data-slot='EXPLORE'] *) {
+    &:is([data-slot="EXPLORE"] *) {
       object-position: bottom 80% left 0px;
-      @include md {
+      @media (min-width: 768px) {
         object-position: 70%;
       }
     }
-    &:is([data-slot='LEAVE'] *) {
+    &:is([data-slot="LEAVE"] *) {
       object-position: bottom 80% left 0px;
-      @include md {
+      @media (min-width: 768px) {
         object-position: 60%;
       }
     }
     transition:
       object-position 240ms linear,
-      transform 420ms $_transform_transition,
+      transform 420ms cubic-bezier(0.2, 0.7, 0.3, 1),
       filter 240ms linear;
-    @include group-hocus() {
+    &:is(.panel:hover *, .panel:focus-visible *) {
       transform: scale(1.08);
       filter: grayscale(1) brightness(var(--photo-brightness-hover)) contrast(var(--photo-contrast));
     }
   }
   &::after {
-    content: ' ';
+    content: " ";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -168,7 +138,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
       transparent 100%
     );
     height: 5rem;
-    @include md {
+    @media (min-width: 768px) {
       height: 15rem;
     }
     display: block;
@@ -200,11 +170,11 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
     opacity: 0;
     transition: opacity 200ms linear;
     background: linear-gradient(rgba(155, 47, 47, 0.48) 0%, rgba(155, 47, 47, 0) 100%);
-    @include dark {
+    @media (prefers-color-scheme: dark) {
       background: linear-gradient(rgba(149, 155, 47, 0.48) 0%, rgba(149, 155, 47, 0) 100%);
     }
     mix-blend-mode: difference;
-    @include group-hocus() {
+    &:is(.panel:hover *, .panel:focus-visible *) {
       opacity: 1;
     }
   }
@@ -217,15 +187,15 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   }
   .chev {
     flex: 0 0 auto;
-    transition: transform 190ms $_transform_transition;
-    @include group-hocus() {
+    transition: transform 190ms cubic-bezier(0.2, 0.7, 0.3, 1);
+    &:is(.panel:hover *, .panel:focus-visible *) {
       transform: translateX(8px);
     }
   }
 
   .rule {
-    transition: width 300ms $_transform_transition;
-    @include group-hocus() {
+    transition: width 300ms cubic-bezier(0.2, 0.7, 0.3, 1);
+    &:is(.panel:hover *, .panel:focus-visible *) {
       width: 128px;
     }
   }
@@ -233,7 +203,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
 
 .tint {
   background: rgba(155, 47, 47, 0.1);
-  @include dark {
+  @media (prefers-color-scheme: dark) {
     background: rgba(146, 149, 47, 0.1);
   }
 }
@@ -249,7 +219,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   position: relative;
   z-index: 4;
 
-  @include md {
+  @media (min-width: 768px) {
     justify-content: flex-end;
     padding: 0 var(--gutter) 78px;
   }
@@ -259,7 +229,7 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
   align-items: center;
   color: var(--ink);
   display: flex;
-  font-family: var(--font-bebas), 'Arial Narrow', sans-serif;
+  font-family: var(--font-bebas), "Arial Narrow", sans-serif;
   font-size: clamp(2.5rem, 2.6vw, 7.25rem);
   gap: 16px;
   letter-spacing: 0.02em;
@@ -275,13 +245,13 @@ $_transform_transition: cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
 .mark {
-  $_mark-clamp: clamp(28px, 3.7vw, 56px);
   position: absolute;
   z-index: 30;
-  right: $_mark-clamp;
-  top: $_mark-clamp;
+  right: clamp(28px, 3.7vw, 56px);
+  top: clamp(28px, 3.7vw, 56px);
   width: 64px;
-  @include md {
+
+  @media (min-width: 768px) {
     width: 34px;
   }
 }

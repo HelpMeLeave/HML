@@ -6,7 +6,7 @@
     flex-direction: column;
   }
   font-size: 0.65rem;
-  --hover-color: var(--theme-secondary);
+  --hover-color: var(--color-secondary);
   .btn__content {
     gap: 2px;
     flex-direction: column-reverse;
@@ -52,7 +52,7 @@
 
   .array-field__draggable-rows > div:has(.collapsible__toggle--open) {
     flex-basis: 550px;
-    @include sm {
+    @media (min-width: 600px) {
       flex-basis: 100%;
       .collapsible__content > .render-fields > .field-type.group-field,
       #currentIcon {
@@ -60,7 +60,8 @@
         margin-inline: auto;
       }
     }
-    @include md {
+
+    @media (min-width: 768px) {
       max-width: 500px;
     }
   }
@@ -69,7 +70,8 @@
       display: grid;
       grid-auto-flow: row dense;
     }
-    @include md {
+
+    @media (min-width: 768px) {
       display: flex;
       flex-direction: column;
       .group-field {
@@ -109,7 +111,7 @@
   .pickerTitle {
     width: 100%;
     text-align: center;
-    border-bottom: 1px solid light-dark(var(--theme-secondary-200), var(--theme-secondary-800));
+    border-bottom: 1px solid light-dark(var(--color-secondary-200), var(--color-secondary-800));
   }
 
   .icon-picker--grp:not(button) {

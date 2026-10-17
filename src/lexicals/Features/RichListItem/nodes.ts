@@ -68,7 +68,7 @@ export class RichListItemTitleNode extends ElementNode {
 
   createDOM() {
     const el = document.createElement('p')
-    el.className = 'rich-list-item__title'
+    el.className = 'rich-list-item__title m-0 text-accent'
     return el
   }
 
@@ -101,7 +101,7 @@ export class RichListItemBodyNode extends ElementNode {
 
   createDOM() {
     const el = document.createElement('div')
-    el.className = 'rich-list-item__body'
+    el.className = 'rich-list-item__body  *:mb-2 *:mbe-0'
     return el
   }
 
