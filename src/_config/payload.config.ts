@@ -51,7 +51,8 @@ const config = buildConfig({
     autoRefresh: true,
     suppressHydrationWarning: true,
     user: 'users',
-    theme: 'all',
+    // theme: 'all',
+    theme: 'light',
     dateFormat: 'MMM do, y',
     timezones: {
       supportedTimezones: defaultTimezones,
