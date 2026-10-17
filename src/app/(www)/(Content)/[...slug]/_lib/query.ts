@@ -2,9 +2,10 @@ import type { ContentRecordRoute, HandleProps } from '@/app/(www)/(Content)/[...
 import { baseQry } from '@/app/(www)/(Content)/[...slug]/_lib/baseQry'
 import { checkUsers } from '@/app/(www)/(Content)/[...slug]/_lib/checkUser'
 import { hasContent } from '@/app/(www)/(Content)/[...slug]/_lib/hasContent'
+import { mergeObj } from '@/lib/mergeObj'
 import type { RoutesSelect } from '@/payload-types'
 import { getPayload } from '@/server/getPayload'
-import type { PaginatedDocs } from 'payload'
+import type { PaginatedDocs, Where as PayloadWhere } from 'payload'
 
 const handlePreview = async ({ user, url, payload }: HandleProps) => {
   user = user ?? (await checkUsers(payload))
@@ -26,17 +27,12 @@ const handlePreview = async ({ user, url, payload }: HandleProps) => {
         subtitle: true,
         'other-brow': true,
         flow: true,
-        init: true,
+        currentLifecycle: { changed: { at: true } },
       },
     },
   })
 
-  return {
-    totalDocs,
-    doc: docs[0]?.doc,
-    user,
-    payload,
-  }
+  return { totalDocs, doc: docs[0]?.doc, user, payload }
 }
 
 const handlePublic = async ({ user, url, payload }: HandleProps) => {
@@ -48,31 +44,23 @@ const handlePublic = async ({ user, url, payload }: HandleProps) => {
   >({
     ...base,
     depth: 3,
-    where: {
-      ...base.where,
+    where: mergeObj(base.where ?? {}, {
       'doc.currentLifecycle.published': { exists: true },
-    },
-    select: {
-      ...base.select,
+    }) as PayloadWhere,
+    select: mergeObj(base.select ?? {}, {
       'doc.currentLifecycle': true,
-    } as RoutesSelect<true>,
-    populate: {
+    }),
+    populate: mergeObj(base.populate ?? {}, {
       tag: {
         display: true,
-        // page-group filters pick their query by the filter tag's title (topic, contentType, …); without it every dynamic filter was skipped
         title: true,
       },
       content: {
         contentType: true,
-        currentLifecycle: {
-          published: true,
-        },
-        init: true,
+        currentLifecycle: { published: true },
       },
       'content-record': {
-        transition: {
-          at: true,
-        },
+        transition: true,
         snapshot: {
           content: true,
           title: true,
@@ -84,7 +72,7 @@ const handlePublic = async ({ user, url, payload }: HandleProps) => {
           campaign: true,
         },
       },
-    },
+    }),
   })) as PaginatedDocs<ContentRecordRoute>
 
   return {
@@ -95,7 +83,7 @@ const handlePublic = async ({ user, url, payload }: HandleProps) => {
       ...docs?.[0]?.doc.currentLifecycle.published.snapshot,
       id: docs?.[0]?.doc.id,
       flow: 'published',
-      at: docs?.[0]?.doc.currentLifecycle.published.transition?.at,
+      updated: docs?.[0]?.doc.currentLifecycle.published.transition?.at,
       init: docs?.[0]?.doc.init,
     },
   }
@@ -105,9 +93,9 @@ export const query = async ({ url, preview }: { url: string; preview: boolean })
   const payload = await getPayload()
   if (!payload) return { doc: {}, payload: {} }
 
-  const { user, doc, totalDocs } = await (preview ?
-    handlePreview({ user: null, url, payload })
-  : handlePublic({ user: null, url, payload }))
+  const fn = preview ? handlePreview : handlePublic
+
+  const { user, doc, totalDocs } = await fn({ user: null, url, payload })
 
   return {
     user,

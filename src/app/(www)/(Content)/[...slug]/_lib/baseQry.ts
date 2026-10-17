@@ -1,5 +1,5 @@
 import type { Where } from '@/lib/filterBy'
-import type { FindOptions, PopulateType, SelectIncludeType } from 'payload'
+import type { FindOptions, SelectIncludeType } from 'payload'
 
 type BaseQry = Sub<
   FindOptions<'routes', SelectIncludeType>,
@@ -9,53 +9,16 @@ type BaseQry = Sub<
   }
 >
 
-export const baseQry = (url: string, preview?: boolean) => {
-  const addtl =
-    typeof preview == 'boolean' ?
-      preview == true ?
-        {
-          depth: 2,
-          where: {},
-          populate: {
-            content: {
-              init: true,
-              content: true,
-              title: true,
-              subtitle: true,
-              'other-brow': true,
-              currentLifecycle: { changed: { at: true } },
-            } as PopulateType['content'],
-          },
-        }
-      : {
-          dept: 3,
-          where: { 'doc.currentLifecycle.published': { exists: true } },
-          populate: {
-            content: { init: true, contentType: true, currentLifecycle: { published: true } },
-            'content-record': {
-              snapshot: {
-                content: true,
-                title: true,
-                subtitle: true,
-                'other-brow': true,
-              },
-              transition: { at: true },
-            },
-          } as PopulateType,
-        }
-    : { where: {}, populate: {} }
-
+export const baseQry = (url: string) => {
   return {
     collection: 'routes',
     limit: 1,
     where: {
       url: { equals: url },
       doc: { exists: true },
-      ...addtl.where,
     } as Where<'routes'>,
+    populate: { content: { init: true } },
     select: { type: true, adminTitle: true },
-    populate: addtl.populate,
-    depth: addtl.depth,
     pagination: false,
   } as BaseQry
 }

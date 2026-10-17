@@ -104,10 +104,10 @@ const PageData = async ({
     content,
     subtitle,
     flow,
-    at: changed,
+    updated,
     init: created,
   } = doc as Partial<Content> & {
-    at: string
+    updated: string
   }
 
   const docPreview = convertLexicalToPlaintext({
@@ -169,15 +169,18 @@ const PageData = async ({
             </MainSubtitle>
           )}
         </MainHGroup>
-        <P className='mt-1 mb-4 text-end font-mono text-xs text-accent uppercase italic'>
+        <P className='mt-1 mb-4 flex gap-2 text-end font-mono text-xs font-thin tracking-wider text-accent/75 uppercase italic'>
           {created && (
             <span className='flex gap-x-2'>
               {created.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Published $2-$3-$1')}
             </span>
           )}
-          {changed && (
+          {created && updated && (
+            <span className='block h-lh min-w-[0.08rem] rotate-14 bg-accent-muted/15' />
+          )}
+          {updated && (
             <span className='flex gap-x-2'>
-              {changed.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Updated $2-$3-$1')}
+              {updated.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Updated $2-$3-$1')}
             </span>
           )}
         </P>
