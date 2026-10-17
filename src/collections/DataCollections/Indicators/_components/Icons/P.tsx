@@ -8,7 +8,7 @@ export const P = ({ ...props }: Props) => (
       fontWeight: 500,
       marginTop: '1rem',
       marginBottom: 12,
-      color: 'var(--theme-secondary)',
+      color: 'var(--color-secondary)',
       textTransform: 'uppercase',
       letterSpacing: '0.05em',
       ...props.style,
