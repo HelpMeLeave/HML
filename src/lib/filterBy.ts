@@ -1,12 +1,7 @@
-import type {
-  CollectionSlug,
-  FilterOptions,
-  GeneratedTypes,
-  Where as PayloadWhere,
-  WhereField,
-} from 'payload'
+import type { Config } from '@/payload-types'
+import type { CollectionSlug, FilterOptions, Where as PayloadWhere, WhereField } from 'payload'
 
-type WhereKeys<T extends CollectionSlug> = keyof GeneratedTypes['collections'][T] | 'and' | 'or'
+type WhereKeys<T extends CollectionSlug> = keyof Config['collections'][T] | 'and' | 'or'
 
 export type Where<T extends CollectionSlug> = PayloadWhere
   & FilterOptions

@@ -73,7 +73,17 @@ export const SectionCoverPlugin = () => {
       editor.update(() => {
         const hgroup = targetKey ? $getNodeByKey(targetKey) : null
 
-        if (!$isSectionHGroupNode(hgroup) || $getCover(hgroup)) return
+        if (!$isSectionHGroupNode(hgroup)) return
+
+        const existing = $getCover(hgroup)
+        if (existing) {
+          existing.setData({
+            ...existing.getData(),
+            relationTo: collectionSlug,
+            value: doc.id,
+          } as UploadData)
+          return
+        }
 
         const cover = $createUploadNode({
           data: { fields: {}, relationTo: collectionSlug, value: doc.id } as UploadData,

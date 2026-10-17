@@ -12,14 +12,31 @@ import type { DuotoneThemed } from '@/lexicals/Features/Duotone/_types'
 import { NTK } from '@/lexicals/RenderRichText/_lib'
 import { listConverters } from '@/lexicals/RenderRichText/_listConverters'
 import { structureConverters } from '@/lexicals/RenderRichText/_structureConverters'
+import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import { cn } from '@/lib/cn'
 import { resolveLinkNode } from '@/lib/normalize/resolveLink'
 import type { Document } from '@/payload-types'
-import type { SerializedUploadNode } from '@payloadcms/richtext-lexical'
+import type {
+  SerializedTableCellNode,
+  SerializedTableNode,
+  SerializedTableRowNode,
+  SerializedUploadNode,
+} from '@payloadcms/richtext-lexical'
 import type { SerializedTextNode } from '@payloadcms/richtext-lexical/lexical'
-import type { JSXConverters, JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
+import type {
+  JSXConverterArgs,
+  JSXConverters,
+  JSXConvertersFunction,
+} from '@payloadcms/richtext-lexical/react'
 import { BookOpenText, Lightbulb, Pin, Siren } from 'lucide-react'
 import Image from 'next/image'
+
+const hasHeaderCells = (firstRow: SerializedTableRowNode) => {
+  const firstCell = firstRow.children[0]
+  return firstCell.type == 'tablecell' && isHeaderCell(firstCell as SerializedTableCellNode)
+}
+
+const isHeaderCell = (node: SerializedTableCellNode) => node.headerState == 1
 
 const CALLOUTS = {
   note: {
@@ -100,36 +117,49 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     // #endregion ! --------------------
     // ------------------------------------------------------------
     // #region ! ---------- TABLE ----------
-    table: ({ node, nodesToJSX }) => {
-      // TODO: Design table
+    table: ({ node, nodesToJSX }: JSXConverterArgs<SerializedTableNode>) => {
+      const [firstRow, ...rows] = node.children as SerializedTableRowNode[]
       return (
         <table
           data-slot='table'
-          className='overflow-hidden rounded-xl shadow-sm sm:mx-auto! dark:bg-black'>
-          <tbody>{nodesToJSX({ nodes: node.children })}</tbody>
+          className='max-w-max overflow-hidden rounded-xl shadow-sm dark:bg-ui-900/50'>
+          {hasHeaderCells(firstRow) ?
+            <>
+              <thead>{nodesToJSX({ nodes: [firstRow] })}</thead>
+              <tbody className='*:odd:bg-slate-0 *:odd:dark:bg-ui-900/75'>
+                {nodesToJSX({ nodes: rows })}
+              </tbody>
+            </>
+          : <tbody>{nodesToJSX({ nodes: [firstRow, ...rows] })}</tbody>}
         </table>
       )
     },
-    tablerow: ({ node, nodesToJSX }) => {
+    tablerow: ({ node, nodesToJSX }: JSXConverterArgs<SerializedTableRowNode>) => (
+      <tr>{nodesToJSX({ nodes: node.children })}</tr>
+    ),
+    tablecell: ({ node, nodesToJSX, converters }) => {
+      const isTH = isHeaderCell(node)
+      const El = isTH ? 'th' : 'td'
       return (
-        <tr
+        <El
+          data-variant={isTH ? 'header' : 'cell'}
           className={cn(
-            'dark:bg-black',
-            'not-first:even:bg-slate-0',
-            'not-first:even:dark:bg-slate-500/15',
-            'first:**:font-normal',
-            'first:**:uppercase',
-            'first:*:py-2 first:*:align-bottom first:**:italic'
+            'border-current font-[monospace] font-thin',
+            isTH ?
+              'pt-4 pb-2 align-bottom text-[1rem] tracking-widest text-accent uppercase italic'
+            : 'px-4 py-4 align-top text-sm',
+            'first:pl-8 last:pr-8'
           )}>
-          {nodesToJSX({ nodes: node.children })}
-        </tr>
+          {nodesToJSX({
+            nodes: node.children,
+            converters: {
+              ...converters,
+              paragraph: removeParagraph,
+            },
+          })}
+        </El>
       )
     },
-    tablecell: ({ node, nodesToJSX }) => (
-      <td className='border-current px-4 py-4 align-top font-[monospace] text-xs font-thin'>
-        {nodesToJSX({ nodes: node.children })}
-      </td>
-    ),
     // #endregion ! --------------------
     // ------------------------------------------------------------
 

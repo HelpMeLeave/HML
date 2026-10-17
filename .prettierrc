@@ -29,7 +29,8 @@
     {
       "files": "*.css",
       "options": {
-        "singleQuote": false
+        "singleQuote": false,
+        "objectWrap": "preserve"
       }
     }
   ]

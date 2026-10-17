@@ -25,10 +25,11 @@
     "paths": {
       "@/*": ["./@types/*", "./src/*", "./public/*", "./.next/dev/types/*"],
       "www/*": ["./src/app/(www)/*"],
-      "api/*": ["./src/app/(api)/*"]
+      "api/*": ["./src/app/(api)/*"],
+      "@types": ["./@types/*"]
     },
     "target": "ES2022",
-    "typeRoots": ["./node_modules/@types", "./@types"],
+    // "typeRoots": ["./node_modules/@types", "./@types"],
     // "skipLibCheck": false
     "skipLibCheck": true
   },
@@ -37,7 +38,7 @@
     "./**/*.ts",
     "./**/*.tsx",
     "./@types/**/*.ts",
-    "./@types/**/*.d.ts",
+    "@types/**/*.d.ts",
     "./eslint.config.mjs",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
