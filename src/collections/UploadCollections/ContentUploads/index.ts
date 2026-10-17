@@ -138,7 +138,7 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
       fit: 'cover',
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
-    adminThumbnail: 'thumbnail',
+    adminThumbnail: 'medium',
     imageSizes: [
       {
         name: 'thumbnail',
@@ -181,5 +181,6 @@ export const MediaContentCollectionConfig: CollectionConfig<'media-content'> = {
     bulkUpload: true,
     mimeTypes: ['image/*'],
     allowRestrictedFileTypes: false,
+    displayPreview: true,
   },
 }

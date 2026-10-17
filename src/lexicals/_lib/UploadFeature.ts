@@ -7,11 +7,23 @@ export const UploadFeature = LexicalUploadFeature({
       fields: [{ type: 'text', name: 'adminTitle', label: 'Title' }],
     },
     media: {
-      fields: [{ type: 'select', options: ['thumbnail', 'normal'], name: 'size' }],
+      fields: [
+        {
+          type: 'select',
+          options: ['thumbnail', 'medium', 'normal'],
+          defaultValue: 'medium',
+          name: 'size',
+        },
+      ],
     },
     'media-content': {
       fields: [
-        { type: 'select', options: ['thumbnail', 'normal'], name: 'size', defaultValue: 'normal' },
+        {
+          type: 'select',
+          options: ['thumbnail', 'medium', 'normal'],
+          name: 'size',
+          defaultValue: 'medium',
+        },
         duotoneFields,
       ],
     },
