@@ -1,11 +1,11 @@
+import { ToolbarActionButtons } from '@/lexicals/Features/ActionToolbar/_components/ToolbarActionButtons'
+import { ToolbarActionDivider } from '@/lexicals/Features/ActionToolbar/_components/ToolbarActionDivider'
+import { ToolbarActionDropdown } from '@/lexicals/Features/ActionToolbar/_components/ToolbarActionDropdown'
 import type {
   ToolbarAction,
   ToolbarActionDropdownGroup,
   ToolbarActionGroup,
 } from '@/lexicals/Features/ActionToolbar/_types'
-import { ToolbarActionButtons } from '@/lexicals/Features/ActionToolbar/ToolbarActionButtons'
-import { ToolbarActionDivider } from '@/lexicals/Features/ActionToolbar/ToolbarActionDivider'
-import { ToolbarActionDropdown } from '@/lexicals/Features/ActionToolbar/ToolbarActionDropdown'
 import type { LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import { Fragment } from 'react/jsx-runtime'
 

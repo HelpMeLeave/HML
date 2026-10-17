@@ -30,3 +30,8 @@ export type ToolbarActionItem = {
   onSelect: (editor?: LexicalEditor) => void
   hideIfDisabled?: boolean
 }
+
+export type ActionStateInitFn = <T>(
+  startingVal: T,
+  actionKey?: keyof ToolbarAction
+) => Record<string, T>

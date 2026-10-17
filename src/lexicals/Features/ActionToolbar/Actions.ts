@@ -35,6 +35,7 @@ import {
   BookOpenText,
   ImageMinus,
   ImagePlus,
+  ImageUp,
   Lightbulb,
   List,
   ListMinus,
@@ -42,6 +43,7 @@ import {
   ListStart,
   NotebookPenIcon,
   Siren,
+  SquarePen,
   Trash,
   type LucideIcon,
 } from 'lucide-react'
@@ -137,6 +139,31 @@ const CoverGrp: ToolbarActionGroup = {
       onSelect: function (editor) {
         const key = editor?.getEditorState().read(() => $hgroupAtCaret()?.getKey())
         if (key) editor?.dispatchCommand(OPEN_COVER_DRAWER_COMMAND, key)
+      },
+      hideIfDisabled: true,
+    },
+    {
+      slug: 'swapCoverImg',
+      label: 'Swap Cover Image',
+      Icon: ImageUp,
+      isActive: () => false,
+      $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
+      onSelect: function (editor) {
+        const key = editor?.getEditorState().read(() => $hgroupAtCaret()?.getKey())
+        if (key) editor?.dispatchCommand(OPEN_COVER_DRAWER_COMMAND, key)
+      },
+      hideIfDisabled: true,
+    },
+    {
+      slug: 'editCoverImg',
+      label: 'Edit Cover Image',
+      Icon: SquarePen,
+      isActive: () => false,
+      $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
+      onSelect: function (editor) {
+        const key = editor?.getEditorState().read(() => $getCover($hgroupAtCaret())?.getKey())
+        const el = key ? editor?.getElementByKey(key) : null
+        el?.querySelector<HTMLButtonElement>('[class*="__upload-drawer-toggler"]')?.click()
       },
       hideIfDisabled: true,
     },

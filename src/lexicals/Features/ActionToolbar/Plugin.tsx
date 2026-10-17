@@ -1,8 +1,9 @@
 'use client'
 
+import { ToolbarGroup } from '@/lexicals/Features/ActionToolbar/_components/ToolbarGroup'
+import { initActionState } from '@/lexicals/Features/ActionToolbar/_lib/initActionState'
 import type { ToolbarAction } from '@/lexicals/Features/ActionToolbar/_types'
-import { AllActions, GroupedActions } from '@/lexicals/Features/ActionToolbar/Actions'
-import { ToolbarGroup } from '@/lexicals/Features/ActionToolbar/ToolbarGroup'
+import { GroupedActions } from '@/lexicals/Features/ActionToolbar/Actions'
 import { cn } from '@/lib/cn'
 import {
   setFloatingElemPosition,
@@ -14,17 +15,49 @@ import {
   COMMAND_PRIORITY_LOW,
   mergeRegister,
   SELECTION_CHANGE_COMMAND,
+  type LexicalEditor,
 } from '@payloadcms/richtext-lexical/lexical'
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Fragment } from 'react/jsx-runtime'
-
-type ActionStateInitFn = <T>(startingVal: T, actionKey?: keyof ToolbarAction) => Record<string, T>
-const ActionInitState: ActionStateInitFn = (startingVal) =>
-  Object.fromEntries(Object.keys(AllActions).map((ea) => [ea, startingVal]))
 
 /** Floating toolbar shown above a Section/SubSection heading, or a line that can become the title of the list below it, while the caret is in it. */
+const Toolbar = ({
+  actions,
+  ref,
+  editor,
+  toolbar,
+}: {
+  toolbar: Record<string, boolean>
+  actions: Array<ToolbarAction>
+  ref: RefObject<HTMLDivElement | null>
+  editor: LexicalEditor
+}) => {
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        'action-toolbar group toolbar bg-base-0 hover:bg-base-50 border-base-200 border-collapse rounded-sm border',
+        'h-6',
+        'shadow-md',
+        'empty:hidden!'
+      )}>
+      {actions.map(({ slug, ...props }) => {
+        if (toolbar[slug] == true) {
+          return (
+            <ToolbarGroup
+              slug={slug}
+              {...props}
+              editor={editor}
+              key={slug}
+            />
+          )
+        }
+      })}
+    </div>
+  )
+}
+
 export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement }) => {
   const [editor] = useLexicalComposerContext()
   const ref = useRef<HTMLDivElement>(null)
@@ -39,7 +72,7 @@ export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement })
     [editorConfig.resolvedFeatureMap]
   )
 
-  const [toolbar, setToolbar] = useState<Record<string, boolean>>(ActionInitState(false))
+  const [toolbar, setToolbar] = useState<Record<string, boolean>>(initActionState(false))
 
   const $position = useEffectEvent(() => {
     if (!ref.current) return
@@ -56,7 +89,7 @@ export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement })
     setFloatingElemPosition({
       anchorElem,
       floatingElem: ref.current,
-      targetRect: target instanceof HTMLElement ? target?.getBoundingClientRect() : null,
+      targetRect: target instanceof HTMLElement ? target.getBoundingClientRect() : null,
       horizontalOffset: 0,
       verticalGap: 15,
     })
@@ -87,31 +120,12 @@ export const ActionToolbarPlugin = ({ anchorElem }: { anchorElem: HTMLElement })
   }, [anchorElem, editor])
 
   return createPortal(
-    <div
-      style={{
-        // @ts-expect-error custom var
-        '--color': 'var(--color-muted)',
-        '--stroke-color': 'var(--theme-secondary)',
-        '--bg': 'var(--theme-elevation-0)',
-        '--hover-bg': 'var(--theme-elevation-50)',
-      }}
+    <Toolbar
+      editor={editor}
       ref={ref}
-      className={cn('action-toolbar group toolbar', 'h-6', 'shadow-md', 'empty:hidden!')}>
-      {ToolbarActions.map(({ slug, ...props }) => {
-        if (toolbar[slug] == true) {
-          return (
-            <Fragment key={slug}>
-              <ToolbarGroup
-                slug={slug}
-                {...props}
-                editor={editor}
-                key={slug}
-              />
-            </Fragment>
-          )
-        }
-      })}
-    </div>,
+      actions={ToolbarActions}
+      toolbar={toolbar}
+    />,
     anchorElem
   )
 }

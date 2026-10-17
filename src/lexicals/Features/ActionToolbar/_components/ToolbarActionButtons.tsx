@@ -29,8 +29,8 @@ export const ToolbarActionButtons = ({
           <Fragment key={slug}>
             <Button
               className={cn(
-                'h-5 border-0 first:rounded-l-[3px]! disabled:pointer-events-none disabled:opacity-50',
-                active && 'opacity-100! [--color:var(--theme-secondary)]'
+                'group/actionbar-btn mx-1 h-5 border-0 px-1 first:rounded-l-[3px]! hover:bg-transparent disabled:pointer-events-none disabled:opacity-50',
+                active && 'text-secondary opacity-100!'
               )}
               round
               iconPosition='left'
@@ -41,11 +41,10 @@ export const ToolbarActionButtons = ({
               disabled={!enabled}
               tooltip={label}
               aria-label={label}
-              icon={ItemIcon && <ItemIcon />}
+              icon={ItemIcon && <ItemIcon className='group-hover/actionbar-btn:text-secondary' />}
               onMouseDown={(e) => e.preventDefault()}
-              onClick={() => onSelect(editor)}>
-              {label}
-            </Button>
+              onClick={() => onSelect(editor)}
+            />
           </Fragment>
         )
       )
