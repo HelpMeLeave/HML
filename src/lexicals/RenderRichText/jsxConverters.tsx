@@ -12,7 +12,6 @@ import type { DuotoneThemed } from '@/lexicals/Features/Duotone/_types'
 import { NTK } from '@/lexicals/RenderRichText/_lib'
 import { listConverters } from '@/lexicals/RenderRichText/_listConverters'
 import { structureConverters } from '@/lexicals/RenderRichText/_structureConverters'
-import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import { cn } from '@/lib/cn'
 import { resolveLinkNode } from '@/lib/normalize/resolveLink'
 import type { Document } from '@/payload-types'
@@ -119,14 +118,15 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     // #region ! ---------- TABLE ----------
     table: ({ node, nodesToJSX }: JSXConverterArgs<SerializedTableNode>) => {
       const [firstRow, ...rows] = node.children as SerializedTableRowNode[]
+      console.log(node)
       return (
         <table
           data-slot='table'
-          className='max-w-max overflow-hidden rounded-xl shadow-sm dark:bg-ui-900/50'>
+          className='*:first max-w-max overflow-hidden rounded-xl shadow-sm dark:bg-ui-900/50'>
           {hasHeaderCells(firstRow) ?
             <>
               <thead>{nodesToJSX({ nodes: [firstRow] })}</thead>
-              <tbody className='*:odd:bg-slate-0 *:odd:dark:bg-ui-900/75'>
+              <tbody className='*:odd:bg-slate-0 *:odd:dark:bg-ui-900/5'>
                 {nodesToJSX({ nodes: rows })}
               </tbody>
             </>
@@ -137,26 +137,22 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     tablerow: ({ node, nodesToJSX }: JSXConverterArgs<SerializedTableRowNode>) => (
       <tr>{nodesToJSX({ nodes: node.children })}</tr>
     ),
-    tablecell: ({ node, nodesToJSX, converters }) => {
+    tablecell: ({ node, nodesToJSX }) => {
       const isTH = isHeaderCell(node)
       const El = isTH ? 'th' : 'td'
       return (
         <El
+          colSpan={node.colSpan}
+          rowSpan={node.rowSpan}
           data-variant={isTH ? 'header' : 'cell'}
           className={cn(
-            'border-current font-[monospace] font-thin',
+            'border-current font-mono font-thin',
+            'px-4 first:pl-8 last:pr-8',
             isTH ?
-              'pt-4 pb-2 align-bottom text-[1rem] tracking-widest text-accent uppercase italic'
-            : 'px-4 py-4 align-top text-sm',
-            'first:pl-8 last:pr-8'
+              'pt-4 pb-2 align-bottom font-sans text-[1rem] tracking-widest text-accent italic dark:bg-ui-900/50'
+            : 'px-4 py-4 align-top text-sm'
           )}>
-          {nodesToJSX({
-            nodes: node.children,
-            converters: {
-              ...converters,
-              paragraph: removeParagraph,
-            },
-          })}
+          {nodesToJSX({ nodes: node.children })}
         </El>
       )
     },

@@ -4,4 +4,5 @@
   --font-serif: var(--font-interstate), serif;
   --font-header: var(--font-bebas), sans-serif;
   --font-mono: var(--font-hyper-mono), monospace;
+  --font-play: var(--font-playfair), serif;
 }
