@@ -11,7 +11,7 @@ export const ColumnsComponent: React.FC<ColumnsBlock> = (props) => {
 
   return (
     <div className='container'>
-      <div className='grid grid-cols-4 gap-x-16 lg:grid-cols-12 lg:gap-x-8'>
+      <div className='flex grid-cols-4 flex-col gap-x-16 sm:grid lg:grid-cols-12 lg:gap-x-8 **:slot-[subsection]:mb-5'>
         {cols
           && Object.values(cols).length > 0
           && Object.values(cols).map((col, index) => {
