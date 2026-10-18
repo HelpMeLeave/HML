@@ -1,4 +1,4 @@
-import type { LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
+import type { BaseSelection, LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import { type LucideIcon } from 'lucide-react'
 
 export type ToolbarAction = {
@@ -19,13 +19,13 @@ export type ToolbarActionGroup = {
 } & (ToolbarActionDropdownGroup | ToolbarActionButtonGroup)
 
 export type ToolbarActionDropdownGroup = { type: 'dropdown'; label: string; Icon: LucideIcon }
-export type ToolbarActionButtonGroup = { type: 'buttons' }
+type ToolbarActionButtonGroup = { type: 'buttons' }
 
 export type ToolbarActionItem = {
   slug: string
   label: string
   Icon: LucideIcon
-  isActive: () => boolean
+  $isActive: (props?: { editor?: LexicalEditor; selection?: BaseSelection }) => boolean
   $isEnabled: (editor?: LexicalEditor) => boolean
   onSelect: (editor?: LexicalEditor) => void
   hideIfDisabled?: boolean

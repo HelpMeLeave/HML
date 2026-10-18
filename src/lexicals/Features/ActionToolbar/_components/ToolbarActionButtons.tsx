@@ -15,7 +15,7 @@ export const ToolbarActionButtons = ({
       Icon: ItemIcon,
       onSelect,
       label,
-      isActive: isActive,
+      $isActive: isActive,
       hideIfDisabled,
     }) => {
       const { enabled, active } = editor

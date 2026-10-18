@@ -1,9 +1,9 @@
 'use client'
 
 import { ToolbarGroup } from '@/lexicals/Features/ActionToolbar/_components/ToolbarGroup'
+import { GroupedActions } from '@/lexicals/Features/ActionToolbar/_lib/createGroupedActions'
 import { initActionState } from '@/lexicals/Features/ActionToolbar/_lib/initActionState'
 import type { ToolbarAction } from '@/lexicals/Features/ActionToolbar/_types'
-import { GroupedActions } from '@/lexicals/Features/ActionToolbar/Actions'
 import { cn } from '@/lib/cn'
 import {
   setFloatingElemPosition,
