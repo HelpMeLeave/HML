@@ -15,7 +15,7 @@ export const EditBtn = ({
     type='button'
     buttonStyle='none'
     className={cn(
-      'outline-secondary shadow-primary text-text border-elevation-150) grid size-5 cursor-pointer place-items-center border bg-background p-0! outline-0 outline-offset-1 transition-all *:size-[0.8rem] hover:outline-2 hover:outline-offset-0 disabled:cursor-default disabled:opacity-35 data-[state="active"]:outline-2',
+      'outline-secondary text-text border-elevation-500 dark:border-elevation-0 grid size-5 cursor-pointer place-items-center border-[0.5px] bg-background p-0! outline-0 outline-offset-1 transition-all *:size-[0.8rem] hover:outline-2 hover:outline-offset-0 disabled:cursor-default disabled:opacity-35 data-[state="active"]:outline-2',
       className
     )}
     extraButtonProps={{ 'data-state': active ? 'active' : undefined }}

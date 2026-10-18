@@ -15,6 +15,7 @@ type SwatchProps = {
 export const Swatch = ({ title, active, theme, setColor }: SwatchProps) => {
   return (
     <Button
+      buttonStyle='none'
       data-variant={COLORS[title][theme]}
       type='button'
       tooltip={title}
@@ -25,10 +26,7 @@ export const Swatch = ({ title, active, theme, setColor }: SwatchProps) => {
         },
       }}
       className={cn(
-        'ring-elevation-800/30 ring-1',
-        'grid size-5 cursor-pointer place-items-center bg-transparent p-0! transition-all *:size-[0.8rem]',
-        'disabled:cursor-default disabled:opacity-35',
-        'data-[state="active"]:ring-1'
+        'outline-secondary text-text border-elevation-500 dark:border-elevation-0 grid size-5 cursor-pointer place-items-center border-[0.5px] bg-background p-0! outline-0 outline-offset-1 transition-all *:size-[0.8rem] hover:outline-2 hover:outline-offset-0 disabled:cursor-default disabled:opacity-35 data-[state="active"]:outline-2'
       )}
       onClick={() => setColor()}
     />
