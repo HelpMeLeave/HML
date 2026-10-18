@@ -1,6 +1,5 @@
 import { RichTextComponent } from '@/_components/blocks/RichText/Component'
 import { query } from '@/app/(www)/(Content)/[...slug]/_lib/query'
-import { P } from '@/components/primitives'
 import type { MainDetails } from '@/components/Structure/_types'
 import {
   Main,
@@ -12,6 +11,7 @@ import {
 import { env } from '@/env'
 import { removeParagraph } from '@/lexicals/RenderRichText/removeParagraphs'
 import { lastArrayIndex } from '@/lib/array'
+import { cn } from '@/lib/cn'
 import type { Where } from '@/lib/filterBy'
 import { getPreview } from '@/lib/getPreview'
 import type { Content, ContentSnapshot, User } from '@/payload-types'
@@ -168,22 +168,31 @@ const PageData = async ({
               />
             </MainSubtitle>
           )}
+          <span
+            data-slot='updated'
+            className={cn(
+              'w-full',
+              'px-2 pt-2',
+              'flex justify-start gap-2',
+              'border-t border-current/30',
+              'text-end text-xs font-thin tracking-wider text-accent uppercase italic',
+              'mb-2 md:mt-0 md:justify-start md:border-0 md:px-0 md:not-italic md:opacity-75'
+            )}>
+            {created && (
+              <span className='flex gap-x-2'>
+                {created.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Published $2-$3-$1')}
+              </span>
+            )}
+            {created && updated && (
+              <span className='block h-lh min-w-[0.08rem] rotate-14 bg-accent-muted/15' />
+            )}
+            {updated && (
+              <span className='flex gap-x-2'>
+                {updated.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Updated $2-$3-$1')}
+              </span>
+            )}
+          </span>
         </MainHGroup>
-        <P className='mt-1 mb-4 flex gap-2 text-end font-mono text-xs font-thin tracking-wider text-accent/75 uppercase italic'>
-          {created && (
-            <span className='flex gap-x-2'>
-              {created.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Published $2-$3-$1')}
-            </span>
-          )}
-          {created && updated && (
-            <span className='block h-lh min-w-[0.08rem] rotate-14 bg-accent-muted/15' />
-          )}
-          {updated && (
-            <span className='flex gap-x-2'>
-              {updated.replace(/(\d{4})-(\d{2})-(\d{2}).+/, 'Updated $2-$3-$1')}
-            </span>
-          )}
-        </P>
         {content && (
           <RichTextComponent
             blockType='rich-text'

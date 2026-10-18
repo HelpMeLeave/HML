@@ -9,7 +9,8 @@ export const MainHGroup = ({ ...props }) => {
         'grid grid-cols-1',
         '*:slot-eyebrow:row-start-1',
         '*:slot-heading:row-start-2',
-        '*:data-[slot=subtitle]:row-start-3',
+        '*:slot-[subtitle]:row-start-3',
+        'md:has-slot-[updated]:*:slot-[subtitle]:row-start-4 md:*:slot-[updated]:row-start-3',
         'text-6xl has-[+.flow]:mb-[0.2em]',
         props.className
       )}
