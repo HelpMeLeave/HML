@@ -1,5 +1,7 @@
+import { SignatureBlockConfig } from '@/_components/blocks/Signature'
 import { is } from '@/access/is'
 import { columnField } from '@/collections/_fields/Flex'
+import { contentEditor } from '@/lexicals/editors'
 import type { GlobalConfig } from 'payload'
 
 const VolunteerAgreementGlobalConfig: GlobalConfig = {
@@ -8,6 +10,7 @@ const VolunteerAgreementGlobalConfig: GlobalConfig = {
     read: () => true,
     update: is().Pillar.Operations,
   },
+  lockDocuments: false,
   admin: {},
   fields: [
     columnField(
@@ -24,6 +27,7 @@ const VolunteerAgreementGlobalConfig: GlobalConfig = {
       {
         type: 'richText',
         name: 'agreement',
+        editor: contentEditor({ blocks: [SignatureBlockConfig] }),
       }
     ),
     {
@@ -41,6 +45,7 @@ const VolunteerAgreementGlobalConfig: GlobalConfig = {
         {
           type: 'richText',
           name: 'agreement',
+          editor: contentEditor({ blocks: [SignatureBlockConfig] }),
         },
       ],
     },
