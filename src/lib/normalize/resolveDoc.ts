@@ -1,4 +1,4 @@
-import { DocLinkField } from '@/lib/normalize/resolveLink'
+import { type DocLinkField } from '@/lib/normalize/resolveLink'
 import type { Content, Document, Media, Route } from '@/payload-types'
 import { isOffSite } from './isOffSite'
 import { parseBaseURL } from './parseBaseURL'

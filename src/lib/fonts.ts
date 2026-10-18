@@ -45,6 +45,6 @@ export const playfair = Playfair_Display({
   variable: '--font-playfair',
   subsets: ['latin'],
   preload: false,
-  style: 'normal',
-  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700', '800', '900'],
 })

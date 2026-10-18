@@ -1,14 +1,11 @@
+import { calloutType } from '@/lexicals/Features/_lib/nodeStates'
 import {
   $create,
-  // $findMatchingParent,
-  // $getSelection,
   $getState,
   $getStateChange,
-  // $isRangeSelection,
   $setState,
   ElementNode,
 } from '@payloadcms/richtext-lexical/lexical'
-import { calloutType } from '../_lib/nodeStates'
 
 export class CalloutNode extends ElementNode {
   $config() {
@@ -42,8 +39,12 @@ export class CalloutNode extends ElementNode {
 }
 
 export const $isCallout = (node: unknown): node is CalloutNode => node instanceof CalloutNode
-export const $createCallout = () => $create(CalloutNode)
+export const $createCallout = (type?: CalloutType) => {
+  const callout = $create(CalloutNode)
+  if (type) $setCalloutType(callout, type)
+  return callout
+}
 
 export type CalloutType = 'tip' | 'quote' | 'urgent' | 'note' | 'case-study'
-export const $setCalloutType = (node: CalloutNode, type: CalloutType) =>
+export const $setCalloutType = (node: CalloutNode, type: CalloutType = 'note') =>
   $setState(node, calloutType, type)
