@@ -1,5 +1,50 @@
 @use '@/styles/admin/mixins' as *;
-@use '@/styles/admin/field' as *;
+@use '@/styles/admin/_field' as *;
+
+@mixin schema-padding {
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
+}
+
+@mixin schema-border {
+  border: 1px solid alpha(var(--theme-input-border-color), 75);
+  &:disabled,
+  &:has(*:disabled, .disabled) {
+    border-color: var(--input-disabled-border-color);
+  }
+}
+
+@mixin schema($path) {
+  [data-field-schemapath='#{$path}'] {
+    @content;
+  }
+}
+
+@mixin schema-inputbox($path) {
+  @include schema($path) {
+    transition: 0.2s ease;
+    transition-property: border-color, box-shadow;
+    border: 1px solid transparent;
+    border-radius: var(--style-radius-s);
+    background-color: var(--theme-input-bg);
+    overflow: hidden;
+    &:disabled,
+    &:has(*:disabled, .disabled) {
+      background-color: var(--input-disabled-bg-color);
+    }
+
+    .ContentEditable__root {
+      padding: 0;
+    }
+    @content;
+    &:hover,
+    &:has(.ContentEditable__root:focus-visible) {
+      border: 1px solid var(--theme-input-border-color-hover);
+      box-shadow: var(--form-shadow-hover);
+    }
+    @include empty(1.75);
+  }
+}
 
 .lexical {
   // A thin muted rule down the left marks "inside this container".
