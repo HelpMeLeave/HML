@@ -28,18 +28,3 @@ export const TextareaConfig = (name: string, options?: TextareaFieldProps): Text
 
   return field
 }
-
-export const DescriptionField = (
-  options: Partial<Omit<TextareaField, 'type'>> = {}
-): TextareaField => ({
-  name: 'description',
-  label: 'Description',
-  ...options,
-  type: 'textarea',
-})
-
-export const TitleField = (options: Partial<Omit<TextareaField, 'type'>> = {}): TextareaField =>
-  TextareaConfig('title', {
-    ...options,
-    label: 'Title',
-  })

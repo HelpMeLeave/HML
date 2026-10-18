@@ -674,7 +674,6 @@ input {
   }
   &__label {
     &-base {
-      line-height: 0.85;
       @include label-all(base);
       header .field-label {
         @include label-all(base);
@@ -842,20 +841,6 @@ input {
     flex-direction: var(--direction);
     gap: var(--flex-gap);
   }
-}
-
-div.field-type.radio-group:not(
-    [class*='--layout__label-small'],
-    [class*='--layout__label-base'],
-    [class*='--layout__label-large']
-  ) {
-  @include label-all(small);
-  > label {
-    position: relative;
-    bottom: 0.5rem;
-    left: 0.5rem;
-  }
-  margin-top: 0.5rem;
 }
 
 .checkbox-group {

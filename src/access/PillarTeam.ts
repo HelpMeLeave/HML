@@ -7,9 +7,9 @@ import type { PayloadRequest } from 'payload'
 
 export const isPillar = (user: Pick<User, 'roles' | 'isDirector'> | null, pillar?: string) => {
   if (!user) return false
-  if (!user.roles?.docs || !pillar) return false
+  if (isDirector(user)) return true
 
-  return isCollection<UserRole>(user.roles.docs) ?
+  return isCollection<UserRole>(user.roles?.docs) ?
       user.roles.docs.filter((d) => d.pillar.includes(getPillarFromName(pillar ?? '')?.id ?? -1))
         .length > 0 || isDirector(user)
     : false

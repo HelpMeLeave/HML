@@ -1405,7 +1405,7 @@ input {
   }
 }
 .field-layout__label-base {
-  line-height: 0.85;
+  /* line-height: 0.85; */
   @apply label-base;
   header .field-label {
     @apply label-base;

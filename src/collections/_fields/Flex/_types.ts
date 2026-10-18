@@ -16,3 +16,6 @@ export type DirectionFieldFn<D extends FieldCustomLayout['direction']> = (
   { custom, labelSize, wrap, className, style, description, ...options }: DirectionOptions,
   ...fields: Field[]
 ) => GroupField
+
+export type RowColumnConfigOptions = Omit<DirectionOptions, 'name'>
+  & Pick<FieldAdmin, 'width' | 'position'>
