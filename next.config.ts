@@ -13,6 +13,11 @@ export default withPayload({
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
+        protocol: new URL(env.NEXT_PUBLIC_BASE_URL).protocol.replace(':', '') as 'http' | 'https',
+        hostname: new URL(env.NEXT_PUBLIC_BASE_URL).hostname,
+        pathname: '/api/**',
+      },
+      {
         protocol: 'https',
         hostname: 'flagcdn.com',
         port: '',

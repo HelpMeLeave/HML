@@ -94,7 +94,8 @@ export const SectionCover = ({
             fill
             src={url}
             alt=''
-            sizes='100vw,600px'
+            quality={75}
+            sizes='1000px,600px'
             className='-z-10 object-cover'
             style={filter ? { filter } : undefined}
             // unoptimized
@@ -104,7 +105,7 @@ export const SectionCover = ({
               '*:bg-(--chip-bg) **:text-(--chip-text)',
               '*:text-nowrap',
               'flex max-w-max flex-col-reverse text-[2em] *:font-normal',
-              '*:slot-eyebrow:text-[.25em] *:slot-eyebrow:text-balance',
+              '*:slot-eyebrow:text-[.25em] *:slot-eyebrow:leading-snug *:slot-eyebrow:tracking-normal *:slot-eyebrow:text-balance *:slot-eyebrow:text-(--chip-text)',
               '*:slot-heading:max-w-min *:slot-heading:px-1 *:slot-heading:pt-2.5 *:slot-heading:text-[min(1em,calc((100cqi-3rem)/(var(--chars,20)*0.35)))] *:slot-heading:leading-[0.85]'
             )}>
             {nodesToJSX({ nodes: [eyebrow, heading].filter(Boolean) })}
