@@ -2,7 +2,6 @@ import type { SerializedUploadNode } from '@payloadcms/richtext-lexical'
 import type { Theme } from '@payloadcms/ui'
 import type { DuotoneTweaks } from './_lib/filter'
 
-export type DuotoneTheme = 'light' | 'dark'
 export type HexColor = `#${string}`
 
 export type DuotoneColor = {
@@ -31,7 +30,7 @@ export type DuotonePreset = {
 
 export type DuotoneThemed = `${DuotoneKey}-${Theme}`
 
-export type DuotonePosition = `${'top' | 'middle' | 'bottom'} ${'left' | 'center' | 'right'}`
+type DuotonePosition = `${'top' | 'middle' | 'bottom'} ${'left' | 'center' | 'right'}`
 
 export type DuotoneFields = {
   duotone: {
