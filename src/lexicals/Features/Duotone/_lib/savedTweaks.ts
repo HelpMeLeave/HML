@@ -1,20 +1,19 @@
-import type { DuotoneTweaks } from './filter'
+import type { DuotoneFields, DuotoneTweakFields } from '@/lexicals/Features/Duotone/_types'
+import type { SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
 
-type SerializedNode = {
-  type?: string
-  id?: string
-  fields?: { duotone?: DuotoneTweaks } | null
-  children?: SerializedNode[]
+type SerializedNode = SerializedLexicalNode & {
+  id: string
+  fields: DuotoneFields
+  children: SerializedNode[]
 }
 
-/** Upload node id → its duotone tweaks as last saved, from the field's serialized initial value. */
 export const savedTweaks = (value: unknown) => {
-  const map: Record<string, DuotoneTweaks | undefined> = {}
+  const map: Record<string, DuotoneTweakFields | undefined> = {}
   const walk = (node?: SerializedNode) => {
     if (!node) return
     if (node.type == 'upload' && node.id) map[node.id] = node.fields?.duotone ?? undefined
     node.children?.forEach(walk)
   }
-  walk((value as { root?: SerializedNode } | null)?.root)
+  walk((value as { root: SerializedNode } | null)?.root)
   return map
 }

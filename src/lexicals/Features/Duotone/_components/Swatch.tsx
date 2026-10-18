@@ -1,6 +1,6 @@
 'use client'
 
-import { COLORS } from '@/lexicals/Features/Duotone/_lib/COLORS'
+import { COLORS } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import type { DuotoneKey } from '@/lexicals/Features/Duotone/_types'
 import { cn } from '@/lib/cn'
 import { Button, type Theme } from '@payloadcms/ui'

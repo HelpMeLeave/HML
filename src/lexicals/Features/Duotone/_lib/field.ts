@@ -1,7 +1,6 @@
+import { DUOTONE_TWEAKS, DUOTONES } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import { toTitleCase } from '@/lib/textCasing'
 import type { GroupField } from 'payload'
-import { DUOTONES } from './DUOTONES'
-import { DUOTONE_TWEAKS } from './filter'
 
 const options = ['top', 'bottom', 'middle'].flatMap((y) =>
   ['left', 'right', 'center'].map((x) => ({

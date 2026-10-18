@@ -1,14 +1,17 @@
-import type { DuotoneThemed } from '../_types'
+import { DUOTONE_TWEAKS } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
+import type { DuotoneThemedColor, DuotoneTweakFields } from '../_types'
 
-/** Per-use tweak defaults, in percent. */
-export const DUOTONE_TWEAKS = { brightness: 100, contrast: 200, grayscale: 100 }
+export const duotoneFilter = (color: DuotoneThemedColor, tweaks?: Nullish<DuotoneTweakFields>) => {
+  const pct = (tweaks?: Nullish<DuotoneTweakFields>) => ({
+    brightness: `brightness(${tweaks?.brightness ?? DUOTONE_TWEAKS.brightness}%)`,
+    contrast: `contrast(${tweaks?.contrast ?? DUOTONE_TWEAKS.contrast}%)`,
+    grayscale: `grayscale(${tweaks?.grayscale ?? DUOTONE_TWEAKS.grayscale}%)`,
+  })
 
-export type DuotoneTweaks = Partial<Record<keyof typeof DUOTONE_TWEAKS, number | null>>
+  const { brightness, contrast, grayscale } = pct(tweaks)
+  if (color.includes('-dark')) {
+    return [contrast, brightness, `url(#duotone-${color})`, grayscale, 'contrast(1.4)'].join(' ')
+  }
 
-/** CSS filter for a duotone preset, with any per-use tweaks applied over the defaults. */
-export const duotoneFilter = (color: DuotoneThemed, tweaks?: DuotoneTweaks | null) => {
-  const pct = (key: keyof typeof DUOTONE_TWEAKS) => `${tweaks?.[key] ?? DUOTONE_TWEAKS[key]}%`
-  return color.includes('-dark') ?
-      `contrast(${pct('contrast')}) brightness(${pct('brightness')}) url(#duotone-${color}) grayscale(${pct('grayscale')}) contrast(1.4)`
-    : `contrast(${pct('contrast')}) brightness(${pct('brightness')}) saturate(0.8) grayscale(${pct('grayscale')}) url(#duotone-${color})`
+  return [contrast, brightness, 'saturate(0.8)', grayscale, `url(#duotone-${color})`].join(' ')
 }

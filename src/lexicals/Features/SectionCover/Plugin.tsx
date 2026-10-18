@@ -2,6 +2,7 @@
 
 import {
   $getCover,
+  $headingChars,
   $isCaretAfterCover,
   $normalizeCover,
   OPEN_COVER_DRAWER_COMMAND,
@@ -21,6 +22,7 @@ import {
   type NodeKey,
 } from '@payloadcms/richtext-lexical/lexical'
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
+import { $dfs } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useCallback, useEffect, useState } from 'react'
 import './style.scss'
 
@@ -48,6 +50,29 @@ export const SectionCoverPlugin = () => {
   )
 
   useEffect(() => editor.registerNodeTransform(SectionHGroupNode, $normalizeCover), [editor])
+
+  useEffect(() => {
+    const $sync = (hgroup: SectionHGroupNode) => {
+      const el = editor.getElementByKey(hgroup.getKey())
+      const chars = $headingChars(hgroup)
+      if (!el) return
+      if (chars) el.style.setProperty('--chars', String(chars))
+      else el.style.removeProperty('--chars')
+    }
+
+    editor
+      .getEditorState()
+      .read(() => $dfs().forEach(({ node }) => $isSectionHGroupNode(node) && $sync(node)))
+
+    return editor.registerUpdateListener(({ editorState, dirtyElements }) =>
+      editorState.read(() => {
+        for (const key of dirtyElements.keys()) {
+          const node = $getNodeByKey(key)
+          if ($isSectionHGroupNode(node)) $sync(node)
+        }
+      })
+    )
+  }, [editor])
 
   useEffect(
     () =>

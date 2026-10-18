@@ -1,6 +1,6 @@
 import { ColumnConfig, columnField, RowConfig, rowField } from '@/collections/_fields/Flex'
 import { CheckboxConfig } from '@/collections/_lib/Checkbox'
-import { COLORS } from '@/lexicals/Features/Duotone/_lib/COLORS'
+import { COLORS } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import { createColorString } from '@/lexicals/Features/Duotone/_lib/createColorString'
 import type { DuotoneKey, HexColor } from '@/lexicals/Features/Duotone/_types'
 import type { Theme } from '@payloadcms/ui'

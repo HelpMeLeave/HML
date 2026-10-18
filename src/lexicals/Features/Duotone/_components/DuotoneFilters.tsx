@@ -1,4 +1,4 @@
-import { DUOTONES } from '@/lexicals/Features/Duotone/_lib/DUOTONES'
+import { DUOTONES } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import type { DuotonePreset } from '@/lexicals/Features/Duotone/_types'
 
 const tableValues = (preset: DuotonePreset, i: 0 | 1 | 2) => {

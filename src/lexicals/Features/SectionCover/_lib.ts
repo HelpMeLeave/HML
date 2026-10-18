@@ -79,3 +79,10 @@ export const $isCaretAfterCover = (selection: BaseSelection | null) => {
 }
 
 export const $hgroupAtCaret = () => $getHGroupFromSelection($getSelection())
+
+/** Heading length for the cover's `--chars` font sizing, matching the site's SectionCover. */
+export const $headingChars = (hgroup: SectionHGroupNode) =>
+  hgroup
+    .getChildren()
+    .find((child) => child.getType() == 'section-heading')
+    ?.getTextContent().length

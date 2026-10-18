@@ -1,17 +1,19 @@
 import { SectionHGroup, SectionSubtitle } from '@/components/Structure/Section'
+import { duotoneChipVars } from '@/lexicals/Features/Duotone/_lib/duotoneChipVars'
 import { duotoneFilter } from '@/lexicals/Features/Duotone/_lib/filter'
-import type { DuotoneFields, DuotoneThemed } from '@/lexicals/Features/Duotone/_types'
-import {
-  duotoneAccent,
-  duotoneChipVars,
-  getDuotonePreset,
-} from '@/lexicals/Features/Duotone/presets'
+import { getDuotonePreset } from '@/lexicals/Features/Duotone/_lib/getDuotonePreset'
+import type { DuotoneFields, DuotoneThemedColor } from '@/lexicals/Features/Duotone/_types'
 import { textOf } from '@/lexicals/RenderRichText/_lib'
 import { cn } from '@/lib/cn'
 import type { SerializedElementNode } from '@payloadcms/richtext-lexical/lexical'
 import type { JSXConverterArgs } from '@payloadcms/richtext-lexical/react'
 import Image from 'next/image'
 import type { CSSProperties } from 'react'
+
+const duotoneAccent = (value: unknown) => {
+  const preset = getDuotonePreset(value)
+  return preset && (preset.value.endsWith('-dark') ? preset.highlight : preset.shadow)
+}
 
 type ConverterArgProps = Pick<JSXConverterArgs<SerializedElementNode>, 'nodesToJSX' | 'node'>
 
@@ -29,7 +31,7 @@ const Subtitle = ({
   subtitle,
 }: {
   nodesToJSX: ConverterArgProps['nodesToJSX']
-  color?: DuotoneThemed
+  color?: DuotoneThemedColor
   subtitle: SerializedElementNode
 }) =>
   subtitle && (

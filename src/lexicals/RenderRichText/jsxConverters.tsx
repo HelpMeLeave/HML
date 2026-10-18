@@ -6,9 +6,8 @@ import type { LinkField } from '@/collections/_fields/LinkBase/_types'
 import { Bold, Italic, P } from '@/components/primitives'
 import { InlineLink } from '@/components/primitives/Link'
 import { definitionConverters } from '@/lexicals/Features/DefinitionsFeature/Converter'
-import { hasDuotoneColor } from '@/lexicals/Features/Duotone/_lib/coverOf'
 import { duotoneFilter } from '@/lexicals/Features/Duotone/_lib/filter'
-import type { DuotoneThemed } from '@/lexicals/Features/Duotone/_types'
+import type { DuotoneThemedColor } from '@/lexicals/Features/Duotone/_types'
 import { NTK } from '@/lexicals/RenderRichText/_lib'
 import { listConverters } from '@/lexicals/RenderRichText/_listConverters'
 import { structureConverters } from '@/lexicals/RenderRichText/_structureConverters'
@@ -29,6 +28,7 @@ import type {
 } from '@payloadcms/richtext-lexical/react'
 import { BookOpenText, Lightbulb, Pin, Siren } from 'lucide-react'
 import Image from 'next/image'
+import { hasDuotoneColor } from '../Features/Duotone/_lib/hasDuotoneColor'
 
 const hasHeaderCells = (firstRow: SerializedTableRowNode) => {
   const firstCell = firstRow.children[0]
@@ -179,7 +179,7 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
       if (!node.value || typeof node.value != 'object') return null
       type FieldVals = SerializedUploadNode & {
         value: Document
-        fields?: { duotone?: { color: DuotoneThemed | null } }
+        fields?: { duotone?: { color: DuotoneThemedColor | null } }
       }
 
       const { value, fields } = node as FieldVals

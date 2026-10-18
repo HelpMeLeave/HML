@@ -1,5 +1,4 @@
-@use '@/styles/admin/mixins' as *;
-@use '@/styles/admin/_field' as *;
+@use '../../../styles/admin/mixins/index.scss' as *;
 
 @mixin schema-padding {
   padding-inline: 1rem;

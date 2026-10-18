@@ -14,10 +14,11 @@ import {
   SubsectionHeading,
 } from '@/components/Structure/Subsection/Subsection'
 import { headingID } from '@/lexicals/Features/_lib/slugifyHeadingID'
-import { coverOf, isUpload } from '@/lexicals/Features/Duotone/_lib/coverOf'
+import { coverOf } from '@/lexicals/Features/Duotone/_lib/coverOf'
 import { childOf, NTK, type Comp, type StyledContainer } from '@/lexicals/RenderRichText/_lib'
 import type { JSXConverter } from '@payloadcms/richtext-lexical/react'
 import { Fragment } from 'react'
+import { isUpload } from '../Features/Duotone/_lib/isUpload'
 
 export const structureConverters: Record<string, JSXConverter<AnySafe>> = {
   // #region ! ---------- SECTION ----------

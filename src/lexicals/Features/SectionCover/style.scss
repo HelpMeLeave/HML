@@ -1,27 +1,44 @@
-hgroup:has(> .lexical-upload:first-child) {
-  position: relative;
+hgroup:has(> .lexical-upload:first-of-type) {
+  --cover-pad: 0.25em;
+  container-type: inline-size;
+  font-size: 4rem;
+  @media (min-width: 768px) {
+    font-size: 4.5rem;
+  }
   isolation: isolate;
   display: grid;
-  align-content: center;
-  gap: 0.25em;
-  min-height: 20rem;
-  padding: 1.5rem;
-  overflow: hidden;
+  grid-template-columns:
+    [cover-start] var(--cover-pad) [text-start] minmax(0, 1fr)
+    [text-end] var(--cover-pad) [cover-end];
+  grid-template-rows:
+    [cover-start] 1fr [heading] auto [eyebrow] auto var(--cover-pad)
+    [cover-end subtitle] auto;
+  gap: 0;
+  padding: 0;
+  @media (max-width: 899px) {
+    margin-top: 3rem;
+  }
+  margin-bottom: 2rem;
+  :is(.document-fields--has-sidebar:has(.sidebar-toggle[data-state='open']) *) & {
+    @media (min-width: 900px) {
+      margin-top: 3rem;
+    }
+  }
 
-  > .lexical-upload:first-child {
-    position: absolute;
-    inset: 0;
+  > .lexical-upload:first-of-type {
+    position: relative;
+    grid-column: cover;
+    grid-row: cover;
+    min-height: min(40vh, 32rem);
+    width: auto;
     margin: 0;
-    // Payload card chrome off: the wrapper only hosts the image + actions.
     border: 0;
-    border-radius: 0;
-    box-shadow: none;
-    // Let clicks reach the editable text; the actions re-enable them below.
+    border-radius: 0.75rem;
+    box-shadow:
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1);
     pointer-events: none;
 
-    // Payload's real DOM (class prefix = theme.upload's LexicalEditorTheme__upload):
-    // __contents > __card > (__media > Thumbnail img + __overlay.__floater > __actions)
-    //                      + __metaOverlay.__floater (filename + collection label)
     [class*='__contents'],
     [class*='__card'],
     [class*='__media'] {
@@ -39,21 +56,18 @@ hgroup:has(> .lexical-upload:first-child) {
       min-height: 0;
       max-width: none;
       max-height: none;
-      border-radius: 0;
+      border-radius: 0.75rem;
       object-fit: cover;
     }
 
-    // Swap would bypass the image-only drawer; covers use Remove + Add instead.
     [class*='__swap-drawer-toggler'] {
       display: none;
     }
 
-    // Filename/collection strip would sit over the text.
     [class*='__metaOverlay'] {
       display: none;
     }
 
-    // Edit/swap/remove buttons: always visible, tucked top-right, above text.
     [class*='__overlay'] {
       z-index: 1;
       opacity: 1;
@@ -62,30 +76,55 @@ hgroup:has(> .lexical-upload:first-child) {
     }
   }
 
-  // Chip colours come from the Duotone feature's --chip-bg / --chip-text.
-  > :not(.lexical-upload) {
+  > :is([data-slot='heading'], [data-slot='eyebrow']) {
+    z-index: 1;
+    grid-column: text;
+    justify-self: start;
     width: fit-content;
+    margin: 0;
     padding: 0.15em 0.5em;
     background: var(--chip-bg, transparent);
     color: var(--chip-text, inherit);
+    font-weight: normal;
+    white-space: nowrap;
+  }
+  > [data-slot='heading'] {
+    grid-row: heading;
+    padding: 0.625rem 0.25rem 0;
+    font-size: min(1em, calc((100cqi - 3rem) / (var(--chars, 20) * 0.35)));
+    line-height: 0.85;
+  }
+  > [data-slot='eyebrow'] {
+    grid-row: eyebrow;
+    padding: 0 0.75rem;
+    font-size: 0.25em;
+    line-height: 1.375;
+    letter-spacing: normal;
+  }
+  > [data-slot='subtitle'] {
+    grid-column: cover;
+    grid-row: subtitle;
+    margin: 0.5rem 0 0;
+    padding-inline: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: center;
   }
 
   &:has(> .lexical-upload[data-position*='top']) {
-    align-content: start;
+    grid-template-rows:
+      [cover-start] var(--cover-pad) [heading] auto [eyebrow] auto 1fr
+      [cover-end subtitle] auto;
   }
   &:has(> .lexical-upload[data-position*='middle']) {
-    align-content: center;
+    grid-template-rows:
+      [cover-start] 1fr [heading] auto [eyebrow] auto 1fr
+      [cover-end subtitle] auto;
   }
-  &:has(> .lexical-upload[data-position*='bottom']) {
-    align-content: end;
+  &:has(> .lexical-upload[data-position*='center']) > :is([data-slot='heading'], [data-slot='eyebrow']) {
+    justify-self: center;
   }
-  &:has(> .lexical-upload[data-position*='left']) {
-    justify-items: start;
-  }
-  &:has(> .lexical-upload[data-position*='center']) {
-    justify-items: center;
-  }
-  &:has(> .lexical-upload[data-position*='right']) {
-    justify-items: end;
+  &:has(> .lexical-upload[data-position*='right']) > :is([data-slot='heading'], [data-slot='eyebrow']) {
+    justify-self: end;
   }
 }
