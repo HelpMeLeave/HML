@@ -3,6 +3,7 @@ import { BlockGateFeature } from '@/lexicals/Features/BlockGate/feature.server'
 import { CustomCheckmarkServer as CheckmarkListFeature } from '@/lexicals/Features/CheckmarkList/feature.server'
 import { DefinitionsFeature } from '@/lexicals/Features/DefinitionsFeature'
 import { DuotoneFeature } from '@/lexicals/Features/Duotone/feature.server'
+import { EditableSyncFeature } from '@/lexicals/Features/EditableSync/feature.server'
 import { LexicalLinkFeature } from '@/lexicals/Features/LinkFeature'
 import { ListTitleFeature } from '@/lexicals/Features/ListTitleFeature/feature.server'
 import { PasteCleanupFeature } from '@/lexicals/Features/PasteCleanupFeature'
@@ -41,6 +42,7 @@ export const baseAdmin = {
 
 // #region ! ---------- EDITOR TIERS ----------
 export const singleLineFeatures = [
+  EditableSyncFeature(),
   UnderlineFeature(),
   BoldFeature(),
   ItalicFeature(),
