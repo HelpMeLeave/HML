@@ -5982,6 +5982,24 @@ export interface CollectionsWidget {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SignatureBlock".
+ */
+export interface SignatureBlock {
+  data?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'signature-pad';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "PageGroupBlock".
  */
 export interface PageGroupBlock {
