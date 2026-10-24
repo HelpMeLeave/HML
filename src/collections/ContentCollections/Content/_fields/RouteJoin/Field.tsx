@@ -1,5 +1,5 @@
+import { Eye } from '@boxicons-pro/react'
 import { Link, PreviewButton, TextInput } from '@payloadcms/ui'
-import { EyeIcon } from 'lucide-react'
 import type { JoinFieldServerProps } from 'payload'
 
 const PreviewBtn = ({ url }: { url: string }) => (
@@ -11,7 +11,8 @@ const PreviewBtn = ({ url }: { url: string }) => (
     <span className='btn__content'>
       preview
       <span className='btn__icon'>
-        <EyeIcon className='icon' />
+        <Eye className='icon' />
+        {/* <EyeIcon className='icon' /> */}
       </span>
     </span>
   </Link>

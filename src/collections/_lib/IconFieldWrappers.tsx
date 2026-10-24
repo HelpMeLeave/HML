@@ -1,16 +1,9 @@
+import type { BoxIcon } from '@boxicons-pro/react'
 import { FieldLabel } from '@payloadcms/ui'
-import type { LucideProps } from 'lucide-react'
 import type { FieldTypes, LabelFunction, StaticLabel } from 'payload'
-import type { JSXElementConstructor } from 'react'
 import type { JSX } from 'react/jsx-runtime'
 
-export const CellWrapper = ({
-  Icon,
-  children,
-}: {
-  children: ReactNode
-  Icon: JSXElementConstructor<LucideProps>
-}) => {
+export const CellWrapper = ({ Icon, children }: { children: ReactNode; Icon: BoxIcon }) => {
   return (
     <span
       className='btn btn--no-margin btn--icon btn--size-xsmall btn--style-none btn--icon-style-without-border'
@@ -23,7 +16,8 @@ export const CellWrapper = ({
       }}>
       <span className='btn__content italic opacity-75'>
         <Icon
-          size='var(--btn-icon-size)'
+          width='var(--btn-icon-size)'
+          height='var(--btn-icon-size)'
           className='btn__icon'
         />
         {children}

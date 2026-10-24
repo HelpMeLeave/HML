@@ -10,11 +10,11 @@ import {
 } from '@/lexicals/Features/SubSectionFeature/SubSectionContainerNode'
 import { SubSectionContentNode } from '@/lexicals/Features/SubSectionFeature/SubSectionContentNode'
 import { SubSectionHeadingNode } from '@/lexicals/Features/SubSectionFeature/SubSectionHeadingNode'
+import { Heading3 } from '@boxicons-pro/react'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import { type LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical/utils'
-import { Heading3 } from 'lucide-react'
 
 const SubSectionMarkdownTransformer: ElementTransformer = {
   dependencies: [SubSectionContainerNode, SubSectionHeadingNode, SubSectionContentNode],

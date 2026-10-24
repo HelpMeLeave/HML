@@ -19,7 +19,7 @@ export class CheckmarkListItemNode extends ListItemNode {
   createDOM(config: EditorConfig): HTMLElement {
     const el = super.createDOM(config)
     el.className =
-      'checkmark-list-item LexicalEditorTheme__listItem LexicalEditorTheme__listItemUnchecked'
+      'checkmark-list-item LexicalEditorTheme__listItem LexicalEditorTheme__listItemUnchecked ml-0 no-underline before:top-0 before:w-auto before:rounded-none before:border-0 before:shadow-none after:content-none'
     return el
   }
 }

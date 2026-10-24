@@ -14,6 +14,7 @@ import { structureConverters } from '@/lexicals/RenderRichText/_structureConvert
 import { cn } from '@/lib/cn'
 import { resolveLinkNode } from '@/lib/normalize/resolveLink'
 import type { Document } from '@/payload-types'
+import { BookOpen, LightBulb, Pin, Siren } from '@boxicons-pro/react'
 import type {
   SerializedTableCellNode,
   SerializedTableNode,
@@ -26,7 +27,6 @@ import type {
   JSXConverters,
   JSXConvertersFunction,
 } from '@payloadcms/richtext-lexical/react'
-import { BookOpenText, Lightbulb, Pin, Siren } from 'lucide-react'
 import Image from 'next/image'
 import { hasDuotoneColor } from '../Features/Duotone/_lib/hasDuotoneColor'
 
@@ -45,7 +45,7 @@ const CALLOUTS = {
   },
   tip: {
     label: 'Good To Know',
-    Icon: Lightbulb,
+    Icon: LightBulb,
     className: 'text-slate-500 dark:text-slate-300',
   },
   urgent: {
@@ -55,7 +55,7 @@ const CALLOUTS = {
   },
   'case-study': {
     label: 'Case study',
-    Icon: BookOpenText,
+    Icon: BookOpen,
     className: 'text-purple-500 dark:text-purple-400',
   },
 }
@@ -118,7 +118,6 @@ export const jsxConverters: (overrides?: JSXConverters) => JSXConvertersFunction
     // #region ! ---------- TABLE ----------
     table: ({ node, nodesToJSX }: JSXConverterArgs<SerializedTableNode>) => {
       const [firstRow, ...rows] = node.children as SerializedTableRowNode[]
-      console.log(node)
       return (
         <table
           data-slot='table'

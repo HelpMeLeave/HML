@@ -3,7 +3,7 @@
 import { Heading } from '@/components/primitives'
 import { SubSectionContext } from '@/components/Structure/Subsection/CTX'
 import { cn } from '@/lib/cn'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight } from '@boxicons-pro/react'
 import { useContext } from 'react'
 
 export const SubsectionHeading = ({ level = 3, ...props }: Props<'button'> & { level?: 2 | 3 }) => {

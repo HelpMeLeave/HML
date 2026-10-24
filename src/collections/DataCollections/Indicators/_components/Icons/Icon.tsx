@@ -1,9 +1,9 @@
+import { QUICK_ICONS } from '@/collections/DataCollections/Indicators/_components/Icons/_lib'
 import { BlackPower } from '@/components/Flag/BlackPower'
 import { PrideFlag } from '@/components/Flag/PrideFlag'
 import { TransFlag } from '@/components/Flag/TransFlag'
 import { UNFlag } from '@/components/Flag/UN'
-import type { LucideIcon } from 'lucide-react'
-import { icons as luIcons } from 'lucide-react'
+import type { BoxIcon, BoxIconProProps } from '@boxicons-pro/react'
 
 const isFlagIcon = (entry: unknown): entry is Flag =>
   ['un', 'pride', 'trans', 'blm'].includes(String(entry))
@@ -51,18 +51,24 @@ const FlagEl = ({
 const CompIcon = ({
   icon,
   searchFn,
-  size = 16,
+  size = 'base',
   style,
+  cssStyle,
+  width,
+  height,
 }: {
-  style?: Props['style']
+  style?: BoxIconProProps['style']
   icon: string
-  searchFn?: (icon: string) => LucideIcon | undefined
-  size?: number
+  searchFn?: (icon: string) => BoxIcon | undefined
+  size?: BoxIconProProps['size']
+  width?: number
+  height?: number
+  cssStyle?: BoxIconProProps['cssStyle']
 }) => {
-  let Comp: LucideIcon | undefined
+  let Comp: BoxIcon | undefined
 
   if (!searchFn) {
-    Comp = (luIcons as unknown as Record<string, LucideIcon>)[icon]
+    Comp = QUICK_ICONS.find((x) => x.id == icon)?.Comp
   } else {
     Comp = searchFn(icon)
   }
@@ -70,10 +76,13 @@ const CompIcon = ({
   return Comp ?
       <Comp
         size={size}
+        width={width}
+        height={height}
         strokeWidth={2}
+        cssStyle={cssStyle}
         style={style}
       />
-    : <span style={{ fontSize: '0.65rem', opacity: 0.5, ...style }}>{icon}</span>
+    : <span style={{ fontSize: '0.65rem', opacity: 0.5, ...cssStyle }}>{icon}</span>
 }
 
 export const Icon = ({
@@ -84,7 +93,7 @@ export const Icon = ({
   ...props
 }: Props & {
   icon: string
-  searchFn?: (icon: string) => LucideIcon | undefined
+  searchFn?: (icon: string) => BoxIcon | undefined
   size?: number
   style?: Props['style']
 }) => {
@@ -109,9 +118,10 @@ export const Icon = ({
       <CompIcon
         {...props}
         searchFn={searchFn}
-        size={size}
+        width={size}
+        height={size}
         icon={icon}
-        style={style}
+        cssStyle={style}
       />
     ),
     label: icon,

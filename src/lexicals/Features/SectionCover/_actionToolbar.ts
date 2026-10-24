@@ -3,9 +3,9 @@ import type { ToolbarActionGroup } from '@/lexicals/Features/ActionToolbar/_type
 import {
   $getCover,
   $hgroupAtCaret,
+  icons,
   OPEN_COVER_DRAWER_COMMAND,
 } from '@/lexicals/Features/SectionCover/_lib'
-import { ImageMinus, ImagePlus, ImageUp, SquarePen } from 'lucide-react'
 
 export const CoverGrp: ToolbarActionGroup = {
   toolbar: 'headings',
@@ -17,7 +17,7 @@ export const CoverGrp: ToolbarActionGroup = {
   entries: [
     createAction('addCoverImg', {
       label: 'Add Cover Image',
-      Icon: ImagePlus,
+      Icon: icons.add,
       $isActive: () => false,
       $isEnabled: () => Boolean($getCover($hgroupAtCaret())) == false,
       onSelect: function (editor) {
@@ -28,7 +28,7 @@ export const CoverGrp: ToolbarActionGroup = {
     }),
     createAction('swapCoverImg', {
       label: 'Swap Cover Image',
-      Icon: ImageUp,
+      Icon: icons.swap,
       $isActive: () => false,
       $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
       onSelect: function (editor) {
@@ -39,7 +39,7 @@ export const CoverGrp: ToolbarActionGroup = {
     }),
     createAction('editCoverImg', {
       label: 'Edit Cover Image',
-      Icon: SquarePen,
+      Icon: icons.edit,
       $isActive: () => false,
       $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
       onSelect: function (editor) {
@@ -51,7 +51,7 @@ export const CoverGrp: ToolbarActionGroup = {
     }),
     createAction('removeCoverImg', {
       label: 'Remove Cover Image',
-      Icon: ImageMinus,
+      Icon: icons.remove,
       $isActive: () => false,
       $isEnabled: () => Boolean($getCover($hgroupAtCaret())),
       onSelect: (editor) => editor?.update(() => $getCover($hgroupAtCaret())?.remove()),

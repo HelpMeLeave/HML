@@ -1,0 +1,53 @@
+@layer components {
+  .editor {
+    @apply font-body;
+
+    /* .lexical__h4 {
+      &:is(h4) {
+        @apply mt-4 text-[1.25rem] *:not-italic *:not-[strong]:font-extrabold;
+        strong {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .lexical__hgroup,
+    .lexical__subsection-heading {
+      margin-top: 0.875em;
+    }
+
+    .lexical__section-content,
+    .lexical__subsection-content,
+    .ContentEditable__root {
+      > * {
+        @apply mt-4 first:mt-0;
+      }
+    }
+
+    [data-lexical-text="true"] {
+      line-height: inherit;
+      font-family: inherit;
+      letter-spacing: inherit;
+    } */
+
+    .link-editor {
+      @apply bg-ui-0 outline outline-input-border;
+      .link-input a {
+        @apply text-ui-800;
+      }
+
+      button {
+        @apply size-[1.35rem] first-of-type:ml-2 last-of-type:mr-1 hover:text-accent;
+      }
+
+      .icon {
+        @apply size-5;
+      }
+    }
+  }
+
+  /* .page-brow {
+    @apply mb-0;
+  } */
+
+}

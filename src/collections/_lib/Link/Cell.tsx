@@ -1,7 +1,7 @@
 import CellBase from '@/collections/_lib/CellBase'
 import { CellWrapper } from '@/collections/_lib/IconFieldWrappers'
 import { NA } from '@/collections/_lib/NA'
-import { Globe } from 'lucide-react'
+import { GlobeAlt } from '@boxicons-pro/react'
 import type { DefaultCellComponentProps } from 'payload'
 
 const LinkIconCell = ({
@@ -11,7 +11,7 @@ const LinkIconCell = ({
 }) => {
   return props.cellData ?
       <CellBase {...props}>
-        <CellWrapper Icon={Globe}>{props.cellData}</CellWrapper>
+        <CellWrapper Icon={GlobeAlt}>{props.cellData}</CellWrapper>
       </CellBase>
     : <NA />
 }

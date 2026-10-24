@@ -1,15 +1,8 @@
-import type { Content, ExternalResource, Route } from '@/payload-types'
+import type { Content, ExternalResource } from '@/payload-types'
+import type { RelationValue } from 'payload-types'
 
 export type NavLink = {
-  item:
-    | {
-        relationTo: 'routes'
-        value: number | Route
-      }
-    | {
-        relationTo: 'externalResources'
-        value: number | ExternalResource
-      }
+  item: RelationValue<'routes' | 'externalResources'>
   displayText: string
   id?: string | null
 }
@@ -35,14 +28,7 @@ export type HeaderDD = {
       }
 }
 type LinkItem =
-  | {
-      relationTo: 'routes'
-      value: number | Route
-    }
-  | {
-      relationTo: 'externalResources'
-      value: number | ExternalResource
-    }
+  | RelationValue<'routes' | 'externalResources'>
   | { doc: { id: number; slug: string }; id: number; url: string }
 
 export type NotNull<T> = Exclude<T, null>

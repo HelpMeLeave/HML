@@ -13,7 +13,7 @@ export const StaticLabel: BlocksFieldLabelClientComponent = () => {
           {toTitleCase(data.blockType?.split('-').slice(1).join(' '))}
         </span>
       </div>
-      <div className='section-title text-elevation-800 items-center font-body text-xs font-semibold tracking-normal text-nowrap'>
+      <div className='section-title items-center font-body text-xs font-semibold tracking-normal text-nowrap text-ui-800'>
         {(data?.displayText as string) ?? ''}{' '}
       </div>
     </>

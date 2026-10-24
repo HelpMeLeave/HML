@@ -6,7 +6,7 @@ import leavePhoto from '@/panel-hearts.jpg'
 import jesusPhoto from '@/panel-jesus.jpg'
 import communityPhoto from '@/panel-leave-wide.jpg'
 import { getPayload } from '@/server/getPayload'
-import { ChevronsRightIcon } from 'lucide-react'
+import { ChevronRight } from '@boxicons-pro/react'
 import type { Metadata } from 'next'
 import Image, { type StaticImageData } from 'next/image'
 import Link from 'next/link'
@@ -51,7 +51,7 @@ const PanelBody = ({ route }: { route: Route }) => {
     <div className={'body'}>
       <div className={'name'}>
         {route.name}
-        <ChevronsRightIcon className='chev' />
+        <ChevronRight className='chev' />
       </div>
       <div className={'rule h-0.75 w-16 bg-accent'} />
       <div
@@ -110,7 +110,7 @@ const Home = async () => {
       id='homePage'
       className={cn(
         'h-dvh max-h-dvh w-dvw',
-        'relative flex max-w-screen! flex-col overflow-hidden'
+        'relative flex max-w-screen flex-col overflow-hidden'
       )}>
       <section
         className={

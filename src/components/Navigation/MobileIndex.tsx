@@ -1,8 +1,8 @@
 'use client'
 
 import { Button } from '@/components/Button'
+import { X } from '@boxicons-pro/react'
 import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react'
-import { X } from 'lucide-react'
 import Link from 'next/link'
 import type { tNavFetchCTX } from 'www/_providers/_types'
 
@@ -27,9 +27,7 @@ export const MobileIndex = ({
         <div className='flex min-h-full items-start justify-center'>
           <DialogPanel className='h-full w-full'>
             <DialogTitle
-              className={
-                'flex w-full items-center justify-between border-b border-hr-muted p-3 px-4'
-              }>
+              className={'flex w-full items-center justify-between border-b border-hr p-3 px-4'}>
               <span className='font-serif text-3xl tracking-widest'>INDEX</span>
               <Button
                 variant='ghost'
@@ -56,7 +54,7 @@ export const MobileIndex = ({
                       prefetch={false}
                       onClick={onClose}
                       className={cnHead(here)}>
-                      <span className='font-header text-4xl leading-[0.85] tracking-wide text-soft transition hocus:text-accent'>
+                      <span className='font-header text-4xl leading-[0.85] tracking-wide text-muted transition hocus:text-accent'>
                         {section.displayText}
                       </span>
                       {here && (
@@ -74,7 +72,7 @@ export const MobileIndex = ({
                               href={child.url}
                               prefetch={false}
                               onClick={onClose}
-                              className='flex min-h-11 items-center border-b border-accent-muted/30 py-3 text-lg leading-snug tracking-wider text-soft/65 uppercase hover:text-soft focus-visible:text-accent active:text-accent'>
+                              className='flex min-h-11 items-center border-b border-accent-muted/30 py-3 text-lg leading-snug tracking-wider text-muted/65 uppercase hover:text-muted focus-visible:text-accent active:text-accent'>
                               {child.displayText}
                             </Link>
                           </li>

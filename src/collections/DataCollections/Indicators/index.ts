@@ -173,7 +173,6 @@ const IndicatorsCollectionConfig: CollectionConfig<'indicators'> = {
     ),
     // #endregion ! --------------------
     JoinConfig('values', 'indicator-values', 'indicator', {
-      defaultLimit: 25,
       defaultColumns: ['country', 'year', 'value'],
       description: 'Every country value recorded for this indicator.',
     }),

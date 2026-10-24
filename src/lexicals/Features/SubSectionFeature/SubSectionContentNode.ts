@@ -7,7 +7,12 @@ export class SubSectionContentNode extends StructureContentNode {
   }
 
   dom(): StructureDOM {
-    return { tag: 'article', className: 'lexical__subsection-content', slot: 'content' }
+    // return { tag: 'article', className: 'lexical__subsection-content', slot: 'content' }
+    return {
+      tag: 'article',
+      className: 'lexical__subsection-content *:mt-4 *:first:mt-0',
+      slot: 'content',
+    }
   }
 }
 

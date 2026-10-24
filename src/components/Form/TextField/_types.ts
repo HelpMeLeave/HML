@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react'
+import type { BoxIcon } from '@boxicons-pro/react'
 
 export type TextFieldProps = Omit<
   Props.WithRef<'input'>,
@@ -6,7 +6,7 @@ export type TextFieldProps = Omit<
 > & {
   Label: TextFieldIcon
   error?: string | string[]
-  Icon?: LucideIcon
+  Icon?: BoxIcon
   defaultValue?: Nullish<string | number | readonly string[]>
 }
 

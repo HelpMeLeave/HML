@@ -3,10 +3,11 @@ import { createAction } from '@/lexicals/Features/ActionToolbar/_lib/createActio
 import { createButtonGroup } from '@/lexicals/Features/ActionToolbar/_lib/createButtonGroup'
 import type { ToolbarActionGroup } from '@/lexicals/Features/ActionToolbar/_types'
 import { $getCalloutAtCaret } from '@/lexicals/Features/Callout/_lib'
+import type { BoxIcon } from '@boxicons-pro/react'
+import { BookOpen, LightBulb, Note, Siren } from '@boxicons-pro/react'
 import { $getState, $setState } from '@payloadcms/richtext-lexical/lexical'
-import { BookOpenText, Lightbulb, NotebookPenIcon, Siren, type LucideIcon } from 'lucide-react'
 
-const calloutItem = ({ key, label, Icon }: { key: string; label: string; Icon: LucideIcon }) =>
+const calloutItem = ({ key, label, Icon }: { key: string; label: string; Icon: BoxIcon }) =>
   createAction(key, {
     $isActive: function () {
       const callout = $getCalloutAtCaret()
@@ -33,9 +34,9 @@ export const CalloutActionBase: ToolbarActionGroup = createButtonGroup('callout'
   feature: 'callout',
   $getKey: () => $getCalloutAtCaret()?.getKey(),
   entries: [
-    { key: 'note', label: 'Note', Icon: NotebookPenIcon },
-    { key: 'tip', label: 'Good to know', Icon: Lightbulb },
+    { key: 'note', label: 'Note', Icon: Note },
+    { key: 'tip', label: 'Good to know', Icon: LightBulb },
     { key: 'urgent', label: 'Urgent', Icon: Siren },
-    { key: 'case-study', label: 'Case study', Icon: BookOpenText },
+    { key: 'case-study', label: 'Case study', Icon: BookOpen },
   ].map(calloutItem),
 })

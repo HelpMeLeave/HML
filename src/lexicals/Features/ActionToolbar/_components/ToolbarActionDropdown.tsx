@@ -1,9 +1,10 @@
 'use client'
 
 import type { ToolbarActionGroup } from '@/lexicals/Features/ActionToolbar/_types'
+import { cn } from '@/lib/cn'
+import { ChevronDown } from '@boxicons-pro/react'
 import type { LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import { Button, Popup, PopupList } from '@payloadcms/ui'
-import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 
 export const ToolbarActionDropdown = ({
@@ -38,16 +39,23 @@ export const ToolbarActionDropdown = ({
         buttonSize='small'
         className='action-toolbar__popup *:gap-2'
         textAlign='right'>
-        {entries.map((item) => (
-          <PopupList.Button
-            key={item.slug}
-            className='flex-row! items-center *:[svg]:size-3.5'
-            disabled={editor.getEditorState().read(() => !item.$isEnabled())}
-            onClick={() => item.onSelect(editor)}>
-            {item.Icon && <item.Icon />}
-            <span className='mt-0.5 block leading-[0.95]'>{item.label}</span>
-          </PopupList.Button>
-        ))}
+        {entries.map((item) => {
+          const disabled = editor.getEditorState().read(() => !item.$isEnabled())
+          return (
+            <PopupList.Button
+              key={item.slug}
+              // className='flex-row! items-center *:[svg]:size-3.5'
+              className={cn(
+                'flex-row! items-center hover:text-accent *:[svg]:size-3.5',
+                disabled && 'pointer-events-none bg-transparent'
+              )}
+              disabled={disabled}
+              onClick={() => item.onSelect(editor)}>
+              {item.Icon && <item.Icon />}
+              <span className='mt-0.5 block leading-[0.95]'>{item.label}</span>
+            </PopupList.Button>
+          )
+        })}
       </PopupList.ButtonGroup>
     </Popup>
   )

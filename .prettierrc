@@ -20,7 +20,7 @@
     "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "tailwindStylesheet": "./src/styles/style.css",
+  "tailwindStylesheet": "./src/styles/www/index.css",
   "tailwindFunctions": [
     "cn",
     "cva"
@@ -31,6 +31,26 @@
       "options": {
         "singleQuote": false,
         "objectWrap": "preserve"
+      }
+    },
+    {
+      "files": [
+        "src/app/(www)/**/*"
+      ],
+      "options": {
+        "tailwindStylesheet": "./src/styles/www/index.css"
+      }
+    },
+    {
+      "files": [
+        "src/app/admin/**/*",
+        "src/_components/**/*",
+        "src/collections/**/*",
+        "src/globals/**/*",
+        "src/lexicals/**/*"
+      ],
+      "options": {
+        "tailwindStylesheet": "./src/styles/admin/index.css"
       }
     }
   ]

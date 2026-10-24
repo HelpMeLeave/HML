@@ -2,29 +2,32 @@
 
 import type { DonationData, Step } from '@/app/(www)/(Content)/donate/_types'
 import { Button } from '@/components/Button'
+import { cn } from '@/lib/cn'
 import { toTitleCase } from '@/lib/textCasing/toTitleCase'
-import { type LucideIcon, MoveLeft } from 'lucide-react'
+import { CaretLeft, CaretRight, SendAlt } from '@boxicons-pro/react'
 import type { Dispatch } from 'react'
 
 export const NextButton = ({
   label,
-  Icon,
+  actionType,
   ...props
-}: Props<'button'> & { label: string; Icon: LucideIcon }) => {
+}: Props<'button'> & { label: string; actionType: 'submit' | 'next' }) => {
   return (
     <Button
       {...props}
       type='button'
-      variant={'accent'}
-      size='small'
-      className={'ml-auto flex max-w-[16em] flex-1 flex-row items-center justify-between gap-2'}>
-      <span data-slot='content'>{toTitleCase(label)}</span>
-      {Icon && (
-        <Icon
-          data-slot='icon'
-          className='h-full w-auto'
-        />
+      btnStyle={'accent'}
+      className={cn(
+        'w-full max-w-2/5 justify-between',
+        actionType == 'submit' ? 'btn-icon:-mt-1 btn-icon:-rotate-20' : 'ml-auto',
+        props.className
       )}
+      Icon={actionType == 'submit' ? SendAlt : CaretRight}
+      iconAttributes={{
+        iconPosition: 'right',
+      }}
+      size='medium'>
+      {toTitleCase(label)}
     </Button>
   )
 }
@@ -45,15 +48,13 @@ export const PrevButton = ({
           step: transactionData.prevStep as Step,
         })
       }}
-      variant={'accentMuted'}
+      btnStyle='accentMuted'
+      className='bg-transparent dark:bg-transparent'
+      Icon={CaretLeft}
       size='small'
-      className={[
-        'flex max-w-[16em] flex-row-reverse items-center justify-between gap-2 bg-transparent dark:bg-transparent',
-      ].join(' ')}>
-      <span data-slot='content'>{toTitleCase('Prev')}</span>
-      <MoveLeft
-        data-slot='icon'
-        className='h-full w-auto'
-      />
+      iconAttributes={{
+        iconPosition: 'left',
+      }}>
+      {toTitleCase('Prev')}
     </Button>
   )

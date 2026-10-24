@@ -7,7 +7,7 @@ import { SectionHeader } from '@/components/Navigation/SectionLink'
 import { SectionPanel } from '@/components/Navigation/SectionPanel'
 import { useKeyboard } from '@/hooks/useKeyboard'
 import { cn } from '@/lib/cn'
-import { Menu } from 'lucide-react'
+import { Menu } from '@boxicons-pro/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
@@ -59,7 +59,7 @@ const NavSectionLogo = () => (
         className='aspect-square h-(--nav-height) w-(--nav-height) p-4 text-accent group-hocus:text-body md:hidden'
       />
     </span>
-    <span className='font-serif text-4xl/[0.85] -tracking-widest text-accent-600 md:hidden'>
+    <span className='font-serif text-4xl/header -tracking-widest text-accent-600 md:hidden'>
       HML
     </span>
   </Link>
@@ -81,7 +81,7 @@ const NavSectionDesktopLinks = ({
       aria-label='Sections'
       className={cn(
         'flex min-w-0 flex-1 items-stretch max-md:hidden md:ml-6',
-        'max-md:order-last max-md:basis-full max-md:overflow-x-auto max-md:border-t max-md:border-hr-muted',
+        'max-md:order-last max-md:basis-full max-md:overflow-x-auto max-md:border-t max-md:border-hr',
         'max-md:scrollbar-none max-md:[-ms-overflow-style:none]',
         'justify-center max-md:[&::-webkit-scrollbar]:hidden'
       )}>
@@ -124,10 +124,7 @@ export const SiteHeader = ({ topNav: nav }: { topNav: tNavFetchCTX['topNav'] }) 
   return (
     <header
       onMouseLeave={() => setOpenSlug(null)}
-      className={cn(
-        'sticky top-0 z-99 border-b border-hr-muted/10',
-        'mb-4 md:max-md:mb-8 print:static'
-      )}>
+      className={cn('sticky top-0 z-99 border-b border-hr/10', 'mb-4 md:max-md:mb-8 print:static')}>
       <div className='relative z-1 flex flex-wrap items-stretch bg-background/80 px-2 not-print:backdrop-blur-sm md:pr-6'>
         <NavSectionLogo />
 

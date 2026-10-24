@@ -2,7 +2,7 @@ import { isUpload } from '@/lexicals/Features/Duotone/_lib/isUpload'
 import type { SerializedElementNode } from '@payloadcms/richtext-lexical/lexical'
 import type { CoverUpload, DuotoneFields } from '../_types'
 
-export const isImageMime = (mime: unknown) => typeof mime == 'string' && mime.startsWith('image/')
+const isImageMime = (mime: unknown) => typeof mime == 'string' && mime.startsWith('image/')
 
 type CoverOfFnReturn = {
   url: string

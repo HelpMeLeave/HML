@@ -1,0 +1,7 @@
+@reference '#tw/admin';
+
+.popup-button-list:has(.popup-button-list__button.workflow) {
+  :is(#action-delete, #action-duplicate) {
+    @apply hidden;
+  }
+}

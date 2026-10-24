@@ -8,7 +8,7 @@ import {
   MainHGroup,
   MainSubtitle,
 } from '@/components/Structure/Main'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from '@boxicons-pro/react'
 import { useRouter } from 'next/navigation'
 
 export const NotFound = () => {
@@ -24,11 +24,10 @@ export const NotFound = () => {
         <MainSubtitle>Sorry, we couldn’t find the page you’re looking for.</MainSubtitle>
       </MainHGroup>
       <Button
-        className='text-theme-accent -left-4 flex items-center justify-start gap-x-2'
-        type='button'
-        variant='ghost'
+        className='-left-4 flex items-center justify-start gap-x-2 text-accent'
+        btnStyle='ghost'
+        Icon={ArrowLeft}
         onClick={router.back}>
-        <ArrowLeft className='size-4' />
         Back to Home
       </Button>
     </Main>

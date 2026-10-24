@@ -1,3 +1,3 @@
-import { DUOTONES } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
+import { DUOTONES } from '../_constants/DUOTONES'
 
 export const getDuotonePreset = (value: unknown) => DUOTONES.find((p) => p.value === value)

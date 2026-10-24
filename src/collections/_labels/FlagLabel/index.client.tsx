@@ -1,11 +1,10 @@
 'use client'
 
 import { cn } from '@/lib/cn'
+import { Flag } from '@boxicons-pro/react'
 import { useField } from '@payloadcms/ui'
-import { Flag } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import type { StaticLabel } from 'payload'
-import './style.scss'
 
 const EditFlagLabel = ({
   required,
@@ -33,7 +32,7 @@ const EditFlagLabel = ({
             '--border-radius': '999px',
           } as Props['style']
         }
-        className='btn btn--withoutPopup btn--style-flag btn--icon-style-without-border btn--size-xsmall btn--no-margin icon-btn--wrapper'
+        className='btn btn--withoutPopup btn--style-flag btn--icon-style-without-border btn--size-xsmall btn--no-margin icon-btn--wrapper relative m-0 h-min -translate-y-1/4'
         type='button'
         onClick={(e) => {
           e.preventDefault()
@@ -44,7 +43,8 @@ const EditFlagLabel = ({
           setValue([...newValues])
         }}>
         <Flag
-          size={'var(--btn-icon-size)'}
+          width={'var(--btn-icon-size)'}
+          height={'var(--btn-icon-size)'}
           className={cn('btn__icon .stroke', isFlagged ? 'fill-accent stroke-accent' : '')}
         />
       </button>

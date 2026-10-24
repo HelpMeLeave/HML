@@ -15,7 +15,7 @@ import {
   SubsectionHeading,
 } from '@/components/Structure/Subsection/Subsection'
 import { cn } from '@/lib/cn'
-import { Trash2, X } from 'lucide-react'
+import { Trash, X } from '@boxicons-pro/react'
 import { type MotionProps, motion } from 'motion/react'
 import { filterCbs } from 'www/(Content)/explorer/_lib/filterCbs'
 import type { ExplorerMasonaryDrawer, tDrawerFilter } from 'www/(Content)/explorer/_types'
@@ -151,10 +151,10 @@ const FilterCB = ({ label, dataKey, checked, onFilterToggle, ...props }: FilterC
 const CloseButton = ({ onClose }: { onClose: () => void }) => (
   <Button
     type='button'
-    variant='muted'
-    className='mt-4 flex items-center justify-center gap-2'
+    btnStyle='accentMuted'
+    Icon={X}
+    className='mt-4'
     onClick={onClose}>
-    <X className='size-4' />
     Close Filters
   </Button>
 )
@@ -162,10 +162,10 @@ const CloseButton = ({ onClose }: { onClose: () => void }) => (
 const ClearButton = ({ onClear }: { onClear: () => void }) => (
   <Button
     type='button'
-    variant='primary'
-    className='mt-4 flex items-center justify-center gap-2'
+    btnStyle='accent'
+    Icon={Trash}
+    className='mt-4'
     onClick={onClear}>
-    <Trash2 className='size-4' />
     Clear all filters
   </Button>
 )

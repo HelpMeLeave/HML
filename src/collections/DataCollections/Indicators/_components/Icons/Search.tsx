@@ -1,7 +1,6 @@
-'use client'
-import { Button } from '@payloadcms/ui'
+import { P } from '@/collections/DataCollections/Indicators/_components/Icons/P'
+import { SearchBtn } from '@/collections/DataCollections/Indicators/_components/Icons/SearchBtn'
 import type { Dispatch, SetStateAction } from 'react'
-import { P } from './P'
 
 export const Search = ({
   custom,
@@ -16,7 +15,7 @@ export const Search = ({
     <div
       id='iconSearch'
       className='w-full'>
-      <P style={{ marginBottom: 6 }}>Custom Lucide Icon</P>
+      <P style={{ marginBottom: 6 }}>Custom Boxicon Icon</P>
       <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
         <input
           type='text'
@@ -27,22 +26,17 @@ export const Search = ({
             flex: 1,
             padding: '6px 10px',
             borderRadius: 6,
-            border: '1px solid var(--color-elevation-150)',
+            border: '1px solid var(--color-ui-150)',
             background: 'transparent',
             fontSize: 13,
           }}
         />
-        <Button
-          margin={false}
-          type='button'
-          className='btn btn--style-secondary btn--size-small'
-          disabled={!custom.trim()}
-          onClick={() => {
-            selectAction(custom.trim())
-            setCustomAction('')
-          }}>
-          Use
-        </Button>
+
+        <SearchBtn
+          custom={custom}
+          selectAction={selectAction}
+          setCustomAction={setCustomAction}
+        />
       </div>
 
       <p style={{ fontSize: '0.65rem', opacity: 0.5, marginTop: 4 }}>

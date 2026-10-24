@@ -2,11 +2,11 @@
 
 import { isActive } from '@/lexicals/Features/_lib/isActive'
 import { $createH4Node, H4Node } from '@/lexicals/Features/H4Feature/H4Node'
+import { Heading } from '@boxicons-pro/react/icons'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import type { LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import { $getSelection, $isRangeSelection } from '@payloadcms/richtext-lexical/lexical'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
-import { Heading4 } from 'lucide-react'
 
 const H4MarkdownTransformer: () => ElementTransformer = () => ({
   dependencies: [H4Node],
@@ -24,7 +24,7 @@ const H4MarkdownTransformer: () => ElementTransformer = () => ({
   type: 'element',
 })
 
-const H4Icon = () => <Heading4 />
+const H4Icon = () => <Heading />
 
 const insertConfig = () => ({
   key: 'h4',

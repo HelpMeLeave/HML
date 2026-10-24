@@ -1,4 +1,3 @@
-'use client'
 import { BtnEl } from '@/collections/DataCollections/Indicators/_components/Icons/BtnEl'
 import { Icon } from '@/collections/DataCollections/Indicators/_components/Icons/Icon'
 import { QUICK_ICONS } from '@/collections/DataCollections/Indicators/_components/Icons/_lib'

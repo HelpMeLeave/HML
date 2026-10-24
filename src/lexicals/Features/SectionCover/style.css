@@ -1,0 +1,72 @@
+@reference '#tw/admin';
+
+hgroup:has(> .lexical-upload:first-of-type) {
+  --cover-pad: 0.25em;
+  grid-template-columns:
+    [cover-start] var(--cover-pad) [text-start] minmax(0, 1fr)
+    [text-end] var(--cover-pad) [cover-end];
+  grid-template-rows:
+    [cover-start] 1fr [heading] auto [eyebrow] auto var(--cover-pad)
+    [cover-end subtitle] auto;
+  container-type: inline-size;
+  @apply isolate mb-8 grid gap-0 p-0 txt-4 max-[899px]:mt-12 md:txt-7xl min-[900px]:sidebar-open:mt-12;
+
+  > .lexical-upload:first-of-type {
+    @apply pointer-events-none relative col-[cover] row-[cover] m-0 min-h-[min(40vh,32rem)] w-auto rounded-xl border-0 shadow-md;
+
+    :is([class*="__contents"], [class*="__card"], [class*="__media"]) {
+      @apply h-full shadow-none;
+    }
+
+    img {
+      @apply absolute inset-0 -z-1 size-full max-h-none min-h-0 max-w-none min-w-0 rounded-xl object-cover;
+    }
+
+    :is([class*="__swap-drawer-toggler"], [class*="__metaOverlay"]) {
+      @apply hidden;
+    }
+
+    [class*="__overlay"] {
+      @apply pointer-events-auto z-1 transform-none opacity-100;
+    }
+  }
+
+  > :is([data-slot="heading"], [data-slot="eyebrow"]) {
+    @apply z-1 col-[text] m-0 w-fit justify-self-start bg-(--chip-bg,transparent) px-[0.5em] py-[0.15em] font-normal whitespace-nowrap text-(--chip-text,inherit);
+  }
+
+  > [data-slot="heading"] {
+    font-size: min(1em, calc((100cqi - 3rem) / (var(--chars, 20) * 0.35)));
+    @apply row-[heading] px-1 pt-2.5 pb-0 leading-header;
+  }
+
+  > [data-slot="eyebrow"] {
+    @apply txt-em-0.25 row-[eyebrow] px-3 py-0 leading-snug tracking-normal;
+  }
+
+  > [data-slot="subtitle"] {
+    @apply col-[cover] row-[subtitle] mt-2 mb-0 px-4 text-center text-[0.9rem] leading-normal;
+  }
+
+  &:has(> .lexical-upload[data-position*="top"]) {
+    grid-template-rows:
+      [cover-start] var(--cover-pad) [heading] auto [eyebrow] auto 1fr
+      [cover-end subtitle] auto;
+  }
+
+  &:has(> .lexical-upload[data-position*="middle"]) {
+    grid-template-rows:
+      [cover-start] 1fr [heading] auto [eyebrow] auto 1fr
+      [cover-end subtitle] auto;
+  }
+
+  &:has(> .lexical-upload[data-position*="center"])
+    > :is([data-slot="heading"], [data-slot="eyebrow"]) {
+    @apply justify-self-center;
+  }
+
+  &:has(> .lexical-upload[data-position*="right"])
+    > :is([data-slot="heading"], [data-slot="eyebrow"]) {
+    @apply justify-self-end;
+  }
+}

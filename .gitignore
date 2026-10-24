@@ -37,3 +37,6 @@ next-env.d.ts
 .vercel.json
 .favorites.json
 docs
+src/lab
+src/app/(lab)
+public/playfair

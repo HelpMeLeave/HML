@@ -1,4 +1,4 @@
-import type { LucideIcon } from 'lucide-react'
+import type { BoxIcon } from '@boxicons-pro/react'
 import Link from 'next/link'
 
 export const BeforeListLink = ({
@@ -8,7 +8,7 @@ export const BeforeListLink = ({
 }: {
   href: Props<typeof Link>['href']
   children: Props<typeof Link>['children']
-  Icon: LucideIcon
+  Icon: BoxIcon
 }) => {
   return (
     <Link
@@ -23,11 +23,9 @@ export const BeforeListLink = ({
       className='btn btn--style-primary btn--size-medium'
       href={href}>
       <Icon
-        size={14}
+        size={'sm'}
         strokeWidth={'1.5px'}
-        style={{
-          paddingBottom: '1px',
-        }}
+        className='pb-px'
       />
       {children}
     </Link>

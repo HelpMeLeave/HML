@@ -11,7 +11,7 @@ export const Providers = ({ nav, children }: { nav: tNavFetchCTX; children: Reac
   return (
     <PortalCTXProvider>
       <UserProvider>
-        <AdminBarCTXProvider>
+        <AdminBarCTXProvider user={nav.user}>
           <NavCTXProvider fetchInit={nav}>
             <FilterProvider>{children}</FilterProvider>
           </NavCTXProvider>

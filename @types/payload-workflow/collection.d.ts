@@ -1,7 +1,6 @@
 declare module 'payload-workflow' {
   import type { User, WorkflowCollectionSlug } from '@/payload-types'
   import type { Button } from '@payloadcms/ui/elements/Button'
-  import type { IconName } from 'lucide-react/dynamic'
   import type { CollectionConfig, Field, TypedCollectionSelect } from 'payload'
 
   // #region ! ---------- BTN OMITTED ----------

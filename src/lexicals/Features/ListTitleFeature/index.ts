@@ -46,7 +46,8 @@ export class TitledListNode extends ListNode {
 
   createDOM(config: EditorConfig, _editor?: LexicalEditor): HTMLOListElement | HTMLUListElement {
     const el = super.createDOM(config, _editor) as HTMLOListElement | HTMLUListElement
-    el.className += ' LexicalEditorTheme__list--titled'
+    // el.className += ' LexicalEditorTheme__list--titled'
+    el.className += " LexicalEditorTheme__list--titled [counter-reset:list-title_0] *:first:mb-0 *:first:ml-0 *:first:list-none *:first:pl-0 [ol]:*:not-first:[counter-increment:list-title_1] [ol]:*:not-first:marker:text-[0.75rem] [ol]:*:not-first:marker:font-semibold [ol]:*:not-first:marker:content-[counter(list-title,decimal)_'.__']"
     return el
   }
 

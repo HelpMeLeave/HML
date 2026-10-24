@@ -6,7 +6,7 @@ import type { CustomerDataType, DonationData } from '@/app/(www)/(Content)/donat
 import { Checkbox, CheckboxField } from '@/components/Form/Checkbox'
 import { Description, Field, FieldRow, Label } from '@/components/Form/Fieldset'
 import { Input, InputGroup } from '@/components/Form/Input'
-import { Mail, MoveRight } from 'lucide-react'
+import { PaperPlane } from '@boxicons-pro/react'
 import type { ChangeEvent, Dispatch } from 'react'
 import z from 'zod'
 
@@ -81,7 +81,7 @@ export const ContactFieldset = ({
         <Field aria-required='true'>
           <Label required>E-Mail</Label>
           <InputGroup className='group'>
-            <Mail
+            <PaperPlane
               data-slot='icon'
               className='opacity-50 group-focus-within:opacity-100'
             />
@@ -120,7 +120,7 @@ export const ContactFieldset = ({
         <div className='mt-auto flex w-full justify-between gap-12'>
           <NextButton
             label={'Next'}
-            Icon={MoveRight}
+            actionType='next'
             onClick={handleNext}
           />
         </div>

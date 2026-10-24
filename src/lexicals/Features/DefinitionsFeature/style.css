@@ -1,0 +1,80 @@
+@reference '#tw/admin';
+
+/* @utility definition-circle {
+  &::before,
+  &::after {
+    content: "";
+    @apply absolute -left-2 size-[105%] rounded-[50%] border-[1.75px] border-solid border-(--color) px-[0.25em] py-[0.1em] dark:border;
+  }
+  &::after {
+    @apply top-[-0.1rem] -rotate-1 border-t-transparent border-l-transparent;
+  }
+  &::before {
+    @apply top-[-0.24rem] rotate-2 border-r-transparent;
+  }
+  &:first-child {
+    @apply -translate-x-1 translate-y-0 scale-x-120 scale-y-120 -rotate-y-30 -rotate-z-174 brightness-125;
+  }
+} */
+
+/* .definitions-toolbar {
+  @apply inline-flex items-center;
+  svg {
+    @apply w-5 has-[+_.definitions-toolbar__count]:text-accent-500;
+  }
+}
+.definitions-toolbar__count {
+  @apply txt-[0.6875] leading-none text-accent-500;
+} */
+
+.definitions-overlay {
+  --color: --alpha(var(--color-accent-400) / 70%);
+  @apply pointer-events-none absolute inset-0 z-1;
+  @variant dark {
+    --color: --alpha(var(--color-accent-600) / 50%);
+  }
+}
+.definitions-overlay__highlight {
+  @apply definition-circle absolute right-[calc(var(--spacing-field)*-0.25)] bottom-[-15%] left-[calc(var(--spacing-field)*-0.25)] z-0 h-[115%] brightness-150;
+}
+
+.definitions-overlay__mark {
+  @apply absolute;
+}
+
+/* .lexical__definition {
+  @apply underline decoration-accent decoration-wavy decoration-[0.5px] underline-offset-2;
+}
+.lexical__definition-wrapper {
+  --color: --alpha(var(--color-accent-400) / 70%);
+  @apply definition-circle relative before:pointer-events-none after:pointer-events-none empty:before:content-[unset] empty:after:content-[unset];
+  @variant dark {
+    --color: --alpha(var(--color-accent-500) / 80%);
+  }
+} */
+
+.toolbar-popup__button-scan-definitions:has(.definitions-toolbar__count) {
+  @apply bg-ui-150 text-body;
+}
+
+.rich-text-lexical .ContentEditable__root > * {
+  @apply z-2;
+}
+
+.definition-drawer {
+  .drawer__content {
+    @apply w-81.25! min-w-min shadow-[-10px_0px_10px_-7px_rgb(0_0_0/15%)];
+  }
+  .drawer__blur-bg {
+    @apply before:opacity-0 after:backdrop-blur-sm;
+  }
+  &.drawer--is-open .drawer__close {
+    @apply opacity-20;
+  }
+  .drawer-action-header__title {
+    @apply txt-2 text-nowrap;
+  }
+  .drawer-action-header__content {
+    @apply flex-col-reverse;
+  }
+}

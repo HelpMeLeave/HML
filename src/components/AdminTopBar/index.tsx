@@ -4,18 +4,17 @@ import { pillColors } from '@/_config/plugins/Plugin-Workflow/_components/Pill/p
 import { getClientSideAdminURL } from '@/app/(www)/_lib/getURL'
 import { Badge } from '@/components/Badge'
 import { Button } from '@/components/Button'
-import { useMe } from '@/hooks/useMe'
 import type { Content, User, WorkflowFlowStatus } from '@/payload-types'
-import { type LucideIcon, Edit, LogOut, User2 } from 'lucide-react'
+import { ArrowOutRightSquareHalf, Edit, UserCircle, type BoxIcon } from '@boxicons-pro/react'
+import type { Dispatch, SetStateAction } from 'react'
 
 const Btn = ({
   href,
   Icon,
   label,
-  showLabel,
 }: {
   href: string
-  Icon: LucideIcon
+  Icon: BoxIcon
   label?: string
   showLabel?: boolean
 }) => {
@@ -23,10 +22,15 @@ const Btn = ({
     <Button
       as='link'
       href={href}
-      variant='ghost'
-      className='flex flex-col items-center gap-0.5 rounded-lg p-2 text-xs hover:bg-black/4 hover:text-body dark:hover:bg-white/5'>
-      <Icon size={showLabel ? 10 : 16} />
-      {showLabel && <span>{label}</span>}
+      variant='primary'
+      rounded
+      size='small'
+      iconAttributes={{
+        pack: 'filled',
+        iconPosition: 'right',
+      }}
+      Icon={Icon}>
+      <span>{label}</span>
     </Button>
   )
 }
@@ -42,46 +46,38 @@ const FlowPill = ({ status }: { status: WorkflowFlowStatus }) => {
 }
 
 export const AdminBar = ({
-  slug,
-  user: _user,
+  user,
   id,
   flow,
 }: {
-  slug: string
-  user: User | false
+  user?: Nullish<Partial<User>>
   id?: string | number
   flow?: Content['flow']
+  setUser?: Dispatch<SetStateAction<Nullish<Partial<User>>>>
 }) => {
-  return <></>
-  const { user: me } = useMe()
   return (
-    me && (
+    user && (
       <div
         data-slot='admin-bar'
-        className='sticky top-0 z-50 flex w-svw items-center justify-end bg-body/2 px-6 py-1 text-body backdrop-blur-xl [&+*]:top-10 md:[&~main]:mt-16'>
+        className='sticky top-0 z-50 flex w-svw items-center justify-end bg-background/2 px-6 py-1 text-background backdrop-blur-xl has-[+#homePage]:hidden [&+*:not(#homePage)]:top-7.5 md:[&~main]:mt-16'>
         <FlowPill status={flow!} />
         <span className='mx-4 block h-4 min-h-full w-px bg-muted/20' />
 
         <span className='flex items-baseline justify-end gap-2'>
           <Btn
-            href={getClientSideAdminURL(`collections/${slug}/${id}`)}
+            href={getClientSideAdminURL(`collections/content/${id}`)}
             Icon={Edit}
             label='Edit'
-          />
-          <Btn
-            href={getClientSideAdminURL('admin', 'logout')}
-            Icon={LogOut}
-            label='Logout'
           />
           <span className='mx-4 block h-4 min-h-full w-px bg-muted/20' />
           <Btn
             href={getClientSideAdminURL('account')}
-            Icon={User2}
+            Icon={UserCircle}
             label='Account'
           />
           <Btn
-            href={getClientSideAdminURL('admin', 'logout')}
-            Icon={LogOut}
+            href={getClientSideAdminURL('logout')}
+            Icon={ArrowOutRightSquareHalf}
             label='Logout'
           />
         </span>

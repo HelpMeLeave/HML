@@ -1,7 +1,7 @@
 import { createAction } from '@/lexicals/Features/ActionToolbar/_lib/createAction'
 import { createButtonGroup } from '@/lexicals/Features/ActionToolbar/_lib/createButtonGroup'
 import { $getHeadingAtCaret } from '@/lexicals/Features/Structure/_lib'
-import { ArrowDown, ArrowUp, Trash } from 'lucide-react'
+import { ArrowDown, ArrowUp, Trash } from '@boxicons-pro/react'
 
 export const StructureGrp = createButtonGroup('headings', {
   feature: 'structure',

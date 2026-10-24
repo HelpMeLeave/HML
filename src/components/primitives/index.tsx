@@ -39,10 +39,10 @@ export const List = ({
   ...props
 }: Props<'ul'> & { type?: 'numbered' | 'checkmark' | '' }) => {
   const className = cn(
-    'in-[li]:my-0.5 in-[li]:ps-2!',
+    'in-[li]:my-0.5 in-[li]:ps-2',
     'ml-2 pl-2 *:last:mb-0',
     type === 'numbered' ? 'list-decimal'
-    : type == 'checkmark' ? 'list-checkmark ml-0 pl-0'
+    : type == 'checkmark' ? 'list-checkmark checkmark-list ml-0 pl-0'
     : 'list-disc',
     props.className
   )

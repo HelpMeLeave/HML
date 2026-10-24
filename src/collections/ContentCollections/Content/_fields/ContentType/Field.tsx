@@ -3,20 +3,19 @@ import type { tContentType } from '@/collections/ContentCollections/Content/_lib
 import { env } from '@/env'
 import { cn } from '@/lib/cn'
 import { fromCamelCase, toTitleCase } from '@/lib/textCasing'
-import { Link } from '@payloadcms/ui'
+import type { BoxIcon } from '@boxicons-pro/react'
 import {
-  ArrowRightLeftIcon,
-  Hammer,
-  Library,
-  NotebookPen,
-  Scale,
-  Speech,
-  TextAlignStartIcon,
-  type LucideIcon,
-} from 'lucide-react'
+  ArrowRightLeft,
+  BookLibrary,
+  ComicBubble,
+  DiamondAlt,
+  Newspaper,
+  ReadingGlass,
+  Receipt,
+} from '@boxicons-pro/react'
+import { Link } from '@payloadcms/ui'
 import type { UIFieldServerProps } from 'payload'
 import type { ParamSegments } from 'payload-types'
-import './style.scss'
 
 const getContentTypeFromParams = (params?: ParamSegments | string) => {
   if (!params) return
@@ -30,14 +29,14 @@ const getContentTypeFromParams = (params?: ParamSegments | string) => {
 }
 
 const ContentTypeChoice = (props: UIFieldServerProps) => {
-  const Actions: Record<tContentType, LucideIcon> = {
-    blog: Library,
-    newsCommentary: Scale,
-    report: NotebookPen,
-    resource: Hammer,
-    statement: Speech,
-    hub: ArrowRightLeftIcon,
-    other: TextAlignStartIcon,
+  const Actions: Record<tContentType, BoxIcon> = {
+    blog: BookLibrary,
+    newsCommentary: Newspaper,
+    report: Receipt,
+    resource: DiamondAlt,
+    statement: ComicBubble,
+    hub: ArrowRightLeft,
+    other: ReadingGlass,
   }
 
   const contentType = props.req.searchParams.get('type') ?? getContentTypeFromParams(props.req.url)
@@ -46,25 +45,27 @@ const ContentTypeChoice = (props: UIFieldServerProps) => {
     !props.id
     && !contentType && (
       <>
-        <div id={'contentTypeChoice'}>
+        <div
+          id={'contentTypeChoice'}
+          className='mt-8 flex flex-wrap gap-4'>
           {contentTypes.map((type) => {
             const Icon = Actions[type]
 
             return (
               <Link
-                className='card'
+                className='card flex h-25 flex-[1_1_400px] items-center justify-between rounded-(--style-radius-l) bg-ui-100 p-6 font-light uppercase no-underline hover:bg-ui-800 hover:text-ui-100 hover:transition-all hover:duration-250 hover:ease-in-out'
                 id={'contentType' + toTitleCase(type)}
                 key={type}
                 href={`${env.NEXT_PUBLIC_BASE_URL}/admin/collections/content/create?type=${type}`}>
-                <span>{fromCamelCase(type).replace(' ', ' & ')}</span>
+                <span className='text-2xl/[auto]'>{fromCamelCase(type).replace(' ', ' & ')}</span>
                 <Icon
                   className={cn(
                     type == 'blog'
-                      && '*:odd:stroke-brand-mulberry *:stroke-2! *:odd:dark:stroke-yellow-700',
+                      && '*:stroke-2 *:odd:stroke-mulberry-700 *:odd:dark:stroke-yellow-700',
                     type == 'statement' && '*:first:fill-current *:first:stroke-0',
                     (type == 'report' || type == 'resource')
                       && '*:last:fill-current *:last:stroke-0',
-                    'stroke-[1.5px]! text-accent'
+                    'size-8 stroke-15 text-accent'
                   )}
                 />
               </Link>

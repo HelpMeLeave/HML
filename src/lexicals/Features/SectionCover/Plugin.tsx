@@ -24,7 +24,8 @@ import {
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { $dfs } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useCallback, useEffect, useState } from 'react'
-import './style.scss'
+// import './style.scss'
+// import './style.css'
 
 export const SectionCoverPlugin = () => {
   const [editor] = useLexicalComposerContext()

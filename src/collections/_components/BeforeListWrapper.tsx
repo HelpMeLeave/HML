@@ -1,5 +1,5 @@
 import { BeforeListLink } from '@/collections/_components/BeforeListLink'
-import type { LucideIcon } from 'lucide-react'
+import type { BoxIcon } from '@boxicons-pro/react'
 import type { CollectionSlug } from 'payload'
 
 const BeforeListWrapper = ({ ...props }: Props) => (
@@ -22,7 +22,7 @@ export const BeforeListLinks = ({
 }: {
   slug: CollectionSlug
   list: {
-    Icon: LucideIcon
+    Icon: BoxIcon
     slug: CollectionSlug
     label: string
   }[]

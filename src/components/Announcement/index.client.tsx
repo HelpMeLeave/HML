@@ -7,7 +7,7 @@ import { env } from '@/env.client'
 import { cn } from '@/lib/cn'
 import { toState } from '@/lib/slots'
 import type { RichTextBlock } from '@/payload-types'
-import { X } from 'lucide-react'
+import { X } from '@boxicons-pro/react'
 import { type Dispatch, type SetStateAction, useState } from 'react'
 
 export const AnnouncementInnerWrapper = ({ banner }: { banner: tNavFetchCTX['banner'] }) => {

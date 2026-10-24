@@ -37,10 +37,12 @@ const Toolbar = ({
     <div
       ref={ref}
       className={cn(
-        'action-toolbar group toolbar bg-base-0 hover:bg-base-50 border-base-200 border-collapse rounded-sm border',
+        'action-toolbar group border-collapse rounded-sm border border-ui-200 bg-ui-0 toolbar hover:bg-ui-50',
+        'action-display absolute top-0 left-0 z-10 opacity-0 transition-opacity duration-200 will-change-transform',
+        '[&>.btn--withPopup]:m-0 [&>.btn--withPopup]:h-full [&>.btn--withPopup]:rounded-none [&>.btn--withPopup_.btn]:border-0',
         'h-6',
         'shadow-md',
-        'empty:hidden!'
+        'empty:hidden'
       )}>
       {actions.map(({ slug, ...props }) => {
         if (toolbar[slug] == true) {

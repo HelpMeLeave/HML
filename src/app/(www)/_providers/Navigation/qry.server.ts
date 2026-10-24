@@ -6,9 +6,9 @@ import type {
   NavLink,
   NotNull,
 } from '@/app/(www)/_providers/Navigation/_types'
-import { isTraversable } from '@/lib/normalize/is'
 import { isOffSite } from '@/lib/normalize/isOffSite'
 import { resolveLinkNode } from '@/lib/normalize/resolveLink'
+import { objHasKey } from '@/lib/objHasKey'
 import { getPayload } from '@/server/getPayload'
 import type { DefaultTypedEditorState } from '@payloadcms/richtext-lexical'
 import { DateTime } from 'luxon'
@@ -27,22 +27,25 @@ const createLink = (ea: NavLink): NavigationGroup => ({
 
 const isNotNull = <T>(entry: T): entry is NotNull<T> => String(entry) != 'null'
 const getHeaderLink = (entry: HeaderDD | HeaderLink) => {
-  if (entry.item) {
-    if ('url' in entry.item) {
-      return resolveLinkNode({ url: entry.item.url, linkType: 'custom' })
-    } else if (entry.item.value && isTraversable(entry.item.value) && 'url' in entry.item.value) {
-      return resolveLinkNode({ url: entry.item.value.url, linkType: 'custom' })
-    }
-  }
-  return undefined
+  const { item } = entry
+  if (!item) return
+  const { url } =
+    objHasKey<{ url: string }>('url', item) ? item
+    : objHasKey<{ url: string }>('url', item.value) ? item.value
+    : { url: null }
+  return url && resolveLinkNode({ url, linkType: 'custom' })
 }
 
 const createHeaderNav = (ea: HeaderDD | HeaderTab): tNavFetchTopNavItem => {
   const link = getHeaderLink(ea)
+  if (link && link.offsite == false) {
+    link.url = link.url.startsWith('/') ? link.url : `/${link.url}`
+  }
   const displayText = ea.displayText ?? ''
-  const description = 'description' in ea && isNotNull(ea.description) ? ea.description : undefined
+  const description =
+    objHasKey('description', ea) && isNotNull(ea.description) ? ea.description : undefined
   const links =
-    ('links' in ea
+    (objHasKey<HeaderTab>('links', ea)
       && ea.links?.map((l) => ({
         ...createLink({ ...(l as NavLink), displayText: l.displayText ?? '' }),
         description: l.description ?? undefined,
@@ -96,5 +99,6 @@ export const getNavigation = async (): Promise<tNavFetchCTX> => {
         }
       ),
     year: DateTime.now().year,
+    user: null,
   }
 }

@@ -35,6 +35,7 @@ export type tNavFetchCTX = {
     description: string
     url?: string
   }[]
+  user: Nullish<User>
 }
 
 export type tPortalCTX = {

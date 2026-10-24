@@ -1,0 +1,408 @@
+@import "#tw/shared/btns.css";
+@import "#tw/shared/fields.css";
+@import "#tw/shared/fonts.css";
+@import "#tw/shared/colors.css";
+@import "#tw/shared/keyframes.css";
+
+@plugin "./bem.ts";
+
+@theme {
+  --leading-header: 0.85;
+}
+
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    @slot;
+  }
+}
+
+@custom-variant hocus {
+  &:is(*:hover, *:focus-visible) {
+    @slot;
+  }
+}
+
+@utility click {
+  cursor: pointer;
+}
+
+@custom-variant sibling {
+  :is(.sibling + *) {
+    @slot;
+  }
+}
+
+@utility txt-* {
+  font-size: --value(--text-*);
+  font-size: calc(--value(integer, [integer], number, [number]) * 1rem);
+}
+
+@utility txt-em-* {
+  font-size: --value(--text-*);
+  font-size: calc(--value(integer, [integer], number, [number]) * 1em);
+}
+
+/* #region ? ---------- VARIANTS ---------- */
+@custom-variant sidebar-open {
+  &:is(.document-fields--has-sidebar:has(.sidebar-toggle[data-state="open"]) *) {
+    @slot;
+  }
+}
+
+@custom-variant sidebar-closed {
+  &:is(.document-fields--has-sidebar:has(.sidebar-toggle[data-state="closed"]) *) {
+    @slot;
+  }
+}
+
+@custom-variant sidebar-field {
+  &:is(.document-fields__sidebar-wrap:has(.sidebar-toggle) *) {
+    /* @variant sidebar {
+      @slot;
+    } */
+    /* @media (width >= 825px) { */
+    @media (width >= 800px) {
+      @slot;
+    }
+  }
+}
+
+/* @custom-variant sidebar { */
+@custom-variant in-sidebar {
+  &:is(.document-fields__sidebar-wrap *) {
+    @slot;
+  }
+}
+
+@custom-variant node-empty {
+  &:has(br:first-child:last-child)[data-placeholder] {
+    @slot;
+  }
+}
+
+@custom-variant node-empty-content {
+  &:has(br:first-child:last-child)[data-placeholder] {
+    &::before {
+      @slot;
+    }
+  }
+}
+
+/* #endregion ? -------------------- */
+
+@utility data-placeholder-* {
+  &::before {
+    content: attr(data-placeholder);
+    position: absolute;
+    cursor: text;
+    font-style: --value(--data-placeholder-*);
+    opacity: calc(--modifier(integer, --default(100)) * 0.01);
+  }
+}
+
+/* #region ? ---------- LABELS ---------- */
+@utility reset-label {
+  --label-size: 0.85rem;
+  --font-label: var(--font-body);
+  --label-weight: 600;
+  --label-leading: 1.65;
+  --label-color: var(--color-ui-500);
+}
+
+@utility group-label-base {
+  &:is(.field-label) {
+    --font-label: var(--font-header);
+    --label-weight: 400;
+    --label-leading: 0.85;
+  }
+  &:has(> .field-label) > {
+    --font-label: var(--font-header);
+    --label-weight: 400;
+    --label-leading: 0.85;
+  }
+}
+
+@utility label-* {
+  --font-label: var(--font-header);
+  --label-weight: 400;
+  --label-leading: 0.85;
+  --label-size: --value(--label-*);
+  --label-color: --value(--label--color-*);
+
+  @variant sidebar-field {
+    --label-size: --value(--label--sidebar- *);
+  }
+  .field-label {
+    font-size: var(--label-size);
+    line-height: var(--label-leading);
+    *:not(.required) {
+      font-size: inherit;
+      line-height: inherit;
+    }
+    .required {
+      transform: none;
+      left: -0.5em;
+      font-size: var(--label-size);
+      line-height: var(--label-leading);
+      top: 0.25lh;
+    }
+  }
+  .field-type,
+  .field-type__wrap {
+    &:not([class*="--layout__label-"]) {
+      @apply reset-label;
+    }
+  }
+}
+/* #endregion ? -------------------- */
+
+@utility inputShadow {
+  &:not(*:disabled) {
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+  }
+}
+
+@utility relationship-input {
+  transition-property: all;
+  transition-duration: 0.1s, 0.1s, 0.5s;
+  transition-timing-function: cubic-bezier(0, 0.2, 0.2, 1);
+  border: 1px solid var(--theme-input-border-color);
+  border-radius: var(--form-radius);
+  @apply inputShadow;
+  &:hover {
+    box-shadow: var(--form-shadow-hover);
+    border-color: var(--theme-input-border-color-hover);
+  }
+  &:is(.relationship--allow-create .rs__control) {
+    border-end-end-radius: 0;
+    border-start-end-radius: 0;
+  }
+}
+
+/* #region ? ---------- CALLOUTS ---------- */
+@utility callout {
+  @apply relative rounded-md bg-(--callout)/8 px-3 pt-7 pb-[0.6rem] dark:bg-(--callout)/12;
+  @variant before {
+    @apply pointer-events-none absolute top-2 left-3 font-mono text-[0.7rem] font-semibold tracking-[0.12em] text-(--callout) uppercase select-none;
+  }
+}
+
+@utility callout-color-* {
+  --callout: --value(--color-*);
+  @variant dark {
+    --callout: --modifier(--color- *);
+  }
+}
+/* #endregion ? -------------------- */
+
+/* #region ? ---------- BTNS ---------- */
+@utility btn-static {
+  --hover-bg: var(--bg-color);
+  --hover-color: var(--color);
+}
+
+@utility btn-pill-disabled {
+  --bg-color: var(--color-ui-100);
+  --color: var(--color-ui-400);
+  @apply btn-static;
+  @variant dark {
+    --bg-color: var(--color-ui-150);
+    --color: var(--color-ui-500);
+  }
+  cursor: not-allowed;
+}
+/* #endregion ? -------------------- */
+
+/* #region ? ---------- INPUTS ---------- */
+@utility input-base {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  --theme-success-400: color-mix(in hsl, var(--color-accent) 50%, transparent);
+  --border-color: var(--theme-input-border-color);
+  &:hover {
+    --border-color: var(--theme-input-border-color-hover);
+  }
+  margin: 2px 0;
+  gap: 0;
+}
+
+@utility input-inner {
+  position: relative;
+  border-radius: 999px;
+  width: 1.25rem;
+  height: 1.25rem;
+  svg {
+    width: 1.15rem;
+    height: 1.15rem;
+    color: var(--color-accent);
+  }
+}
+
+@utility input-label {
+  --label-color: var(--color-ui-600);
+  --label-leading: 0.85;
+  --label-weight: 500;
+  --size: calc(var(--label-size) * 0.85);
+  --label-font: var(--font-mono);
+  line-height: var(--label-leading);
+  font-weight: var(--label-weight);
+  color: var(--label-color);
+  font-size: var(--size);
+  font-family: var(--label-font);
+  text-transform: uppercase;
+  font-style: italic;
+  margin-left: 10px;
+  padding-left: 0;
+  --theme-success-400: color-mix(in hsl, var(--color-accent) 40%, transparent);
+}
+
+@utility input-grp-group {
+  padding-inline: 1rem;
+  list-style-type: none;
+}
+
+@utility input-grp-direction {
+  padding-right: 1.53846rem;
+}
+
+@utility input-grp {
+  padding-right: 1.53846rem;
+  --input-size: calc(100% - 6px);
+  --label-leading: 0.85;
+  margin-inline: 0;
+  min-width: var(--minWidth);
+  background-color: var(--theme-input-bg);
+  padding: 0;
+  padding-left: 1rem;
+  padding-bottom: calc(var(--base) * 0.5);
+  border-radius: var(--form-radius);
+  border: 1px solid var(--theme-input-border-color);
+  position: relative;
+  @apply w-max sidebar-field:w-full;
+  legend.field-label {
+    line-height: var(--label-leading);
+    max-width: max-content;
+    padding-inline: 0;
+    margin-left: 6px;
+    position: relative;
+    .required {
+      left: calc(-0.25rem - 6px);
+      top: -1px;
+      font-size: calc(var(--label-size) * 0.75);
+    }
+  }
+}
+/* #endregion ? -------------------- */
+
+@custom-variant before {
+  &::before {
+    @slot;
+  }
+}
+
+@custom-variant after {
+  &::after {
+    @slot;
+  }
+}
+
+@utility subtitle-text {
+  @apply text-[1.05rem] leading-normal font-light tracking-[0.1ch] text-balance text-ui-500 italic dark:text-ui-600;
+}
+
+@utility definition-circle {
+  &::before,
+  &::after {
+    content: "";
+    @apply absolute -left-2 size-[105%] rounded-[50%] border-[1.75px] border-solid border-(--color) px-[0.25em] py-[0.1em] dark:border;
+  }
+  &::after {
+    @apply top-[-0.1rem] -rotate-1 border-t-transparent border-l-transparent;
+  }
+  &::before {
+    @apply top-[-0.24rem] rotate-2 border-r-transparent;
+  }
+  &:first-child {
+    @apply -translate-x-1 translate-y-0 scale-x-120 scale-y-120 -rotate-y-30 -rotate-z-174 brightness-125;
+  }
+}
+
+@utility checkmark-list {
+  position: relative;
+  & li {
+    list-style-image: none;
+    /* Safari ignores `content` on ::marker, so the disc from prose.css still drew next to the checkmark */
+    list-style-type: none;
+    &::marker {
+      content: " ";
+    }
+    &.LexicalEditorTheme__indent::before {
+      left: 40px;
+    }
+  }
+  & li:not(.list-title) {
+    position: relative;
+    padding-left: 2rem;
+    & ul {
+      margin-left: 0;
+      padding-left: 0 !important;
+    }
+    &.indent-1 {
+      margin-left: 2rem;
+    }
+    &.indent-2 {
+      margin-left: 4rem;
+    }
+    &.indent-3 {
+      margin-left: 6rem;
+    }
+    &::before {
+      background-color: var(--color-accent);
+      content: " ";
+      height: 0.75rem;
+      display: block;
+      position: absolute;
+      left: 0;
+      transform: translateY(0.5rem);
+      aspect-ratio: 0.991;
+      clip-path: shape(
+    from 75.66% 63.13%,
+    line by 12.61% -16.88%,
+    vline by 28.75%,
+    curve by -25.22% 25% with 0% 13.75%/-11.35% 25%,
+    hline by -37.83%,
+    curve by -25.22% -25% with -13.87% 0%/-25.22% -11.25%,
+    vline by -37.5%,
+    curve by 25.22% -25% with 0% -13.75%/11.35% -25%,
+    hline by 32.16%,
+    curve by 3.78% 0% with 3.15% 0%/3.78% 0%,
+    line by -8.2% 12.5%,
+    hline to 25.85%,
+    curve by -12.61% 12.5% with -6.94% 0%/-12.61% 5.63%,
+    vline by 37.5%,
+    curve by 12.61% 12.5% with 0% 6.88%/5.67% 12.5%,
+    hline by 37.2%,
+    curve by 12.61% -12.5% with 6.94% 0%/12.61% -5.63%,
+    vline to 63.13%,
+    close,
+    move to 98.36% 1.88%,
+    curve by -6.94% 0% with -1.89% -2.5%/-5.04% -2.5%,
+    hline by 0%,
+    line by -23.96% 33.13%,
+    line by -21.44% 30%,
+    line by -16.39% -20%,
+    curve by -6.94% 0% with -1.89% -2.5%/-5.04% -2.5%,
+    curve by 0% 8.13% with -1.89% 2.5%/-1.89% 5.63%,
+    line by 20.18% 24.38%,
+    curve by 3.78% 1.88% with 1.26% 1.25%/2.52% 1.88%,
+    curve by 3.78% -1.88% with 1.26% 0%/2.52% -0.63%,
+    curve by 27.11% -36.88% with 0% 0%/20.18% -27.5%,
+    curve by 22.07% -30% with 5.67% -7.5%/22.07% -30%,
+    curve to 98.36% 1.88% with 100.25% 8.13%/100.25% 4.38%,
+    close
+    );
+    }
+  }
+}

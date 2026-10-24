@@ -14,7 +14,11 @@ export const BtnEl = ({
   <Button
     {...props}
     onClick={() => selectAction(iconId)}
-    className={['icon-btn icon-picker', props.className].join(' ')}
+    // className={['icon-btn icon-picker', props.className].join(' ')}
+    className={[
+      'icon-btn icon-picker [--hover-color:var(--color-accent)] text-[0.65rem] btn-content:flex-col-reverse btn-content:gap-0.5',
+      props.className,
+    ].join(' ')}
     margin={false}
     type='button'
     buttonStyle='icon-label'

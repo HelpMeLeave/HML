@@ -2,7 +2,7 @@
 
 import { CheckmarkListItemNode } from '@/lexicals/Features/CheckmarkList/CheckmarkListItemNode'
 import { CheckmarkListNode } from '@/lexicals/Features/CheckmarkList/CheckmarkListNode'
-import '@/styles/lexicals/_checkmarkList.css'
+import { CheckCircle } from '@boxicons-pro/react'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import {
   type LexicalEditor,
@@ -11,12 +11,10 @@ import {
 } from '@payloadcms/richtext-lexical/lexical'
 import { $isListItemNode } from '@payloadcms/richtext-lexical/lexical/list'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
-import { CheckCircle } from 'lucide-react'
 import { $convertToCheckmarkListNode } from './_lib/convertToCheckmarkListNode'
 import { $createCheckmarkListItemNode } from './_lib/createCheckmarkListItemNode'
 import { $createCheckmarkListNode } from './_lib/createCheckmarkListNode'
 import { $isCheckmarkListNode } from './_lib/isCheckmarkListNode'
-import './style.scss'
 
 const CheckMarkIcon = () => <CheckCircle />
 

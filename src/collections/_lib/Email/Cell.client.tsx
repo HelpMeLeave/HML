@@ -1,7 +1,7 @@
 'use client'
 
+import { PaperPlane } from '@boxicons-pro/react'
 import { Button, Drawer, useModal } from '@payloadcms/ui'
-import { Mail } from 'lucide-react'
 
 // TODO: EMAIL RICH TEXT DRAWER
 export const MailToDrawer = ({ id, children }: { children?: ReactNode; id: string }) => {
@@ -24,7 +24,7 @@ export const MailToDrawer = ({ id, children }: { children?: ReactNode; id: strin
         iconStyle='without-border'
         size='xsmall'
         iconPosition='left'
-        icon={<Mail />}
+        icon={<PaperPlane />}
         onClick={() => modal.openModal(`mailTo-${id}`)}>
         {children}
       </Button>

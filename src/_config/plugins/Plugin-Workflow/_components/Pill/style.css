@@ -1,0 +1,9 @@
+@reference '#tw/admin';
+
+/* .flow .flow-pill__wrapper {
+  @apply flex items-center justify-end gap-1 text-[0.75rem];
+
+  &:is(.flow-field *) {
+    @apply justify-start;
+  }
+} */

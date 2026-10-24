@@ -17,9 +17,11 @@ import {
 } from '@payloadcms/richtext-lexical/lexical'
 import { ListNode } from '@payloadcms/richtext-lexical/lexical/list'
 import { $getNearestNodeOfType } from '@payloadcms/richtext-lexical/lexical/utils'
-import { ListStart, TextCursor } from 'lucide-react'
+// import { ListStart, TextCursor } from '@boxicons-pro/react'
+import { Rename } from '@boxicons-pro/react'
+import { icons as Icons } from './_lib/icons'
 
-const Icon = () => <ListStart />
+const Icon = () => <Icons.add />
 
 const isEnabled = () => {
   const selection = $getSelection()
@@ -52,7 +54,7 @@ const toolbarConfig: ToolbarGroup = {
   key: 'text',
   type: 'dropdown' as const,
   maxActiveItems: 2,
-  ChildComponent: () => <TextCursor />,
+  ChildComponent: () => <Rename />,
   items: [
     {
       ...itemConfig,

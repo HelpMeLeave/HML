@@ -15,6 +15,7 @@ import {
   SectionContainerNode,
   SectionContentNode,
 } from '@/lexicals/Features/SectionFeature/SectionStructureNodes'
+import { Heading2 } from '@boxicons-pro/react'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import {
   type LexicalEditor,
@@ -24,8 +25,6 @@ import {
 } from '@payloadcms/richtext-lexical/lexical'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
 import { $findMatchingParent } from '@payloadcms/richtext-lexical/lexical/utils'
-import { Heading2 } from 'lucide-react'
-import './style.scss'
 
 const SectionMarkdownTransformer: ElementTransformer = {
   dependencies: [
@@ -64,12 +63,7 @@ const SectionMarkdownTransformer: ElementTransformer = {
   type: 'element',
 }
 
-const H2Icon = () => (
-  <Heading2
-    nonScalingStroke
-    strokeWidth={'1.5px'}
-  />
-)
+const H2Icon = () => <Heading2 strokeWidth={'1.5px'} />
 
 const insertConfig = {
   key: 'section-hgroup',

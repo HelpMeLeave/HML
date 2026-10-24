@@ -1,17 +1,11 @@
-'use client'
-
 export const P = ({ ...props }: Props) => (
   <p
     {...props}
     style={{
-      fontSize: '0.75rem',
-      fontWeight: 500,
-      marginTop: '1rem',
       marginBottom: 12,
-      color: 'var(--color-secondary)',
-      textTransform: 'uppercase',
       letterSpacing: '0.05em',
       ...props.style,
     }}
+    className='mt-4 text-[0.75rem] font-medium text-accent uppercase'
   />
 )

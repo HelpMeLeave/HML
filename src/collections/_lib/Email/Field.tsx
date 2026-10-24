@@ -1,13 +1,13 @@
 import { Wrapper } from '@/collections/_lib/IconFieldWrappers'
+import { PaperPlane } from '@boxicons-pro/react'
 import { TextField } from '@payloadcms/ui'
-import { Mail } from 'lucide-react'
 import type { TextFieldServerProps } from 'payload'
 
 const EmailField = (props: TextFieldServerProps) => {
   return (
     <Wrapper
       label={props.clientField.label}
-      IconEl={<Mail />}
+      IconEl={<PaperPlane />}
       iconPosition='left'
       type={'text'}
       path={props.path}>

@@ -1,5 +1,5 @@
+import { PaperPlane } from '@boxicons-pro/react'
 import { Button } from '@payloadcms/ui'
-import { MailPlus } from 'lucide-react'
 import type { UIFieldServerProps } from 'payload'
 import { NoCreateCountdown } from './Field.client'
 
@@ -21,7 +21,7 @@ const NoCreate = ({ operation, req }: UIFieldServerProps) => {
               margin={false}
               buttonStyle='none'
               className='emph'>
-              <MailPlus /> Invite Users
+              <PaperPlane /> Invite Users
             </Button>
             workflow to add new users
           </p>

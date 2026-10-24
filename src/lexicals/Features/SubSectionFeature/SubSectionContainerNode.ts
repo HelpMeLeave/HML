@@ -10,7 +10,14 @@ export class SubSectionContainerNode extends StructureContainerNode {
   }
 
   dom(): StructureDOM {
-    return { tag: 'section', className: 'lexical__subsection', slot: 'subsection' }
+    // return { tag: 'section', className: 'lexical__subsection', slot: 'subsection' }
+    return {
+      tag: 'section',
+      // className: 'lexical__subsection border-l border-ui-200 pl-4',
+      className:
+        'lexical__subsection border-l border-ui-200 pl-4 data-[variant=section]:[&>h3]:text-6xl data-[variant=section]:[&>h3]:leading-none data-[variant=minor]:[&>h3]:mt-[1em] data-[variant=minor]:[&>h3]:text-[1.25rem] data-[variant=minor]:[&>h3]:*:font-extrabold',
+      slot: 'subsection',
+    }
   }
 
   headingStyleState() {

@@ -1,0 +1,55 @@
+@reference '#tw/admin';
+
+.collection-edit--content .doc-controls.gutter {
+  @apply top-0;
+}
+
+.rich-text-lexical__wrap .fixed-toolbar {
+  @apply max-controls:top-[calc(var(--doc-controls-height)+2px)];
+}
+
+.collection-edit {
+  .doc-controls__controls {
+    @apply max-controls:after:bg-transparent max-controls:after:bg-none grow items-end;
+  }
+  .doc-controls__controls-top.flow {
+    /* @apply max-controls:justify-start max-controls:gap-2 controls:gap-y-2 sidebar:grow sidebar:justify-between flex w-full flex-wrap gap-8; */
+
+    .pill {
+      @apply max-controls:m-0!;
+    }
+
+    /* .flow-wrapper {
+      @apply flex gap-4;
+    } */
+  }
+  .doc-controls__controls-wrapper {
+    @apply max-controls:top-0 max-controls:my-2 max-controls:h-fit max-controls:border-0 max-controls:bg-transparent controls:h-auto controls:min-h-(--doc-controls-height) controls:pt-[calc((var(--doc-controls-height)-27px)/2)] items-end pb-[calc((var(--doc-controls-height)-27px)/2)];
+  }
+  .doc-controls__divider,
+  .doc-controls__content {
+    @apply hidden;
+  }
+  .doc-controls__wrapper {
+    @apply controls:h-auto controls:min-h-(--doc-controls-height) min-h-fit;
+  }
+  .doc-controls {
+    .live-preview-toggler {
+      @apply flex size-6.75 items-center justify-center rounded-lg p-0 text-(--theme-text) hover:bg-ui-50;
+
+      svg {
+        @apply size-4.5;
+      }
+    }
+    .live-preview-toggler--active {
+      @apply bg-ui-100;
+    }
+    &.gutter {
+      @apply max-controls:-top-8;
+    }
+  }
+}
+
+#action-save {
+  @apply h-full;
+}

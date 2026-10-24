@@ -18,12 +18,17 @@ export const JoinConfig = <T extends CollectionSlug>(
     collection,
     on,
     ...otherOpts,
-    admin: {
-      ...otherOpts.admin,
-      description,
-      allowCreate,
-      defaultColumns,
-      position,
-    },
+    // admin: {
+    //   ...otherOpts.admin,
+    //   description,
+    //   allowCreate,
+    //   defaultColumns,
+    //   position,
+    // },
+    admin: Object.fromEntries(
+      Object.entries({ ...otherOpts.admin, description, allowCreate, defaultColumns, position }).filter(
+        ([, value]) => value !== undefined
+      )
+    ),
   }
 }

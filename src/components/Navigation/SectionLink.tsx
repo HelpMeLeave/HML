@@ -2,13 +2,13 @@
 
 import { ButtonLink } from '@/components/Navigation/ButtonLink'
 import { cn } from '@/lib/cn'
+import { ChevronDown } from '@boxicons-pro/react'
 import { cva } from 'class-variance-authority'
-import { ChevronDown } from 'lucide-react'
 
 const link = cva(
   [
     'relative flex items-center gap-1.5 px-4 text-sm font-medium tracking-wider whitespace-nowrap',
-    'text-soft transition-colors hocus:text-accent',
+    'text-muted transition-colors hocus:text-accent',
     'after:absolute after:inset-x-4 after:-bottom-px after:h-0.5 after:bg-accent',
     'after:scale-x-0 after:transition-transform',
     'max-md:shrink-0 max-md:px-4 max-md:py-3.5 max-md:after:inset-x-4 max-md:after:bottom-0',

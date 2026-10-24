@@ -21,7 +21,8 @@ export class DefinitionNode extends ElementNode {
 
   createDOM(): HTMLElement {
     const el = document.createElement('span')
-    el.className = 'lexical__definition'
+    // el.className = 'lexical__definition'
+    el.className = 'lexical__definition underline decoration-accent decoration-wavy decoration-[0.5px] underline-offset-2'
     el.dataset.termId = String($getState(this, termIDState, 'direct'))
     return el
   }

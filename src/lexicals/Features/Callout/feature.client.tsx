@@ -3,6 +3,7 @@
 import { isActive } from '@/lexicals/Features/_lib/isActive'
 import { calloutType } from '@/lexicals/Features/_lib/nodeStates'
 import { $createCallout, CalloutNode } from '@/lexicals/Features/Callout/CalloutNode'
+import { Megaphone } from '@boxicons-pro/react'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import {
   $getSelection,
@@ -12,8 +13,6 @@ import {
   type LexicalEditor,
 } from '@payloadcms/richtext-lexical/lexical'
 import type { ElementTransformer } from '@payloadcms/richtext-lexical/lexical/markdown'
-import { Megaphone } from 'lucide-react'
-import './style.scss'
 
 const CalloutMarkdownTransformer: () => ElementTransformer = () => ({
   dependencies: [CalloutNode],

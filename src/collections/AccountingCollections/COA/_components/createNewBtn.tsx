@@ -1,7 +1,7 @@
 'use client'
 
+import { PlusCircle } from '@boxicons-pro/react'
 import { Button } from '@payloadcms/ui'
-import { PlusCircle } from 'lucide-react'
 
 export const CreateNewBtn = ({
   openDrawerAction,

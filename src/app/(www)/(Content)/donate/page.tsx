@@ -12,7 +12,6 @@ import type { Content, ContentRecord, Tag, User } from '@/payload-types'
 import type { BasePayload } from 'payload'
 import { DonationPageClient } from 'www/(Content)/donate/page.client'
 import { NotFound } from 'www/_components/NotFound'
-import './style.css'
 
 export const metadata: Metadata = {
   title: 'Donate',
@@ -27,7 +26,6 @@ const DonationsPage = async ({ searchParams }: PageProps<'/donate'>) => {
   const returned = typeof params.result == 'string' ? params.result : null
   const initialResult = returned ? await getDonationResult(returned) : null
 
-  // const payload = await getPayload()
   const { doc } = (await query({ url: 'donate', preview })) as {
     user: User | false
     doc: Content

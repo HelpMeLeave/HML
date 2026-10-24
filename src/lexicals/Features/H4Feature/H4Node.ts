@@ -11,7 +11,9 @@ export class H4Node extends ElementNode {
 
   createDOM() {
     const el = document.createElement('h4')
-    el.className = 'lexical__h4'
+    // el.className = 'lexical__h4'
+    el.className =
+      'lexical__h4 mt-4 text-[1.25rem] *:not-italic *:not-[strong]:font-extrabold [&_strong]:font-medium'
     return el
   }
 

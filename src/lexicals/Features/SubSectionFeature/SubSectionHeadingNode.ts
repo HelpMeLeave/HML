@@ -12,7 +12,9 @@ export class SubSectionHeadingNode extends StructureHeadingNode {
   dom(): StructureDOM {
     return {
       tag: 'h3',
-      className: 'lexical__subsection-heading',
+      // className: 'lexical__subsection-heading',
+      className:
+        'lexical__subsection-heading mt-[0.875em] node-empty:data-placeholder-noitalic/75 node-empty:leading-normal',
       placeholder: 'Subsection heading...',
     }
   }

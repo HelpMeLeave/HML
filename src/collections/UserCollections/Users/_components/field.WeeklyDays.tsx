@@ -17,21 +17,10 @@ const TODField = ({ as, ...props }: Props<'button'> & { as?: JSX.ElementType }) 
   return (
     <El
       {...props}
-      style={{
-        cursor: 'pointer',
-        display: 'flex',
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: 'var(--font-mono)',
-        fontSize: '.75rem',
-        fontWight: 500,
-        textTransform: 'uppercase',
-        backgroundColor: 'var(--color-elevation-100)',
-        appearance: 'none',
-        border: 0,
-      }}
-      className={cn('h-full click', props.className)}
+      className={cn(
+        'flex h-full w-full click appearance-none items-center justify-center border-0 bg-ui-100 font-mono txt-xs font-medium uppercase',
+        props.className
+      )}
     />
   )
 }
@@ -115,15 +104,7 @@ const WeeklyDays = (props: JSONFieldClientProps) => {
           <Fragment key={day}>
             <button
               aria-label={day}
-              style={{
-                background: 'none',
-                textTransform: 'uppercase',
-                textAlign: 'end',
-                paddingRight: '1rem',
-                fontSize: '0.75rem',
-                fontWeight: 600,
-                cursor: 'pointer',
-              }}
+              className='click bg-none pr-4 text-end txt-xs font-semibold uppercase'
               onClick={() => handleDayClick(day)}
               type='button'>
               {day}

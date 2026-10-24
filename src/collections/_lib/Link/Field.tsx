@@ -1,6 +1,6 @@
 import { Wrapper } from '@/collections/_lib/IconFieldWrappers'
+import { GlobeAlt } from '@boxicons-pro/react'
 import { TextField } from '@payloadcms/ui'
-import { Globe } from 'lucide-react'
 import type { TextFieldClient, TextFieldServerProps } from 'payload'
 
 const LinkField = ({ ...props }: TextFieldServerProps) => (
@@ -11,7 +11,7 @@ const LinkField = ({ ...props }: TextFieldServerProps) => (
     path={props.path}
     label={props.clientField.label}
     iconPosition='left'
-    IconEl={<Globe />}>
+    IconEl={<GlobeAlt />}>
     <TextField
       readOnly={props.clientField.admin?.readOnly}
       path={props.path}

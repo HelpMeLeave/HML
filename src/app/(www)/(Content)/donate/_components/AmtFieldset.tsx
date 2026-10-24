@@ -10,7 +10,6 @@ import {
   PaymentElement,
   useCheckoutElements,
 } from '@stripe/react-stripe-js/checkout'
-import { Send } from 'lucide-react'
 import type { Dispatch } from 'react'
 import { useCallback, useRef, useState } from 'react'
 import { AmountCards, customToMinor } from 'www/(Content)/donate/_components/AmountCards'
@@ -140,9 +139,9 @@ export const AmtFieldset = ({
           {isInBounds(transactionData.amount) && (
             <NextButton
               label={submitting ? 'Processing' : 'Submit'}
-              Icon={Send}
               disabled={submitting}
               onClick={handleSubmit}
+              actionType='submit'
             />
           )}
         </div>

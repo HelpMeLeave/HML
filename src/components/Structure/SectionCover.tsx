@@ -106,7 +106,8 @@ export const SectionCover = ({
             className={cn(
               '*:bg-(--chip-bg) **:text-(--chip-text)',
               '*:text-nowrap',
-              'flex max-w-max flex-col-reverse text-[2em] *:font-normal',
+              'm-0 flex max-w-max flex-col-reverse text-[2em] *:font-normal',
+              '*:slot-eyebrow:w-fit *:slot-eyebrow:px-3',
               '*:slot-eyebrow:text-[.25em] *:slot-eyebrow:leading-snug *:slot-eyebrow:tracking-normal *:slot-eyebrow:text-balance *:slot-eyebrow:text-(--chip-text)',
               '*:slot-heading:max-w-min *:slot-heading:px-1 *:slot-heading:pt-2.5 *:slot-heading:text-[min(1em,calc((100cqi-3rem)/(var(--chars,20)*0.35)))] *:slot-heading:leading-[0.85]'
             )}>

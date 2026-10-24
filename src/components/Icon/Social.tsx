@@ -1,7 +1,6 @@
 import { cn } from '@/lib/cn'
-import type { LucideProps } from 'lucide-react'
 
-export const SocialIcon = (props: Props<'svg'> & LucideProps) => {
+export const SocialIcon = (props: Props<'svg'>) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

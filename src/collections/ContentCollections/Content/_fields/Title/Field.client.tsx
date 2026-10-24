@@ -1,5 +1,4 @@
 'use client'
-import './style.scss'
 
 import { useSlugFields } from '@/collections/ContentCollections/Content/_lib/useSlugFields'
 import { toSlug } from '@/lib/normalize/to'
@@ -13,15 +12,7 @@ const BaseField = (props: Props<'input'>) => {
       {...props}
       type='text'
       id={'document'}
-      className='doc-header__title render-title content-title'
-      style={{
-        fontFamily: 'var(--font-header)',
-        fontSize: '3.75rem',
-        backgroundColor: 'transparent',
-        appearance: 'none',
-        border: 0,
-        width: '100%',
-      }}
+      className='doc-header__title render-title content-title h-lh w-full appearance-none border-0 bg-transparent font-header txt-6xl leading-header [--accessibility-outline:0px] focus-visible:border-transparent'
     />
   )
 }

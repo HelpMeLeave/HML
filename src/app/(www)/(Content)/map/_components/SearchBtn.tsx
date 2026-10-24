@@ -1,7 +1,7 @@
 import { Button } from '@/components/Button'
 import { cn } from '@/lib/cn'
+import { Search as SearchIcon } from '@boxicons-pro/react'
 import { useClickOutside } from '@payloadcms/ui/hooks/useClickOutside'
-import { Search as SearchIcon } from 'lucide-react'
 import { type MotionProps, motion } from 'motion/react'
 import { type ActionDispatch, useRef } from 'react'
 import type { MapCountry } from '../_lib/types'
@@ -99,9 +99,13 @@ const Btn = ({ ...props }) => {
   return (
     <Button
       {...props}
-      className='col-start-2 aspect-square bg-accent-muted/50 p-2 text-white interactive hocus:bg-accent-muted/75'
-      variant={'ghost'}>
-      <SearchIcon className='h-5 w-5' />
+      className='col-start-2 aspect-square'
+      btnStyle='primary'
+      Icon={SearchIcon}
+      iconAttributes={{
+        iconOnly: true,
+      }}
+      iconOnly={true}>
       <span className='sr-only'>Toggle Search Drawer</span>
     </Button>
   )
@@ -192,7 +196,7 @@ const SearchItem = ({ item, ...props }: Props<'button'> & MotionProps & { item: 
       animate={{ height: 'auto' }}
       exit={{ height: 0 }}
       className={cn(
-        'block w-full shrink-0 click overflow-hidden px-2 py-2 text-start font-body text-xs text-nowrap text-ellipsis text-soft/80 uppercase hover:bg-accent/8 hover:text-soft focus-visible:text-accent sm:font-sans sm:text-xs'
+        'block w-full shrink-0 click overflow-hidden px-2 py-2 text-start font-body text-xs text-nowrap text-ellipsis text-muted/80 uppercase hover:bg-accent/8 hover:text-muted focus-visible:text-accent sm:font-sans sm:text-xs'
       )}>
       {item.name}
     </motion.button>

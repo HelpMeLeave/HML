@@ -1,12 +1,11 @@
-'use client'
+import { BtnEl } from '@/collections/DataCollections/Indicators/_components/Icons/BtnEl'
 import { Icon } from '@/collections/DataCollections/Indicators/_components/Icons/Icon'
+import { P } from '@/collections/DataCollections/Indicators/_components/Icons/P'
 import {
   BTN_SIZE,
   QUICK_ICONS,
   SPECIAL_ICONS,
 } from '@/collections/DataCollections/Indicators/_components/Icons/_lib'
-import { BtnEl } from './BtnEl'
-import { P } from './P'
 
 export const SpecialItemPicker = ({ selectAction }: { selectAction: (id: string) => void }) => (
   <div id='specialIcons'>

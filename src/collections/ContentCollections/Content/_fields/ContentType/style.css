@@ -1,0 +1,5 @@
+@reference '#tw/admin';
+
+body:has(.collection-edit--content) .doc-header {
+  @apply hidden;
+}

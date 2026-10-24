@@ -1,5 +1,3 @@
-import './style.scss'
-
 import { SocialIcon } from '@/components/Icon/Social'
 
 const Icon = () => (
@@ -10,7 +8,7 @@ const Icon = () => (
       left: '-.5rem',
       top: '-.1rem',
       height: '1.25rem',
-      color: 'var(--color-primary)',
+      color: 'var(--color-accent)',
       borderRadius: '999px',
       overflow: 'visible',
       outlineOffset: '0.5rem',

@@ -46,11 +46,30 @@ const contentTypeFilters: Partial<Record<tContentType, Where>> = {
   statement: { id: { equals: 8 } },
 }
 
+const singleLineFieldClassName = [
+  'overflow-hidden rounded-sm border bg-input-bg transition-[border-color,boxshadow] duration-200',
+  'disabled:bg-(--input-disabled-bg-color) has-disabled:bg-(--input-disabled-bg-color)',
+  '[&_[data-lexical-editor]]:p-0',
+  'hover:border-input-hover-border hover:shadow-(--form-shadow-hover)',
+  'has-[[data-lexical-editor]:focus-visible]:border-input-hover-border has-[[data-lexical-editor]:focus-visible]:shadow-(--form-shadow-hover)',
+  'node-empty:data-placeholder-italic/75 node-empty:leading-1.75!',
+].join(' ')
+
 const SubtitleField = RichTextConfig(
   'subtitle',
   singleLineEditor({ namespace: 'pageSubtitle', placeholder: 'Subtitle....' }),
   {
-    admin: { condition: hasContentType, className: 'page-subtitle', ...listDisabled },
+    // admin: { condition: hasContentType, className: 'page-subtitle', ...listDisabled },
+    admin: {
+      condition: hasContentType,
+      className: [
+        'page-subtitle',
+        singleLineFieldClassName,
+        'border-input-border/75 px-4 py-2 shadow-[0_2px_2px_-1px_var(--shadow)] [--shadow:rgba(0,0,0,0.1)] not-disabled:hover:[--shadow:rgba(0,0,0,0.1)] disabled:border-input-border has-disabled:border-input-border',
+        '[&_p]:subtitle-text [&_p]:m-0 [&_p]:tracking-[0.075ch] rich-text-lexical-label-row:hidden',
+      ].join(' '),
+      ...listDisabled,
+    },
     access: {
       update: ({ data }: { data?: Partial<Content> }) =>
         Boolean(data?.flow && !data?.currentLifecycle?.locked && !['deleted'].includes(data.flow)),
@@ -142,7 +161,8 @@ const OtherBrowField = RichTextConfig(
   singleLineEditor({ namespace: 'pageBrow', placeholder: 'Brow....' }),
   {
     admin: {
-      className: 'page-brow',
+      // className: 'page-brow',
+      className: ['page-brow', singleLineFieldClassName, 'mb-0 border-transparent max-w-[50vw] px-2 text-xs *:m-0'].join(' '),
       condition: (data) => data?.contentType == 'other',
       ...listDisabled,
     },

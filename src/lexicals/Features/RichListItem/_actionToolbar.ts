@@ -2,8 +2,8 @@ import { $getListItemAtCaret } from '@/lexicals/Features/_lists/getListItemAtCar
 import type { ToolbarActionGroup } from '@/lexicals/Features/ActionToolbar/_types'
 import { $addDetails } from '@/lexicals/Features/RichListItem/_lib/addDetails'
 import { $isRichListItem, $removeDetails } from '@/lexicals/Features/RichListItem/nodes'
+import { ListMinus, Paragraph } from '@boxicons-pro/react'
 import { $isListItemNode } from '@payloadcms/richtext-lexical/lexical/list'
-import { ListMinus, ListPlus } from 'lucide-react'
 
 export const RichListItemAction: ToolbarActionGroup = {
   toolbar: 'lists',
@@ -18,7 +18,7 @@ export const RichListItemAction: ToolbarActionGroup = {
     {
       slug: 'addDetails',
       label: 'Create Rich List',
-      Icon: ListPlus,
+      Icon: Paragraph,
       $isActive: () => false,
       $isEnabled: () => !$isRichListItem($getListItemAtCaret()),
       onSelect: (editor) =>

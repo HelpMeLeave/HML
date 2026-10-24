@@ -20,6 +20,8 @@ const ReactSelect = dynamic(
   { ssr: false }
 )
 
+const selectClassName = String.raw`focus-within:outline-accent has-[.rs\_\_control:hover]:border-input-hover-border rs-control:hover:cursor-text rs-menu:top-[105%]! rs-menu:left-0 rs-menu:z-2 rs-menu:min-h-5 rs-menu:overflow-hidden rs-menu:rounded-lg rs-menu:border rs-menu:border-input-border rs-menu:bg-background rs-menu:text-[1rem] rs-menu:leading-normal rs-menu:capitalize rs-menu:hover:border-input-hover-border rs-menu:before:absolute rs-menu:before:size-full rs-menu:before:bg-slate-950/50 rs-option:p-2 rs-option:hover:bg-slate-100/5 rs-value-container:gap-x-1.25 rs-multi-value:rounded-lg rs-multi-value:border-[0.75px] rs-multi-value:border-accent rs-multi-value:bg-accent/20 rs-multi-value:pl-1 rs-multi-value:transition-all rs-multi-value:duration-300 rs-multi-value:ease-[ease] rs-multi-value:has-[.multi-value-remove:hover]:border-transparent rs-multi-value:has-[.multi-value-remove:hover]:bg-accent/5 rs-multi-value:[&_:is(.multi-value-label,.multi-value-remove)]:pl-[0.15rem] rs-multi-value:[&_:is(.multi-value-label,.multi-value-remove)]:font-mono rs-multi-value:[&_:is(.multi-value-label,.multi-value-remove)]:font-[450] rs-multi-value:[&_:is(.multi-value-label,.multi-value-remove)]:text-accent rs-multi-value:[&_:is(.multi-value-label,.multi-value-remove)]:uppercase rs-multi-value:[&_.multi-value-remove]:cursor-pointer rs-placeholder:w-full rs-placeholder:italic rs-placeholder:opacity-75`
+
 export const BaseSelect = ({
   width,
   label,
@@ -52,7 +54,8 @@ export const BaseSelect = ({
         />
         <ReactSelect
           placeholder={placeholder ?? undefined}
-          className={cn(baseClass, 'fe-form')}
+          // className={cn(baseClass, 'fe-form')}
+          className={cn(baseClass, 'fe-form', selectClassName)}
           id={`field-${name}`}
           value={((field.state.value as string[]) ?? []).map((ea) => ({
             label: ea,

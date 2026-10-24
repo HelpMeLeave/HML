@@ -1,6 +1,6 @@
 'use client'
 
-import { Plane } from 'lucide-react'
+import { Plane } from '@boxicons-pro/react'
 import { motion } from 'motion/react'
 
 export const Loading = () => {

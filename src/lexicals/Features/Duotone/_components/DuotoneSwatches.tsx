@@ -1,12 +1,5 @@
 import { EditBtn } from '@/lexicals/Features/Duotone/_components/EditBtn'
 import { Swatch } from '@/lexicals/Features/Duotone/_components/Swatch'
-import {
-  COLORS,
-  DUOTONE_TWEAKS,
-  POSITIONS,
-  TWEAK_KEYS,
-  TWEAK_MAX,
-} from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import type {
   DuotoneFields,
   DuotoneKey,
@@ -14,15 +7,20 @@ import type {
   DuotoneTweakFields,
 } from '@/lexicals/Features/Duotone/_types'
 import { cn } from '@/lib/cn'
+import { History, Moon, RotateCcw, Slider, Sun, X } from '@boxicons-pro/react'
+import { Grid } from '@boxicons-pro/react/icons'
 import { $isUploadNode } from '@payloadcms/richtext-lexical/client'
 import {
   $getNodeByKey,
   HISTORY_MERGE_TAG,
   type LexicalEditor,
 } from '@payloadcms/richtext-lexical/lexical'
-import { Grid3x3, History, Moon, RotateCcw, SlidersHorizontal, Sun, X } from 'lucide-react'
 import { useRef, useState } from 'react'
-import '../style.css'
+import { COLORS } from '../_constants/COLORS'
+import { DUOTONE_TWEAKS } from '../_constants/DUOTONE_TWEAKS'
+import { POSITIONS } from '../_constants/POSITIONS'
+import { TWEAK_KEYS } from '../_constants/TWEAK_KEYS'
+import { TWEAK_MAX } from '../_constants/TWEAK_MAX'
 
 type Position = DuotoneFields['duotone']['position']
 
@@ -86,7 +84,7 @@ export const DuotoneSwatches = ({
       <div
         // className='duotone-swatches pointer-events-auto absolute top-2 z-1 flex w-8 max-w-8 flex-col items-center gap-1 rounded-xl p-2 px-4 shadow-sm transition-all *:[--border-radius:999px]'
         // className='duotone-swatches pointer-events-auto absolute top-2 left-full z-1 ml-2 flex w-8 max-w-8 flex-col items-center gap-1 rounded-xl p-2 px-4 shadow-sm transition-all *:[--border-radius:999px]'
-        className='duotone-swatches min-[900px]:sidebar-open:top-auto min-[900px]:sidebar-open:bottom-full min-[900px]:sidebar-open:left-0 min-[900px]:sidebar-open:w-auto min-[900px]:sidebar-open:max-w-none min-[900px]:sidebar-open:flex-row min-[900px]:sidebar-open:px-2 pointer-events-auto absolute bottom-full left-0 z-1 flex items-center gap-1 rounded-xl p-2 transition-all *:[--border-radius:999px] min-[900px]:top-2 min-[900px]:bottom-auto min-[900px]:left-full min-[900px]:w-8 min-[900px]:max-w-8 min-[900px]:flex-col min-[900px]:px-4'
+        className='duotone-swatches pointer-events-auto absolute bottom-full left-0 z-1 flex items-center gap-1 rounded-xl p-2 transition-all *:[--border-radius:999px] min-[900px]:top-2 min-[900px]:bottom-auto min-[900px]:left-full min-[900px]:w-8 min-[900px]:max-w-8 min-[900px]:flex-col min-[900px]:px-4 min-[900px]:sidebar-open:top-auto min-[900px]:sidebar-open:bottom-full min-[900px]:sidebar-open:left-0 min-[900px]:sidebar-open:w-auto min-[900px]:sidebar-open:max-w-none min-[900px]:sidebar-open:flex-row min-[900px]:sidebar-open:px-2'
         role='toolbar'
         aria-label='Duotone'
         onMouseDown={(e) => e.preventDefault()}>
@@ -102,31 +100,30 @@ export const DuotoneSwatches = ({
 
         <EditBtn
           tooltip={`Switch to ${flip}`}
-          icon={theme == 'light' ? <Sun className='size-4!' /> : <Moon className='size-4!' />}
+          icon={theme == 'light' ? <Sun className='size-4' /> : <Moon className='size-4' />}
           disabled={!active}
           onClick={() => active && setColor(editor, nodeKey, `${active}-${flip}`)}
         />
 
         <EditBtn
           tooltip='No duotone'
-          icon={<X className='size-4!' />}
+          icon={<X className='size-4' />}
           disabled={!active}
           onClick={() => setColor(editor, nodeKey, null)}
         />
 
         <EditBtn
           tooltip={showSliders ? 'Hide adjustments' : 'Adjust'}
-          icon={<SlidersHorizontal className='size-4!' />}
+          icon={<Slider className='size-4' />}
           disabled={!active}
           active={showSliders}
-          // onClick={() => setOpen(!open)}
           onClick={() => toggle('sliders')}
         />
 
         {isCover && (
           <EditBtn
             tooltip={showPosition ? 'Hide text position' : 'Text position'}
-            icon={<Grid3x3 className='size-4!' />}
+            icon={<Grid className='size-4' />}
             active={showPosition}
             onClick={() => toggle('position')}
           />
@@ -137,8 +134,7 @@ export const DuotoneSwatches = ({
           role='radiogroup'
           aria-label='Text position'
           className={cn(
-            // 'bg-elevation-0/85 pointer-events-auto absolute top-2 right-2 z-2 grid grid-cols-3 gap-1 rounded-xl p-2 shadow-sm backdrop-blur-sm transition-opacity in-data-[position*=right]:right-auto in-data-[position*=right]:left-2 in-data-[position*=top]:top-auto in-data-[position*=top]:bottom-2',
-            'bg-elevation-0/85 pointer-events-auto absolute top-2 right-2 z-2 grid grid-cols-3 gap-1 rounded-xl p-2 shadow-sm backdrop-blur-sm transition-opacity',
+            'pointer-events-auto absolute top-2 right-2 z-2 grid grid-cols-3 gap-1 rounded-xl bg-ui-0/85 p-2 shadow-sm backdrop-blur-sm transition-opacity',
             !showPosition && 'pointer-events-none opacity-0'
           )}
           onMouseDown={(e) => e.preventDefault()}>
@@ -150,9 +146,9 @@ export const DuotoneSwatches = ({
               title={value}
               aria-label={value}
               aria-checked={(position ?? 'bottom left') == value}
-              className='group/dot hover:bg-elevation-100 grid size-6 cursor-pointer appearance-none place-items-center rounded-md border-0 bg-transparent p-0'
+              className='group/dot grid size-6 cursor-pointer appearance-none place-items-center rounded-md border-0 bg-transparent p-0 hover:bg-ui-100'
               onClick={() => setData(editor, nodeKey, { position: value })}>
-              <span className='bg-elevation-400 group-hover/dot:bg-elevation-600 group-aria-checked/dot:bg-secondary-500 size-1.5 rounded-full transition-all group-aria-checked/dot:size-2.5' />
+              <span className='size-1.5 rounded-full bg-ui-400 transition-all group-hover/dot:bg-ui-600 group-aria-checked/dot:size-2.5 group-aria-checked/dot:bg-accent-500' />
             </button>
           ))}
         </div>
@@ -161,9 +157,7 @@ export const DuotoneSwatches = ({
         role='group'
         aria-label='Duotone adjustments'
         className={cn(
-          // 'bg-elevation-0/85 pointer-events-auto absolute top-2 left-12 z-1 grid w-64 grid-cols-[auto_1fr_2.75rem_auto] items-center gap-x-2 gap-y-1 rounded-xl px-3 py-2 text-xs text-(--theme-text) shadow-sm backdrop-blur-sm transition-opacity',
-          // 'bg-elevation-0/85 pointer-events-auto absolute top-2 right-2 z-1 grid w-64 grid-cols-[auto_1fr_2.75rem_auto] items-center gap-x-2 gap-y-1 rounded-xl px-3 py-2 text-xs text-(--theme-text) shadow-sm backdrop-blur-sm transition-opacity',
-          'bg-elevation-0/85 pointer-events-auto absolute top-2 right-2 z-2 grid w-64 grid-cols-[auto_1fr_2.75rem_auto] items-center gap-x-2 gap-y-1 rounded-xl px-3 py-2 text-xs text-(--theme-text) shadow-sm backdrop-blur-sm transition-opacity in-data-[position*=right]:right-auto in-data-[position*=right]:left-2 in-data-[position*=top]:top-auto in-data-[position*=top]:bottom-2',
+          'pointer-events-auto absolute top-2 right-2 z-2 grid w-64 grid-cols-[auto_1fr_2.75rem_auto] items-center gap-x-2 gap-y-1 rounded-xl bg-ui-0/85 px-3 py-2 text-xs text-(--theme-text) shadow-sm backdrop-blur-sm transition-opacity in-data-[position*=right]:right-auto in-data-[position*=right]:left-2 in-data-[position*=top]:top-auto in-data-[position*=top]:bottom-2',
           !showSliders && 'pointer-events-none opacity-0'
         )}
         onKeyDown={(e) => !e.metaKey && !e.ctrlKey && e.stopPropagation()}>
@@ -184,7 +178,7 @@ export const DuotoneSwatches = ({
                 step={5}
                 disabled={!active}
                 value={value}
-                className='h-1 w-full cursor-pointer accent-(--color-secondary-500)'
+                className='h-1 w-full cursor-pointer accent-(--color-accent-500)'
                 onPointerDown={() => (drag.current = 'start')}
                 onPointerUp={() => (drag.current = 'idle')}
                 onChange={({ currentTarget }) => {
@@ -198,16 +192,13 @@ export const DuotoneSwatches = ({
                 }}
               />
               <output
-                className={cn(
-                  'text-right tabular-nums',
-                  tweaks?.[key] == null && 'text-elevation-500'
-                )}>
+                className={cn('text-right tabular-nums', tweaks?.[key] == null && 'text-ui-500')}>
                 {value}%
               </output>
             </label>
           )
         })}
-        <div className='border-elevation-150 col-start-4 row-span-3 row-start-1 flex flex-col justify-center gap-1 self-stretch border-l pl-2'>
+        <div className='col-start-4 row-span-3 row-start-1 flex flex-col justify-center gap-1 self-stretch border-l border-ui-150 pl-2'>
           {(
             [
               [
@@ -225,7 +216,7 @@ export const DuotoneSwatches = ({
               title={label}
               aria-label={label}
               disabled={disabled}
-              className='hover:bg-elevation-100 grid size-6 cursor-pointer appearance-none place-items-center rounded-md border-0 bg-transparent p-0 text-(--theme-text) disabled:cursor-default disabled:opacity-35 disabled:hover:bg-transparent'
+              className='grid size-6 cursor-pointer appearance-none place-items-center rounded-md border-0 bg-transparent p-0 text-(--theme-text) hover:bg-ui-100 disabled:cursor-default disabled:opacity-35 disabled:hover:bg-transparent'
               onClick={() =>
                 setData(editor, nodeKey, Object.fromEntries(TWEAK_KEYS.map((k) => [k, valueOf(k)])))
               }>

@@ -1,7 +1,8 @@
 'use client'
 import { useTransition } from '@/_config/plugins/Plugin-Workflow/_components/FlowControls/useTransition'
 import { PopupList } from '@payloadcms/ui'
-import './style.scss'
+// import './style.scss'
+// import './style.css'
 
 /**
  * Archive and Delete, for widths where the controls row is hidden.

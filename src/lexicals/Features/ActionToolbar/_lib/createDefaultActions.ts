@@ -1,5 +1,15 @@
 import type { ToolbarActionItem } from '@/lexicals/Features/ActionToolbar/_types'
 import { fromCamelCase } from '@/lib/textCasing'
+import type { BoxIcon } from '@boxicons-pro/react'
+import {
+  Bold,
+  Code,
+  Italic,
+  Strikethrough,
+  Subscript,
+  Superscript,
+  Underline,
+} from '@boxicons-pro/react'
 import {
   $getSelection,
   $isRangeSelection,
@@ -9,16 +19,6 @@ import {
   type LexicalEditor,
   type TextFormatType,
 } from '@payloadcms/richtext-lexical/lexical'
-import {
-  Bold,
-  Code,
-  Italic,
-  Strikethrough,
-  Subscript,
-  Superscript,
-  Underline,
-  type LucideIcon,
-} from 'lucide-react'
 
 type PaylodFnType<P> = (editor?: LexicalEditor) => P
 type Payload<P> = P | PaylodFnType<P>
@@ -31,7 +31,7 @@ export type CommandAction<P> = ToolbarActionItem & {
 type CommandActionOpts<P> = {
   slug: string
   label?: string
-  Icon: LucideIcon
+  Icon: BoxIcon
   command: LexicalCommand<P>
   payload: Payload<P>
   $isActive?: ToolbarActionItem['$isActive']
@@ -68,7 +68,7 @@ export const createCommandAction = <P, _>({
 const $rangeSelection = (selection: BaseSelection | null = $getSelection()) =>
   $isRangeSelection(selection) ? selection : null
 
-const createFormatAction = (format: TextFormatType, Icon: LucideIcon, label?: string) =>
+const createFormatAction = (format: TextFormatType, Icon: BoxIcon, label?: string) =>
   createCommandAction({
     slug: format,
     label,

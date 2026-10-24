@@ -61,7 +61,7 @@ export const listConverters: Record<string, JSXConverter<SerializedListNode>> = 
     return (
       isUL(node) ? <UL className={cn('list-disc')}>{children}</UL>
       : isOL(node) ? <OL className={cn('list-decimal')}>{children}</OL>
-      : <CheckmarkList className={cn('list-checkmark')}>{children}</CheckmarkList>
+      : <CheckmarkList className={cn('list-checkmark checkmark-list')}>{children}</CheckmarkList>
     )
   },
   'titled-list': ({ node, nodesToJSX }) => nodesToJSX({ nodes: [{ ...node, type: 'list' }] }),

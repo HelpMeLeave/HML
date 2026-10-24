@@ -1,5 +1,5 @@
 import { cn } from '@/lib/cn'
-import { ArrowRight } from 'lucide-react'
+import { CaretRight } from '@boxicons-pro/react'
 import { motion } from 'motion/react'
 
 export const FirstVisitOverlay = ({ draggingFirst }: { draggingFirst: boolean }) => {
@@ -29,9 +29,9 @@ export const FirstVisitOverlay = ({ draggingFirst }: { draggingFirst: boolean })
             duration: 2,
           },
         }}>
-        <ArrowRight className='h-full w-auto origin-left scale-300 rotate-180' />
+        <CaretRight className='h-full w-auto origin-left scale-300 rotate-180' />
         <span className='block w-2/3 text-center'>Drag to move the map</span>
-        <ArrowRight className='origin-left scale-300' />
+        <CaretRight className='origin-left scale-300' />
       </motion.span>
     </motion.div>
   )

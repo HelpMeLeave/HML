@@ -55,7 +55,7 @@ const InnerAttributeLI = ({
   return Object(
     <li
       className={
-        'mb-0 flex items-center gap-x-2 font-bold text-[#498DD5] uppercase no-underline! decoration-transparent decoration-0! empty:hidden'
+        'mb-0 flex items-center gap-x-2 font-bold text-[#498DD5] uppercase no-underline decoration-transparent decoration-0 empty:hidden'
       }>
       {(key == 'unMember' || key == 'un') && <UNFlag.Check attr={data} />}
       {(key == 'prideSafety' || key == 'pride') && <PrideFlag.Check attr={data} />}

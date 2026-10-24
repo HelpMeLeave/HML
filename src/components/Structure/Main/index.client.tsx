@@ -4,7 +4,7 @@ import { InlineLink } from '@/components/primitives/Link'
 import { Eyebrow } from '@/components/Structure/Eyebrow'
 import { lastArrayIndex } from '@/lib/array'
 import { cn } from '@/lib/cn'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight } from '@boxicons-pro/react'
 import { usePathname } from 'next/navigation'
 import { useContext, useEffect } from 'react'
 import type { tAdminBarCTX } from 'www/_providers/_types'
@@ -40,7 +40,7 @@ export const MainBreadcrumb = ({ baseLink, ...props }: Props<'nav'> & { baseLink
   return (
     <Eyebrow className='items-center-safe pb-1'>
       <BreadcrumbLink
-        className='tracking-[2px]! text-inherit'
+        className='tracking-[2px] text-inherit'
         index={0}
         href='/'>
         Home

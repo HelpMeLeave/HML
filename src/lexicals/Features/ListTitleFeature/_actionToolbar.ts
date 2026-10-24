@@ -5,9 +5,9 @@ import type { ToolbarActionGroup } from '@/lexicals/Features/ActionToolbar/_type
 import { $toggleTitled } from '@/lexicals/Features/ListTitleFeature'
 import { $getPotentialListTitle } from '@/lexicals/Features/ListTitleFeature/_lib/getPotentialListTitle'
 import { $getTitledListAtCaret } from '@/lexicals/Features/ListTitleFeature/_lib/getTitledListAtCaret'
+import { icons } from '@/lexicals/Features/ListTitleFeature/_lib/icons'
 import { $makeListTitle } from '@/lexicals/Features/ListTitleFeature/_lib/makeListTitle'
 import { $isParagraphNode } from '@payloadcms/richtext-lexical/lexical'
-import { List, ListStart } from 'lucide-react'
 
 export const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
   feature: 'list-title',
@@ -16,7 +16,7 @@ export const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
     {
       slug: 'makeListTitle',
       label: 'Make List Title',
-      Icon: ListStart,
+      Icon: icons.add,
       $isActive: () => false,
       $isEnabled: () => {
         const list = $getListAtCaret()
@@ -36,7 +36,7 @@ export const ListTitleAction: ToolbarActionGroup = createButtonGroup('lists', {
     {
       slug: 'dissolveListTitle',
       label: 'Dissolve List Title',
-      Icon: List,
+      Icon: icons.remove,
       $isActive: () => false,
       $isEnabled: () => Boolean($getTitledListAtCaret()),
       onSelect: (editor) =>

@@ -1,6 +1,6 @@
-import { DUOTONES } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import { getDuotonePreset } from '@/lexicals/Features/Duotone/_lib/getDuotonePreset'
 import type { DuotoneThemedColor } from '@/lexicals/Features/Duotone/_types'
+import { DUOTONES } from '../_constants/DUOTONES'
 import { duotoneChipVars } from './duotoneChipVars'
 
 const duotoneFilterStyle = (value: DuotoneThemedColor) => getDuotonePreset(value)?.image

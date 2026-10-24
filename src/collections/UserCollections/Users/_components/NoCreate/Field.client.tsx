@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import './style.scss'
 
 export const NoCreateCountdown = ({ url }: { url: string }) => {
   const [value, setValue] = useState(4)
@@ -17,5 +16,5 @@ export const NoCreateCountdown = ({ url }: { url: string }) => {
     }
   }, [value])
 
-  return <span className='countdown'>{String(value)}</span>
+  return <span className='countdown inline-block w-5'>{String(value)}</span>
 }

@@ -28,4 +28,9 @@ declare module 'payload-types' {
         [K in keyof T as K extends string ? SentenceToCamelCase<K> : K]: CamelizeKeys<T[K]>
       }
     : T
+
+  export type RelationValue<T extends CollectionSlug> = {
+    relationTo: T
+    value: Collection<T> | Collection<T>['id']
+  }
 }

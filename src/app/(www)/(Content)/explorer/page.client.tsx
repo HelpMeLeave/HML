@@ -1,5 +1,6 @@
 'use client'
 
+import { P } from '@/components/primitives'
 import { MainEyebrow, MainHeading, MainHGroup, MainSubtitle } from '@/components/Structure/Main'
 import { AnimatePresence } from 'motion/react'
 import { Suspense, useCallback, useContext, useMemo, useRef, useState } from 'react'
@@ -76,19 +77,18 @@ export const Base = ({ countries }: { countries: ExplorerBase }) => {
             help narrow down your search!
           </MainSubtitle>
         </MainHGroup>
-        <span className='flex items-center justify-start gap-4'>
-          {/* two buttons rather than one: the drawer opens as a side panel on md+, a bottom sheet below */}
+        <P className='*:btn my-6 max-sm:w-full'>
           <FilterBtn
             className='hidden md:inline-flex'
             count={filters.length}
             onClick={() => setDrawerSize('md')}
-          />{' '}
+          />
           <FilterBtn
-            className='md:hidden'
+            className='max-md:w-full max-md:min-w-full md:hidden'
             count={filters.length}
             onClick={() => setDrawerSize('sm')}
           />
-        </span>
+        </P>
       </div>
       <Suspense fallback={<div className='text-center'>Loading...</div>}>
         <Masonry

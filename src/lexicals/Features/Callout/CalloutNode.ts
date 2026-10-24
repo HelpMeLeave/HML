@@ -1,4 +1,6 @@
 import { calloutType } from '@/lexicals/Features/_lib/nodeStates'
+import { getCalloutData, type CALLOUT_KEYS } from '@/lexicals/Features/Callout/CALLOUTS'
+import { cn } from '@/lib/cn'
 import {
   $create,
   $getState,
@@ -21,7 +23,15 @@ export class CalloutNode extends ElementNode {
 
   createDOM() {
     const el = document.createElement('article')
-    el.className = 'LexicalEditorTheme__callout'
+    const calloutKey = $getState(this, calloutType) as CALLOUT_KEYS
+    const calloutData = getCalloutData(calloutKey)
+    el.style = `--label:"${calloutData.label}"`
+
+    el.className = cn(
+      'callout',
+      'LexicalEditorTheme__callout before:[content:var(--label)]',
+      calloutData.className
+    )
     el.dataset.slot = 'callout'
     el.dataset.variant = $getState(this, calloutType)
     return el

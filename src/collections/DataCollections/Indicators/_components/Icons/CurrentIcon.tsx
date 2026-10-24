@@ -1,6 +1,6 @@
 'use client'
+import { CursorClick, Trash } from '@boxicons-pro/react'
 import { Button } from '@payloadcms/ui'
-import { MousePointerClick, Trash } from 'lucide-react'
 import type { Dispatch, SetStateAction } from 'react'
 
 export const CurrentIcon = ({
@@ -21,7 +21,7 @@ export const CurrentIcon = ({
         type='button'
         buttonStyle='primary'
         size='xsmall'
-        icon={<MousePointerClick />}
+        icon={<CursorClick />}
         onClick={() => setOpen((o) => !o)}>
         {open ? 'Close' : 'Pick Icon'}
       </Button>

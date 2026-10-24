@@ -5,20 +5,28 @@ import { getMarkState, useMarkState } from '@/lexicals/Features/DefinitionsFeatu
 import { DefinitionNode } from '@/lexicals/Features/DefinitionsFeature/DefinitionNode'
 import { DefinitionNodeWrapper } from '@/lexicals/Features/DefinitionsFeature/DefinitionNodeWrapper'
 import { DefinitionsPlugin } from '@/lexicals/Features/DefinitionsFeature/DefinitionsPlugin'
+import { cn } from '@/lib/cn'
+import { BookBookmark } from '@boxicons-pro/react'
 import { createClientFeature } from '@payloadcms/richtext-lexical/client'
 import { type LexicalEditor } from '@payloadcms/richtext-lexical/lexical'
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
-import { BookMarked } from 'lucide-react'
-import './style.scss'
 
 const DefinitionsIcon = () => {
   const [editor] = useLexicalComposerContext()
   const { active, matches } = useMarkState(editor)
 
   return (
-    <span className={'definitions definitions-toolbar'}>
-      <BookMarked className='icon definitions-toolbar__icon' />
-      {active && <span className={'definitions-toolbar__count'}>{matches.length}</span>}
+    <span className={'definitions definitions-toolbar inline-flex items-center'}>
+      <BookBookmark
+        style='rounded'
+        size='xs'
+        className={cn('icon definitions-toolbar__icon p-0.5', active && 'text-accent-500')}
+      />
+      {active && (
+        <span className={'definitions-toolbar__count txt-[0.6875] leading-none text-accent-500'}>
+          {matches.length}
+        </span>
+      )}
     </span>
   )
 }

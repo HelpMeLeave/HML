@@ -28,6 +28,7 @@ import {
   UnderlineFeature,
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
+import type { EditorThemeClasses } from '@payloadcms/richtext-lexical/lexical'
 import { HeadingFeatures } from './_lib/HeadingFeature'
 import { FixedToolbarFeature } from './_lib/Toolbars'
 import { UploadFeature } from './_lib/UploadFeature'
@@ -82,8 +83,20 @@ export const contentFeatures = [
 ]
 // #endregion ! --------------------
 
-export const baseTheme = {
+export const baseTheme: EditorThemeClasses = {
   ...defaultEditorLexicalConfig.theme,
-  root: cn(`rich-editor`, defaultEditorLexicalConfig.theme.root ?? ''),
+  // root: cn(`rich-editor`, defaultEditorLexicalConfig.theme.root ?? ''),
+  root: cn(
+    `rich-editor`,
+    defaultEditorLexicalConfig.theme.root ?? '',
+    '*:mt-4 *:first:mt-0 [&_[data-lexical-text=true]]:[line-height:inherit] [&_[data-lexical-text=true]]:[font-family:inherit] [&_[data-lexical-text=true]]:[letter-spacing:inherit]'
+  ),
   upload: cn('lexical-upload', defaultEditorLexicalConfig.theme.upload ?? ''),
+  paragraph: 'text-body leading-normal font-normal [:is(.rich-list-item__body>*)]:first:mt-0 mb-0',
+  text: {
+    italic: 'text-accent-muted dark:text-accent-150 dark:font-extralight',
+    bold: 'font-medium text-accent dark:font-light',
+    base: '',
+  },
+  link: 'border-b-2 text-body border-accent/50 hover:border-b',
 }

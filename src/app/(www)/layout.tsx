@@ -8,7 +8,7 @@ import {
   bebasNeue,
   interstateFont /* playfair */,
 } from '@/lib/fonts'
-import '@/styles/style.css'
+import '@/styles/www/index.css'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import 'react'

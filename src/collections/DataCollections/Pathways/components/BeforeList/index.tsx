@@ -1,30 +1,30 @@
 import { BeforeListLinks } from '@/collections/_components/BeforeListWrapper'
-import { type LucideIcon, BookOpenText, Globe2, LayoutDashboard, SignpostBig } from 'lucide-react'
+import { Book, Dashboard, Globe, Trip, type BoxIcon } from '@boxicons-pro/react'
 import type { CollectionSlug } from 'payload'
 
 const list: {
-  Icon: LucideIcon
+  Icon: BoxIcon
   slug: CollectionSlug
   label: string
 }[] = [
   {
-    Icon: LayoutDashboard,
+    Icon: Dashboard,
     slug: 'pathway-categories',
     label: 'Pathway Categories',
   },
 
   {
-    Icon: SignpostBig,
+    Icon: Trip,
     slug: 'pathways',
     label: 'Pathways',
   },
   {
-    Icon: Globe2,
+    Icon: Globe,
     slug: 'countries',
     label: 'Countries',
   },
   {
-    Icon: BookOpenText,
+    Icon: Book,
     slug: 'glossary-term',
     label: 'Glossary',
   },

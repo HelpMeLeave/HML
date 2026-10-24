@@ -1,5 +1,5 @@
-import { DUOTONES } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
 import type { DuotonePreset } from '@/lexicals/Features/Duotone/_types'
+import { DUOTONES } from '../_constants/DUOTONES'
 
 const tableValues = (preset: DuotonePreset, i: 0 | 1 | 2) => {
   const channel = (hex: string, i: 0 | 1 | 2) =>

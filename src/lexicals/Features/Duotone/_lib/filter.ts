@@ -1,4 +1,4 @@
-import { DUOTONE_TWEAKS } from '@/lexicals/Features/Duotone/_lib/CONSTANTS'
+import { DUOTONE_TWEAKS } from '../_constants/DUOTONE_TWEAKS'
 import type { DuotoneThemedColor, DuotoneTweakFields } from '../_types'
 
 export const duotoneFilter = (color: DuotoneThemedColor, tweaks?: Nullish<DuotoneTweakFields>) => {

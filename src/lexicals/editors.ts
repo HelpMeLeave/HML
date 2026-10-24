@@ -63,12 +63,7 @@ export const contentEditor = ({
       namespace: 'rich-editor',
       theme: {
         ...baseTheme,
-        root: cn(baseTheme.root, 'max-w-[65ch]!'),
-        paragraph: 'text-theme font-normal [:is(.rich-list-item__body>*)]:first:mt-0',
-        text: {
-          bold: 'font-semibold text-accent',
-          base: '',
-        },
+        root: cn(baseTheme.root, 'max-w-[65ch]'),
       },
     },
   })

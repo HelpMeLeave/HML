@@ -3,8 +3,9 @@
 import { useSlugFields } from '@/collections/ContentCollections/Content/_lib/useSlugFields'
 import { cn } from '@/lib/cn'
 import { toSlug } from '@/lib/normalize/to'
+import { LockKeyhole, LockKeyholeOpen } from '@boxicons-pro/react'
 import { type FieldAction, TextInput } from '@payloadcms/ui'
-import { LockKeyhole, UnlockKeyhole } from 'lucide-react'
+
 import { type ChangeEvent, useState } from 'react'
 
 type SlugLockElProps = {
@@ -27,12 +28,14 @@ const SlugLockEl = ({ disabled, handleLockClick, locked }: SlugLockElProps) => (
     <span className='sr-only'>{locked ? 'Unlock' : 'Lock'} Slug Field</span>
     {locked ?
       <LockKeyhole
-        className='group-hover:text-(--color-primary)'
-        size={14}
+        className='group-hover:text-accent'
+        width={14}
+        height={14}
       />
-    : <UnlockKeyhole
-        className='group-hover:text-(--color-primary)'
-        size={14}
+    : <LockKeyholeOpen
+        className='group-hover:text-accent'
+        width={14}
+        height={14}
       />
     }
   </button>
@@ -61,7 +64,7 @@ const GenerateBtn = ({ locked, ...props }: Props<'button'> & { locked: boolean }
       style={{
         lineHeight: 'inherit',
         // @ts-expect-error custom css var
-        '--hover-color': 'var(--color-primary)',
+        '--hover-color': 'var(--color-accent)',
       }}
       type='button'
       className={cn('slug-generate btn--style-none btn btn--size-small btn--no-margin')}>

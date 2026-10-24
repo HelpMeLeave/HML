@@ -1,0 +1,52 @@
+@reference '#tw/admin';
+
+.fe-form {
+  &:has(.rs__control:hover):not(.rs__menu:hover) {
+    @apply border-input-hover-border;
+  }
+
+  &:focus-within {
+    @apply outline-accent;
+  }
+
+  .rs__menu {
+    @apply top-[105%]! left-0 z-2 min-h-5 overflow-hidden rounded-lg border border-input-border bg-background text-[1rem] leading-normal capitalize hover:border-input-hover-border;
+
+    &::before {
+      content: " ";
+      @apply absolute size-full bg-slate-950/50;
+    }
+  }
+
+  .rs__menu-list .rs__option {
+    @apply p-2 hover:bg-slate-100/5;
+  }
+
+  .rs__control:not(:has(.rs__placeholder)) .rs__value-container {
+    @apply gap-x-1.25;
+
+    .rs__multi-value {
+      @apply rounded-lg border-[0.75px] border-accent bg-accent/20 pl-1 transition-all duration-300 ease-[ease];
+
+      &:has(.multi-value-remove:hover) {
+        @apply border-transparent bg-accent/5;
+      }
+
+      :is(.multi-value-label, .multi-value-remove) {
+        @apply pl-[0.15rem] font-mono font-[450] text-accent uppercase;
+      }
+
+      .multi-value-remove {
+        @apply cursor-pointer;
+      }
+    }
+  }
+
+  .rs__control:not(.rs__value-container:hover) {
+    @apply hover:cursor-text;
+  }
+
+  .rs__placeholder {
+    @apply w-full italic opacity-75;
+  }
+}

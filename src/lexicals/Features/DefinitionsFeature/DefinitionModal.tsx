@@ -79,7 +79,8 @@ export const MatchModals = ({
 
   return (
     <Drawer
-      className='definition-drawer'
+      // className='definition-drawer'
+      className='definition-drawer drawer-content:w-81.25! drawer-content:min-w-min drawer-content:shadow-[-10px_0px_10px_-7px_rgb(0_0_0/15%)] drawer-blur-bg:before:opacity-0 drawer-blur-bg:after:backdrop-blur-sm [&.drawer--is-open]:drawer-close:opacity-20 drawer-action-header-title:txt-2 drawer-action-header-title:text-nowrap drawer-action-header-content:flex-col-reverse'
       slug={slug}
       Header={
         <DrawerActionHeader

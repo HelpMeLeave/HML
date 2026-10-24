@@ -82,7 +82,7 @@ const CTASecondary = ({ button }: { button?: CTABtn }) =>
     <a
       href={button.href}
       target={button.target}
-      className='max-h-min text-xs/6 font-medium whitespace-nowrap text-soft hover:opacity-80'>
+      className='max-h-min text-xs/6 font-medium whitespace-nowrap text-muted hover:opacity-80'>
       {button?.text}
       <span
         aria-hidden='true'

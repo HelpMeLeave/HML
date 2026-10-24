@@ -1,4 +1,3 @@
-import type { IconName } from 'lucide-react/dynamic'
 import type { Route } from 'next'
 
 declare global {

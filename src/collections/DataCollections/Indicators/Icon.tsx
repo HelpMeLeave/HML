@@ -7,11 +7,11 @@ import { Search } from '@/collections/DataCollections/Indicators/_components/Ico
 import { SpecialItemPicker } from '@/collections/DataCollections/Indicators/_components/Icons/SpecialItemPicker'
 import { useField } from '@payloadcms/ui'
 import { useState } from 'react'
-import './_components/Icons/style.scss'
 
 const IconPickerClient = ({ path }: { path: string }) => {
   const { value, setValue } = useField<string>({ path })
-  const { value: iconVal } = useField<string>({ path: 'icon' })
+  // const { value: iconVal } = useField<string>({ path: 'icon' })
+  const iconVal = value
   const [open, setOpen] = useState(false)
   const [custom, setCustomAction] = useState('')
 

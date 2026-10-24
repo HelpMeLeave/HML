@@ -21,7 +21,8 @@ export class DefinitionNodeWrapper extends ElementNode {
 
   createDOM(): HTMLElement {
     const el = document.createElement('span')
-    el.className = 'lexical__definition-wrapper'
+    // el.className = 'lexical__definition-wrapper'
+    el.className = 'lexical__definition-wrapper definition-circle relative [--color:color-mix(in_oklab,var(--color-accent-400)_70%,transparent)] before:pointer-events-none after:pointer-events-none empty:before:content-[unset] empty:after:content-[unset] dark:[--color:color-mix(in_oklab,var(--color-accent-500)_80%,transparent)]'
     // 'direct' reads this node's own copy, which is what reconciliation is rendering
     el.dataset.termId = String($getState(this, termIDState, 'direct'))
     el.dataset.wrappedText = this.getFullTextContent()

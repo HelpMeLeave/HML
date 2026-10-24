@@ -2,8 +2,8 @@
 
 import { TextField } from '@/components/Form'
 import { env } from '@/env.client'
+import { Copy } from '@boxicons-pro/react'
 import { useField } from '@payloadcms/ui'
-import { Copy } from 'lucide-react'
 
 const TokenCopyField = () => {
   const { value: token } = useField({ path: 'token' })

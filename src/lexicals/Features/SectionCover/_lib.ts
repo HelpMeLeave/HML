@@ -3,6 +3,7 @@ import {
   type SectionHGroupNode,
 } from '@/lexicals/Features/SectionFeature/SectionHGroupNodes'
 import { $isSectionContent } from '@/lexicals/Features/SectionFeature/SectionStructureNodes'
+import { Edit, Eraser, ImagePlus, Images } from '@boxicons-pro/react/icons'
 import { $isUploadNode, type UploadNode } from '@payloadcms/richtext-lexical/client'
 import {
   $getSelection,
@@ -86,3 +87,10 @@ export const $headingChars = (hgroup: SectionHGroupNode) =>
     .getChildren()
     .find((child) => child.getType() == 'section-heading')
     ?.getTextContent().length
+
+export const icons = {
+  add: ImagePlus,
+  swap: Images,
+  edit: Edit,
+  remove: Eraser,
+}

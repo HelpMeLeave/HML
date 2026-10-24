@@ -7,9 +7,9 @@ import { useScrollProgress } from '@/hooks/useInView'
 import { headingID, headingPlainText } from '@/lexicals/Features/_lib/slugifyHeadingID'
 import { cn } from '@/lib/cn'
 import { getNodesFromRichText } from '@/lib/getNodesFromRichText'
+import { ChevronDown } from '@boxicons-pro/react'
 import type { DefaultTypedEditorState, SerializedHeadingNode } from '@payloadcms/richtext-lexical'
 import type { SerializedLexicalNode } from '@payloadcms/richtext-lexical/lexical'
-import { ChevronDown } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 type HeadingGrp = {
@@ -33,7 +33,7 @@ const Grp = ({
   progress?: number
 }) => {
   return (
-    <ul className='relative ml-2.5 text-base'>
+    <ul className='relative ml-2.5 text-body'>
       <span
         style={{
           height: `100%`,
@@ -156,9 +156,16 @@ export const TOC = ({
           <Button
             type='button'
             onClick={() => setShow((prev) => !prev)}
-            variant='ghost'
-            className='flex click items-center gap-1 pl-0 text-lg font-bold *:size-5 *:transition-all hocus:text-accent hocus:outline-0'>
-            <ChevronDown className={show ? 'rotate-0' : '-rotate-90'} />
+            btnStyle='ghost'
+            Icon={ChevronDown}
+            iconAttributes={{
+              rotate: show ? 0 : -90,
+              size: 'base',
+              removePadding: true,
+            }}
+            className='pl-0 text-lg font-bold btn-label:xl:text-[1rem]'
+            /* className='flex click items-center gap-1 pl-0 text-lg font-bold *:size-5 *:transition-all hocus:text-accent hocus:outline-0' */
+          >
             ON THIS PAGE
           </Button>
         </h4>

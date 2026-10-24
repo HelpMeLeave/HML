@@ -14,7 +14,12 @@ export class SectionContainerNode extends StructureContainerNode {
   }
 
   dom(): StructureDOM {
-    return { tag: 'section', className: 'lexical__section border-l border-ui-200', slot: 'section' }
+    return {
+      tag: 'section',
+      className:
+        'lexical__section border-l border-ui-200 pl-4 data-[variant=subsection]:*:data-[slot=header]:text-[2.5rem] data-[variant=subsection]:*:data-[slot=header]:*:not-data-[slot=heading]:opacity-35!',
+      slot: 'section',
+    }
   }
 
   headingStyleState() {
@@ -28,7 +33,12 @@ export class SectionContentNode extends StructureContentNode {
   }
 
   dom(): StructureDOM {
-    return { tag: 'article', className: 'lexical__section-content', slot: 'content' }
+    // return { tag: 'article', className: 'lexical__section-content', slot: 'content' }
+    return {
+      tag: 'article',
+      className: 'lexical__section-content *:mt-4 *:first:mt-0',
+      slot: 'content',
+    }
   }
 }
 

@@ -121,7 +121,7 @@ export const WorldMap = ({ countries }: { countries: MapCountry[] }) => {
                 className={cn(
                   'hover:opacity-100! dark:stroke-background',
                   country.id == 'USA'
-                    && 'hover:fill-brand-mulberry/20 cursor-not-allowed hover:dark:fill-accent-800/20',
+                    && 'cursor-not-allowed hover:fill-mulberry-700/20 hover:dark:fill-accent-800/20',
                   country.id == 'ISR' && 'cursor-not-allowed',
                   country.id != 'USA' && 'hover:fill-accent-muted dark:hover:fill-accent-muted',
                   'fill-accent/20 transition-all dark:fill-accent-800/20'

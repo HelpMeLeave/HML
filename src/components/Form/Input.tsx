@@ -85,7 +85,7 @@ export const Input = forwardRef(function Input(
           // Basic layout
           'relative block w-full appearance-none rounded-lg px-[calc(--spacing(3.5)-1px)] py-[calc(--spacing(2.5)-1px)] sm:px-[calc(--spacing(3)-1px)] sm:py-[calc(--spacing(1.5)-1px)]',
           // Typography
-          'text-base/6 text-body placeholder:text-soft sm:text-sm/6',
+          'text-base/6 text-body placeholder:text-muted sm:text-sm/6',
           // Border
           'border border-input-border data-hover:border-(--theme-input-hover-border)',
           // Background color

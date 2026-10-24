@@ -16,6 +16,7 @@ export const NavCTX = createContext<tNavFetchCTX>({
   topNav: [],
   year: Date.now(),
   banner: undefined,
+  user: null,
 })
 
 export const FilterCTX = createContext<tFilterCTX>(null as unknown as tFilterCTX)

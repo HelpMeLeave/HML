@@ -16,7 +16,8 @@ import type { WorkflowCollectionSlug } from '@/payload-types'
 import { Button, SaveButton, useField, useTranslation } from '@payloadcms/ui'
 import { usePathname, useSearchParams } from 'next/navigation'
 import type { FlowSTATUS } from 'payload-workflow'
-import './style.scss'
+// import './style.scss'
+// import './style.css'
 
 const Btn = ({ button }: { button: FlowButton }) => {
   const { to, admin, btnStyle, btnLabel, ...props } = button
@@ -88,9 +89,9 @@ export const FlowControlsClient = ({
 
   if (isCreatePage && canCreate) {
     return (
-      <span className='doc-controls__controls-top flow'>
+      <span className='doc-controls__controls-top flow flex w-full flex-wrap gap-8 max-controls:justify-start max-controls:gap-2 controls:gap-y-2 sidebar:grow sidebar:justify-between'>
         <span />
-        <span className='flow-wrapper'>
+        <span className='flow-wrapper flex gap-4'>
           <SaveButton label={tFn('general:createNew', true)({ t, i18n })} />
         </span>
       </span>
@@ -100,12 +101,12 @@ export const FlowControlsClient = ({
   const showSaveButton = Boolean(locked) == false
 
   return (
-    <span className='doc-controls__controls-top flow'>
+    <span className='doc-controls__controls-top flow flex w-full flex-wrap gap-8 max-controls:justify-start max-controls:gap-2 controls:gap-y-2 sidebar:grow sidebar:justify-between'>
       <FlowPill
         status={from}
         label={pillLabels[from]}
       />
-      <span className='flow-wrapper'>
+      <span className='flow-wrapper flex gap-4'>
         {showSaveButton && <SaveButton />}
         <BtnWrapper
           style={{
