@@ -1,0 +1,5 @@
+export { atkinsonFont } from '@/lib/fonts/atkinsonFont'
+export { atkinsonMonoFont } from '@/lib/fonts/atkinsonMonoFont'
+export { bebasNeue } from '@/lib/fonts/bebasNeue'
+export { interstateFont } from '@/lib/fonts/interstate'
+export { playfair } from '@/lib/fonts/playfair'
