@@ -21,18 +21,19 @@ export const CurrentIcon = ({
         type='button'
         buttonStyle='primary'
         size='xsmall'
-        icon={<CursorClick />}
+        icon={<CursorClick pack='filled' />}
         onClick={() => setOpen((o) => !o)}>
         {open ? 'Close' : 'Pick Icon'}
       </Button>
       {value && (
         <Button
+          className='ml-2 btn--error'
           margin={false}
           type='button'
           buttonStyle='error'
           size='xsmall'
           round={false}
-          icon={<Trash />}
+          icon={<Trash pack='filled' />}
           onClick={() => setValue('')}>
           Clear
         </Button>

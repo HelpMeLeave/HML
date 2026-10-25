@@ -1,8 +1,6 @@
 import { pillColors } from '@/_config/plugins/Plugin-Workflow/_components/Pill/pillColors'
 import { Pill } from '@/components/Admin/Pill'
 import type { FlowSTATUS } from 'payload-workflow'
-// import './style.scss'
-// import './style.css'
 
 type PillBaseProps = {
   status: FlowSTATUS
@@ -41,12 +39,9 @@ const FlowPill = ({
     className='flow-pill flow-pill__wrapper in-[.flow]:flex in-[.flow]:items-center in-[.flow]:justify-end in-[.flow]:gap-1 in-[.flow]:text-[0.75rem] in-[.flow-field]:justify-start'>
     <PillBase
       style={{
-        marginInline: '1rem',
-        height: '100%',
-        justifyContent: 'center',
-        maxWidth: 'min-content',
         ...pillStyles,
       }}
+      className='my-0.5 h-full max-w-min justify-center'
       label={label}
       status={status}
     />

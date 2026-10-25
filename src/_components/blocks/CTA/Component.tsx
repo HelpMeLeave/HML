@@ -28,7 +28,7 @@ const CTATitle = ({
   <SectionHeading
     data-slot='heading'
     {...props}
-    className='col-start-1 mx-auto flex flex-col text-5xl leading-[0.85] text-balance text-accent *:saturate-50 *:data-[slot=spacer]:h-2! dark:font-medium!'>
+    className='col-start-1 mx-auto flex flex-col text-5xl leading-header text-balance text-accent *:saturate-50 *:data-[slot=spacer]:h-2! dark:font-medium!'>
     {inner && <LexicalOrComponent content={inner} />}
   </SectionHeading>
 )
@@ -70,7 +70,7 @@ const CTAPrimary = ({ button }: { button: CTABtn }) => {
       href={button.href}
       target={button.target}
       className='max-h-min border-0 bg-accent text-white!'
-      variant='primary'>
+      btnStyle='primary'>
       {button.text}
     </Button>
   )

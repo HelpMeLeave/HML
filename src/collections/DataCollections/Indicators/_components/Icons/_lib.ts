@@ -25,6 +25,7 @@ import {
 
 export const BTN_SIZE = 16
 
+// Note: more quick icons still need choosing; custom icon search was removed
 export const QUICK_ICONS: Array<{ id: string; label: string; Comp: BoxIcon }> = [
   { id: 'Trophy', label: 'Trophy', Comp: Trophy },
   { id: 'BadgeCheck', label: 'Badge', Comp: BadgeCheck },

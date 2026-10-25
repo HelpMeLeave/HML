@@ -92,7 +92,7 @@ export const SignatureBlockComponent = ({
         aria-controls='signature-pad'
         className='mx-1'
         type='button'
-        variant='ghost'
+        btnStyle='ghost'
         onClick={handleClearEntry}>
         Clear
       </Button>

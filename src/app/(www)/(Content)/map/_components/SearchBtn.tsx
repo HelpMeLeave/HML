@@ -102,10 +102,7 @@ const Btn = ({ ...props }) => {
       className='col-start-2 aspect-square'
       btnStyle='primary'
       Icon={SearchIcon}
-      iconAttributes={{
-        iconOnly: true,
-      }}
-      iconOnly={true}>
+      iconOnly>
       <span className='sr-only'>Toggle Search Drawer</span>
     </Button>
   )

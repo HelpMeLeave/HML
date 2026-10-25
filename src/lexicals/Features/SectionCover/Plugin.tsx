@@ -11,6 +11,8 @@ import {
   $isSectionHGroupNode,
   SectionHGroupNode,
 } from '@/lexicals/Features/SectionFeature/SectionHGroupNodes'
+import { duotoneChipVars } from '@/lexicals/Features/Duotone/_lib/duotoneChipVars'
+import type { DuotoneFields } from '@/lexicals/Features/Duotone/_types'
 import type { UploadData } from '@payloadcms/richtext-lexical'
 import { $createUploadNode, useLexicalListDrawer } from '@payloadcms/richtext-lexical/client'
 import {
@@ -24,8 +26,13 @@ import {
 import { useLexicalComposerContext } from '@payloadcms/richtext-lexical/lexical/react/LexicalComposerContext'
 import { $dfs } from '@payloadcms/richtext-lexical/lexical/utils'
 import { useCallback, useEffect, useState } from 'react'
-// import './style.scss'
-// import './style.css'
+
+// Classes each hgroup child takes while the hgroup has a cover
+const coverRoles: Record<string, string[]> = {
+  'section-heading': ['chip', 'fit-text'],
+  'section-eyebrow': ['chip', 'order-1'],
+  'section-subtitle': ['overlay-below'],
+}
 
 export const SectionCoverPlugin = () => {
   const [editor] = useLexicalComposerContext()
@@ -59,6 +66,26 @@ export const SectionCoverPlugin = () => {
       if (!el) return
       if (chars) el.style.setProperty('--chars', String(chars))
       else el.style.removeProperty('--chars')
+
+      const cover = $getCover(hgroup)
+      const duotone = (cover?.getData().fields as Partial<DuotoneFields> | undefined)?.duotone
+      el.classList.toggle('overlay', Boolean(cover))
+      el.toggleAttribute('data-cover', Boolean(cover))
+      if (duotone?.position) el.dataset.position = duotone.position
+      else delete el.dataset.position
+
+      const chip = cover ? duotoneChipVars(duotone?.color) : undefined
+      for (const prop of ['--chip-bg', '--chip-text'] as const) {
+        const value = chip?.[prop]
+        if (value) el.style.setProperty(prop, value)
+        else el.style.removeProperty(prop)
+      }
+
+      if (cover) editor.getElementByKey(cover.getKey())?.classList.add('overlay-media')
+      for (const child of hgroup.getChildren()) {
+        const childEl = editor.getElementByKey(child.getKey())
+        for (const role of coverRoles[child.getType()] ?? []) childEl?.classList.toggle(role, Boolean(cover))
+      }
     }
 
     editor

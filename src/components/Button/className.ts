@@ -108,11 +108,12 @@ export const btnClassName = ({
         hasIcon: true,
         iconPosition: 'right',
         className: [
-          'grid-cols-[min-content_min-content] btn-icon:col-start-2 btn-label:col-start-1 *:btn-label:w-full',
+          'grid-cols-[min-content_min-content] btn-icon:col-start-2 btn-label:col-start-1 btn-label:w-full',
         ],
       },
     ],
   })
 
-  return cn(btnCva({ rounded, size, btnStyle }), iconCVA({ className, iconPosition, hasIcon }))
+  // return cn(btnCva({ rounded, size, btnStyle }), iconCVA({ className, iconPosition, hasIcon }))
+  return cn(btnCva({ rounded, size, btnStyle }), iconCVA({ iconPosition, hasIcon }))
 }

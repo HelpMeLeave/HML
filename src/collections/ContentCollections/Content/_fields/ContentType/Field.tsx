@@ -59,13 +59,10 @@ const ContentTypeChoice = (props: UIFieldServerProps) => {
                 href={`${env.NEXT_PUBLIC_BASE_URL}/admin/collections/content/create?type=${type}`}>
                 <span className='text-2xl/[auto]'>{fromCamelCase(type).replace(' ', ' & ')}</span>
                 <Icon
+                  weight={type == 'blog' ? 'normal' : 'thin'}
                   className={cn(
-                    type == 'blog'
-                      && '*:stroke-2 *:odd:stroke-mulberry-700 *:odd:dark:stroke-yellow-700',
-                    type == 'statement' && '*:first:fill-current *:first:stroke-0',
-                    (type == 'report' || type == 'resource')
-                      && '*:last:fill-current *:last:stroke-0',
-                    'size-8 stroke-15 text-accent'
+                    type == 'blog' && '*:odd:fill-mulberry-700 *:odd:dark:fill-yellow-700',
+                    'size-8 text-accent'
                   )}
                 />
               </Link>

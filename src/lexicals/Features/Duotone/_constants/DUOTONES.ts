@@ -1,16 +1,18 @@
 import { COLORS } from '@/lexicals/Features/Duotone/_constants/COLORS'
-import { THEME_KEYS } from '@/lexicals/Features/Duotone/_constants/THEME_KEYS'
 import { createColorString } from '@/lexicals/Features/Duotone/_lib/createColorString'
 import { duotoneFilter } from '@/lexicals/Features/Duotone/_lib/filter'
 import type { DuotoneKey, DuotonePreset, HexColor } from '@/lexicals/Features/Duotone/_types'
 import { toTitleCase } from '@/lib/textCasing'
 import type { Theme } from '@payloadcms/ui'
 
+const THEME_KEYS: [Theme, Theme] = ['light', 'dark']
+
 type HighlightShadowFnProps = {
   hex: Record<Theme, HexColor>
   theme: Theme
   type: 'highlight' | 'shadow'
 }
+
 export const DUOTONES = (Object.entries(COLORS) as [DuotoneKey, Record<Theme, HexColor>][]).flatMap(
   ([color, hex]) => {
     const highlightShadow = ({ hex, theme, type }: HighlightShadowFnProps): HexColor =>

@@ -7,44 +7,10 @@ import Link from 'next/link'
 import type { ElementType } from 'react'
 import { twJoin } from 'tailwind-merge'
 
-const parseProps = (props: tBtnProps<'link' | 'button'>) => {
-  const {
-    size = 'medium',
-    variant = 'primary',
-    btnStyle,
-    rounded = false,
-    iconAttributes,
-    Icon,
-    as,
-    className,
-    iconOnly,
-    ...rest
-  } = props
-
-  const El = 'href' in props || as == 'link' ? Link : ('button' as ElementType)
-
-  const btnProps = {
-    size,
-    btnStyle: btnStyle ?? variant,
-    rounded,
-  } as ButtonVariants
-
-  if (Boolean(Icon)) {
-    btnProps.hasIcon = true
-
-    if (iconOnly || iconAttributes?.iconOnly)
-      btnProps.iconOnly = iconOnly || iconAttributes?.iconOnly
-    else btnProps.iconPosition = iconAttributes?.iconPosition ?? 'left'
-  }
-
-  if (!objHasKey('href', props) && as != 'link') rest.type = 'button'
-}
-
 export const Button: tBtnComponent = (props) => {
   const {
     size = 'medium',
-    variant = 'primary',
-    btnStyle,
+    btnStyle = 'primary',
     rounded = false,
     iconAttributes,
     Icon,
@@ -58,7 +24,8 @@ export const Button: tBtnComponent = (props) => {
 
   const btnProps = {
     size,
-    btnStyle: btnStyle ?? variant,
+    // btnStyle: btnStyle ?? variant,
+    btnStyle,
     rounded,
     className,
   } as ButtonVariants
@@ -66,8 +33,7 @@ export const Button: tBtnComponent = (props) => {
   if (Boolean(Icon)) {
     btnProps.hasIcon = true
 
-    if (iconOnly || iconAttributes?.iconOnly)
-      btnProps.iconOnly = iconOnly || iconAttributes?.iconOnly
+    if (iconOnly) btnProps.iconOnly = iconOnly
     else btnProps.iconPosition = iconAttributes?.iconPosition ?? 'left'
   }
 
@@ -80,6 +46,7 @@ export const Button: tBtnComponent = (props) => {
       <TouchTarget as={as ?? 'button'}>
         <Inner
           size={size}
+          iconOnly={iconOnly}
           iconAttributes={iconAttributes}
           Icon={Icon}>
           {props.children}
@@ -89,8 +56,9 @@ export const Button: tBtnComponent = (props) => {
   )
 }
 
-const Inner = ({ iconAttributes, Icon: Icon, size, ...props }: tBtnProps) => {
-  const { iconPosition, iconOnly, size: iconSize, ...rest } = iconAttributes ?? {}
+const Inner = ({ iconAttributes, Icon: Icon, size, iconOnly, ...props }: tBtnProps) => {
+  // const { iconPosition, iconOnly, size: iconSize, ...rest } = iconAttributes ?? {}
+  const { iconPosition = 'left', size: iconSize, ...rest } = iconAttributes ?? {}
 
   return (
     <>

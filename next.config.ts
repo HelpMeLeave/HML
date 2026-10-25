@@ -5,7 +5,7 @@ export default withPayload({
   logging: {
     browserToTerminal: true,
   },
-  reactStrictMode: false,
+  reactStrictMode: true,
   poweredByHeader: false,
   devIndicators: false,
   allowedDevOrigins: ['192.168.0.159'],

@@ -86,17 +86,17 @@ export const contentFeatures = [
 export const baseTheme: EditorThemeClasses = {
   ...defaultEditorLexicalConfig.theme,
   // root: cn(`rich-editor`, defaultEditorLexicalConfig.theme.root ?? ''),
-  root: cn(
-    `rich-editor`,
-    defaultEditorLexicalConfig.theme.root ?? '',
-    '*:mt-4 *:first:mt-0 [&_[data-lexical-text=true]]:[line-height:inherit] [&_[data-lexical-text=true]]:[font-family:inherit] [&_[data-lexical-text=true]]:[letter-spacing:inherit]'
-  ),
-  upload: cn('lexical-upload', defaultEditorLexicalConfig.theme.upload ?? ''),
+  root: cn(`rich-editor`, defaultEditorLexicalConfig.theme.root ?? '', '*:mt-4 *:first:mt-0'),
+  upload:
+    /* cn('lexical-upload', defaultEditorLexicalConfig.theme.upload ?? '') */ 'lexical-upload',
   paragraph: 'text-body leading-normal font-normal [:is(.rich-list-item__body>*)]:first:mt-0 mb-0',
   text: {
     italic: 'text-accent-muted dark:text-accent-150 dark:font-extralight',
     bold: 'font-medium text-accent dark:font-light',
-    base: '',
+    base: '[font-family:inherit] leading-[inherit] tacking-[inherit]',
   },
-  link: 'border-b-2 text-body border-accent/50 hover:border-b',
+  link: cn('pointer-events-none border-b-2 border-accent/50 text-body no-underline hover:border-b'),
+  heading: {
+    h2: '',
+  },
 }

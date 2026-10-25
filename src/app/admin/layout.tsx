@@ -26,7 +26,13 @@ export default async function Layout({ children }: { children: ReactNode }) {
         htmlProps={
           {
             ['data-admin']: '',
-            className: cn(atkinsonFont.variable, atkinsonMonoFont.variable, bebasNeue.variable),
+            className: cn(
+              atkinsonFont.variable,
+              atkinsonMonoFont.variable,
+              bebasNeue.variable,
+              String.raw`has-[.collection-edit--users_.create-user_.countdown]:**:[.doc-controls,.doc-header,.auth-fields.collection-edit\_\_auth,.document-fields\_\_sidebar-wrap]:hidden`
+              // 'has-[.collection-edit--users_.create-user_.countdown]:**:[.app-header,#nav-toggler]:z-0'
+            ),
           } as ComponentPropsWithoutRef<'html'>
         }
         config={config}

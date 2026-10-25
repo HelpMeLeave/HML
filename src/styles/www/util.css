@@ -26,7 +26,7 @@
   }
 }
 
-@utility interactive-outline {
+/* @utility interactive-outline {
   outline-color: var(--color-accent);
   @variant dark {
     outline-color: var(--color-accent-muted);
@@ -55,7 +55,7 @@
     text-decoration-color: --alpha(var(--color-accent) / 50%);
     @apply interactive-shadow;
   }
-}
+} */
 
 @utility strong {
   font-weight: 600;

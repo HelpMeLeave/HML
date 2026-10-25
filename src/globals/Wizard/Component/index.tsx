@@ -27,7 +27,7 @@ export const WizardButton = ({
           setPanelID(panels[0]?.id ?? null)
         }}
         className='max-h-min border-0 bg-accent text-white'
-        variant='primary'>
+        btnStyle='primary'>
         {children}
       </Button>
       {panel && (

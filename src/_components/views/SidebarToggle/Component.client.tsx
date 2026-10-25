@@ -4,7 +4,6 @@ import { Button } from '@/components/Button'
 import { ChevronLeft } from '@boxicons-pro/react'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-// import './style.css'
 
 const sidebarClassNames = [
   'min-[800px]:border-0',
@@ -63,8 +62,8 @@ export const SidebarToggleClient = () => {
           onClick={() => setOpen((p) => !p)}
           btnStyle='ghost'
           Icon={ChevronLeft}
+          iconOnly
           iconAttributes={{
-            iconOnly: true,
             size: 'base',
             removePadding: true,
             rotate: open ? 180 : 0,

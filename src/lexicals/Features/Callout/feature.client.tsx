@@ -64,6 +64,7 @@ export default createClientFeature({
       {
         key: 'add',
         type: 'dropdown',
+        ChildComponent: () => <>SUP</>,
         items: [
           {
             key: 'callout',

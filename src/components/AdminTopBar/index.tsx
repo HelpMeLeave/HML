@@ -22,7 +22,7 @@ const Btn = ({
     <Button
       as='link'
       href={href}
-      variant='primary'
+      btnStyle='primary'
       rounded
       size='small'
       iconAttributes={{

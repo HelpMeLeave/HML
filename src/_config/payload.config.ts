@@ -51,7 +51,6 @@ const config = buildConfig({
     autoRefresh: true,
     suppressHydrationWarning: true,
     user: 'users',
-    // theme: 'all',
     theme: 'light',
     dateFormat: 'MMM do, y',
     timezones: {
@@ -118,6 +117,7 @@ const config = buildConfig({
         Icon: viewPath('Icon'),
       },
       header: [SidebarTogglePath],
+      providers: [viewPath('Shell')],
     },
     // #endregion ! --------------------
   },

@@ -12,7 +12,6 @@ export const SubsectionHeading = ({ level = 3, ...props }: Props<'button'> & { l
     <Heading
       className={cn(
         'group flex cursor-pointer items-baseline-last text-[2.125rem] leading-normal',
-        // 'mt-[1.25em] mb-[0.25em] not-in-data-open:mb-0 print:break-after-avoid'
         'mt-[1.25em] mb-[0.25em] not-in-data-[state=open]:mb-0 print:break-after-avoid'
       )}
       level={level}
@@ -29,9 +28,9 @@ export const SubsectionHeading = ({ level = 3, ...props }: Props<'button'> & { l
         onClick={handleToggle}>
         <span className='relative top-1.25 block'>
           <ChevronRight
+            weight='thin'
             className={cn(
-              '',
-              'h-[0.7em] w-auto stroke-[1.25px] group-focus-within:stroke-2 group-focus-within:text-accent',
+              'h-[0.7em] w-auto stroke-current stroke-0 transition-all group-focus-within:stroke-[0.75px] group-focus-within:text-accent group-hover:stroke-[0.75px]',
               open && 'text-theme-accent rotate-90'
             )}
           />

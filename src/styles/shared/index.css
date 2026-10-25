@@ -406,3 +406,140 @@
     }
   }
 }
+
+@custom-variant slot-heading (&:is([data-slot="heading"]));
+@custom-variant slot-subsection-heading (&:is([data-slot="heading"][data-variant="subsection"]));
+@custom-variant slot-section-heading (&:is([data-slot="heading"][data-variant="section"]));
+@custom-variant slot-eyebrow (&:is([data-slot="eyebrow"]));
+@custom-variant slot-header (&:is([data-slot="header"]));
+@custom-variant slot-icon (&:is([data-slot="icon"]));
+
+@utility interactive-outline {
+  outline-color: var(--color-accent);
+  @variant dark {
+    outline-color: var(--color-accent-muted);
+  }
+  &:focus {
+    outline-width: 1.5px;
+    outline-style: solid;
+    outline-offset: 2px;
+  }
+}
+
+@utility interactive-shadow {
+  &:focus-visible {
+    box-shadow:
+      0px 0px 0px 2px var(--color-background),
+      0px 0px 0px 3px var(--color-accent);
+  }
+}
+
+@utility interactive {
+  &:is(button, input) {
+    @apply interactive-outline;
+  }
+  &:is(a) {
+    text-decoration-thickness: 2px;
+    text-decoration-color: --alpha(var(--color-accent) / 50%);
+    @apply interactive-shadow;
+  }
+}
+
+/* #region ? ---------- OVERLAY ---------- */
+@utility overlay {
+  --overlay-pad: 0.25em;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  container-type: inline-size;
+  min-height: var(--overlay-min-height, min(40vh, 32rem));
+  grid-template-columns: [overlay-start] var(--overlay-pad) [content-start] minmax(0, 1fr) [content-end] var(--overlay-pad) [overlay-end];
+  grid-template-rows: [overlay-start] var(--overlay-before, 1fr) [content-start] auto auto auto [content-end] var(--overlay-after, var(--overlay-pad)) [overlay-end];
+
+  /* Fills the top spacer row so content auto-flows into the rows below it */
+  &::before {
+    content: "";
+    grid-column: content;
+    grid-row: 1;
+  }
+
+  & > :not(.overlay-media, .overlay-below) {
+    z-index: 1;
+    grid-column: content;
+    justify-self: var(--overlay-justify, start);
+  }
+
+  &:is([data-position*="top"], :has(> [data-position*="top"])) {
+    --overlay-before: var(--overlay-pad);
+    --overlay-after: 1fr;
+  }
+  &:is([data-position*="middle"], :has(> [data-position*="middle"])) {
+    --overlay-after: 1fr;
+  }
+  &:is([data-position*="center"], :has(> [data-position*="center"])) {
+    --overlay-justify: center;
+  }
+  &:is([data-position*="right"], :has(> [data-position*="right"])) {
+    --overlay-justify: end;
+  }
+}
+
+@utility overlay-media {
+  /* Absolute inside its grid area, so it fills the overlay without taking cells from the content */
+  position: absolute;
+  inset: 0;
+  grid-column: overlay;
+  grid-row: overlay;
+  margin: 0;
+  width: auto;
+  border: 0;
+  pointer-events: none;
+  @apply rounded-xl shadow-md;
+
+  & img {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    min-width: 0;
+    min-height: 0;
+    object-fit: cover;
+    @apply rounded-xl;
+  }
+
+  /* Payload's upload node parts, only present in the editor */
+  & :is([class*="__contents"], [class*="__card"], [class*="__media"]) {
+    height: 100%;
+    box-shadow: none;
+  }
+  & :is([class*="__swap-drawer-toggler"], [class*="__metaOverlay"]) {
+    display: none;
+  }
+  & [class*="__overlay"] {
+    pointer-events: auto;
+    z-index: 1;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@utility overlay-below {
+  grid-column: overlay;
+  grid-row: overlay-end;
+}
+/* #endregion ? -------------------- */
+
+@utility chip {
+  width: fit-content;
+  padding: 0.15em 0.5em;
+  white-space: nowrap;
+  background-color: var(--chip-bg, transparent);
+  color: var(--chip-text, inherit);
+}
+
+@utility fit-text {
+  font-size: min(1em, calc((100cqi - 3rem) / (var(--chars, 20) * 0.35)));
+}

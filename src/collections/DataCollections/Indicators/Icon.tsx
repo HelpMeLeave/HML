@@ -3,7 +3,7 @@
 import { CurrentIcon } from '@/collections/DataCollections/Indicators/_components/Icons/CurrentIcon'
 import { Icon } from '@/collections/DataCollections/Indicators/_components/Icons/Icon'
 import { Icons } from '@/collections/DataCollections/Indicators/_components/Icons/Icons'
-import { Search } from '@/collections/DataCollections/Indicators/_components/Icons/Search'
+// import { Search } from '@/collections/DataCollections/Indicators/_components/Icons/Search'
 import { SpecialItemPicker } from '@/collections/DataCollections/Indicators/_components/Icons/SpecialItemPicker'
 import { useField } from '@payloadcms/ui'
 import { useState } from 'react'
@@ -13,29 +13,23 @@ const IconPickerClient = ({ path }: { path: string }) => {
   // const { value: iconVal } = useField<string>({ path: 'icon' })
   const iconVal = value
   const [open, setOpen] = useState(false)
-  const [custom, setCustomAction] = useState('')
+  // const [custom, setCustomAction] = useState('')
 
   const selectAction = (id: string) => {
     setValue(id)
     setOpen(false)
   }
 
+  const { Icon: ThisIcon } = Icon({ icon: iconVal }) ?? {
+    Icon: <></>,
+    label: null,
+  }
+
   return (
     <>
-      <label
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          fontSize: '1rem',
-          fontFamily: 'var(--font-body)',
-          fontWeight: 600,
-          letterSpacing: 'normal',
-          flexDirection: 'column',
-          width: '100%',
-        }}>
-        {iconVal && iconVal != '' && Icon({ icon: iconVal })?.icon}
-      </label>
+      <span className='txt-[1rem] flex w-full flex-col items-center gap-2 font-body font-semibold tracking-normal'>
+        {ThisIcon}
+      </span>
       <div
         id='currentIcon'
         className='w-full text-center'>
@@ -49,11 +43,11 @@ const IconPickerClient = ({ path }: { path: string }) => {
 
       {open && (
         <>
-          <Search
+          {/* <Search
             custom={custom}
             selectAction={selectAction}
             setCustomAction={setCustomAction}
-          />
+          /> */}
           <div id='iconOptions'>
             <SpecialItemPicker selectAction={selectAction} />
             <Icons selectAction={selectAction} />

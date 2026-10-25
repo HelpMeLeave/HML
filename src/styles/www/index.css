@@ -5,7 +5,6 @@
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css";
 
-@import "#tw/lexicals";
 @import "#tw/shared";
 
 @import "./util.css";
@@ -119,9 +118,9 @@
   }
 
 }
-@custom-variant slot-heading (&:is([data-slot="heading"]));
-@custom-variant slot-subsection-heading (&:is([data-slot="heading"][data-variant="subsection"]));
-@custom-variant slot-section-heading (&:is([data-slot="heading"][data-variant="section"]));
-@custom-variant slot-eyebrow (&:is([data-slot="eyebrow"]));
-@custom-variant slot-header (&:is([data-slot="header"]));
-@custom-variant slot-icon (&:is([data-slot="icon"]));
+/* @custom-variant slot-heading (&:is([data-slot="heading"])); */
+/* @custom-variant slot-subsection-heading (&:is([data-slot="heading"][data-variant="subsection"])); */
+/* @custom-variant slot-section-heading (&:is([data-slot="heading"][data-variant="section"])); */
+/* @custom-variant slot-eyebrow (&:is([data-slot="eyebrow"])); */
+/* @custom-variant slot-header (&:is([data-slot="header"])); */
+/* @custom-variant slot-icon (&:is([data-slot="icon"])); */

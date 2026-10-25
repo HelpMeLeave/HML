@@ -2,8 +2,8 @@
   color: var(--color-ui-0);
   background-color: var(--color-ui-800);
   @variant hover {
-    color: var(--color-accent-600);
-    background-color: var(--color-accent-200);
+    color: var(--color-accent-100);
+    background-color: var(--color-accent-600);
   }
   @variant dark {
     color: var(--color-accent-900);
@@ -13,7 +13,7 @@
       background-color: var(--color-accent-800);
     }
   }
-  @apply rounded-lg;
+  @apply rounded-md;
 }
 
 @utility btn-light {
@@ -98,8 +98,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   font-family: --value(--font-*, --default(mono));
-  font-weight: --modifier(--font-weight-*, --default(400));
-  letter-spacing: -0.05ch;
+  letter-spacing: -0.04ch;
 }
 
 @layer components {
@@ -117,7 +116,7 @@
     &[class*="style-tab"] {
       @apply btn-tab;
       &.doc-tab--active {
-        @apply btn-static cursor-default not-disabled:not-[.btn--disabled,.pill--disabled]:text-accent;
+        @apply cursor-default btn-static not-disabled:not-[.btn--disabled,.pill--disabled]:text-accent;
       }
     }
     &[class*="style-pill"] {
@@ -132,24 +131,45 @@
     }
     &[class*="size-xsmall"],
     &[class*="size-small"] {
-      @apply px-3;
+      @apply px-3 text-[0.75rem] btn-label:font-medium;
+    }
+    &[class*="size-xsmall"] {
+      @apply py-0.5;
+    }
+    &[class*="size-small"] {
+      @apply py-0.5;
     }
     &[class*="size-medium"] {
-      @apply px-4.5;
-    }
-    &[class*="__content"] {
-      @apply text-[0.75rem];
+      @apply px-5 py-[calc(calc((var(--base-px)/var(--base-body-size))*0.85rem)*0.35)] btn-label:font-medium;
     }
     transition-delay: 0s;
     transition-behavior: normal;
     transition-duration: 0.15s;
     transition-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
     transition-property: all;
-    @apply btn-text-mono *:btn-text-mono click;
+    @apply click btn-text-mono *:btn-text-mono;
   }
 
-  .btn--disabled,
-  .pill--disabled {
+  .pill--error,
+  .btn--error {
+    color: var(--color-error-500);
+    background-color: var(--color-error-50);
+    &:hover {
+      background-color: var(--color-error-500);
+      color: var(--color-error-100);
+    }
+    @variant dark {
+      color: var(--color-error-100);
+      background-color: var(--color-error-700);
+      &:hover {
+        background-color: var(--color-error-900);
+        color: var(--color-error-400);
+      }
+    }
+  }
+
+  .btn.btn--disabled,
+  .pill.pill--disabled {
     @apply btn-disabled;
   }
 
@@ -214,7 +234,7 @@
   .popup-button-list {
     @apply gap-y-1;
     &[classname*="__button"] {
-      @apply btn-text-sans/medium flex flex-col;
+      @apply flex flex-col btn-text-sans font-medium;
       @variant hover {
         @apply bg-accent/15;
         &:is(.popup-button-list__disabled) {
@@ -223,5 +243,4 @@
       }
     }
   }
-
 }

@@ -13,35 +13,33 @@ type Flag = 'un' | 'pride' | 'trans' | 'blm'
 const FlagEl = ({
   icon,
   size,
-  style,
+  cssStyle,
   ...props
 }: {
   icon?: string | null
-  size: number
-  style?: Props['style']
-} & Props) => {
+} & BoxIconProProps) => {
   return (
     icon == 'un' ?
       <UNFlag.Icon
         {...props}
-        style={{ color: '#498DD5', minWidth: `${size}px`, height: 'auto', ...style }}
+        style={{ color: '#498DD5', minWidth: `${size}px`, height: 'auto', ...cssStyle }}
       />
     : icon == 'pride' ?
       <span
         {...props}
-        style={{ width: size, height: 'auto', ...style }}>
+        style={{ width: size, height: 'auto', ...cssStyle }}>
         <PrideFlag.Icon />
       </span>
     : icon == 'trans' ?
       <span
         {...props}
-        style={{ width: size, height: 'auto', ...style }}>
+        style={{ width: size, height: 'auto', ...cssStyle }}>
         <TransFlag.Icon />
       </span>
     : icon == 'blm' ?
       <span
         {...props}
-        style={{ width: size, height: 'auto', ...style }}>
+        style={{ width: size, height: 'auto', ...cssStyle }}>
         <BlackPower.Icon />
       </span>
     : <></>
@@ -56,14 +54,9 @@ const CompIcon = ({
   cssStyle,
   width,
   height,
-}: {
-  style?: BoxIconProProps['style']
+}: BoxIconProProps & {
   icon: string
   searchFn?: (icon: string) => BoxIcon | undefined
-  size?: BoxIconProProps['size']
-  width?: number
-  height?: number
-  cssStyle?: BoxIconProProps['cssStyle']
 }) => {
   let Comp: BoxIcon | undefined
 
@@ -74,39 +67,51 @@ const CompIcon = ({
   }
 
   return Comp ?
-      <Comp
-        size={size}
-        width={width}
-        height={height}
-        strokeWidth={2}
-        cssStyle={cssStyle}
-        style={style}
-      />
+      <>
+        <Comp
+          data-icon={icon}
+          size={size}
+          width={width}
+          height={height}
+          strokeWidth={2}
+          cssStyle={cssStyle}
+          style={style}
+        />
+        <span className='sr-only'>{icon}</span>
+      </>
     : <span style={{ fontSize: '0.65rem', opacity: 0.5, ...cssStyle }}>{icon}</span>
 }
 
 export const Icon = ({
   icon,
   searchFn,
-  size = 16,
+  size = 'base',
   style,
   ...props
-}: Props & {
+}: Omit<BoxIconProProps, 'size'> & {
   icon: string
   searchFn?: (icon: string) => BoxIcon | undefined
-  size?: number
+  size?: number | BoxIconProProps['size']
   style?: Props['style']
 }) => {
   if (!icon) return null
 
+  const propSize =
+    typeof size == 'number' ?
+      {
+        width: size,
+        height: size,
+      }
+    : { size }
+
   if (isFlagIcon(icon)) {
     return {
-      icon: (
+      Icon: (
         <FlagEl
           {...props}
           icon={icon}
-          size={size}
-          style={style}
+          cssStyle={style}
+          {...propSize}
         />
       ),
       label: icon,
@@ -114,12 +119,11 @@ export const Icon = ({
   }
 
   return {
-    icon: (
+    Icon: (
       <CompIcon
         {...props}
+        {...propSize}
         searchFn={searchFn}
-        width={size}
-        height={size}
         icon={icon}
         cssStyle={style}
       />

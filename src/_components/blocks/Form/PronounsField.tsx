@@ -6,8 +6,6 @@ import { BaseSelect } from '@/_components/blocks/Form/SelectField'
 import { PRONOUNS } from '@/lib/constants/PRONOUNS'
 import type { FormFieldPronouns } from '@/payload-types'
 /*8-16*/
-// import './pronouns.scss'
-// import './pronouns.css'
 
 export const PronounsFieldComponent = (props: FormFieldPronouns) => {
   const { name, label, required } = props

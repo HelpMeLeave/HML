@@ -1,5 +1,0 @@
-@reference '#tw/admin';
-
-.template-default:not(*:has(.sidebar-sm)) {
-  @apply grid-cols-1!;
-}

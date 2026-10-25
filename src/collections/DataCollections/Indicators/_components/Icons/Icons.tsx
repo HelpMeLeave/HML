@@ -9,7 +9,7 @@ export const Icons = ({ selectAction }: { selectAction: (id: string) => void }) 
     <div className='icon-picker--grp'>
       {QUICK_ICONS.map(({ id, label }, i) => (
         <BtnEl
-          icon={Icon({ icon: id, searchFn: (_icon) => QUICK_ICONS[i].Comp })?.icon}
+          icon={Icon({ icon: id, searchFn: (_icon) => QUICK_ICONS[i].Comp })?.Icon}
           selectAction={selectAction}
           iconId={id}
           id={id}

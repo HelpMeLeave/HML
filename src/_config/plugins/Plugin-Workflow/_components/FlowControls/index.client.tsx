@@ -16,8 +16,6 @@ import type { WorkflowCollectionSlug } from '@/payload-types'
 import { Button, SaveButton, useField, useTranslation } from '@payloadcms/ui'
 import { usePathname, useSearchParams } from 'next/navigation'
 import type { FlowSTATUS } from 'payload-workflow'
-// import './style.scss'
-// import './style.css'
 
 const Btn = ({ button }: { button: FlowButton }) => {
   const { to, admin, btnStyle, btnLabel, ...props } = button

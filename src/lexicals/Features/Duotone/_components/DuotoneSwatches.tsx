@@ -3,6 +3,7 @@ import { Swatch } from '@/lexicals/Features/Duotone/_components/Swatch'
 import type {
   DuotoneFields,
   DuotoneKey,
+  DuotonePosition,
   DuotoneThemedColor,
   DuotoneTweakFields,
 } from '@/lexicals/Features/Duotone/_types'
@@ -18,11 +19,22 @@ import {
 import { useRef, useState } from 'react'
 import { COLORS } from '../_constants/COLORS'
 import { DUOTONE_TWEAKS } from '../_constants/DUOTONE_TWEAKS'
-import { POSITIONS } from '../_constants/POSITIONS'
-import { TWEAK_KEYS } from '../_constants/TWEAK_KEYS'
-import { TWEAK_MAX } from '../_constants/TWEAK_MAX'
+
+const POSITIONS = (['top', 'middle', 'bottom'] as const).flatMap((y) =>
+  (['left', 'center', 'right'] as const).map((x): DuotonePosition => `${y} ${x}`)
+)
 
 type Position = DuotoneFields['duotone']['position']
+
+type DutotoneSwatchesProps = {
+  editor: LexicalEditor
+  nodeKey: string
+  color?: DuotoneThemedColor
+  tweaks?: DuotoneTweakFields
+  saved?: DuotoneTweakFields
+  position?: Position
+  isCover?: boolean
+}
 
 const setColor = (editor: LexicalEditor, nodeKey: string, color: DuotoneThemedColor | null) =>
   editor.update(() => {
@@ -50,6 +62,10 @@ const setData = (
     merge ? { tag: HISTORY_MERGE_TAG } : undefined
   )
 
+const TWEAK_MAX: DuotoneTweakFields = { brightness: 200, contrast: 400, grayscale: 100 }
+
+const TWEAK_KEYS = Object.keys(DUOTONE_TWEAKS) as (keyof DuotoneTweakFields)[]
+
 export const DuotoneSwatches = ({
   editor,
   nodeKey,
@@ -58,15 +74,7 @@ export const DuotoneSwatches = ({
   saved,
   position,
   isCover,
-}: {
-  editor: LexicalEditor
-  nodeKey: string
-  color?: DuotoneThemedColor
-  tweaks?: DuotoneTweakFields
-  saved?: DuotoneTweakFields
-  position?: Position
-  isCover?: boolean
-}) => {
+}: DutotoneSwatchesProps) => {
   const [active, theme = 'light'] = (color?.split('-') ?? []) as [DuotoneKey?, 'light'?]
   const flip = theme == 'light' ? 'dark' : 'light'
   const drag = useRef<'idle' | 'start' | 'moving'>('idle')

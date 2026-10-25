@@ -21,19 +21,22 @@ export class CalloutNode extends ElementNode {
     super()
   }
 
-  createDOM() {
-    const el = document.createElement('article')
+  buildDataVaraint() {
     const calloutKey = $getState(this, calloutType) as CALLOUT_KEYS
     const calloutData = getCalloutData(calloutKey)
-    el.style = `--label:"${calloutData.label}"`
 
-    el.className = cn(
-      'callout',
-      'LexicalEditorTheme__callout before:[content:var(--label)]',
-      calloutData.className
-    )
-    el.dataset.slot = 'callout'
-    el.dataset.variant = $getState(this, calloutType)
+    return {
+      className: cn('callout', 'LexicalEditorTheme__callout', calloutData.className),
+      variant: calloutKey,
+    }
+  }
+
+  createDOM() {
+    const el = document.createElement('article')
+    const { className, variant } = this.buildDataVaraint()
+    el.className = className
+    el.dataset.variant = variant
+
     return el
   }
 
@@ -43,7 +46,12 @@ export class CalloutNode extends ElementNode {
 
   updateDOM(prevNode: this, dom: HTMLElement): boolean {
     const change = $getStateChange(this, prevNode, calloutType)
-    if (change) dom.dataset.variant = change[0]
+    if (change) {
+      const { className, variant } = this.buildDataVaraint()
+      dom.dataset.variant = variant
+      dom.className = className
+    }
+
     return false
   }
 }

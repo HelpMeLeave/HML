@@ -30,7 +30,7 @@ export const MobileIndex = ({
               className={'flex w-full items-center justify-between border-b border-hr p-3 px-4'}>
               <span className='font-serif text-3xl tracking-widest'>INDEX</span>
               <Button
-                variant='ghost'
+                btnStyle='ghost'
                 type='button'
                 onClick={onClose}
                 aria-label='Close index'
@@ -54,7 +54,7 @@ export const MobileIndex = ({
                       prefetch={false}
                       onClick={onClose}
                       className={cnHead(here)}>
-                      <span className='font-header text-4xl leading-[0.85] tracking-wide text-muted transition hocus:text-accent'>
+                      <span className='font-header text-4xl leading-header tracking-wide text-muted transition hocus:text-accent'>
                         {section.displayText}
                       </span>
                       {here && (

@@ -72,8 +72,7 @@ export const HasManyFieldClient = ({
               onClick={() => setValue([...value.filter((val) => v != val)])}
               tooltip='Remove'
               round={true}
-              // className='has-many__item'
-              className='has-many__item min-w-min p-0 [--color:var(--theme-text)] hover:stroke-[2.25px] hover:text-(--theme-error-500) btn-icon:pointer-events-auto btn-icon:h-full btn-icon:w-[calc(var(--btn-icon-size)+1rem)] btn-icon:justify-start btn-content:pl-4 btn-icon:[&_svg]:size-(--btn-icon-size)'
+              className='has-many__item hover:text-error-500 min-w-min p-0 [--color:var(--color-body)] btn-icon:pointer-events-auto btn-icon:h-full btn-icon:w-[calc(var(--btn-icon-size)+1rem)] btn-icon:justify-start btn-content:pl-4 btn-icon:[&_svg]:size-(--btn-icon-size)'
               key={v}
               size='xsmall'
               margin={false}

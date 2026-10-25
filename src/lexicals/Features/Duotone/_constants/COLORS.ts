@@ -2,8 +2,8 @@ import type { DuotoneColor } from '@/lexicals/Features/Duotone/_types'
 
 export const COLORS: DuotoneColor = {
   asphalt: {
-    light: '#292a27',
-    dark: '#292a27',
+    light: '#272623',
+    dark: '#272623',
   },
   pine: {
     light: '#285a3d',

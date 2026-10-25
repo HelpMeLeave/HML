@@ -6,12 +6,10 @@ export type tBtnProps<T extends 'button' | 'link' = 'button'> = Omit<
   ButtonVariants,
   'iconOnly' | 'iconPosition'
 > & {
-  variant?: 'primary' | 'secondary' | 'muted' | 'ghost' | 'accent' | 'accentMuted'
   as?: T
-  rounded?: boolean | number
+  rounded?: boolean
   iconAttributes?: BoxIconProProps & {
     iconPosition?: 'left' | 'right'
-    iconOnly?: boolean
   }
   Icon?: BoxIcon
   iconOnly?: boolean
