@@ -28,6 +28,7 @@ export const AmtFieldset = ({
   const { amount, custom, currency, sessionId, error } = transactionData
   const timer = useRef<ReturnType<typeof setTimeout>>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [valid, setValid] = useState(false)
 
   const sync = useCallback(
     (minorEur: number, delay: number) => {
@@ -66,6 +67,7 @@ export const AmtFieldset = ({
   }
 
   const { checkout } = cke
+
   const display = checkout.currency ?? currency
   const fxRate =
     checkout.currencyOptions?.find((o) => o.currency == display)?.currencyConversion?.fxRate ?? 1
@@ -122,7 +124,11 @@ export const AmtFieldset = ({
             onPreset={handlePreset}
             onCustom={handleCustom}
           />
-          <PaymentElement />
+          <PaymentElement
+            onChange={(e) => {
+              setValid(e.complete)
+            }}
+          />
           <Err
             err={Boolean(error)}
             message={error ?? ''}
@@ -136,14 +142,12 @@ export const AmtFieldset = ({
             transactionData={transactionData}
             dispatchTransactionDataAction={dispatchTransactionDataAction}
           />
-          {isInBounds(transactionData.amount) && (
-            <NextButton
-              label={submitting ? 'Processing' : 'Submit'}
-              disabled={submitting}
-              onClick={handleSubmit}
-              actionType='submit'
-            />
-          )}
+          <NextButton
+            label={submitting ? 'Processing' : 'Submit'}
+            disabled={submitting || !isInBounds(transactionData.amount) || !valid}
+            onClick={handleSubmit}
+            actionType='submit'
+          />
         </div>
       )}
     </>

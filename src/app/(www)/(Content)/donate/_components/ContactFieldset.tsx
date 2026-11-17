@@ -116,11 +116,12 @@ export const ContactFieldset = ({
         </CheckboxField>
       </TransitionFieldset>
 
-      {transactionData.step == 'contact' && validate(customerData) && (
+      {transactionData.step == 'contact' && (
         <div className='mt-auto flex w-full justify-between gap-12'>
           <NextButton
             label={'Next'}
             actionType='next'
+            disabled={!validate(customerData)}
             onClick={handleNext}
           />
         </div>

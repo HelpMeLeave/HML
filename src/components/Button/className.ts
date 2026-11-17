@@ -46,6 +46,7 @@ export const btnClassName = ({
             'bg-red-600 text-white hover:bg-red-700 focus-visible:bg-red-700',
             'dark:bg-red-700 dark:hocus:bg-red-900',
             'interactive',
+            'disabled:saturate-15',
           ],
           secondary: 'bg-mulberry-800 text-white hover:bg-mulberry-600',
           ghost: 'border-0 bg-transparent text-body',
@@ -53,14 +54,16 @@ export const btnClassName = ({
             'text-accent hover:bg-mulberry-700/10',
             'dark:bg-mulberry-900 dark:text-grey-50 hover:dark:bg-mulberry-700',
           ],
-          accent: [
+          accent: cn([
             'bg-red-600 text-white hover:bg-mulberry-700',
-            'dark:bg-yellow-800 dark:outline-transparent dark:outline-yellow-300/30 dark:hover:bg-yellow-900 dark:hover:outline-yellow-300/10',
-          ],
+            'dark:bg-yellow-800 dark:outline-yellow-300/30 dark:hover:bg-yellow-900 dark:hover:outline-yellow-300/10',
+            'disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-base-300 disabled:dark:bg-base-800 disabled:dark:text-base-600',
+          ]),
           accentMuted: [
             'bg-mulberry-50 text-mulberry-500 outline-mulberry-100/70 hover:text-body',
             'dark:bg-yellow-300/10 dark:text-yellow-500',
             'ring-zinc-600 hover:saturate-25 dark:outline-transparent',
+            'disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-base-300 disabled:dark:bg-base-800 disabled:dark:text-base-600',
           ],
         },
         hasIcon: {
