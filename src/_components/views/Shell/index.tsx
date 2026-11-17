@@ -2,10 +2,7 @@ import { LocationEl } from '@/_components/views/Shell/Location'
 import { cn } from '@/lib/cn'
 import type { AdminViewServerProps } from 'payload'
 
-export default function Shell({
-  children,
-  ...props
-}: AdminViewServerProps & { children: ReactNode }) {
+export default function Shell({ children }: AdminViewServerProps & { children: ReactNode }) {
   return (
     <div
       id='shell'
