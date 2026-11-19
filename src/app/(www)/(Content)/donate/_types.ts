@@ -22,5 +22,5 @@ export type CustomerDataType = {
   firstName: string | null
   lastName: string | null
   newsletter: boolean
-  email: string | null
+  email?: string | null
 }

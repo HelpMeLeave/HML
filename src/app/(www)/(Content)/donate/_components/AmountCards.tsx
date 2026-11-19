@@ -76,9 +76,7 @@ export const AmountCards = ({
       <Radio
         value={OTHER}
         className={cn(card, 'col-span-2 lg:col-span-4')}>
-        <span className='font-semibold text-base text-body group-data-checked:text-accent'>
-          Other amount
-        </span>
+        <span className='font-semibold text-body group-data-checked:text-accent'>Other amount</span>
         {selected != OTHER && <span className='text-sm text-muted'>Choose your own amount</span>}
       </Radio>
 
