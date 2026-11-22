@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+import { env } from '@/env.client'
 import type { User } from '@/payload-types'
 
 export const getMeUser = async (args?: {
@@ -16,7 +17,8 @@ export const getMeUser = async (args?: {
   const cookieStore = await cookies()
   const token = cookieStore.get('payload-token')?.value
 
-  const meUserReq = await fetch(`http://localhost:3000/api/users/me`, {
+  // const meUserReq = await fetch(`http://localhost:3000/api/users/me`, {
+  const meUserReq = await fetch(`${env.NEXT_PUBLIC_BASE_URL}/api/users/me`, {
     headers: {
       Authorization: `JWT ${token}`,
     },
